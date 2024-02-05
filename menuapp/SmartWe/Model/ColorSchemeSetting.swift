@@ -36,3 +36,20 @@ enum ColorSchemeSetting: Int, CaseIterable, Identifiable {
         self
     }
 }
+
+struct ThemeSettings {
+    
+    let sideBarTheme:SideBarTheme
+    
+}
+
+struct SideBarTheme {
+    let selectedBgColor:Color
+    let unSelectedBgColor:Color
+    let selectedTextColor:Color
+    let unSelectedTextColor:Color
+    let selectedIcon:String
+    let unSelectedIcon:String
+    
+    
+}

@@ -33,28 +33,28 @@ struct SideBar:View {
             Image("smartwe.logo")
                 .scaledToFit()
             List(Category.showableCategory) { category in
-                Button(
-                    action: {
-                        store.send(.sideBarTapped(category))
-                    }, label: {
+                Button(action: {
+                    store.send(.sideBarTapped(category))
+                }, label: {
+                    HStack {
                         Label(category.localizedString, systemImage: category.iconImage)
+                            .foregroundColor(store.state.sideSelection == category ? .white : .blue)
+                        Spacer()
                     }
-                )
-                .foregroundColor(store.state.sideSelection == category ? .primary : .blue)
-                //.background(store.state.sideSelection == category ? .primary : .clear)
-                .padding(EdgeInsets(top: 15, leading: 0, bottom: 10, trailing: 0))
+                    .padding(EdgeInsets(top: 15, leading: 10, bottom: 10, trailing: 0))
+                    .background(store.state.sideSelection == category ? Color.blue : Color.clear) // 选中时显示蓝色背景
+                    .cornerRadius(10)
+                })
                 .buttonStyle(.plain)
-                .cornerRadius(10)
-                //.listRowBackground(Color.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
             }
-            .background(.clear)
-            //.padding(.top, 23)
             .listStyle(SidebarListStyle())
             .navigationBarTitle("Sidebar", displayMode: .inline)
             .navigationBarHidden(true)
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-        }//.background(.black)
+        }
         
     }
 }
