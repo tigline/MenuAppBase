@@ -40,7 +40,9 @@ enum ColorSchemeSetting: Int, CaseIterable, Identifiable {
 struct ThemeSettings {
     
     let sideBarTheme:SideBarTheme
-    
+    let addButtonTheme:AddButtonTheme
+    let backgroudTheme:BackgroundTheme
+    let foodTheme:FoodTheme
 }
 
 struct SideBarTheme {
@@ -50,6 +52,16 @@ struct SideBarTheme {
     let unSelectedTextColor:Color
     let selectedIcon:String
     let unSelectedIcon:String
-    
-    
+}
+
+struct AddButtonTheme {
+    let bgColor:Color
+}
+
+struct BackgroundTheme {
+    let mainBackground:Color
+}
+
+struct FoodTheme {
+    let titleContainBg:Color
 }

@@ -49,7 +49,7 @@ struct SideBar:View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
             }
-            .listStyle(SidebarListStyle())
+            //.listStyle(SidebarListStyle())
             .navigationBarTitle("Sidebar", displayMode: .inline)
             .navigationBarHidden(true)
             .frame(maxWidth: .infinity, alignment: .leading)

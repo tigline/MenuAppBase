@@ -24,3 +24,7 @@ struct ShopInfo {
     let machineCode:String
 }
 
+extension ShopInfo {
+    
+}
+
