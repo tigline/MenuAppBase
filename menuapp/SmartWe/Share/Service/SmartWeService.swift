@@ -12,8 +12,8 @@ protocol SmartWeService {
     func activeDevice(machineCode:String) async throws -> Response<MachineInfo>
 
 //    func categroryList(shopCode:String,machineCode:String) async throws -> Response
-//
-//    func menuItemList(shopCode:String,machineCode:String,categoryCode:String) async throws -> Response
+
+    func menuItemList(shopCode:String,machineCode:String,categoryCode:String) async throws -> Response<MenuVo>
     
 }
 
@@ -26,9 +26,9 @@ extension SmartWeService {
 //        try await categroryList(shopCode: shopCode, machineCode: machineCode)
 //    }
     
-//    func menuItemList(shopCode:String,machineCode:String,categoryCode:String) async throws -> Response {
-//        try await menuItemList(shopCode: shopCode, machineCode: machineCode, categoryCode: categoryCode)
-//    }
+    func menuItemList(shopCode:String,machineCode:String,categoryCode:String) async throws -> Response<MenuVo> {
+        try await menuItemList(shopCode: shopCode, machineCode: machineCode, categoryCode: categoryCode)
+    }
 }
 
 
@@ -45,4 +45,8 @@ struct MachineInfo: Codable {
     let reimburse: Bool
     let shopCode: String
     let tableNo: String
+}
+
+struct MenuVo: Codable {
+    
 }

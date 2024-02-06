@@ -101,6 +101,8 @@
 		76AC260129C45C69007874DA /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC260029C45C69007874DA /* Destination.swift */; };
 		76C939CF29C95C2400A5D020 /* GenreContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C939CE29C95C2400A5D020 /* GenreContainer.swift */; };
 		76C939D129C95C4100A5D020 /* GenreScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C939D029C95C4100A5D020 /* GenreScrollView.swift */; };
+		935DD0202B7274CF00FE5EC3 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD01F2B7274CF00FE5EC3 /* AppConfiguration.swift */; };
+		935DD0222B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */; };
 		BE0C69142B71C8FC00312FE1 /* SystemPackage in Frameworks */ = {isa = PBXBuildFile; productRef = BE0C69132B71C8FC00312FE1 /* SystemPackage */; };
 		BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69152B71CA3500312FE1 /* MenuItem.swift */; };
 		BE0C69192B71D5D900312FE1 /* SmartWeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69182B71D5D900312FE1 /* SmartWeClient.swift */; };
@@ -205,6 +207,8 @@
 		76AC260029C45C69007874DA /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		76C939CE29C95C2400A5D020 /* GenreContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreContainer.swift; sourceTree = "<group>"; };
 		76C939D029C95C4100A5D020 /* GenreScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreScrollView.swift; sourceTree = "<group>"; };
+		935DD01F2B7274CF00FE5EC3 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeEnviromentKey.swift; sourceTree = "<group>"; };
 		BE0C69152B71CA3500312FE1 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		BE0C69182B71D5D900312FE1 /* SmartWeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeClient.swift; sourceTree = "<group>"; };
 		BE0C691A2B71D62000312FE1 /* APISClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISClient.swift; sourceTree = "<group>"; };
@@ -553,6 +557,7 @@
 				76AC25BF29C2E7DC007874DA /* DebugResources.swift */,
 				76AC25C729C2EAA1007874DA /* TMDBConfiguration.swift */,
 				76751E6829C5922D0013BBDF /* Assets.swift */,
+				935DD01F2B7274CF00FE5EC3 /* AppConfiguration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				BE0C691E2B71EE7000312FE1 /* Serialiser.swift */,
 				BE0C69202B71EEF500312FE1 /* URL+QueryItem.swift */,
 				BE0C69252B72117500312FE1 /* Response.swift */,
+				935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -787,12 +793,14 @@
 				76751E6B29C5C3E10013BBDF /* NowPlayingRowContainer.swift in Sources */,
 				769002BA29C6EC0100620A3C /* CategoryWrapper.swift in Sources */,
 				769002B729C6E76300620A3C /* Home.swift in Sources */,
+				935DD0222B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift in Sources */,
 				76AC260129C45C69007874DA /* Destination.swift in Sources */,
 				769F248A29CF10E700C550B8 /* AppLanguage.swift in Sources */,
 				76A0D35129C979AD002C3286 /* EnvironmentKey.swift in Sources */,
 				76AC25A929C2E35C007874DA /* Shape.swift in Sources */,
 				76751E5529C544DC0013BBDF /* AppConfiguration.swift in Sources */,
 				76751E5E29C556500013BBDF /* TabDestination.swift in Sources */,
+				935DD0202B7274CF00FE5EC3 /* AppConfiguration.swift in Sources */,
 				76751E5729C547350013BBDF /* ColorSchemeSetting.swift in Sources */,
 				76751E6529C58BDA0013BBDF /* NowPlayingBannerTitle.swift in Sources */,
 				76C939D129C95C4100A5D020 /* GenreScrollView.swift in Sources */,

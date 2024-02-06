@@ -39,7 +39,7 @@ final actor SmartWeClient: APISClient {
     }
 
     func post<Request: Encodable, Response: Decodable>(path: URL, body: Request) async throws -> Response {
-        var urlRequest = buildURLRequest(for: path)
+        var urlRequest = URLRequest(url: path)
         urlRequest.httpMethod = "POST"
         urlRequest.httpBody = try await serialiser.encode(body)
 
@@ -60,32 +60,32 @@ final actor SmartWeClient: APISClient {
 
 extension SmartWeClient {
 
-//    private func buildURLRequest(for path: URL) -> URLRequest {
-//        let url = urlFromPath(path)
-//        var urlRequest = URLRequest(url: url)
-//        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-//        return urlRequest
-//    }
-//
-//    private func urlFromPath(_ path: URL) -> URL {
-//        guard var urlComponents = URLComponents(url: path, resolvingAgainstBaseURL: true) else {
-//            return path
-//        }
-//
-//        urlComponents.scheme = baseURL.scheme
-//        urlComponents.host = baseURL.host
-//        urlComponents.path = "\(baseURL.path)\(urlComponents.path)"
-//
-//        return urlComponents.url!
-//            .appendingAPIKey(apiKey)
-//            .appendingLanguage()
-//    }
-//
-//    private func validate(response: URLResponse) throws {
-//        if let tmdbError = SmartWeError(response: response) {
-//            throw tmdbError
-//        }
-//    }
+    private func buildURLRequest(for path: URL) -> URLRequest {
+        let url = urlFromPath(path)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        return urlRequest
+    }
+
+    private func urlFromPath(_ path: URL) -> URL {
+        guard var urlComponents = URLComponents(url: path, resolvingAgainstBaseURL: true) else {
+            return path
+        }
+
+        urlComponents.scheme = baseURL.scheme
+        urlComponents.host = baseURL.host
+        urlComponents.path = "\(baseURL.path)\(urlComponents.path)"
+
+        return urlComponents.url!
+            .appendingAPIKey(apiKey)
+            .appendingLanguage()
+    }
+
+    private func validate(response: URLResponse) throws {
+        if let tmdbError = SmartWeError(response: response) {
+            throw tmdbError
+        }
+    }
 
 }
 
