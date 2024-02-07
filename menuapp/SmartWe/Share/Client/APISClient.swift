@@ -15,11 +15,11 @@ protocol APISClient {
 
 extension APISClient {
     func get<Response: Decodable>(point: SWEndpoint) async throws -> Response {
-        try await get(path: point.path)
+        return try await get(path: point.path)
     }
 
     func post<Response: Decodable>(point: SWPostEndpoint) async throws -> Response {
-        try await post(path: point.path, body: point.body)
+        return try await post(path: point.path, body: point.body)
     }
 }
 
@@ -56,15 +56,15 @@ enum SmartWePostEndpoint {
 
 extension SmartWePostEndpoint: SWPostEndpoint {
     
-    private static let basePath = URL(string: "/wed/ipad")!
+    private static let basePath = URL(string: "/pad/web/ipad")!
     
     var path: URL {
         switch self {
-        case .active(machineCode: let machineCode):
+        case .active(machineCode: _):
             return Self.basePath.appendingPathComponent("activate")
-        case .category(shopCode: let shopCode, machineCode: let machineCode):
+        case .category(shopCode: _, machineCode: _):
             return Self.basePath.appendingPathComponent("category")
-        case .menu(shopCode: let shopCode, language: let language):
+        case .menu(shopCode: _, language: _):
             return Self.basePath.appendingPathComponent("index")
         }
     }

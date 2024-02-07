@@ -38,10 +38,11 @@ final actor SmartWeClient: APISClient {
         return try await serialiser.decode(data)
     }
 
-    func post<Request: Encodable, Response: Decodable>(path: URL, body: Request) async throws -> Response {
-        var urlRequest = URLRequest(url: path)
+    func post<Response: Decodable>(path: URL, body: Data) async throws -> Response {
+        //let url = urlFromPath(path)
+        var urlRequest = buildURLRequest(for: path)
         urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = try await serialiser.encode(body)
+        urlRequest.httpBody = body
 
         let data: Data
         let response: URLResponse
@@ -63,7 +64,7 @@ extension SmartWeClient {
     private func buildURLRequest(for path: URL) -> URLRequest {
         let url = urlFromPath(path)
         var urlRequest = URLRequest(url: url)
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         return urlRequest
     }
 
@@ -77,8 +78,8 @@ extension SmartWeClient {
         urlComponents.path = "\(baseURL.path)\(urlComponents.path)"
 
         return urlComponents.url!
-            .appendingAPIKey(apiKey)
-            .appendingLanguage()
+//            .appendingAPIKey(apiKey)
+//            .appendingLanguage()
     }
 
     private func validate(response: URLResponse) throws {

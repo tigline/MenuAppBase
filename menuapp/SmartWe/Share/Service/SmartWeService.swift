@@ -13,38 +13,38 @@ protocol SmartWeService {
 
 //    func categroryList(shopCode:String,machineCode:String) async throws -> Response
 
-    func menuItemList(shopCode:String,machineCode:String,categoryCode:String) async throws -> Response<MenuVo>
+    func menuItemList(shopCode:String,language:String) async throws -> Response<MenuVo>
     
 }
 
 extension SmartWeService {
     func activeDevice(machineCode:String) async throws -> Response<MachineInfo> {
-        try await activeDevice(machineCode: machineCode)
+        return try await activeDevice(machineCode: machineCode)
     }
     
 //    func categroryList(shopCode:String,machineCode:String) async throws -> Response {
 //        try await categroryList(shopCode: shopCode, machineCode: machineCode)
 //    }
     
-    func menuItemList(shopCode:String,machineCode:String,categoryCode:String) async throws -> Response<MenuVo> {
-        try await menuItemList(shopCode: shopCode, machineCode: machineCode, categoryCode: categoryCode)
+    func menuItemList(shopCode:String,language:String) async throws -> Response<MenuVo> {
+        return try await menuItemList(shopCode: shopCode, language: language)
     }
 }
 
 
 
 struct MachineInfo: Codable {
-    let actuarial: Bool
-    let homeImages: [String]
+    let linePayChannelMap: [String: Bool]?
     let languages: [String]
-    let linePayChannelMap: [String: Bool]
-    let lineup: Bool
-    let logoImage: String
-    let machineCode: String
     let machineType: String
-    let reimburse: Bool
+    let tableNo: String?
     let shopCode: String
-    let tableNo: String
+    let machineCode: String
+    let logoImage: String
+    let homeImages: [String]?
+    let lineup: Bool?
+    let actuarial: Bool?
+    let reimburse: Bool?
 }
 
 struct MenuVo: Codable {

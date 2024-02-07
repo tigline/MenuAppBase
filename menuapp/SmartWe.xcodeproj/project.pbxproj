@@ -101,7 +101,7 @@
 		76AC260129C45C69007874DA /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC260029C45C69007874DA /* Destination.swift */; };
 		76C939CF29C95C2400A5D020 /* GenreContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C939CE29C95C2400A5D020 /* GenreContainer.swift */; };
 		76C939D129C95C4100A5D020 /* GenreScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C939D029C95C4100A5D020 /* GenreScrollView.swift */; };
-		935DD0202B7274CF00FE5EC3 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD01F2B7274CF00FE5EC3 /* AppConfiguration.swift */; };
+		935DD0202B7274CF00FE5EC3 /* EnvironmentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD01F2B7274CF00FE5EC3 /* EnvironmentConfiguration.swift */; };
 		935DD0222B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */; };
 		BE0C69142B71C8FC00312FE1 /* SystemPackage in Frameworks */ = {isa = PBXBuildFile; productRef = BE0C69132B71C8FC00312FE1 /* SystemPackage */; };
 		BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69152B71CA3500312FE1 /* MenuItem.swift */; };
@@ -113,6 +113,9 @@
 		BE0C69242B720F2200312FE1 /* SmartWeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69232B720F2200312FE1 /* SmartWeService.swift */; };
 		BE0C69262B72117500312FE1 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69252B72117500312FE1 /* Response.swift */; };
 		BE0C69282B72206100312FE1 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69272B72206100312FE1 /* AppService.swift */; };
+		BE0C692D2B7340BB00312FE1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692C2B7340BB00312FE1 /* LoginView.swift */; };
+		BE0C692F2B73528600312FE1 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692E2B73528600312FE1 /* ScanView.swift */; };
+		BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69302B7353CA00312FE1 /* ScanViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,7 +210,7 @@
 		76AC260029C45C69007874DA /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		76C939CE29C95C2400A5D020 /* GenreContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreContainer.swift; sourceTree = "<group>"; };
 		76C939D029C95C4100A5D020 /* GenreScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreScrollView.swift; sourceTree = "<group>"; };
-		935DD01F2B7274CF00FE5EC3 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		935DD01F2B7274CF00FE5EC3 /* EnvironmentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentConfiguration.swift; sourceTree = "<group>"; };
 		935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeEnviromentKey.swift; sourceTree = "<group>"; };
 		BE0C69152B71CA3500312FE1 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		BE0C69182B71D5D900312FE1 /* SmartWeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeClient.swift; sourceTree = "<group>"; };
@@ -218,6 +221,9 @@
 		BE0C69232B720F2200312FE1 /* SmartWeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeService.swift; sourceTree = "<group>"; };
 		BE0C69252B72117500312FE1 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		BE0C69272B72206100312FE1 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
+		BE0C692C2B7340BB00312FE1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BE0C692E2B73528600312FE1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
+		BE0C69302B7353CA00312FE1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		BE8EA0922B6C6FD7004555DF /* SmartWe.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SmartWe.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,6 +391,9 @@
 			children = (
 				76AC258229C2E23A007874DA /* MovieHunterApp.swift */,
 				76AC258429C2E23A007874DA /* ContentView.swift */,
+				BE0C692C2B7340BB00312FE1 /* LoginView.swift */,
+				BE0C692E2B73528600312FE1 /* ScanView.swift */,
+				BE0C69302B7353CA00312FE1 /* ScanViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -557,7 +566,7 @@
 				76AC25BF29C2E7DC007874DA /* DebugResources.swift */,
 				76AC25C729C2EAA1007874DA /* TMDBConfiguration.swift */,
 				76751E6829C5922D0013BBDF /* Assets.swift */,
-				935DD01F2B7274CF00FE5EC3 /* AppConfiguration.swift */,
+				935DD01F2B7274CF00FE5EC3 /* EnvironmentConfiguration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -744,7 +753,9 @@
 				76751E6729C58EE20013BBDF /* NowPlayingBackdrop.swift in Sources */,
 				76AC25A629C2E350007874DA /* DeviceStatus.swift in Sources */,
 				BE0C69192B71D5D900312FE1 /* SmartWeClient.swift in Sources */,
+				BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */,
 				769F248E29D11E2100C550B8 /* MovieDetailContainer.swift in Sources */,
+				BE0C692D2B7340BB00312FE1 /* LoginView.swift in Sources */,
 				BE0C691D2B71ED9200312FE1 /* SmartWeError.swift in Sources */,
 				76AC258329C2E23A007874DA /* MovieHunterApp.swift in Sources */,
 				76443C2729D2778200D23BB0 /* SettingLibrary.swift in Sources */,
@@ -784,6 +795,7 @@
 				7652A74429CD6EA5000D7A4A /* MovieGalleryContainer.swift in Sources */,
 				769F248429CF003D00C550B8 /* SettingGenres.swift in Sources */,
 				7652A74229CD6C0E000D7A4A /* MovieExtension.swift in Sources */,
+				BE0C692F2B73528600312FE1 /* ScanView.swift in Sources */,
 				769AB0A229D174A4008451E6 /* DetailReviews.swift in Sources */,
 				769002C429C804DC00620A3C /* NowPlayingScrollViewRow.swift in Sources */,
 				76AC25B629C2E381007874DA /* Rate.swift in Sources */,
@@ -800,7 +812,7 @@
 				76AC25A929C2E35C007874DA /* Shape.swift in Sources */,
 				76751E5529C544DC0013BBDF /* AppConfiguration.swift in Sources */,
 				76751E5E29C556500013BBDF /* TabDestination.swift in Sources */,
-				935DD0202B7274CF00FE5EC3 /* AppConfiguration.swift in Sources */,
+				935DD0202B7274CF00FE5EC3 /* EnvironmentConfiguration.swift in Sources */,
 				76751E5729C547350013BBDF /* ColorSchemeSetting.swift in Sources */,
 				76751E6529C58BDA0013BBDF /* NowPlayingBannerTitle.swift in Sources */,
 				76C939D129C95C4100A5D020 /* GenreScrollView.swift in Sources */,
@@ -952,6 +964,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartWe/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "For scan machine code";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -995,6 +1008,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartWe/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "For scan machine code";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

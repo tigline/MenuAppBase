@@ -8,14 +8,19 @@ import TMDb
 
 struct MenuListView:View {
     @Environment(\.store) var store
-    let category: Category
-    @StateObject private var loader = MoviesGalleryLoader()
-    var movies:AnyRandomAccessCollection<Movie> {
+    let category: String
+    @State private var loader = ShopMenuInfoLoader()
+    var menus:AnyRandomAccessCollection<MenuCategory> {
         return AnyRandomAccessCollection(loader)
     }
+    
+    var items:[Menu] {
+        return menus.first(where: {$0.categoryName == category})?.menuVoList ?? []
+    }
+    
     @Environment(\.tmdb) private var tmdb
     var body: some View {
-        MovieGalleryContainer(movies: movies)
+        MovieGalleryContainer(movies: items)
             .environment(\.isLoading, loader.loading)
             .onAppear {
                 loader.setLoader(category: store.state.sideSelection, tmdb: tmdb)

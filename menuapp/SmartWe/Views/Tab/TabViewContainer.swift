@@ -15,46 +15,51 @@ struct SideBarContainer: View {
             TabViewContainer()
         }
     }
-    
-//    var body: some View {
-//        HStack {
-//            SideBar()
-//                .frame(width: 200)
-//                .background(.clear)
-//            TabViewContainer()
-//        }
-//    }
 }
 
 struct SideBar:View {
     @Environment(\.store) var store
+    @StateObject private var configuration = AppConfiguration.share
+    @State private var loader = ShopMenuInfoLoader()
+    var menus:AnyRandomAccessCollection<MenuCategory> {
+        return AnyRandomAccessCollection(loader)
+    }
     var body: some View {
         VStack {
             Image("smartwe.logo")
                 .scaledToFit()
-            List(Category.showableCategory) { category in
-                Button(action: {
-                    store.send(.sideBarTapped(category))
-                }, label: {
-                    HStack {
-                        Label(category.localizedString, systemImage: category.iconImage)
-                            .foregroundColor(store.state.sideSelection == category ? .white : .blue)
-                        Spacer()
-                    }
-                    .padding(EdgeInsets(top: 15, leading: 10, bottom: 10, trailing: 0))
-                    .background(store.state.sideSelection == category ? Color.blue : Color.clear) // 选中时显示蓝色背景
-                    .cornerRadius(10)
-                })
-                .buttonStyle(.plain)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 
+                
+                List(menus) { menu in
+                    Button(action: {
+                        store.send(.sideBarTapped(menu.categoryName))
+                    }, label: {
+                        HStack {
+                            Label(menu.categoryName, systemImage: "star")
+                                .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .blue)
+                            Spacer()
+                        }
+                        .padding(EdgeInsets(top: 15, leading: 10, bottom: 10, trailing: 0))
+                        .background(store.state.sideSelection == menu.categoryName ? Color.blue : Color.clear) // 选中时显示蓝色背景
+                        .cornerRadius(10)
+                    })
+                    .buttonStyle(.plain)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                }
+                //.listStyle(SidebarListStyle())
+                .navigationBarTitle("Sidebar", displayMode: .inline)
+                .navigationBarHidden(true)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            //.listStyle(SidebarListStyle())
-            .navigationBarTitle("Sidebar", displayMode: .inline)
-            .navigationBarHidden(true)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
             
-        }
+            Button("Logout"){
+                configuration.machineCode = ""
+                configuration.loginState = .logout
+            }
+            
+        
         
     }
 }
@@ -63,7 +68,7 @@ struct SideBar:View {
 
 struct TabViewContainer: View {
     @Environment(\.store) var store
-    var selection: Binding<Category> {
+    var selection: Binding<String> {
         store.binding(for: \.sideSelection, toAction: {
             .sideBarTapped($0)
         })

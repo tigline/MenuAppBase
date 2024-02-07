@@ -5,6 +5,32 @@
 import Foundation
 import SwiftUI
 import TMDb
+import Observation
+
+@Observable
+class ShopMenuInfoLoader: RandomAccessCollection {
+    
+    var loading = false
+
+    var menuCatagory: [MenuCategory] = []
+    
+    var startIndex: Int { menuCatagory.startIndex }
+    var endIndex: Int { menuCatagory.endIndex }
+
+    func index(after i: Int) -> Int {
+        return menuCatagory.index(after: i)
+    }
+
+    func index(before i: Int) -> Int {
+        return menuCatagory.index(before: i)
+    }
+
+    subscript(position: Int) -> MenuCategory {
+        return menuCatagory[position]
+    }
+    
+    
+}
 
 final class MoviesGalleryLoader: RandomAccessCollection, ObservableObject {
     @Published var movies = [Movie]()

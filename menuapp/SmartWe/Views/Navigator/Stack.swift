@@ -13,14 +13,25 @@ struct StackContainer: View {
     var destinations:Binding<[Destination]> {
         .init(get:{store.state.destinations}, set:{store.state.destinations = $0})
     }
+    @Environment(\.smartwe) var smartwe
     var body: some View {
                 VStack {
             HStack{
-                Button("オーダボタン", action: {})
+                Button("オーダボタン", action: {
+                    Task {
+                        let result = try await smartwe.activeDevice(machineCode:testMachineCode)
+                        store.send(.updateMachineInfo(result.data))
+                    }
+                })
                     .buttonStyle(.bordered)
                 Button("注文履歴", action: {})
                     .buttonStyle(.bordered)
-                Button("買い物かご", action: {})
+                Button("買い物かご", action: {
+                    Task {
+                        let result = try await smartwe.menuItemList(shopCode: store.state.machineInfo.shopCode, language: store.state.machineInfo.languages[0])
+                        print("menuList : \(result)")
+                    }
+                })
                     .buttonStyle(.bordered)
                 Spacer()
                 
@@ -33,7 +44,7 @@ struct StackContainer: View {
             
             
             NavigationStack(path: destinations) {
-                MovieGalleryDataSource(category: store.state.sideSelection)
+                MenuListView(category: store.state.sideSelection)
                     .navigationDestination(for: Destination.self) { destination in
                         switch destination {
                         case .favoritePerson:

@@ -16,10 +16,10 @@ class AppService: SmartWeService {
     }
     
     func activeDevice(machineCode: String) async throws -> Response<MachineInfo> {
-        try await apisClient.post(point: SmartWePostEndpoint.active(machineCode: machineCode))
+        return try await apisClient.post(point: SmartWePostEndpoint.active(machineCode: machineCode))
     }
     
-    func menuItemList(shopCode: String, machineCode: String) async throws -> Response<MenuVo> {
-        try await apisClient.post(point: SmartWePostEndpoint.menu(shopCode: shopCode, language: machineCode))
+    func menuItemList(shopCode: String, language: String) async throws -> Response<ShopMenuInfo> {
+        return try await apisClient.post(point: SmartWePostEndpoint.menu(shopCode: shopCode, language: language))
     }
 }

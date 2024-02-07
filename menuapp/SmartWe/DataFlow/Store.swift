@@ -85,6 +85,8 @@ final class Store {
         // update favorite person
         case let .updateFavoritePersonList(personID):
             environment.stack.updateFavoritePerson(personID: personID)
+        case let .updateMachineInfo(machineInfo):
+            state.machineInfo = machineInfo
         }
         return Empty(completeImmediately: true).eraseToAnyPublisher()
     }

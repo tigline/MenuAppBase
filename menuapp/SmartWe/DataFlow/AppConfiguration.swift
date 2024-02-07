@@ -21,6 +21,14 @@ final class AppConfiguration: ObservableObject {
     @AppStorage("open_in_new_window") var open_in_new_window = false
     /// show bookMark
     @AppStorage("showBookMarkInPoster") var showBookMarkInPoster = true
+    
+    @AppStorage("machineCode") var machineCode:String?
+    
+    @AppStorage("shopCode") var shopCode:String?
+    
+    @AppStorage("menuLaguage") var menuLaguage:String?
+    
+    @AppStorage("loginState") var loginState: LoginState = .logout
 
     static let share = AppConfiguration()
 }

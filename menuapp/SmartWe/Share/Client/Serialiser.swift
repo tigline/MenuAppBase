@@ -20,6 +20,9 @@ actor Serialiser {
     func decode<T: Decodable>(_ data: Data) async throws -> T {
         let result: T
         do {
+            if let dataString = String(data: data, encoding: .utf8) {
+                print("ResponData: \(dataString)")
+            }
             result = try decoder.decode(T.self, from: data)
         } catch let error {
             throw SmartWeError.decode(error)

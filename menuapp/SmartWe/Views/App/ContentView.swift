@@ -19,15 +19,20 @@ struct ContentView: View {
     var body: some View {
         VStack {
             #if !os(macOS)
+            if appConfiguration.loginState == .login {
                 SideBarContainer()
+            } else {
+                LoginView()
+            }
+                
             #else
                 StackContainer()
             #endif
         }
-        .if(containerName != ""){
-            $0.overlayContainer(containerName, containerConfiguration: ContainerConfiguration.share)
-        }
-        .environment(\.containerName, containerName)
+//        .if(containerName != ""){
+//            $0.overlayContainer(containerName, containerConfiguration: ContainerConfiguration.share)
+//        }
+//        .environment(\.containerName, containerName)
         .environment(\.inWishlist) {
             store.state.favoriteMovieIDs.contains($0)
         }
@@ -43,7 +48,7 @@ struct ContentView: View {
         .environment(\.goDetailFromCategory) {
             store.send(.gotoDestination(.movieDetail($0)))
         }
-        .syncCoreData() // 同步 favorite 数据
+        .syncCoreData() // 同步 booking list 数据
         .preferredColorScheme(appConfiguration.colorScheme.colorScheme)
         .environment(\.locale, appConfiguration.appLanguage.locale)
         .setDeviceStatus()

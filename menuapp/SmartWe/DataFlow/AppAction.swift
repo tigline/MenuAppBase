@@ -12,7 +12,7 @@ enum AppAction {
     /// switch tabView
     case TabItemButtonTapped(TabDestination)
     
-    case sideBarTapped(Category)
+    case sideBarTapped(String)
     /// empty destinations and back to home
     case setDestination(to: [Destination])
     /// update destination
@@ -23,4 +23,7 @@ enum AppAction {
     case updateMovieWishlist(Int)
     /// update favorite person
     case updateFavoritePersonList(Int)
+    ///  update machine info
+    case updateMachineInfo(MachineInfo)
+    
 }
