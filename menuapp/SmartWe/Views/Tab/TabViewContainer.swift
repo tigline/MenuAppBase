@@ -6,31 +6,42 @@ import Foundation
 import SwiftUI
 
 struct SideBarContainer: View {
+    @StateObject private var configuration = AppConfiguration.share
+    @State private var loader = ShopMenuInfoLoader()
+    @Environment(\.smartwe) var smartwe
+    var menus:AnyRandomAccessCollection<MenuState> {
+        return AnyRandomAccessCollection(loader)
+    }
+    
     var body: some View {
         NavigationSplitView {
-            SideBar()
+            SideBar(categorys: menus)
                 .navigationSplitViewColumnWidth(200)
                 //.navigationSplitViewStyle(.automatic)
         } detail: {
-            TabViewContainer()
-        }
+            TabViewContainer(categorys: menus)
+        }.onAppear(perform: {
+            Task {
+                await loader.loadMenuInfo(smartwe: smartwe,shopCode:configuration.shopCode ?? "" ,language:configuration.menuLaguage ?? "")
+            }
+        })
     }
 }
 
 struct SideBar:View {
+    
+    let categorys:AnyRandomAccessCollection<MenuState>
+    
     @Environment(\.store) var store
     @StateObject private var configuration = AppConfiguration.share
-    @State private var loader = ShopMenuInfoLoader()
-    var menus:AnyRandomAccessCollection<MenuCategory> {
-        return AnyRandomAccessCollection(loader)
-    }
+    
     var body: some View {
         VStack {
             Image("smartwe.logo")
                 .scaledToFit()
-                
-                
-                List(menus) { menu in
+            
+            
+                List(categorys) { menu in
                     Button(action: {
                         store.send(.sideBarTapped(menu.categoryName))
                     }, label: {
@@ -51,16 +62,15 @@ struct SideBar:View {
                 .navigationBarTitle("Sidebar", displayMode: .inline)
                 .navigationBarHidden(true)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            }
+            
+                
+        }
             Spacer()
             
             Button("Logout"){
                 configuration.machineCode = ""
                 configuration.loginState = .logout
             }
-            
-        
-        
     }
 }
 
@@ -68,18 +78,19 @@ struct SideBar:View {
 
 struct TabViewContainer: View {
     @Environment(\.store) var store
+    //@Environment(\.store.state.shopMenuState.categorys) var categorys
     var selection: Binding<String> {
         store.binding(for: \.sideSelection, toAction: {
             .sideBarTapped($0)
         })
     }
-
+    let categorys:AnyRandomAccessCollection<MenuState>
     var body: some View {
         TabView(selection: selection) {
             
-            ForEach(Category.showableCategory, id: \.self) { category in
+            ForEach(categorys, id: \.self) { category in
                 StackContainer()
-                    .tag(category)
+                    .tag(category.categoryName)
             }
         }
     }

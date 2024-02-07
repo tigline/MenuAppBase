@@ -14,8 +14,15 @@ struct StackContainer: View {
         .init(get:{store.state.destinations}, set:{store.state.destinations = $0})
     }
     @Environment(\.smartwe) var smartwe
+    @Environment(\.store.state.shopMenuState.menuInfos) var menuInfos
+    @Environment(\.store.state.sideSelection) var sideSelection
+    
+    var menuCategory:MenuState? {
+        return menuInfos.first(where: {$0.categoryName == sideSelection})
+    }
+    
     var body: some View {
-                VStack {
+        VStack {
             HStack{
                 Button("オーダボタン", action: {
                     Task {
@@ -41,24 +48,28 @@ struct StackContainer: View {
             .frame(height: 50)
             .padding(.horizontal)
             //.padding(.vertical, 10)
+                    
             
-            
-            NavigationStack(path: destinations) {
-                MenuListView(category: store.state.sideSelection)
-                    .navigationDestination(for: Destination.self) { destination in
-                        switch destination {
-                        case .favoritePerson:
-                            EmptyView()
-                        case .movieDetail(let movie):
-                            // movie Detail
-                            MovieDetailContainer(movie: movie)
-                        case .personDetail:
-                            EmptyView()
-                        default:
-                            EmptyView()
+            if menuCategory != nil {
+                NavigationStack(path: destinations) {
+                    MenuListView(menuCategory: menuCategory!)
+                        .navigationDestination(for: Destination.self) { destination in
+                            switch destination {
+                            case .favoritePerson:
+                                EmptyView()
+                            case .movieDetail(let movie):
+                                // movie Detail
+                                MovieDetailContainer(movie: movie)
+                            case .personDetail:
+                                EmptyView()
+                            default:
+                                EmptyView()
+                            }
                         }
-                    }
+                }
             }
+            Spacer()
+            
             //.setBackdropSize()
             
         }

@@ -11,26 +11,53 @@ import Observation
 class ShopMenuInfoLoader: RandomAccessCollection {
     
     var loading = false
-
-    var menuCatagory: [MenuCategory] = []
+    var menuCatagorys: [MenuState] = []
+    private var smartwe: AppService? = nil
     
-    var startIndex: Int { menuCatagory.startIndex }
-    var endIndex: Int { menuCatagory.endIndex }
+    
+    var startIndex: Int { menuCatagorys.startIndex }
+    var endIndex: Int { menuCatagorys.endIndex }
 
     func index(after i: Int) -> Int {
-        return menuCatagory.index(after: i)
+        return menuCatagorys.index(after: i)
     }
 
     func index(before i: Int) -> Int {
-        return menuCatagory.index(before: i)
+        return menuCatagorys.index(before: i)
     }
 
-    subscript(position: Int) -> MenuCategory {
-        return menuCatagory[position]
+    subscript(position: Int) -> MenuState {
+        return menuCatagorys[position]
     }
     
     
 }
+
+extension ShopMenuInfoLoader {
+    func loadMenuInfo(smartwe:AppService, shopCode: String, language: String) async {
+        guard !loading else { return }
+        
+        loading = true
+        defer { loading = false }
+        
+        do {
+            
+            // 调用 AppService 来加载数据
+            let response = try await smartwe.menuItemList(shopCode: shopCode, language: language)
+            
+            // 处理响应
+            DispatchQueue.main.async {
+                self.menuCatagorys = response.data.categoryVoList.enumerated().map { (index, category) in
+                    return MenuState(id: index, categoryName: category.categoryName)
+                }
+            }
+            
+        } catch {
+            print("Failed to load menu info: \(error)")
+        }
+    }
+}
+
 
 final class MoviesGalleryLoader: RandomAccessCollection, ObservableObject {
     @Published var movies = [Movie]()

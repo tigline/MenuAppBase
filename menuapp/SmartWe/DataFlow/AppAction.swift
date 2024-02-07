@@ -26,4 +26,6 @@ enum AppAction {
     ///  update machine info
     case updateMachineInfo(MachineInfo)
     
+    case loadShopInfo
+    
 }

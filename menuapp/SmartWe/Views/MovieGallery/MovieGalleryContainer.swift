@@ -6,6 +6,23 @@ import Foundation
 import SwiftUI
 import TMDb
 
+struct MenuGalleryContainer: View {
+    let movies: AnyRandomAccessCollection<Movie>
+    @Environment(\.deviceStatus) private var deviceStatus
+
+    var body: some View {
+        VStack {
+            switch deviceStatus {
+            case .macOS, .regular:
+                GalleryLazyVGrid(movies: movies)
+            case .compact:
+                GalleryLazyVStack(movies: movies)
+            }
+        }
+        .animation(.default, value: movies.count)
+    }
+}
+
 struct MovieGalleryContainer: View {
     let movies: AnyRandomAccessCollection<Movie>
     @Environment(\.deviceStatus) private var deviceStatus

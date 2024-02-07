@@ -8,28 +8,21 @@ import TMDb
 
 struct MenuListView:View {
     @Environment(\.store) var store
-    let category: String
-    @State private var loader = ShopMenuInfoLoader()
-    var menus:AnyRandomAccessCollection<MenuCategory> {
-        return AnyRandomAccessCollection(loader)
-    }
-    
-    var items:[Menu] {
-        return menus.first(where: {$0.categoryName == category})?.menuVoList ?? []
-    }
-    
-    @Environment(\.tmdb) private var tmdb
+
+    let menuCategory: MenuState
+
     var body: some View {
-        MovieGalleryContainer(movies: items)
-            .environment(\.isLoading, loader.loading)
-            .onAppear {
-                loader.setLoader(category: store.state.sideSelection, tmdb: tmdb)
-            }
+        EmptyView()
+//        MovieGalleryContainer(movies: items)
+//            .environment(\.isLoading, loader.loading)
+//            .onAppear {
+//                loader.setLoader(category: store.state.sideSelection, tmdb: tmdb)
+//            }
 
 //            .task(id: store.state.sideSelection) {
 //                loader.setLoader(category: category, tmdb: tmdb)
 //            }
-            .navigationTitle(store.state.sideSelection.localizedString)
+            //.navigationTitle(store.state.sideSelection.localizedString)
         #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
         #endif

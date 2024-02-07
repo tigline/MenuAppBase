@@ -27,8 +27,7 @@ struct Language: Codable {
     let name: String
 }
 
-struct MenuCategory: Codable,Identifiable {
-    var id = UUID()
+struct MenuCategory: Codable {
     let categoryCode: String
     let categoryName: String
     let showType: String

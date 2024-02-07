@@ -19,7 +19,7 @@ struct Home: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                MovieGalleryDataSource(category: store.state.sideSelection)
+//                MovieGalleryDataSource(category: store.state.sideSelection)
 //                ForEach(Category.showableCategory) { category in
 //                    CategoryWrapper(category: category)
 //                }
@@ -31,7 +31,7 @@ struct Home: View {
         }
         .scrollContentBackground(.hidden)
         .background(Assets.Colors.mainBackground)
-        .navigationTitle(store.state.sideSelection.localizedString)
+        //.navigationTitle(store.state.sideSelection.localizedString)
         #if !os(macOS)
             .toolbar(.hidden, for: .navigationBar)
         #endif
