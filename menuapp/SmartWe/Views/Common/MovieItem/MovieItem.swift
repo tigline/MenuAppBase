@@ -2,14 +2,106 @@
 //  File.swift
 //
 //
-//  Created by Yang Xu on /13.
-//
 
 import Foundation
 import Nuke
 import NukeUI
 import SwiftUI
 import TMDb
+
+public struct MenuItem: View {
+    private let item: Menu?
+    private let category: Category?
+    private let genreID: Genre.ID?
+    private let displayType: DisplayType
+
+    @Environment(\.goDetailFromHome) private var goDetailFromHome
+    @Environment(\.goDetailFromCategory) private var goDetailFromCategory
+    @Environment(\.colorScheme) private var colorScheme
+    @State private var isPressed: Bool = false
+    @StateObject private var configuration = AppConfiguration.share
+    @Environment(\.store.state.appTheme) var theme
+    private var showBookMark: Bool {
+        configuration.showBookMarkInPoster
+    }
+
+    init(
+        item: Menu?,
+        category: Category? = nil,
+        genreID: Genre.ID? = nil,
+        displayType: DisplayType
+    ) {
+        self.item = item
+        self.category = category
+        self.genreID = genreID
+        self.displayType = displayType
+    }
+
+    private var layout: AnyLayout {
+        switch displayType {
+        case .portrait:
+            return AnyLayout(VStackLayout(alignment: .leading, spacing: 0))
+        case .landscape:
+            return AnyLayout(HStackLayout(alignment: .center, spacing: 0))
+        }
+    }
+
+    private var clipShape: AnyShape {
+        if displayType == .landscape {
+            return AnyShape(Rectangle())
+        } else {
+            return AnyShape(HalfRoundedRectangle(cornerRadius: 8))
+        }
+    }
+
+    public var body: some View {
+        ZStack(alignment: .topLeading) {
+            Button {
+                //guard let item else { return }
+//                let destinationCategory: Category = category ?? (genreID != nil ? .genre(genreID!) : .popular)
+//                // from movie gallery
+//                if category == nil && genreID == nil {
+//                    goDetailFromCategory(movie)
+//                } else {
+//                    goDetailFromHome(destinationCategory, movie)
+//                }
+            } label: {
+                layout {
+                    MenuItemPoster(
+                        imagePath: URL(string: item?.homeImage ?? ""),
+                        size: displayType.imageSize
+                    )
+                    ItemShortInfo(
+                        title: item?.mainTitle ?? "",
+                        subtitle: String(item?.price ?? 100),
+                        displayType: displayType,
+                        theme: theme.themeColor
+                    )
+                    if displayType == .landscape {
+                        Image(systemName: "chevron.forward")
+                            .padding(.trailing, 16)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .background(displayType == .landscape ? .clear : Assets.Colors.rowBackground)
+                .compositingGroup()
+                //.clipShape(clipShape)
+                .contentShape(Rectangle())
+                .if(displayType != .landscape) { view in
+                    view
+                        .shadow(color: .black.opacity(colorScheme == .dark ? 0.3 : 0.1), radius: 3, x: 0, y: 2)
+                }
+            }
+            .buttonStyle(.pressStatus($isPressed))
+//            if showBookMark {
+//                BookMarkCornerButton(movieID: movie?.id)
+//            }
+        }
+        .scaleEffect(isPressed ? 0.95 : 1)
+        .animation(.easeOut.speed(2), value: isPressed)
+    }
+}
+
 
 public struct MovieItem: View {
     private let movie: Movie?
@@ -72,10 +164,10 @@ public struct MovieItem: View {
                         movie: movie,
                         size: displayType.imageSize
                     )
-                    MovieShortInfo(
-                        movie: movie,
-                        displayType: displayType
-                    )
+//                    MovieShortInfo(
+//                        movie: movie,
+//                        displayType: displayType
+//                    )
                     if displayType == .landscape {
                         Image(systemName: "chevron.forward")
                             .padding(.trailing, 16)
@@ -92,9 +184,9 @@ public struct MovieItem: View {
                 }
             }
             .buttonStyle(.pressStatus($isPressed))
-//            if showBookMark {
-//                BookMarkCornerButton(movieID: movie?.id)
-//            }
+            if showBookMark {
+                BookMarkCornerButton(movieID: movie?.id)
+            }
         }
         .scaleEffect(isPressed ? 0.95 : 1)
         .animation(.easeOut.speed(2), value: isPressed)
@@ -121,7 +213,7 @@ public enum DisplayType: Equatable {
         case .portrait(.small):
             return .init(width: 150, height: 223)
         case .portrait(.middle):
-            return .init(width: 174, height: 260)
+            return .init(width: 300, height: 213)
         case .portrait(.large):
             // TODO: - 设置成正确的 Large 尺寸
             return .init(width: 174, height: 260)

@@ -11,7 +11,7 @@ import Observation
 class ShopMenuInfoLoader: RandomAccessCollection {
     
     var loading = false
-    var menuCatagorys: [MenuState] = []
+    var menuCatagorys: [MenuCategory] = []
     private var smartwe: AppService? = nil
     
     
@@ -26,7 +26,7 @@ class ShopMenuInfoLoader: RandomAccessCollection {
         return menuCatagorys.index(before: i)
     }
 
-    subscript(position: Int) -> MenuState {
+    subscript(position: Int) -> MenuCategory {
         return menuCatagorys[position]
     }
     
@@ -47,9 +47,7 @@ extension ShopMenuInfoLoader {
             
             // 处理响应
             DispatchQueue.main.async {
-                self.menuCatagorys = response.data.categoryVoList.enumerated().map { (index, category) in
-                    return MenuState(id: index, categoryName: category.categoryName)
-                }
+                self.menuCatagorys = response.data.categoryVoList
             }
             
         } catch {

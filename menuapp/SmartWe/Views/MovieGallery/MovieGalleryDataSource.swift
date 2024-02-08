@@ -7,21 +7,16 @@ import SwiftUI
 import TMDb
 
 struct MenuListView:View {
-    @Environment(\.store) var store
+    @Environment(\.store.state.appTheme) var theme
 
-    let menuCategory: MenuState
+    @State var menuCategory: MenuCategory
+    
 
     var body: some View {
-        EmptyView()
-//        MovieGalleryContainer(movies: items)
-//            .environment(\.isLoading, loader.loading)
-//            .onAppear {
-//                loader.setLoader(category: store.state.sideSelection, tmdb: tmdb)
-//            }
-
-//            .task(id: store.state.sideSelection) {
-//                loader.setLoader(category: category, tmdb: tmdb)
-//            }
+        MenuGalleryContainer(menuCategory: menuCategory)
+            .background(theme.themeColor.buttonColor)
+            .toolbar(.hidden, for: .navigationBar)
+            //.environment(\.isLoading, loader.loading)
             //.navigationTitle(store.state.sideSelection.localizedString)
         #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)

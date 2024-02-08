@@ -14,65 +14,73 @@ struct StackContainer: View {
         .init(get:{store.state.destinations}, set:{store.state.destinations = $0})
     }
     @Environment(\.smartwe) var smartwe
-    @Environment(\.store.state.shopMenuState.menuInfos) var menuInfos
+
     @Environment(\.store.state.sideSelection) var sideSelection
-    
-    var menuCategory:MenuState? {
-        return menuInfos.first(where: {$0.categoryName == sideSelection})
-    }
+    @Environment(\.store.state.appTheme) var theme
+    @State var category:MenuCategory
     
     var body: some View {
         VStack {
             HStack{
-                Button("オーダボタン", action: {
-                    Task {
-                        let result = try await smartwe.activeDevice(machineCode:testMachineCode)
-                        store.send(.updateMachineInfo(result.data))
-                    }
-                })
-                    .buttonStyle(.bordered)
-                Button("注文履歴", action: {})
-                    .buttonStyle(.bordered)
-                Button("買い物かご", action: {
-                    Task {
-                        let result = try await smartwe.menuItemList(shopCode: store.state.machineInfo.shopCode, language: store.state.machineInfo.languages[0])
-                        print("menuList : \(result)")
-                    }
-                })
-                    .buttonStyle(.bordered)
-                Spacer()
                 
-                Button("Language", action: {})
-                    .buttonStyle(.bordered)
+                OrderButton(icon: "button_bell_ White",
+                            text: "オーダボタン",
+                            bgColor: theme.themeColor.darkRed) {
+                    
+                }
+                OrderButton(icon: "button_bell_ White",
+                            text: "注文履歴",
+                            bgColor: theme.themeColor.mainBackground) {
+                    
+                }
+                OrderButton(icon: "button_shopping car_ White",
+                            text: "買い物かご",
+                            bgColor: theme.themeColor.mainBackground) {
+                    
+                }
+                Spacer()
+//                OrderButton(icon: "",
+//                            text: "Language",
+//                            bgColor: theme.themeColor.mainBackground) {
+//                    
+//                }
+
+                    
             }
             .frame(height: 50)
             .padding(.horizontal)
-            //.padding(.vertical, 10)
+            .background(theme.themeColor.buttonColor)
+
+            
+            Rectangle()
+                .fill(Color.gray) // 设置分割线颜色
+                    .frame(height: 1)
+                    .padding(.leading, 2)
                     
             
-            if menuCategory != nil {
-                NavigationStack(path: destinations) {
-                    MenuListView(menuCategory: menuCategory!)
-                        .navigationDestination(for: Destination.self) { destination in
-                            switch destination {
-                            case .favoritePerson:
-                                EmptyView()
-                            case .movieDetail(let movie):
-                                // movie Detail
-                                MovieDetailContainer(movie: movie)
-                            case .personDetail:
-                                EmptyView()
-                            default:
-                                EmptyView()
-                            }
+            
+            NavigationStack(path: destinations) {
+                MenuListView(menuCategory: category)
+                    .navigationDestination(for: Destination.self) { destination in
+                        switch destination {
+                        case .favoritePerson:
+                            EmptyView()
+                        case .movieDetail(let movie):
+                            // movie Detail
+                            MovieDetailContainer(movie: movie)
+                        case .personDetail:
+                            EmptyView()
+                        default:
+                            EmptyView()
                         }
-                }
+                    }
             }
-            Spacer()
+            
+            //Spacer()
             
             //.setBackdropSize()
             
-        }
+        }.background(theme.themeColor.buttonColor)
     }
     
 //    // 测试时，屏蔽 Movie 视图，减少 TMDb 网络调用，防止被封
@@ -91,8 +99,8 @@ struct StackContainer: View {
 //    }()
 }
 
-struct StackContainer_Previews: PreviewProvider {
-    static var previews: some View {
-        StackContainer()
-    }
-}
+//struct StackContainer_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StackContainer(category: )
+//    }
+//}

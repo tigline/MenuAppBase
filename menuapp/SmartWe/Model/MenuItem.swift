@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ShopMenuInfo: Codable {
+struct ShopMenuInfo: Identifiable, Codable, Equatable, Hashable {
+    var id: String {self.shopCode}
     let shopCode: String
     let machineCode: String?
     let languages: [Language]
@@ -19,15 +20,17 @@ struct ShopMenuInfo: Codable {
     let businessTime: String?
     let seatNumber: Int?
     let categoryVoList: [MenuCategory]
-    let linePayChannelMap: [String: Bool]? // 根据实际情况可能需要调整类型
+    let linePayChannelMap: [String: Bool]?
 }
 
-struct Language: Codable {
+struct Language: Identifiable, Codable, Equatable, Hashable {
+    var id:String {self.val}
     let val: String
     let name: String
 }
 
-struct MenuCategory: Codable {
+struct MenuCategory: Identifiable, Codable, Equatable, Hashable {
+    var id:String {self.categoryCode}
     let categoryCode: String
     let categoryName: String
     let showType: String
@@ -35,35 +38,8 @@ struct MenuCategory: Codable {
     let menuVoList: [Menu]
 }
 
-struct OptionGroup: Codable {
-    let groupCode: Int
-    let groupName: String
-    let multipleState: Int
-    let optionVoList: [OptionVo]
-    let printText: String
-    let remark: String
-    let smallest: Int
-}
-
-struct OptionVo: Codable {
-    let bounds: Int
-    let boundsPrice: Double
-    let buttonColorValue: Int
-    let currentPrice: Double
-    let group: Int
-    let groupName: String
-    let homeImage: String
-    let homeImageHttp: String
-    let mainTitle: String
-    let optionCode: String
-    let price: Double
-    let printText: String
-    let standard: Int
-    let subTitle: String
-}
-
-
-struct Menu: Codable {
+struct Menu: Identifiable, Codable, Equatable, Hashable {
+    var id:String {self.menuCode}
     let menuCode: String
     let barCode: String
     let type: Int
@@ -82,5 +58,37 @@ struct Menu: Codable {
     let timeBoundsEnd: [Int]
     let optionGroupVoList: [OptionGroup]?
 }
+
+struct OptionGroup: Identifiable, Codable, Equatable, Hashable {
+    var id:Int {self.groupCode}
+    let groupCode: Int
+    let groupName: String
+    let multipleState: Int
+    let optionVoList: [OptionVo]
+    let printText: String
+    let remark: String
+    let smallest: Int
+}
+
+struct OptionVo: Identifiable, Codable, Equatable, Hashable {
+    var id:String {self.optionCode}
+    let bounds: Int
+    let boundsPrice: Double
+    let buttonColorValue: Int
+    let currentPrice: Double
+    let group: Int
+    let groupName: String
+    let homeImage: String
+    let homeImageHttp: String
+    let mainTitle: String
+    let optionCode: String
+    let price: Double
+    let printText: String
+    let standard: Int
+    let subTitle: String
+}
+
+
+
 
 

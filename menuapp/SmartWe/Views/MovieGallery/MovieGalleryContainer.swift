@@ -7,19 +7,14 @@ import SwiftUI
 import TMDb
 
 struct MenuGalleryContainer: View {
-    let movies: AnyRandomAccessCollection<Movie>
+    @State var menuCategory: MenuCategory
     @Environment(\.deviceStatus) private var deviceStatus
 
     var body: some View {
         VStack {
-            switch deviceStatus {
-            case .macOS, .regular:
-                GalleryLazyVGrid(movies: movies)
-            case .compact:
-                GalleryLazyVStack(movies: movies)
-            }
+            MenuGalleryLazyVGrid(items: menuCategory.menuVoList)
         }
-        .animation(.default, value: movies.count)
+        .animation(.default, value: menuCategory.menuVoList.count)
     }
 }
 
@@ -37,6 +32,27 @@ struct MovieGalleryContainer: View {
             }
         }
         .animation(.default, value: movies.count)
+    }
+}
+
+struct MenuGalleryLazyVGrid: View {
+    let items: [Menu]
+    @Environment(\.isLoading) private var isLoading
+    private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
+    var body: some View {
+        ScrollView(.vertical) {
+            let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(items) { item in
+                    MenuItem(item: item, displayType: .portrait(.middle))
+                }
+            }
+            .padding(.vertical, 20)
+            if isLoading {
+                ProgressView()
+                    .padding(10)
+            }
+        }
     }
 }
 

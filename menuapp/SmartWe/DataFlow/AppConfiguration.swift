@@ -24,6 +24,8 @@ final class AppConfiguration: ObservableObject {
     
     @AppStorage("machineCode") var machineCode:String?
     
+    @AppStorage("logoImage") var logoImage:String = ""
+    
     @AppStorage("shopCode") var shopCode:String?
     
     @AppStorage("menuLaguage") var menuLaguage:String?

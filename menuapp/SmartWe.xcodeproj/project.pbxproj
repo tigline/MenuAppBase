@@ -116,6 +116,8 @@
 		BE0C692D2B7340BB00312FE1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692C2B7340BB00312FE1 /* LoginView.swift */; };
 		BE0C692F2B73528600312FE1 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692E2B73528600312FE1 /* ScanView.swift */; };
 		BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69302B7353CA00312FE1 /* ScanViewController.swift */; };
+		BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */; };
+		BEF9C0A62B74C657000D259B /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A52B74C657000D259B /* OrderButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +227,8 @@
 		BE0C692E2B73528600312FE1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		BE0C69302B7353CA00312FE1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		BE8EA0922B6C6FD7004555DF /* SmartWe.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SmartWe.entitlements; sourceTree = "<group>"; };
+		BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoImageView.swift; sourceTree = "<group>"; };
+		BEF9C0A52B74C657000D259B /* OrderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				76629CE729CE7AF600FA75AA /* Stack.swift */,
+				BEF9C0A52B74C657000D259B /* OrderButton.swift */,
 			);
 			path = Navigator;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				769F247429CEEC2F00C550B8 /* TabViewContainer.swift */,
+				BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -739,6 +745,7 @@
 				769AB09E29D16458008451E6 /* DetailCredit.swift in Sources */,
 				769F248629CF004B00C550B8 /* SettingStorage.swift in Sources */,
 				76AC258529C2E23A007874DA /* ContentView.swift in Sources */,
+				BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */,
 				76AC25B429C2E37C007874DA /* MovieShortInfo.swift in Sources */,
 				76AC25B229C2E37C007874DA /* BookMarkButton.swift in Sources */,
 				762FCA8629CC718300030A57 /* Binding.swift in Sources */,
@@ -751,6 +758,7 @@
 				769AB0A629D18EF7008451E6 /* SimilarMovies.swift in Sources */,
 				769002AE29C6A57100620A3C /* SyncDataView.swift in Sources */,
 				76751E6729C58EE20013BBDF /* NowPlayingBackdrop.swift in Sources */,
+				BEF9C0A62B74C657000D259B /* OrderButton.swift in Sources */,
 				76AC25A629C2E350007874DA /* DeviceStatus.swift in Sources */,
 				BE0C69192B71D5D900312FE1 /* SmartWeClient.swift in Sources */,
 				BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */,

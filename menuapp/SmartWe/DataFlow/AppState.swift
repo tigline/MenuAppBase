@@ -14,18 +14,16 @@ struct AppState {
     var checkLanguage: String = "JP"
     var machineInfo: MachineInfo = .createDefault()
     var shopMenuInfo: ShopMenuInfo?
-    var shopMenuState: ShopMenuState = ShopMenuState()
+    var appTheme: Assets = .dark
 }
 
 struct ShopMenuState {
     
     var categorys:[String] = []
-    var menuInfos:[MenuState] = []
+    var menuInfos:[MenuCategory] = []
     
     mutating func updateMenuInfos(_ shopMenuInfo: ShopMenuInfo) {
-        menuInfos = shopMenuInfo.categoryVoList.enumerated().map { (index, category) in
-            return MenuState(id: index, categoryName: category.categoryName)
-        }
+      menuInfos = shopMenuInfo.categoryVoList
     }
     
 }
@@ -33,6 +31,7 @@ struct ShopMenuState {
 struct MenuState: Hashable, Identifiable {
     var id: Int = 0
     var categoryName:String = ""
+    var itemList:[Menu] = []
 }
 
 struct ItemState {

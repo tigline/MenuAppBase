@@ -85,6 +85,7 @@ struct LoginView: View {
                 store.send(.updateMachineInfo(result.data))
                 configuration.machineCode = result.data.machineCode
                 configuration.shopCode = result.data.shopCode
+                configuration.logoImage = result.data.logoImage
                 configuration.menuLaguage = result.data.languages[0]
                 configuration.loginState = .login
             } else {
