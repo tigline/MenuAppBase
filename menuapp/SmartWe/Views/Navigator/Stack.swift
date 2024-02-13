@@ -95,10 +95,14 @@ struct StackContainer: View {
             
             //.setBackdropSize()
             
-        }.background(theme.themeColor.contentBg)
+        }
+        .background(theme.themeColor.contentBg)
+        .environment(\.goOptions) { code in
+            
+        }
     }
     
-//    // 测试时，屏蔽 Movie 视图，减少 TMDb 网络调用，防止被封
+
 //    let showStack: Bool = {
 //        #if DEBUG
 //        let arguments = ProcessInfo.processInfo.arguments
@@ -119,3 +123,36 @@ struct StackContainer: View {
 //        StackContainer(category: )
 //    }
 //}
+
+struct OptionsView: View {
+    @Binding var isShowing: Bool
+
+    var body: some View {
+        ZStack {
+            // 半透明背景
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation {
+                        isShowing = false
+                    }
+                }
+
+            // 选项内容
+            VStack(spacing: 20) {
+                Text("选项 1").onTapGesture { print("选项 1 被选中") }
+                Text("选项 2").onTapGesture { print("选项 2 被选中") }
+                Button("关闭") {
+                    withAnimation {
+                        isShowing = false
+                    }
+                }
+            }
+            .frame(width: 300, height: 200)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(radius: 10)
+            .transition(.opacity) // 这里可以自定义转场动画
+        }
+    }
+}

@@ -38,13 +38,18 @@ struct MovieGalleryContainer: View {
 struct MenuGalleryLazyVGrid: View {
     let items: [Menu]
     @Environment(\.isLoading) private var isLoading
+    @State private var showOptions = false
     private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
     var body: some View {
         ScrollView(.vertical) {
             let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
             LazyVGrid(columns: columns, spacing: 18.5) {
                 ForEach(items) { item in
-                    MenuItem(item: item, displayType: .portrait(.middle))
+                    MenuItem(item: item, displayType: .portrait(.middle), onTap: {
+                        withAnimation {
+                            showOptions.toggle()
+                        }
+                    })
                 }
             }
             .padding(.top, 15)
@@ -53,9 +58,18 @@ struct MenuGalleryLazyVGrid: View {
 //                ProgressView()
 //                    .padding(10)
 //            }
+            .overlay(
+                // 根据 showOptions 的值条件渲染 OptionsView
+                showOptions ? OptionsView(isShowing: $showOptions) : nil,
+                alignment: .center // 定位到底部
+            )
         }
     }
 }
+
+
+
+
 
 struct GalleryLazyVGrid: View {
     let movies: AnyRandomAccessCollection<Movie>

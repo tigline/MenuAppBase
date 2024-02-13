@@ -21,6 +21,7 @@ public struct MenuItem: View {
     @State private var isPressed: Bool = false
     @StateObject private var configuration = AppConfiguration.share
     @Environment(\.store.state.appTheme) var theme
+    var onTap:()->Void
     private var showBookMark: Bool {
         configuration.showBookMarkInPoster
     }
@@ -29,12 +30,14 @@ public struct MenuItem: View {
         item: Menu?,
         category: Category? = nil,
         genreID: Genre.ID? = nil,
-        displayType: DisplayType
+        displayType: DisplayType,
+        onTap:@escaping ()->Void
     ) {
         self.item = item
         self.category = category
         self.genreID = genreID
         self.displayType = displayType
+        self.onTap = onTap
     }
 
     private var layout: AnyLayout {
@@ -57,7 +60,7 @@ public struct MenuItem: View {
     public var body: some View {
         ZStack(alignment: .topLeading) {
             Button {
-                //guard let item else { return }
+//                guard let item else { return }
 //                let destinationCategory: Category = category ?? (genreID != nil ? .genre(genreID!) : .popular)
 //                // from movie gallery
 //                if category == nil && genreID == nil {
@@ -65,6 +68,7 @@ public struct MenuItem: View {
 //                } else {
 //                    goDetailFromHome(destinationCategory, movie)
 //                }
+                onTap()
             } label: {
                 layout {
                     MenuItemPoster(

@@ -54,6 +54,14 @@ struct GoCategoryKey: EnvironmentKey {
     }
 }
 
+struct GoOptionsKey: EnvironmentKey {
+    static var defaultValue: (String) -> Void = {
+        #if DEBUG
+            print("go to \($0.debugDescription)'s options view")
+        #endif
+    }
+}
+
 struct MovieIsLoadingKey: EnvironmentKey {
     static var defaultValue: Bool = false
 }
@@ -75,6 +83,11 @@ extension EnvironmentValues {
     var theme: (Assets) -> Void {
         get { self[themeKey.self] }
         set { self[themeKey.self] = newValue }
+    }
+    
+    var goOptions: (String) -> Void {
+        get { self[GoOptionsKey.self] }
+        set { self[GoOptionsKey.self] = newValue }
     }
     // check if in favorite movie list
     var inWishlist: (Int) -> Bool {

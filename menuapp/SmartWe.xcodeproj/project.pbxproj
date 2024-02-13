@@ -117,6 +117,9 @@
 		BE0C692F2B73528600312FE1 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692E2B73528600312FE1 /* ScanView.swift */; };
 		BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69302B7353CA00312FE1 /* ScanViewController.swift */; };
 		BE27EBE32B75F43D0024DB77 /* ThemePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */; };
+		BE27EBE62B7B308D0024DB77 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE52B7B308D0024DB77 /* OptionButton.swift */; };
+		BE27EBE82B7B563E0024DB77 /* OptionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE72B7B563E0024DB77 /* OptionListView.swift */; };
+		BE27EBEA2B7B631E0024DB77 /* OptionGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE92B7B631E0024DB77 /* OptionGroupListView.swift */; };
 		BEF0EBC02B75E60C00EAB2D9 /* LanguagePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */; };
 		BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */; };
 		BEF9C0A62B74C657000D259B /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A52B74C657000D259B /* OrderButton.swift */; };
@@ -229,6 +232,9 @@
 		BE0C692E2B73528600312FE1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		BE0C69302B7353CA00312FE1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopverMenu.swift; sourceTree = "<group>"; };
+		BE27EBE52B7B308D0024DB77 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
+		BE27EBE72B7B563E0024DB77 /* OptionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListView.swift; sourceTree = "<group>"; };
+		BE27EBE92B7B631E0024DB77 /* OptionGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionGroupListView.swift; sourceTree = "<group>"; };
 		BE8EA0922B6C6FD7004555DF /* SmartWe.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SmartWe.entitlements; sourceTree = "<group>"; };
 		BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePopverMenu.swift; sourceTree = "<group>"; };
 		BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoImageView.swift; sourceTree = "<group>"; };
@@ -346,6 +352,7 @@
 		769002C529C825CD00620A3C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BE27EBE42B7B30560024DB77 /* Options */,
 				769002C829C826F700620A3C /* Misc */,
 				769002AC29C6A55E00620A3C /* CoreData */,
 				76AC25C129C2E821007874DA /* Person */,
@@ -648,6 +655,16 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		BE27EBE42B7B30560024DB77 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				BE27EBE52B7B308D0024DB77 /* OptionButton.swift */,
+				BE27EBE72B7B563E0024DB77 /* OptionListView.swift */,
+				BE27EBE92B7B631E0024DB77 /* OptionGroupListView.swift */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -759,6 +776,7 @@
 				769002D229C83B5800620A3C /* WishlistScrollView.swift in Sources */,
 				BE0C69262B72117500312FE1 /* Response.swift in Sources */,
 				76AC25B129C2E37C007874DA /* MovieItemPoster.swift in Sources */,
+				BE27EBE82B7B563E0024DB77 /* OptionListView.swift in Sources */,
 				769002A329C67AB900620A3C /* CoreDataStack.swift in Sources */,
 				76AC25C029C2E7DC007874DA /* DebugResources.swift in Sources */,
 				769AB0A629D18EF7008451E6 /* SimilarMovies.swift in Sources */,
@@ -779,6 +797,7 @@
 				76AC25CB29C2EB06007874DA /* TMDBEnviromentKey.swift in Sources */,
 				769AB0A429D17C6E008451E6 /* MovieSpecific.swift in Sources */,
 				769002B029C6DB9900620A3C /* Array.swift in Sources */,
+				BE27EBEA2B7B631E0024DB77 /* OptionGroupListView.swift in Sources */,
 				76A0D34F29C9727A002C3286 /* Genre_SortBy.swift in Sources */,
 				BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */,
 				769002CA29C826FF00620A3C /* ViewMore.swift in Sources */,
@@ -796,6 +815,7 @@
 				769F247829CEFA4200C550B8 /* SettingContainer.swift in Sources */,
 				76AC25AC29C2E369007874DA /* Pipeline.swift in Sources */,
 				76751E5329C542F10013BBDF /* AppAction.swift in Sources */,
+				BE27EBE62B7B308D0024DB77 /* OptionButton.swift in Sources */,
 				BE27EBE32B75F43D0024DB77 /* ThemePopverMenu.swift in Sources */,
 				769002A629C67ACB00620A3C /* Model.xcdatamodeld in Sources */,
 				769F247E29CF001C00C550B8 /* SettingHome.swift in Sources */,
