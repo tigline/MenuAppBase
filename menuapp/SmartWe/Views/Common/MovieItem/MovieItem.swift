@@ -213,7 +213,7 @@ public enum DisplayType: Equatable {
         case .portrait(.small):
             return .init(width: 150, height: 223)
         case .portrait(.middle):
-            return .init(width: 300, height: 213)
+            return .init(width: 260, height: 160)
         case .portrait(.large):
             // TODO: - 设置成正确的 Large 尺寸
             return .init(width: 174, height: 260)

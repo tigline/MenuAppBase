@@ -18,44 +18,59 @@ struct StackContainer: View {
     @Environment(\.store.state.sideSelection) var sideSelection
     @Environment(\.store.state.appTheme) var theme
     @State var category:MenuCategory
-    
+    @State var showPopover = false
+    @State var showThemePopover = false
     var body: some View {
         VStack {
             HStack{
                 
                 OrderButton(icon: "button_bell_ White",
                             text: "オーダボタン",
-                            bgColor: theme.themeColor.darkRed) {
+                            bgColor: theme.themeColor.darkRed, 
+                            textColor: .white) {
                     
                 }
-                OrderButton(icon: "button_bell_ White",
+                OrderButton(icon: "button_ list_black",
                             text: "注文履歴",
-                            bgColor: theme.themeColor.mainBackground) {
+                            bgColor: theme.themeColor.mainBackground,
+                            textColor: .black) {
                     
                 }
-                OrderButton(icon: "button_shopping car_ White",
+                OrderButton(icon: "button_shopping car_ black",
                             text: "買い物かご",
-                            bgColor: theme.themeColor.mainBackground) {
+                            bgColor: theme.themeColor.mainBackground,
+                            textColor: .black) {
                     
                 }
                 Spacer()
-//                OrderButton(icon: "",
-//                            text: "Language",
-//                            bgColor: theme.themeColor.mainBackground) {
-//                    
-//                }
+                Button(LocalizedStringKey("setting_theme")){
+        
+                    showThemePopover = true
+                }
+                .padding()
+                .background(theme.themeColor.mainBackground)
+                .cornerRadius(10)
+                .popover(isPresented: $showThemePopover, content: {
+                    ThemePopverMenu(showPopover: $showThemePopover)
+                })
+                
+                OrderButton(icon: "language_Japanese",
+                            text: "日本语",
+                            bgColor: .white,
+                            textColor: .brown) {
+                    showPopover = true
+                }
+                .popover(isPresented: $showPopover, content: {
+                    LanguagePopverMenu(showPopover: $showPopover)
+                })
+            
 
                     
             }
-            .frame(height: 50)
-            .padding(.horizontal)
-            .background(theme.themeColor.buttonColor)
-
-            
-            Rectangle()
-                .fill(Color.gray) // 设置分割线颜色
-                    .frame(height: 1)
-                    .padding(.leading, 2)
+            .frame(height: 70)
+            .padding(.leading,31)
+            .padding(.trailing,16)
+            .background(theme.themeColor.navBgColor)
                     
             
             
@@ -80,7 +95,7 @@ struct StackContainer: View {
             
             //.setBackdropSize()
             
-        }.background(theme.themeColor.buttonColor)
+        }.background(theme.themeColor.contentBg)
     }
     
 //    // 测试时，屏蔽 Movie 视图，减少 TMDb 网络调用，防止被封

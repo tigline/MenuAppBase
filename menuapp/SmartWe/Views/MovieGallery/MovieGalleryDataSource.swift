@@ -14,7 +14,7 @@ struct MenuListView:View {
 
     var body: some View {
         MenuGalleryContainer(menuCategory: menuCategory)
-            .background(theme.themeColor.buttonColor)
+            .background(theme.themeColor.contentBg)
             .toolbar(.hidden, for: .navigationBar)
             //.environment(\.isLoading, loader.loading)
             //.navigationTitle(store.state.sideSelection.localizedString)

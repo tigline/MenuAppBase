@@ -10,6 +10,7 @@ struct SideBarContainer: View {
     @State private var loader = ShopMenuInfoLoader()
     @Environment(\.smartwe) var smartwe
     @Environment(\.store.state.appTheme) var theme
+
     var menus:AnyRandomAccessCollection<MenuCategory> {
         return AnyRandomAccessCollection(loader)
     }
@@ -21,6 +22,7 @@ struct SideBarContainer: View {
                 .navigationSplitViewColumnWidth(200)
                 .background(theme.themeColor.mainBackground)
                 .navigationSplitViewStyle(.automatic)
+                
             
         } detail: {
             TabViewContainer(categorys: menus)
@@ -41,46 +43,90 @@ struct SideBar:View {
     @Environment(\.store.state.appTheme) var theme
     @Environment(\.store) var store
     @StateObject private var configuration = AppConfiguration.share
-    
+    @State var showPopover = false
     var body: some View {
         VStack {
             LogoImageView(path: configuration.logoImage)
                 .frame(width:200,height: 50)
                 .padding(.top,10)
-                
-                List(categorys) { menu in
-                    Button(action: {
-                        store.send(.sideBarTapped(menu.categoryName))
-                    }, label: {
-                        HStack {
-                            Label(menu.categoryName, systemImage: "star")
-                                .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .blue)
-                            Spacer()
-                        }
-                        .padding(EdgeInsets(top: 15, leading: 10, bottom: 10, trailing: 0))
-                        .background(store.state.sideSelection == menu.categoryName ? Color.blue : Color.clear) // 选中时显示蓝色背景
-                        .cornerRadius(10)
-                    })
-                    .background(theme.themeColor.mainBackground)
-                    .buttonStyle(.plain)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                }
-                
-                .navigationBarTitle("Sidebar", displayMode: .inline)
-                .navigationBarHidden(true)
+                .padding(.bottom,30)
+            
+            ForEach(categorys) { menu in
+                //let menu = index
+                Button(action: {
+                    store.send(.sideBarTapped(menu.categoryName))
+                }, label: {
+                    HStack {
+                        Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
+                            .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
+                        Spacer()
+                    }
+                    .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
+                    .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
+                    .cornerRadius(10)
+                })
+                .padding(.vertical)
+                .buttonStyle(.plain)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(theme.themeColor.mainBackground)
+            }
+            .padding(.trailing, 5)
+            .padding(.leading, -10)
+            .navigationBarTitle("Sidebar", displayMode: .inline)
+            .navigationBarHidden(true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(theme.themeColor.mainBackground)
                 
+//                List(categorys) { menu in
+//                    Button(action: {
+//                        store.send(.sideBarTapped(menu.categoryName))
+//                    }, label: {
+//                        HStack {
+//                            Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
+//                                .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
+//                            Spacer()
+//                        }
+//                        .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
+//                        .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
+//                        .cornerRadius(10)
+//                    })
+//                    //.background(theme.themeColor.mainBackground)
+//                    .buttonStyle(.plain)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    
+//                }
+//                .padding(.leading, -32)
+//                .padding(.trailing, -20)
+//                .navigationBarTitle("Sidebar", displayMode: .inline)
+//                .navigationBarHidden(true)
+//                .frame(maxWidth: .infinity, alignment: .leading)
+//                .background(theme.themeColor.mainBackground)
+            
             Spacer()
+            
                 
-        }.background(theme.themeColor.mainBackground)
             
+                
+        }
+        .background(theme.themeColor.mainBackground)
             
-//            Button("Logout"){
-//                configuration.machineCode = ""
-//                configuration.loginState = .logout
-//            }.background(theme.themeColor.mainBackground)
+//        Button(LocalizedStringKey("setting_theme")){
+//            
+//            showPopover = true
+//        }
+//        .padding()
+//        .background(theme.themeColor.mainBackground)
+//        .popover(isPresented: $showPopover, content: {
+//            ThemePopverMenu(showPopover: $showPopover)
+//        })
+//        
+//        
+//        Button(LocalizedStringKey("log_out")){
+//            configuration.machineCode = ""
+//            configuration.loginState = .logout
+//        }
+//        .padding()
+//        .background(theme.themeColor.mainBackground)
+        
     }
 }
 

@@ -56,7 +56,10 @@
 "Tab_Home" = "首页";
 "Tab_Setting" = "设置";
 
-// Setting
+"log_out" = "登出";
+"setting_theme" = "主题";
+
+// 
 "Setting_Title" = "设置";
 "SettingCategory_Appearance" = "外观";
 "SettingCategory_Genre" = "电影类型";

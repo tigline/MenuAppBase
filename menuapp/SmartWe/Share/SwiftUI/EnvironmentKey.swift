@@ -14,6 +14,14 @@ struct InWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Bool = { _ in true }
 }
 
+struct themeKey: EnvironmentKey {
+    static var defaultValue: (Assets) -> Void = {
+        #if DEBUG
+        print("select theme \($0.themeColor)")
+        #endif
+    }
+}
+
 struct GoMovieDetailFromHomeKey: EnvironmentKey {
     static var defaultValue: (Category, Movie) -> Void = {
         #if DEBUG
@@ -63,6 +71,10 @@ extension EnvironmentValues {
     var store:Store {
         get { self[StoreKey.self] }
         set { self[StoreKey.self] = newValue }
+    }
+    var theme: (Assets) -> Void {
+        get { self[themeKey.self] }
+        set { self[themeKey.self] = newValue }
     }
     // check if in favorite movie list
     var inWishlist: (Int) -> Bool {

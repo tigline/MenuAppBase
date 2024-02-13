@@ -13,6 +13,7 @@ struct OrderButton: View {
     let icon:String
     let text:String
     let bgColor:Color
+    let textColor:Color
     let onTap:()->Void
     
     var body: some View {
@@ -21,17 +22,23 @@ struct OrderButton: View {
         }, label: {
             HStack {
                 Label(text, image: icon)
-                    .foregroundColor(.white)
-                
+                    .foregroundColor(textColor)
             }
             .padding(8)
             .background(bgColor)
             .cornerRadius(10)
         })
         .buttonStyle(.plain)
+        
     }
 }
-
+//HStack {
+//    Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
+//        .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
+//    Spacer()
+//}
+//.padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
+//.background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
 //#Preview {
 //    OrderButton()
 //}

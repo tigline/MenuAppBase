@@ -36,6 +36,9 @@ struct ContentView: View {
         .environment(\.inWishlist) {
             store.state.favoriteMovieIDs.contains($0)
         }
+        .environment(\.theme) { theme in
+            store.state.appTheme = theme
+        }
         .environment(\.goDetailFromHome) { category, movie in
             store.send(.setDestination(to: [category.destination, .movieDetail(movie)]))
         }
@@ -49,7 +52,7 @@ struct ContentView: View {
             store.send(.gotoDestination(.movieDetail($0)))
         }
         .syncCoreData() // 同步 booking list 数据
-        .preferredColorScheme(appConfiguration.colorScheme.colorScheme)
+        .preferredColorScheme(.light)
         .environment(\.locale, appConfiguration.appLanguage.locale)
         .setDeviceStatus()
         #if os(macOS)

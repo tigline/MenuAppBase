@@ -6,12 +6,15 @@ import Foundation
 import SwiftUI
 
 enum AppLanguage: Int, CaseIterable, Identifiable {
+    case jp
     case en
     case zh
     case system
 
     var localizedString: LocalizedStringKey {
         switch self {
+        case .jp:
+            return "AppLanguage_English"
         case .en:
             return "AppLanguage_English"
         case .zh:
@@ -33,6 +36,8 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
             return .init(identifier: "zh-cn")
         case .en:
             return .init(identifier: "en")
+        case .jp:
+            return .init(identifier: "ja-JP")
         }
     }
 }

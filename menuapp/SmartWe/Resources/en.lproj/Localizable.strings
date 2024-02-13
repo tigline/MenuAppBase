@@ -57,6 +57,9 @@
 "Tab_Home" = "Home";
 "Tab_Setting" = "Settings";
 
+"log_out" = "Logout";
+"setting_theme" = "Theme";
+
 // Setting
 "Setting_Title" = "Settings";
 "SettingCategory_Appearance" = "Appearance";

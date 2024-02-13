@@ -42,16 +42,17 @@ struct MenuGalleryLazyVGrid: View {
     var body: some View {
         ScrollView(.vertical) {
             let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
-            LazyVGrid(columns: columns, spacing: 20) {
+            LazyVGrid(columns: columns, spacing: 18.5) {
                 ForEach(items) { item in
                     MenuItem(item: item, displayType: .portrait(.middle))
                 }
             }
-            .padding(.vertical, 20)
-            if isLoading {
-                ProgressView()
-                    .padding(10)
-            }
+            .padding(.top, 15)
+//            .padding(.horizontal, 32)
+//            if isLoading {
+//                ProgressView()
+//                    .padding(10)
+//            }
         }
     }
 }

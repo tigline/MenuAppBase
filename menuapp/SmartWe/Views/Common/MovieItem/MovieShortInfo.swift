@@ -78,7 +78,7 @@ struct ItemShortInfo: View {
     @ViewBuilder
     var titleView: some View {
         Text(title)
-            .font(.callout)
+            .font(.custom("PingFangSC-Regular", size: 13))
             .lineLimit(1)
             .foregroundColor(theme.textColor)
     }
@@ -87,7 +87,7 @@ struct ItemShortInfo: View {
     var subTitleView: some View {
         VStack {
             Text(subtitle)
-                .font(.title2)
+                .font(.custom("Avenir-Heavy", size: 15))
                 .foregroundColor(theme.textColor)
         }
     }
@@ -106,7 +106,7 @@ struct ItemShortInfo: View {
         .frame(width: 32, height: 32)
         .buttonStyle(BorderlessButtonStyle())
         .background(theme.buttonColor)
-        .cornerRadius(10)
+        .cornerRadius(8)
         
     }
 
@@ -248,7 +248,7 @@ struct MovieShortInfo: View {
                 ItemShortInfo(title: "Title",
                               subtitle: "Subtitle",
                               displayType: .portrait(.middle),
-                              theme: .init(mainBackground: Color("darkMain"),
+                              theme: .init(mainBackground: Color("darkMain"), navBgColor: .white, contentBg: .white,
                                            buttonColor: Color("darkGrey"),
                                            darkRed: Color("darkRed"),
                                            textColor: .white))
