@@ -18,6 +18,8 @@ struct StackContainer: View {
     @Environment(\.store.state.sideSelection) var sideSelection
     @Environment(\.store.state.appTheme) var theme
     @State var category:MenuCategory
+    
+
     @State var showPopover = false
     @State var showThemePopover = false
     var body: some View {

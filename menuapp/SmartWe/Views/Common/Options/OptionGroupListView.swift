@@ -10,6 +10,7 @@ import NukeUI
 
 struct OptionGroupListView: View {
     let optionGroups:[OptionGroup]
+    
     var body: some View {
         HStack(alignment:.top, content:  {
             //image area
@@ -35,6 +36,8 @@ struct OptionGroupListView: View {
                     OptionListView(option: optionGroup)
                 }
             })
+                
+    
 
         }).padding()
     }

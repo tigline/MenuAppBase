@@ -60,32 +60,32 @@ struct Menu: Identifiable, Codable, Equatable, Hashable {
 }
 
 struct OptionGroup: Identifiable, Codable, Equatable, Hashable {
-    var id:Int {self.groupCode}
-    let groupCode: Int
+    var id:String {self.groupCode}
+    let groupCode: String
     let groupName: String
-    let multipleState: Int
+    let multipleState: String
     let optionVoList: [OptionVo]
     let printText: String
     let remark: String
-    let smallest: Int
+    let smallest: String
 }
 
 struct OptionVo: Identifiable, Codable, Equatable, Hashable {
     var id:String {self.optionCode}
     let bounds: Int
-    let boundsPrice: Double
-    let buttonColorValue: Int
+    let boundsPrice: Double?
+    let buttonColorValue: String
     let currentPrice: Double
-    let group: Int
-    let groupName: String
+    let group: String
+    let groupName: String?
     let homeImage: String
     let homeImageHttp: String
     let mainTitle: String
     let optionCode: String
-    let price: Double
-    let printText: String
-    let standard: Int
-    let subTitle: String
+    let price: Double?
+    let printText: String?
+    let standard: Int?
+    let subTitle: [String]?
 }
 
 

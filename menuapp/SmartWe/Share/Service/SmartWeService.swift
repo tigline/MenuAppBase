@@ -47,6 +47,3 @@ struct MachineInfo: Codable {
     let reimburse: Bool?
 }
 
-struct MenuVo: Codable {
-    
-}

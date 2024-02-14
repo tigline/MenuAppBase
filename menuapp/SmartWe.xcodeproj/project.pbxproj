@@ -120,6 +120,9 @@
 		BE27EBE62B7B308D0024DB77 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE52B7B308D0024DB77 /* OptionButton.swift */; };
 		BE27EBE82B7B563E0024DB77 /* OptionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE72B7B563E0024DB77 /* OptionListView.swift */; };
 		BE27EBEA2B7B631E0024DB77 /* OptionGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE92B7B631E0024DB77 /* OptionGroupListView.swift */; };
+		BE27EBEC2B7C51490024DB77 /* MenuStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBEB2B7C51490024DB77 /* MenuStore.swift */; };
+		BE27EBEE2B7C519E0024DB77 /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBED2B7C519E0024DB77 /* OrderStore.swift */; };
+		BE27EBF02B7C9C0F0024DB77 /* CargoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBEF2B7C9C0F0024DB77 /* CargoStore.swift */; };
 		BEF0EBC02B75E60C00EAB2D9 /* LanguagePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */; };
 		BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */; };
 		BEF9C0A62B74C657000D259B /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A52B74C657000D259B /* OrderButton.swift */; };
@@ -235,6 +238,9 @@
 		BE27EBE52B7B308D0024DB77 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
 		BE27EBE72B7B563E0024DB77 /* OptionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListView.swift; sourceTree = "<group>"; };
 		BE27EBE92B7B631E0024DB77 /* OptionGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionGroupListView.swift; sourceTree = "<group>"; };
+		BE27EBEB2B7C51490024DB77 /* MenuStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuStore.swift; sourceTree = "<group>"; };
+		BE27EBED2B7C519E0024DB77 /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
+		BE27EBEF2B7C9C0F0024DB77 /* CargoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoStore.swift; sourceTree = "<group>"; };
 		BE8EA0922B6C6FD7004555DF /* SmartWe.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SmartWe.entitlements; sourceTree = "<group>"; };
 		BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePopverMenu.swift; sourceTree = "<group>"; };
 		BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoImageView.swift; sourceTree = "<group>"; };
@@ -292,6 +298,9 @@
 				76751E4C29C541D70013BBDF /* Reducer.swift */,
 				76751E4E29C542110013BBDF /* AppState.swift */,
 				76751E5029C5424C0013BBDF /* Store.swift */,
+				BE27EBEB2B7C51490024DB77 /* MenuStore.swift */,
+				BE27EBED2B7C519E0024DB77 /* OrderStore.swift */,
+				BE27EBEF2B7C9C0F0024DB77 /* CargoStore.swift */,
 				76751E5229C542F10013BBDF /* AppAction.swift */,
 				76751E5429C544DC0013BBDF /* AppConfiguration.swift */,
 				769002A829C680F300620A3C /* AppEnvironment.swift */,
@@ -773,10 +782,12 @@
 				76AC25B229C2E37C007874DA /* BookMarkButton.swift in Sources */,
 				762FCA8629CC718300030A57 /* Binding.swift in Sources */,
 				76751E4D29C541D70013BBDF /* Reducer.swift in Sources */,
+				BE27EBF02B7C9C0F0024DB77 /* CargoStore.swift in Sources */,
 				769002D229C83B5800620A3C /* WishlistScrollView.swift in Sources */,
 				BE0C69262B72117500312FE1 /* Response.swift in Sources */,
 				76AC25B129C2E37C007874DA /* MovieItemPoster.swift in Sources */,
 				BE27EBE82B7B563E0024DB77 /* OptionListView.swift in Sources */,
+				BE27EBEC2B7C51490024DB77 /* MenuStore.swift in Sources */,
 				769002A329C67AB900620A3C /* CoreDataStack.swift in Sources */,
 				76AC25C029C2E7DC007874DA /* DebugResources.swift in Sources */,
 				769AB0A629D18EF7008451E6 /* SimilarMovies.swift in Sources */,
@@ -816,6 +827,7 @@
 				76AC25AC29C2E369007874DA /* Pipeline.swift in Sources */,
 				76751E5329C542F10013BBDF /* AppAction.swift in Sources */,
 				BE27EBE62B7B308D0024DB77 /* OptionButton.swift in Sources */,
+				BE27EBEE2B7C519E0024DB77 /* OrderStore.swift in Sources */,
 				BE27EBE32B75F43D0024DB77 /* ThemePopverMenu.swift in Sources */,
 				769002A629C67ACB00620A3C /* Model.xcdatamodeld in Sources */,
 				769F247E29CF001C00C550B8 /* SettingHome.swift in Sources */,
