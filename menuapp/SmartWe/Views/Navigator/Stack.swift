@@ -13,15 +13,16 @@ struct StackContainer: View {
     var destinations:Binding<[Destination]> {
         .init(get:{store.state.destinations}, set:{store.state.destinations = $0})
     }
-    @Environment(\.smartwe) var smartwe
 
     @Environment(\.store.state.sideSelection) var sideSelection
     @Environment(\.store.state.appTheme) var theme
     @State var category:MenuCategory
     
-
+    @Environment(\.store.menuStore) var menuStore
+    @State private var showOptions = false
     @State var showPopover = false
     @State var showThemePopover = false
+    @State var optionMenu:Menu?
     var body: some View {
         VStack {
             HStack{
@@ -99,9 +100,15 @@ struct StackContainer: View {
             
         }
         .background(theme.themeColor.contentBg)
-        .environment(\.goOptions) { code in
-            
+        .environment(\.goOptions) { menu in
+            showOptions.toggle()
+            optionMenu = menu
         }
+        .overlay(
+            // 根据 showOptions 的值条件渲染 OptionsView
+            showOptions&&(optionMenu != nil)&&(optionMenu?.optionGroupVoList != nil ) ? OptionGroupListView(optionGroups: (optionMenu?.optionGroupVoList)!) : nil,
+            alignment: .center // 定位到底部
+        )
     }
     
 

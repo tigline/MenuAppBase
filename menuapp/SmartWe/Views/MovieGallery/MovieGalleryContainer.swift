@@ -38,7 +38,7 @@ struct MovieGalleryContainer: View {
 struct MenuGalleryLazyVGrid: View {
     let items: [Menu]
     @Environment(\.isLoading) private var isLoading
-    @State private var showOptions = false
+    @Environment(\.goOptions) var goOptions
     private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
     var body: some View {
         ScrollView(.vertical) {
@@ -47,7 +47,7 @@ struct MenuGalleryLazyVGrid: View {
                 ForEach(items) { item in
                     MenuItem(item: item, displayType: .portrait(.middle), onTap: {
                         withAnimation {
-                            showOptions.toggle()
+                            goOptions(item)
                         }
                     })
                 }
@@ -58,11 +58,7 @@ struct MenuGalleryLazyVGrid: View {
 //                ProgressView()
 //                    .padding(10)
 //            }
-            .overlay(
-                // 根据 showOptions 的值条件渲染 OptionsView
-                showOptions ? OptionsView(isShowing: $showOptions) : nil,
-                alignment: .center // 定位到底部
-            )
+            
         }
     }
 }

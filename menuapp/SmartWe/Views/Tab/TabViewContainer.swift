@@ -15,6 +15,7 @@ struct SideBarContainer: View {
     
     
     var body: some View {
+        let _ = Self._printChanges()
         NavigationSplitView {
             
             SideBar(categorys: menuStore.menuList)
@@ -53,7 +54,8 @@ struct SideBar:View {
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
     var body: some View {
-        
+        let _ = Self._printChanges()
+
         VStack {
             LogoImageView(path: configuration.logoImage)
                 .frame(width:200,height: 50)
@@ -155,7 +157,7 @@ struct TabViewContainer: View {
     let categorys:[MenuCategory]
     
     var body: some View {
-        
+        let _ = Self._printChanges()
         ZStack {
             ForEach(categorys, id: \.self) { category in
                 if (store.state.sideSelection == category.categoryName) {

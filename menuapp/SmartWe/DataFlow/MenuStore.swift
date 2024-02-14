@@ -6,13 +6,14 @@
 //
 
 import Observation
-
 @Observable
 class MenuStore {
     
     let appService:AppService
     
     var shopMenuInfo:ShopMenuInfo?
+    
+    var selectionIndex:Int = 0
     
     var menuList:[MenuCategory] {
         shopMenuInfo?.categoryVoList ?? []
@@ -21,6 +22,20 @@ class MenuStore {
     var catagorys:[String] {
         menuList.map({$0.categoryName})
     }
+    
+    var catagory:String {
+        return catagorys[selectionIndex]
+    }
+    
+    var curMenuInfo:MenuCategory {
+        return menuList.first(where: {$0.categoryName == catagory})!
+    }
+    
+//    var selectItemOptions:(String)->Menu? = { code in
+//        
+//        return curMenuInfo.menuVoList.first(where: {$0.menuCode == code})
+//    }
+    
     
     
     
