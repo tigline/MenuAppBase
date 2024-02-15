@@ -15,13 +15,15 @@ struct OptionListView: View {
     
     
     var body: some View {
+        
         VStack(alignment: .leading, content: {
             Text(option.groupName)
-            HStack(spacing: 15, content: {
+            let columns: [GridItem] = [.init(.adaptive(minimum: 120))]
+            LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(option.optionVoList) { optionVo in
                     OptionButton(optionVo: optionVo)
                 }
-            })
+            }
         })
     }
 }

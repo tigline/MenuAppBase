@@ -100,9 +100,8 @@ struct StackContainer: View {
         }
         .background(theme.themeColor.contentBg)
         .environment(\.goOptions) { menu in
-            
-            showOptions.toggle()
             menuStore.selectMenuItem(menu)
+            showOptions.toggle()
         }
         .overlay(
             

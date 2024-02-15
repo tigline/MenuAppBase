@@ -43,57 +43,20 @@ struct OptionGroupListView: View {
                 .padding()
                 //option area
                 ZStack(alignment: .topTrailing) {
+                    VStack(alignment: .leading, spacing: 20, content: {
+                        Text(menuOptionState?.mainTitle ?? "")
+                            .font(.title)
+                        Text(menuOptionState?.subTitle ?? "")
+                            .font(.subheadline)
+                        optionView
+                    })
+                    closeButton
                     
-                    
-                        VStack(alignment: .leading, spacing: 20, content: {
-                            Text(menuOptionState?.mainTitle ?? "")
-                                .font(.title)
-
-                            Text(menuOptionState?.subTitle ?? "")
-                                .font(.subheadline)
-                            
-                            
-                            ScrollView(.vertical) {
-                                LazyVStack(alignment: .leading) {
-                                    if let optionGroups = menuOptionState?.optionList {
-                                        ForEach(optionGroups) { optionGroup in
-                                            OptionListView(option: optionGroup)
-                                        }
-                                    }
-                                    VStack(alignment: .center, content: {
-                                        Button("確認する") {
-                                            
-                                        }
-                                        .frame(height: 50)
-                                        .padding(.horizontal, 100)
-                                        .buttonStyle(.plain)
-                                        .foregroundStyle(.white)
-                                        .background(.orange)
-                                        .clipCornerRadius(10)
-                                        
-                                    })
-                                    .padding(.top, 50)
-                                    .frame(maxWidth: .infinity)
-                                }
-                                
-                            }
-                            .scrollIndicators(.hidden)
-                            
-                        })
-                    
-                    Button {
-                        withAnimation {
-                            isShowing = false
-                        }
-                    } label: {
-                        Image(systemName: "xmark.circle")
-                    }
                 }
                 .frame(height: 560)
                 .padding()
                 
             })
-            
             .background(.white)
             .clipCornerRadius(10)
             .padding(.horizontal,100)
@@ -106,6 +69,48 @@ struct OptionGroupListView: View {
         }
         
         
+    }
+    
+    @ViewBuilder
+    var closeButton: some View {
+        Button {
+            withAnimation {
+                isShowing = false
+            }
+        } label: {
+            Image(systemName: "xmark.circle")
+        }
+    }
+    
+    @ViewBuilder
+    var optionView: some View {
+        ScrollView(.vertical) {
+            LazyVStack(alignment: .leading) {
+                if let optionGroups = menuOptionState?.optionList {
+                    ForEach(optionGroups) { optionGroup in
+                        OptionListView(option: optionGroup)
+                    }
+                }
+                VStack(alignment: .center, content: {
+                    Button("確認する") {
+                        withAnimation {
+                            isShowing = false
+                        }
+                    }
+                    .frame(height: 50)
+                    .padding(.horizontal, 100)
+                    .buttonStyle(.plain)
+                    .foregroundStyle(.white)
+                    .background(.orange)
+                    .clipCornerRadius(10)
+                    
+                })
+                .padding(.top, 50)
+                .frame(maxWidth: .infinity)
+            }
+            
+        }
+        .scrollIndicators(.hidden)
     }
 }
 

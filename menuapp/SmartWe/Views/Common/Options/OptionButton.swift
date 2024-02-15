@@ -21,25 +21,25 @@ struct OptionButton: View {
         return inOptionlist(optionVo.optionCode, optionVo.group)
     }
     
+    var hasPrice:Bool {
+        optionVo.currentPrice > 0
+    }
+    
     var body: some View {
         Button(action: {
             updateOptionlist(optionVo.optionCode, optionVo.group)
         }, label: {
             HStack{
+                Spacer()
                 Text(optionVo.mainTitle)
-                    .padding(.leading)
-                    .lineLimit(1)
-                
-                
-                
-                
-                if optionVo.currentPrice > 0 {
+                    .lineLimit(2)
+                if hasPrice {
+                    Spacer()
                     VStack(alignment: .trailing, content: {
                         RoundedRightAngleTriangle().fill(.orange)
                             .frame(width: 36, height: 32)
                             .padding(.leading, -20)
                             .overlay {
-                                
                                 Text("+" + "\(Int(optionVo.currentPrice))")
                                     .foregroundStyle(.white)
                                     .font(.system(size: 10))
@@ -49,9 +49,10 @@ struct OptionButton: View {
                             }
                         Spacer()
                     })
+                    
+                } else {
+                    Spacer()
                 }
-                
-                
             }
             .frame(height: 40)
             .buttonStyle(.plain)

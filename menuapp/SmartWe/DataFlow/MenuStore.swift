@@ -30,10 +30,10 @@ class MenuStore {
         return menuList.first(where: {$0.categoryName == catagory})!
     }
     
-    var selectMenuItem:Menu?
+    //var selectMenuItem:Menu?
     
     func selectMenuItem(_ menu:Menu) {
-        selectMenuItem = menu
+        //selectMenuItem = menu
         menuOptionState = MenuOptionState(menu: menu)
     }
     
