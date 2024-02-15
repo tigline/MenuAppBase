@@ -22,7 +22,6 @@ struct StackContainer: View {
     @State private var showOptions = false
     @State var showPopover = false
     @State var showThemePopover = false
-    @State var optionMenu:Menu?
     var body: some View {
         VStack {
             HStack{
@@ -101,12 +100,13 @@ struct StackContainer: View {
         }
         .background(theme.themeColor.contentBg)
         .environment(\.goOptions) { menu in
+            
             showOptions.toggle()
-            optionMenu = menu
+            menuStore.selectMenuItem(menu)
         }
         .overlay(
-            // 根据 showOptions 的值条件渲染 OptionsView
-            showOptions&&(optionMenu != nil)&&(optionMenu?.optionGroupVoList != nil ) ? OptionGroupListView(optionGroups: (optionMenu?.optionGroupVoList)!) : nil,
+            
+            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
             alignment: .center // 定位到底部
         )
     }

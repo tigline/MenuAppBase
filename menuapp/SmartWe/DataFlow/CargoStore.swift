@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+@Observable
+class CargoStore {
+    
+    var shoppingList:[Menu] = []
+    
+    
+    
+}
+
+
+

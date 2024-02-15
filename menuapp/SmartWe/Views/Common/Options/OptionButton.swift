@@ -8,42 +8,63 @@
 import SwiftUI
 
 struct OptionButton: View {
-    @State var content:String
     @State var backgroud:Color = .init(hex: "#F7F7F7")
-    @State var selectColor:Color = .orange
+    @State var selectColor:Color = .init(hex: "#FC8F36")
     //@Binding var selected:Bool
-    @State var price:Int = 999
+    let optionVo:OptionVo
+    
+    @Environment(\.updateOptionlist) var updateOptionlist
+    @Environment(\.inOptionlist) var inOptionlist
+    
+    
+    private var isSelected: Bool {
+        return inOptionlist(optionVo.optionCode, optionVo.group)
+    }
+    
     var body: some View {
-        Button(action: {}, label: {
+        Button(action: {
+            updateOptionlist(optionVo.optionCode, optionVo.group)
+        }, label: {
             HStack{
-                Text(content).padding(.leading)
+                Text(optionVo.mainTitle)
+                    .padding(.leading)
+                    .lineLimit(1)
                 
                 
-                VStack(alignment: .trailing, content: {
-                    RoundedRightAngleTriangle().fill(.orange)
-                        .frame(width: 66, height: 50)
-                        .padding(.leading, -20)
-                        .overlay {
-                            Text("+" + "\(price)")
-                                .foregroundStyle(.white)
-                                .rotationEffect(.degrees(38))
-                                .padding(.bottom, 15)
-                        }
-                    Spacer()
-                })
+                
+                
+                if optionVo.currentPrice > 0 {
+                    VStack(alignment: .trailing, content: {
+                        RoundedRightAngleTriangle().fill(.orange)
+                            .frame(width: 36, height: 32)
+                            .padding(.leading, -20)
+                            .overlay {
+                                
+                                Text("+" + "\(Int(optionVo.currentPrice))")
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 10))
+                                    .rotationEffect(.degrees(38))
+                                    .padding(.bottom, 10)
+                                    .padding(.leading, -12)
+                            }
+                        Spacer()
+                    })
+                }
+                
                 
             }
+            .frame(height: 40)
+            .buttonStyle(.plain)
+            .background(isSelected ? selectColor : backgroud)
+            .cornerRadius(8)
         })
-        .background(backgroud)
-        .frame(height: 60)
-        .buttonStyle(.plain)
-        .cornerRadius(13)
+        
     }
 }
 
-#Preview {
-    OptionButton(content: "Option")
-}
+//#Preview {
+    //OptionButton(content: "Option", optionCode: "123456")
+//}
 
 import SwiftUI
 

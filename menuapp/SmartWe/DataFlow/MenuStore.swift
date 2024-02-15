@@ -6,6 +6,7 @@
 //
 
 import Observation
+
 @Observable
 class MenuStore {
     
@@ -13,7 +14,7 @@ class MenuStore {
     
     var shopMenuInfo:ShopMenuInfo?
     
-    var selectionIndex:Int = 0
+    var menuOptionState:MenuOptionState?
     
     var menuList:[MenuCategory] {
         shopMenuInfo?.categoryVoList ?? []
@@ -23,20 +24,18 @@ class MenuStore {
         menuList.map({$0.categoryName})
     }
     
-    var catagory:String {
-        return catagorys[selectionIndex]
-    }
+    var catagory:String = ""
     
     var curMenuInfo:MenuCategory {
         return menuList.first(where: {$0.categoryName == catagory})!
     }
     
-//    var selectItemOptions:(String)->Menu? = { code in
-//        
-//        return curMenuInfo.menuVoList.first(where: {$0.menuCode == code})
-//    }
+    var selectMenuItem:Menu?
     
-    
+    func selectMenuItem(_ menu:Menu) {
+        selectMenuItem = menu
+        menuOptionState = MenuOptionState(menu: menu)
+    }
     
     
     init(appService: AppService) {
@@ -54,9 +53,65 @@ class MenuStore {
         }
     }
     
+    func updateSelectOption(_ code:String, _ group:String) {
+        menuOptionState?.selectOptions.updateValue(code, forKey: group)
+    }
     
-    
+    func inOptionlist(_ code:String, _ group:String) -> Bool {
+        return menuOptionState?.selectOptions.contains(where: {$0 == group && $1 == code}) ?? false
+    }
     
 }
 
 
+struct MenuOptionState {
+    private let menu:Menu
+    
+    var selectOptions:[String:String] = [:]
+    
+    init(menu: Menu) {
+        self.menu = menu
+        getInitOptions()
+    }
+    
+    var optionList:[OptionGroup] {
+        menu.optionGroupVoList ?? []
+    }
+    
+    var images:[String] {
+        [menu.homeImage,menu.homeImageHttp]
+    }
+    
+    var mainTitle:String {
+        menu.mainTitle
+    }
+    
+    var subTitle:String {
+        guard let titles = menu.subtitle else
+        { return "" }
+        return titles[0]
+    }
+    
+    
+    
+    
+    
+    private mutating func getInitOptions(){
+        guard let options = menu.optionGroupVoList else {
+            return
+        }
+        
+        for option in options {
+            
+            let selectCode = option.optionVoList.first(where: {$0.standard == 1})?.optionCode ?? ""
+            
+            selectOptions.updateValue(selectCode, forKey: option.groupCode)
+       
+        }
+
+        
+    }
+    
+    
+    
+}

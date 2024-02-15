@@ -9,40 +9,113 @@ import SwiftUI
 import NukeUI
 
 struct OptionGroupListView: View {
-    let optionGroups:[OptionGroup]
-    
+    @Environment(\.store.menuStore.menuOptionState) var menuOptionState
+    @Environment(\.store.menuStore) var menuStore
+    @Environment(\.imagePipeline) private var imagePipeline
+    @Binding var isShowing: Bool
     var body: some View {
-        HStack(alignment:.top, content:  {
-            //image area
-            VStack(spacing: 10, content: {
-                LazyImage(url: URL(string: ""))
-                HStack(spacing: 10, content: {
-                    LazyImage(url: URL(string: ""))
-                        .frame(height: 150)
-                    LazyImage(url: URL(string: ""))
-                        .frame(height: 150)
-                })
-            }).frame(width: 300, height: 560)
-            //option area
-            
-            VStack(alignment: .leading, spacing: 20, content: {
-                
-                Text("フルーツミックスミルクティー")
-                    .font(.title)
-                Text("マンゴー、ライチ、オレンジのフレッシュフルーツを加えたおいしいお")
-                    .font(.subheadline)
-                
-                ForEach(optionGroups) { optionGroup in
-                    OptionListView(option: optionGroup)
+        ZStack {
+            // 半透明背景
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation {
+                        isShowing = false
+                    }
                 }
-            })
-                
-    
+            HStack(alignment:.top, content:  {
+                //image area
+                VStack(spacing: 10, content: {
+                    LazyImage(url: URL(string:  ""))
+                        .pipeline(imagePipeline)
+                        .frame(width: 310, height: 400)
+                    HStack(spacing: 10, content: {
+                        LazyImage(url: URL(string:  ""))
+                            .pipeline(imagePipeline)
+                            .frame(width: 150, height: 150)
+                        LazyImage(url: URL(string:  ""))
+                            .pipeline(imagePipeline)
+                            .frame(width: 150, height: 150)
+                    })
+                    
+                })
+                .frame(width: 300, height: 560)
+                .padding()
+                //option area
+                ZStack(alignment: .topTrailing) {
+                    
+                    
+                        VStack(alignment: .leading, spacing: 20, content: {
+                            Text(menuOptionState?.mainTitle ?? "")
+                                .font(.title)
 
-        }).padding()
+                            Text(menuOptionState?.subTitle ?? "")
+                                .font(.subheadline)
+                            
+                            
+                            ScrollView(.vertical) {
+                                LazyVStack(alignment: .leading) {
+                                    if let optionGroups = menuOptionState?.optionList {
+                                        ForEach(optionGroups) { optionGroup in
+                                            OptionListView(option: optionGroup)
+                                        }
+                                    }
+                                    VStack(alignment: .center, content: {
+                                        Button("確認する") {
+                                            
+                                        }
+                                        .frame(height: 50)
+                                        .padding(.horizontal, 100)
+                                        .buttonStyle(.plain)
+                                        .foregroundStyle(.white)
+                                        .background(.orange)
+                                        .clipCornerRadius(10)
+                                        
+                                    })
+                                    .padding(.top, 50)
+                                    .frame(maxWidth: .infinity)
+                                }
+                                
+                            }
+                            .scrollIndicators(.hidden)
+                            
+                        })
+                    
+                    Button {
+                        withAnimation {
+                            isShowing = false
+                        }
+                    } label: {
+                        Image(systemName: "xmark.circle")
+                    }
+                }
+                .frame(height: 560)
+                .padding()
+                
+            })
+            
+            .background(.white)
+            .clipCornerRadius(10)
+            .padding(.horizontal,100)
+        }
+        .environment(\.inOptionlist) {
+            menuStore.inOptionlist($0, $1)
+        }
+        .environment(\.updateOptionlist) {code,groud in
+            menuStore.updateSelectOption(code, groud)
+        }
+        
+        
     }
 }
 
-#Preview {
-    OptionGroupListView(optionGroups: sampleOptionGroups)
+extension View {
+    func clipCornerRadius(_ cornerRadius:CGFloat) -> some View {
+        clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+    }
 }
+
+//#Preview {
+//    @State var isShow:Bool = false
+//    OptionGroupListView(optionGroups: sampleOptionGroups, isShowing: $isShow)
+//}

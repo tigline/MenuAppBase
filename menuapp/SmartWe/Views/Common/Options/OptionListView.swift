@@ -8,19 +8,18 @@
 import SwiftUI
 
 
+
 struct OptionListView: View {
     
     let option:OptionGroup
     
+    
     var body: some View {
         VStack(alignment: .leading, content: {
             Text(option.groupName)
-            HStack(spacing: 25, content: {
+            HStack(spacing: 15, content: {
                 ForEach(option.optionVoList) { optionVo in
-                    OptionButton(content: optionVo.printText ?? "",
-                                 selectColor: .init(hex: "\(optionVo.buttonColorValue)"),
-                                 price: Int(optionVo.price ?? 0)
-                                )
+                    OptionButton(optionVo: optionVo)
                 }
             })
         })

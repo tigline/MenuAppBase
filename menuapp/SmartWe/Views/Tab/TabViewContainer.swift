@@ -120,19 +120,6 @@ struct SideBar:View {
             }
             .background(theme.themeColor.mainBackground)
             .scrollIndicators(.hidden)
-            
-            
-            //        Button(LocalizedStringKey("setting_theme")){
-            //
-            //            showPopover = true
-            //        }
-            //        .padding()
-            //        .background(theme.themeColor.mainBackground)
-            //        .popover(isPresented: $showPopover, content: {
-            //            ThemePopverMenu(showPopover: $showPopover)
-            //        })
-            //
-            //
             Button(LocalizedStringKey("log_out")){
                 configuration.machineCode = ""
                 configuration.loginState = .logout

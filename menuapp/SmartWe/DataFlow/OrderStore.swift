@@ -7,8 +7,8 @@
 
 import Observation
 
-
-struct OrderStore {
+@Observable
+class OrderStore {
     let service:AppService
     var orderList:[Order] = []
     var currentOrder:Order?

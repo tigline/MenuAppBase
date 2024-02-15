@@ -14,6 +14,10 @@ struct InWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Bool = { _ in true }
 }
 
+struct InOptionlistKey: EnvironmentKey {
+    static var defaultValue: (String, String) -> Bool = { _,_  in false }
+}
+
 struct themeKey: EnvironmentKey {
     static var defaultValue: (Assets) -> Void = {
         #if DEBUG
@@ -42,6 +46,14 @@ struct UpdateMovieWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Void = {
         #if DEBUG
             print("update movie id:\($0) in favorite movie list")
+        #endif
+    }
+}
+
+struct UpdateMenuOptionlistKey: EnvironmentKey {
+    static var defaultValue: (String, String) -> Void = {
+        #if DEBUG
+            print("update option old:\($0) new:\($1) in menu option list")
         #endif
     }
 }
@@ -94,6 +106,11 @@ extension EnvironmentValues {
         get { self[InWishlistKey.self] }
         set { self[InWishlistKey.self] = newValue }
     }
+    
+    var inOptionlist: (String, String) -> Bool {
+        get { self[InOptionlistKey.self] }
+        set { self[InOptionlistKey.self] = newValue }
+    }
 
     // go to movie detail view from home
     var goDetailFromHome: (Category, Movie) -> Void {
@@ -111,6 +128,11 @@ extension EnvironmentValues {
     var updateWishlist: (Int) -> Void {
         get { self[UpdateMovieWishlistKey.self] }
         set { self[UpdateMovieWishlistKey.self] = newValue }
+    }
+    
+    var updateOptionlist: (String, String) -> Void {
+        get { self[UpdateMenuOptionlistKey.self] }
+        set { self[UpdateMenuOptionlistKey.self] = newValue }
     }
 
     // go to category gallery view
