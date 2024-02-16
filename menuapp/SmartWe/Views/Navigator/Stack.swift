@@ -19,9 +19,11 @@ struct StackContainer: View {
     @State var category:MenuCategory
     
     @Environment(\.store.menuStore) var menuStore
+    @Environment(\.store.cargoStore) var cargoStore
     @State private var showOptions = false
     @State var showPopover = false
     @State var showThemePopover = false
+    @State var showCargoView = false
     var body: some View {
         VStack {
             HStack{
@@ -42,7 +44,7 @@ struct StackContainer: View {
                             text: "買い物かご",
                             bgColor: theme.themeColor.mainBackground,
                             textColor: .black) {
-                    
+                    showCargoView.toggle()
                 }
                 Spacer()
                 Button(LocalizedStringKey("setting_theme")){
@@ -100,14 +102,25 @@ struct StackContainer: View {
         }
         .background(theme.themeColor.contentBg)
         .environment(\.goOptions) { menu in
-            menuStore.selectMenuItem(menu)
-            showOptions.toggle()
+            
+            if let optionGroupVoList =  menu.optionGroupVoList,
+                optionGroupVoList.count > 0 {
+                menuStore.selectMenuItem(menu)
+                showOptions.toggle()
+            } else {
+                //add to shopping car
+                cargoStore.addGood(menu, price: menu.currentPrice)
+            }
+            
         }
         .overlay(
             
             showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
             alignment: .center // 定位到底部
         )
+        .overlay {
+            showCargoView ? ShoppingCarView():nil
+        }
     }
     
 

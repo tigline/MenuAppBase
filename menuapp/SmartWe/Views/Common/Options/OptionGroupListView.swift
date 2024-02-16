@@ -11,6 +11,7 @@ import NukeUI
 struct OptionGroupListView: View {
     @Environment(\.store.menuStore.menuOptionState) var menuOptionState
     @Environment(\.store.menuStore) var menuStore
+    @Environment(\.store.cargoStore) var cargoStore
     @Environment(\.imagePipeline) private var imagePipeline
     @Binding var isShowing: Bool
     var body: some View {
@@ -26,20 +27,28 @@ struct OptionGroupListView: View {
             HStack(alignment:.top, content:  {
                 //image area
                 VStack(spacing: 10, content: {
-                    LazyImage(url: URL(string:  ""))
+                    LazyImage(url: URL(string:  menuOptionState?.images.first ?? ""))
                         .pipeline(imagePipeline)
-                        .frame(width: 310, height: 400)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 280, height: 300)
+                        .clipCornerRadius(10)
                     HStack(spacing: 10, content: {
-                        LazyImage(url: URL(string:  ""))
+                        LazyImage(url: URL(string:  menuOptionState?.images.last ?? ""))
                             .pipeline(imagePipeline)
-                            .frame(width: 150, height: 150)
-                        LazyImage(url: URL(string:  ""))
+                            //.aspectRatio(contentMode: .fill)
+                            .frame(width: 135, height: 130)
+                            .clipCornerRadius(10)
+                            .clipped()
+                        LazyImage(url: URL(string:  menuOptionState?.images.last ?? ""))
                             .pipeline(imagePipeline)
-                            .frame(width: 150, height: 150)
+                            //.aspectRatio(contentMode: .fill)
+                            .frame(width: 135, height: 130)
+                            .clipCornerRadius(10)
+                            .clipped()
                     })
                     
                 })
-                .frame(width: 300, height: 560)
+                .frame(width: 280, height: 440)
                 .padding()
                 //option area
                 ZStack(alignment: .topTrailing) {
@@ -53,7 +62,7 @@ struct OptionGroupListView: View {
                     closeButton
                     
                 }
-                .frame(height: 560)
+                .frame(height: 440)
                 .padding()
                 
             })
@@ -93,6 +102,14 @@ struct OptionGroupListView: View {
                 }
                 VStack(alignment: .center, content: {
                     Button("確認する") {
+                        
+                        guard let menuOptionState = menuStore.menuOptionState else {
+                            return
+                        }
+                        cargoStore.addGood(menuOptionState.optionGoodInfo.0,
+                                           price: menuOptionState.optionGoodInfo.1,
+                                           options: menuOptionState.optionGoodInfo.2)
+                        
                         withAnimation {
                             isShowing = false
                         }

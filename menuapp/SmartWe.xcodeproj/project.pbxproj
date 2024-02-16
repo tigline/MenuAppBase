@@ -123,6 +123,9 @@
 		BE27EBEC2B7C51490024DB77 /* MenuStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBEB2B7C51490024DB77 /* MenuStore.swift */; };
 		BE27EBEE2B7C519E0024DB77 /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBED2B7C519E0024DB77 /* OrderStore.swift */; };
 		BE27EBF02B7C9C0F0024DB77 /* CargoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBEF2B7C9C0F0024DB77 /* CargoStore.swift */; };
+		BE2A84422B7EF1C0007D11CB /* ShoppingCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */; };
+		BE2A84442B7F29B0007D11CB /* CargoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84432B7F29B0007D11CB /* CargoCellView.swift */; };
+		BE2A84462B7F4B7A007D11CB /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */; };
 		BEF0EBC02B75E60C00EAB2D9 /* LanguagePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */; };
 		BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */; };
 		BEF9C0A62B74C657000D259B /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A52B74C657000D259B /* OrderButton.swift */; };
@@ -241,6 +244,9 @@
 		BE27EBEB2B7C51490024DB77 /* MenuStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuStore.swift; sourceTree = "<group>"; };
 		BE27EBED2B7C519E0024DB77 /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
 		BE27EBEF2B7C9C0F0024DB77 /* CargoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoStore.swift; sourceTree = "<group>"; };
+		BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCarView.swift; sourceTree = "<group>"; };
+		BE2A84432B7F29B0007D11CB /* CargoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoCellView.swift; sourceTree = "<group>"; };
+		BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		BE8EA0922B6C6FD7004555DF /* SmartWe.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SmartWe.entitlements; sourceTree = "<group>"; };
 		BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePopverMenu.swift; sourceTree = "<group>"; };
 		BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoImageView.swift; sourceTree = "<group>"; };
@@ -509,6 +515,7 @@
 		76AC259229C2E250007874DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE2A84402B7EF196007D11CB /* ShoppingCar */,
 				769AB0BB29D1CC1B008451E6 /* App */,
 				769AB0B829D1CAB1008451E6 /* MenuBar */,
 				769AB0B329D1BD21008451E6 /* OverlayContainer */,
@@ -674,6 +681,16 @@
 			path = Options;
 			sourceTree = "<group>";
 		};
+		BE2A84402B7EF196007D11CB /* ShoppingCar */ = {
+			isa = PBXGroup;
+			children = (
+				BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */,
+				BE2A84432B7F29B0007D11CB /* CargoCellView.swift */,
+				BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */,
+			);
+			path = ShoppingCar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -797,6 +814,7 @@
 				76AC25A629C2E350007874DA /* DeviceStatus.swift in Sources */,
 				BE0C69192B71D5D900312FE1 /* SmartWeClient.swift in Sources */,
 				BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */,
+				BE2A84422B7EF1C0007D11CB /* ShoppingCarView.swift in Sources */,
 				769F248E29D11E2100C550B8 /* MovieDetailContainer.swift in Sources */,
 				BE0C692D2B7340BB00312FE1 /* LoginView.swift in Sources */,
 				BE0C691D2B71ED9200312FE1 /* SmartWeError.swift in Sources */,
@@ -810,6 +828,7 @@
 				769002B029C6DB9900620A3C /* Array.swift in Sources */,
 				BE27EBEA2B7B631E0024DB77 /* OptionGroupListView.swift in Sources */,
 				76A0D34F29C9727A002C3286 /* Genre_SortBy.swift in Sources */,
+				BE2A84442B7F29B0007D11CB /* CargoCellView.swift in Sources */,
 				BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */,
 				769002CA29C826FF00620A3C /* ViewMore.swift in Sources */,
 				76751E4F29C542110013BBDF /* AppState.swift in Sources */,
@@ -831,6 +850,7 @@
 				BE27EBE32B75F43D0024DB77 /* ThemePopverMenu.swift in Sources */,
 				769002A629C67ACB00620A3C /* Model.xcdatamodeld in Sources */,
 				769F247E29CF001C00C550B8 /* SettingHome.swift in Sources */,
+				BE2A84462B7F4B7A007D11CB /* SwiftUIView.swift in Sources */,
 				769002B229C6DF6B00620A3C /* Category.swift in Sources */,
 				7652A73E29CD52E9000D7A4A /* FetchRequest.swift in Sources */,
 				769AB0BA29D1CAC1008451E6 /* MenuBar.swift in Sources */,

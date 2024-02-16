@@ -11,6 +11,8 @@ final class Store {
     
     var state = AppState()
     var menuStore = MenuStore(appService: AppService.appDefault)
+    var cargoStore = CargoStore(appService: AppService.appDefault)
+    
 
     private let environment = AppEnvironment()
     private var effectCancellable: [UUID: AnyCancellable] = [:]

@@ -61,65 +61,11 @@ struct SideBar:View {
                 .frame(width:200,height: 50)
                 .padding(.top,10)
                 .padding(.bottom,30)
-            ScrollView(.vertical) {
-                ForEach(categorys) { menu in
-                    //let menu = index
-                    Button(action: {
-                        store.send(.sideBarTapped(menu.categoryName))
-                    }, label: {
-                        HStack {
-                            Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
-                                .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
-                            Spacer()
-                        }
-                        .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
-                        .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
-                        .cornerRadius(10)
-                    })
-                    .padding(.vertical)
-                    .buttonStyle(.plain)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding(.trailing, 5)
-                .padding(.leading, -10)
-                .navigationBarTitle("Sidebar", displayMode: .inline)
-                .navigationBarHidden(true)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(theme.themeColor.mainBackground)
+            
+            sidebarScroll
                 
-                //                List(categorys) { menu in
-                //                    Button(action: {
-                //                        store.send(.sideBarTapped(menu.categoryName))
-                //                    }, label: {
-                //                        HStack {
-                //                            Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
-                //                                .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
-                //                            Spacer()
-                //                        }
-                //                        .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
-                //                        .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
-                //                        .cornerRadius(10)
-                //                    })
-                //                    //.background(theme.themeColor.mainBackground)
-                //                    .buttonStyle(.plain)
-                //                    .frame(maxWidth: .infinity, alignment: .leading)
-                //
-                //                }
-                //                .padding(.leading, -32)
-                //                .padding(.trailing, -20)
-                //                .navigationBarTitle("Sidebar", displayMode: .inline)
-                //                .navigationBarHidden(true)
-                //                .frame(maxWidth: .infinity, alignment: .leading)
-                //                .background(theme.themeColor.mainBackground)
+            Spacer()
                 
-                Spacer()
-                
-                
-                
-                
-            }
-            .background(theme.themeColor.mainBackground)
-            .scrollIndicators(.hidden)
             Button(LocalizedStringKey("log_out")){
                 configuration.machineCode = ""
                 configuration.loginState = .logout
@@ -128,6 +74,66 @@ struct SideBar:View {
             .background(theme.themeColor.mainBackground)
         }
         
+    }
+    
+    @ViewBuilder
+    var sidebarList: some View {
+        List(categorys) { menu in
+            Button(action: {
+                store.send(.sideBarTapped(menu.categoryName))
+            }, label: {
+                HStack {
+                    Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
+                        .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
+                    Spacer()
+                }
+                .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
+                .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
+                .cornerRadius(10)
+            })
+            //.background(theme.themeColor.mainBackground)
+            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        }
+        .padding(.leading, -32)
+        .padding(.trailing, -20)
+        .navigationBarTitle("Sidebar", displayMode: .inline)
+        .navigationBarHidden(true)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(theme.themeColor.mainBackground)
+    }
+    
+    @ViewBuilder
+    var sidebarScroll: some View {
+        ScrollView(.vertical) {
+            ForEach(categorys) { menu in
+                //let menu = index
+                Button(action: {
+                    store.send(.sideBarTapped(menu.categoryName))
+                }, label: {
+                    HStack {
+                        Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
+                            .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
+                        Spacer()
+                    }
+                    .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
+                    .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
+                    .cornerRadius(10)
+                })
+                .padding(.vertical)
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.trailing, 5)
+            .padding(.leading, -10)
+            .navigationBarTitle("Sidebar", displayMode: .inline)
+            .navigationBarHidden(true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(theme.themeColor.mainBackground)
+        }
+        .background(theme.themeColor.mainBackground)
+        .scrollIndicators(.hidden)
     }
 }
 
