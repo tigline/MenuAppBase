@@ -30,7 +30,6 @@ struct SideBarContainer: View {
             } else {
                 TabViewContainer()
             }
-            
                 
         }
         .environment(\.isLoading, isLoading)

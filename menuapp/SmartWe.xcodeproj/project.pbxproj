@@ -103,6 +103,7 @@
 		76C939D129C95C4100A5D020 /* GenreScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C939D029C95C4100A5D020 /* GenreScrollView.swift */; };
 		935DD0202B7274CF00FE5EC3 /* EnvironmentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD01F2B7274CF00FE5EC3 /* EnvironmentConfiguration.swift */; };
 		935DD0222B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */; };
+		93DEC8322B83A08700C8DF8A /* SwiftUIAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DEC8312B83A08700C8DF8A /* SwiftUIAView.swift */; };
 		BE0C69142B71C8FC00312FE1 /* SystemPackage in Frameworks */ = {isa = PBXBuildFile; productRef = BE0C69132B71C8FC00312FE1 /* SystemPackage */; };
 		BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69152B71CA3500312FE1 /* MenuItem.swift */; };
 		BE0C69192B71D5D900312FE1 /* SmartWeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69182B71D5D900312FE1 /* SmartWeClient.swift */; };
@@ -225,6 +226,7 @@
 		76C939D029C95C4100A5D020 /* GenreScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreScrollView.swift; sourceTree = "<group>"; };
 		935DD01F2B7274CF00FE5EC3 /* EnvironmentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentConfiguration.swift; sourceTree = "<group>"; };
 		935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeEnviromentKey.swift; sourceTree = "<group>"; };
+		93DEC8312B83A08700C8DF8A /* SwiftUIAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIAView.swift; sourceTree = "<group>"; };
 		BE0C69152B71CA3500312FE1 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		BE0C69182B71D5D900312FE1 /* SmartWeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeClient.swift; sourceTree = "<group>"; };
 		BE0C691A2B71D62000312FE1 /* APISClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISClient.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				769F247429CEEC2F00C550B8 /* TabViewContainer.swift */,
+				93DEC8312B83A08700C8DF8A /* SwiftUIAView.swift */,
 				BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */,
 				BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */,
 			);
@@ -829,6 +832,7 @@
 				BE27EBEA2B7B631E0024DB77 /* OptionGroupListView.swift in Sources */,
 				76A0D34F29C9727A002C3286 /* Genre_SortBy.swift in Sources */,
 				BE2A84442B7F29B0007D11CB /* CargoCellView.swift in Sources */,
+				93DEC8322B83A08700C8DF8A /* SwiftUIAView.swift in Sources */,
 				BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */,
 				769002CA29C826FF00620A3C /* ViewMore.swift in Sources */,
 				76751E4F29C542110013BBDF /* AppState.swift in Sources */,
