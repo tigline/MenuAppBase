@@ -6,9 +6,11 @@
 //
 
 import Observation
+import UIKit
 
 @Observable
 class MenuStore {
+    var cartIconGlobalFrame: CGRect = .zero
     
     let appService:AppService
     
@@ -21,14 +23,33 @@ class MenuStore {
     }
     
     var catagorys:[String] {
-        menuList.map({$0.categoryName})
+        var list = menuList.map({$0.categoryName})
+        list.append("shoppingCar")
+        return list
     }
     
-    var catagory:String = ""
-    
-    var curMenuInfo:MenuCategory {
-        return menuList.first(where: {$0.categoryName == catagory})!
+    var selectBarIndex:Int = 0 {
+        didSet {
+            
+        }
     }
+    
+    var catagory:String {
+        if catagorys.count > 0 {
+            return catagorys[selectBarIndex]
+        }
+        return ""
+    }
+    
+    func updateTab(_ tap:String) {
+        if let index = catagorys.firstIndex(where: {$0 == tap}) {
+            selectBarIndex = index
+        }
+    }
+    
+//    var curMenuInfo:MenuCategory {
+//        return menuList.first(where: {$0.categoryName == catagory})!
+//    }
     
     //var selectMenuItem:Menu?
     

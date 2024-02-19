@@ -18,18 +18,22 @@ struct SideBarContainer: View {
         let _ = Self._printChanges()
         NavigationSplitView {
             
-            SideBar(categorys: menuStore.menuList)
+            SideBar()
                 .navigationSplitViewColumnWidth(200)
                 .background(theme.themeColor.mainBackground)
                 .navigationSplitViewStyle(.automatic)
                 
             
         } detail: {
-            TabViewContainer(categorys: menuStore.menuList)
+            if isLoading {
+                ProgressView().padding()
+            } else {
+                TabViewContainer()
+            }
+            
                 
         }
-        
-        
+        .environment(\.isLoading, isLoading)
         .onAppear(perform: {
             Task {
                 isLoading = true
@@ -48,9 +52,9 @@ struct SideBarContainer: View {
 
 struct SideBar:View {
     
-    let categorys:[MenuCategory]
     @Environment(\.store.state.appTheme) var theme
-    @Environment(\.store) var store
+    @Environment(\.store.menuStore) var menuStore
+    @Environment(\.isLoading) private var isLoading
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
     var body: some View {
@@ -62,7 +66,14 @@ struct SideBar:View {
                 .padding(.top,10)
                 .padding(.bottom,30)
             
-            sidebarScroll
+            if isLoading {
+                Spacer()
+                ProgressView().padding(10)
+                    .navigationBarTitle("Sidebar", displayMode: .inline)
+                    .navigationBarHidden(true)
+            } else {
+                sidebarScroll
+            }
                 
             Spacer()
                 
@@ -78,17 +89,18 @@ struct SideBar:View {
     
     @ViewBuilder
     var sidebarList: some View {
-        List(categorys) { menu in
+        List(menuStore.catagorys, id: \.self) { menu in
             Button(action: {
-                store.send(.sideBarTapped(menu.categoryName))
+                menuStore.updateTab(menu)
             }, label: {
                 HStack {
-                    Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
-                        .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
+                    
+                    Label(menu, systemImage: "hand.thumbsup.fill")
+                        .foregroundColor(menuStore.catagory == menu ? .white : .init(hex: "#828282"))
                     Spacer()
                 }
                 .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
-                .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
+                .background(menuStore.catagory == menu ? theme.themeColor.buttonColor : Color.clear)
                 .cornerRadius(10)
             })
             //.background(theme.themeColor.mainBackground)
@@ -107,18 +119,19 @@ struct SideBar:View {
     @ViewBuilder
     var sidebarScroll: some View {
         ScrollView(.vertical) {
-            ForEach(categorys) { menu in
+            ForEach(menuStore.catagorys, id: \.self) { menu in
                 //let menu = index
                 Button(action: {
-                    store.send(.sideBarTapped(menu.categoryName))
+                    menuStore.updateTab(menu)
                 }, label: {
                     HStack {
-                        Label(menu.categoryName, systemImage: "hand.thumbsup.fill")
-                            .foregroundColor(store.state.sideSelection == menu.categoryName ? .white : .init(hex: "#828282"))
+                        
+                        Label(menu, systemImage: "hand.thumbsup.fill")
+                            .foregroundColor(menuStore.catagory == menu ? .white : .init(hex: "#828282"))
                         Spacer()
                     }
                     .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
-                    .background(store.state.sideSelection == menu.categoryName ? theme.themeColor.buttonColor : Color.clear)
+                    .background(menuStore.catagory == menu ? theme.themeColor.buttonColor : Color.clear)
                     .cornerRadius(10)
                 })
                 .padding(.vertical)
@@ -140,20 +153,19 @@ struct SideBar:View {
 
 
 struct TabViewContainer: View {
-    @Environment(\.store) var store
+    @Environment(\.store.menuStore) var menuStore
     @Environment(\.store.state.appTheme) var theme
-    var selection: Binding<String> {
-        store.binding(for: \.sideSelection, toAction: {
-            .sideBarTapped($0)
-        })
-    }
-    let categorys:[MenuCategory]
+//    var selection: Binding<String> {
+//        store.binding(for: \.sideSelection, toAction: {
+//            .sideBarTapped($0)
+//        })
+//    }
     
     var body: some View {
         let _ = Self._printChanges()
         ZStack {
-            ForEach(categorys, id: \.self) { category in
-                if (store.state.sideSelection == category.categoryName) {
+            ForEach(menuStore.menuList, id: \.self) { category in
+                if (menuStore.catagory == category.categoryName) {
                     StackContainer(category:category)
                         .tag(category.categoryName)
                 }
@@ -170,16 +182,16 @@ struct TabViewContainer: View {
     }
 }
 
-struct TabViewContainer_Previews: PreviewProvider {
-    static var previews: some View {
-        #if os(iOS)
-//            TabViewContainer()
-//                .environmentObject(Store.share)
-//                .previewDevice(.iPhoneName)
-
-        SideBarContainer()
-                .environment(\.deviceStatus, .regular)
-                .previewDevice(.iPadName)
-        #endif
-    }
-}
+//struct TabViewContainer_Previews: PreviewProvider {
+//    static var previews: some View {
+//        #if os(iOS)
+////            TabViewContainer()
+////                .environmentObject(Store.share)
+////                .previewDevice(.iPhoneName)
+//
+//        SideBarContainer()
+//                .environment(\.deviceStatus, .regular)
+//                .previewDevice(.iPadName)
+//        #endif
+//    }
+//}

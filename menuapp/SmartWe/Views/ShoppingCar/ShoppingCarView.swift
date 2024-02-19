@@ -9,34 +9,53 @@ import SwiftUI
 
 struct ShoppingCarView: View {
     
+    @Environment(\.store.state.appTheme) var theme
     @Environment(\.store.cargoStore) var cargoStore
     
     var body: some View {
         
-        VStack {
-            List(cargoStore.shoppingCart) { item in
-                CargoCellView(item: item, addOrMinus: { action, item in
-                    switch action {
-                    case .add:
-                        cargoStore.addGood(item)
-                    case .minus:
-                        cargoStore.removeGood(item)
-                    }
-                })
+        if cargoStore.shoppingCart.isEmpty {
+            VStack {
+                ContentUnavailableView("ご注文くださいい", systemImage: "exclamationmark.circle")
             }
+            .background(.white)
             
-            HStack {
-                Spacer()
-                VStack(alignment: .trailing, content: {
-                    goodsCountView
+                
+        } else {
+            
+            VStack {
+                ScrollView(.vertical) {
+                    LazyVStack(content: {
+                        ForEach(cargoStore.shoppingCart) { item in
+                            CargoCellView(item: item, addOrMinus: { action, item in
+                                switch action {
+                                case .add:
+                                    cargoStore.addGood(item)
+                                case .minus:
+                                    cargoStore.removeGood(item)
+                                }
+                            })
+                        }
+                    })
+                }
+                
+                HStack {
+                    Color.clear
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack {
+                        goodsCountView
+                        priceCountView
+                        totleCountView
+                        orderButton
+                    }
                     
-                    priceCountView
-                    
-                    totleCountView
-                    
-                    orderButton
-                })
-            }.frame(maxWidth: .infinity)
+                }
+                .padding(.trailing, 50)
+                .background(theme.themeColor.mainBackground)
+                .frame(height: 220)
+            }
+            .padding(20)
+            .background(theme.themeColor.contentBg)
         }
     }
     
@@ -44,13 +63,17 @@ struct ShoppingCarView: View {
     
     @ViewBuilder
     var orderButton: some View {
-        Button("発信") {
-            
+        HStack {
+            Spacer()
+            Button("発信") {
+                cargoStore.shoppingCart.removeAll()
+            }
+            .foregroundStyle(.white)
+            .frame(width: 200, height: 50)
+            .background(.orange)
+            .clipCornerRadius(10)
         }
-        .foregroundStyle(.white)
-        .frame(width: 200, height: 50)
-        .background(.orange)
-        .clipCornerRadius(10)
+        
     }
     
     @ViewBuilder
@@ -58,7 +81,7 @@ struct ShoppingCarView: View {
         HStack {
             Text("数量")
                 .frame(maxWidth: .infinity, alignment: .leading)
-            //Spacer()
+            Spacer()
             Text(cargoStore.goodsCount)
                 .frame(alignment: .trailing)
         }

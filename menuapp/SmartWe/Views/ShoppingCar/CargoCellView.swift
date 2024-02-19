@@ -36,7 +36,7 @@ struct CargoCellView: View {
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
-            Text("\(item.quantity)")
+            Text("table 8")
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -72,7 +72,10 @@ struct CargoCellView: View {
             }.padding(.horizontal)
             Spacer()
 
-        }.padding()
+        }
+        .padding()
+        .background(.white)
+        
     }
 }
 

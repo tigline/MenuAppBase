@@ -35,33 +35,86 @@ struct MovieGalleryContainer: View {
     }
 }
 
-struct MenuGalleryLazyVGrid: View {
-    let items: [Menu]
-    @Environment(\.isLoading) private var isLoading
-    @Environment(\.goOptions) var goOptions
-    private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
-    var body: some View {
-        ScrollView(.vertical) {
-            let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
-            LazyVGrid(columns: columns, spacing: 18.5) {
-                ForEach(items) { item in
-                    MenuItem(item: item, displayType: .portrait(.middle), onTap: {
-                        withAnimation {
-                            goOptions(item)
-                        }
-                    })
-                }
-            }
-            .padding(.top, 15)
-//            .padding(.horizontal, 32)
+//struct MenuGalleryLazyVGrid: View {
+//    let items: [Menu]
+//    @Environment(\.isLoading) private var isLoading
+//    @Environment(\.goOptions) var goOptions
+//    private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
+//    var body: some View {
+//        ScrollView(.vertical) {
+//            let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
+//            LazyVGrid(columns: columns, spacing: 18.5) {
+//                ForEach(items) { item in
+//                    MenuItem(item: item, displayType: .portrait(.middle), onTap: {
+//                        withAnimation {
+//                            goOptions(item)
+//                        }
+//                    })
+//                }
+//            }
+//            .padding(.top, 15)
+////            .padding(.horizontal, 32)
 //            if isLoading {
 //                ProgressView()
 //                    .padding(10)
 //            }
-            
+//            
+//        }
+//    }
+//}
+
+
+
+
+
+struct MenuGalleryLazyVGrid: View {
+    let items: [Menu]
+    @Environment(\.isLoading) private var isLoading
+    @Environment(\.goOptions) var goOptions
+    @Environment(\.store.menuStore.cartIconGlobalFrame) var cartIconGlobalFrame
+    
+    // 新增状态变量
+    @State private var selectedItemId: String?
+    @State private var animateToCart: Bool = false
+    
+    private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
+    
+    var body: some View {
+        // 使用 GeometryReader 获取购物车图标的位置
+        GeometryReader { geometry in
+            ScrollView(.vertical) {
+                let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
+                LazyVGrid(columns: columns, spacing: 18.5) {
+                    ForEach(items) { item in
+                        MenuItem(item: item, displayType: .portrait(.middle), onTap: {
+                            selectedItemId = item.menuCode
+                            withAnimation {
+                                animateToCart = true
+                            }
+                            // 延迟重置动画状态，以便动画可以完成
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                animateToCart = false
+                                goOptions(item)
+                            }
+                       })
+//                            // 应用缩放和位置动画
+//                    .scaleEffect(animateToCart && selectedItemId == item.menuCode ? 0.1 : 1)
+//                    .position(x: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midX : geometry.frame(in: .global).minX,
+//                              y: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midY : geometry.frame(in: .global).minY)
+                    }
+                }
+                .padding(.top, 15)
+                
+                if isLoading {
+                    ProgressView()
+                        .padding(10)
+
+                }
+            }
         }
     }
 }
+
 
 
 

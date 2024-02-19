@@ -17,11 +17,11 @@ class CargoStore {
     var shoppingCart:[GoodItem] = []
     
     var goodsCount:String {
-//        let count = shoppingCart.reduce(0) { count, item in
-//            count += item.quantity
-//        }
+        let count = shoppingCart.reduce(into: 0) { count, item in
+            count += item.quantity
+        }
         
-        return "\(shoppingCart.count)"
+        return "\(count)"
     }
     
     var subTotle:String {
@@ -30,7 +30,7 @@ class CargoStore {
     
     var allTotle:String {
         let all = shoppingCart.reduce(0) { count, item in
-            count + item.price
+            count + item.price * Double(item.quantity)
         }
         return "\(all)"
     }
@@ -49,9 +49,6 @@ class CargoStore {
                                          quantity: 1
                                         ))
         }
-        
-        
-        
     }
     
     func addGood(_ item: GoodItem) {

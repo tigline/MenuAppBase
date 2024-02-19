@@ -40,12 +40,19 @@ struct StackContainer: View {
                             textColor: .black) {
                     
                 }
-                OrderButton(icon: "button_shopping car_ black",
+                CartButton(icon: "button_shopping car_ black",
                             text: "買い物かご",
                             bgColor: theme.themeColor.mainBackground,
                             textColor: .black) {
                     showCargoView.toggle()
-                }
+                }.background(
+                    GeometryReader { geometry in
+                        Color.clear
+                            .onAppear {
+                                menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
+                            }
+                    }
+                )
                 Spacer()
                 Button(LocalizedStringKey("setting_theme")){
         

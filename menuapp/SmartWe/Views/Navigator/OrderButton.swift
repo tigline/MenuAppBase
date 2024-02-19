@@ -42,3 +42,43 @@ struct OrderButton: View {
 //#Preview {
 //    OrderButton()
 //}
+struct CartButton: View {
+    @Environment(\.store.cargoStore) var cargoStore
+    
+    let icon:String
+    let text:String
+    let bgColor:Color
+    let textColor:Color
+    let onTap:()->Void
+    
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            Button(action: {
+                onTap()
+            }, label: {
+                HStack {
+                    Label(text, image: icon)
+                        .foregroundColor(textColor)
+                }
+                .padding(8)
+                .background(bgColor)
+                .cornerRadius(10)
+            })
+            .buttonStyle(.plain)
+            
+            if cargoStore.shoppingCart.count > 0 {
+                Text("\(cargoStore.goodsCount)")
+                    .font(.caption2).bold()
+                    .foregroundColor(.white)
+                    .frame(width: 18, height: 18)
+                    .background(Color.red)
+                    .clipShape(Circle())
+                    .offset(x: 10, y: -10)
+            }
+            
+            
+            
+        }
+        
+    }
+}
