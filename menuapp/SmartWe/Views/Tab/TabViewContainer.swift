@@ -11,13 +11,14 @@ struct SideBarContainer: View {
 
     @Environment(\.store.state.appTheme) var theme
     @Environment(\.store.menuStore) var menuStore
+    @Environment(\.router) var router
     @State var isLoading = false
     //@State var selectionBar:String?
     
     var selectionBar: Binding<String?> {
         menuStore.binding(for: \.catagory, toFunction: {
-            menuStore.updateTab($0 ?? "")
-            
+            //menuStore.updateTab($0 ?? "")
+            router(.menu($0 ?? ""))
         })
     }
     
@@ -36,6 +37,7 @@ struct SideBarContainer: View {
         .environment(\.isLoading, isLoading)
         .onAppear(perform: {
             Task {
+                
                 isLoading = true
                 guard let shopCode = configuration.shopCode else {
                     return
@@ -164,24 +166,30 @@ struct SideBar:View {
 
 struct TabViewContainer: View {
     @Environment(\.store.menuStore) var menuStore
-    @Environment(\.store.router) var router
+    //@Environment(\.store.router) var router
 //    var selection: Binding<String> {
 //        store.binding(for: \.sideSelection, toAction: {
 //            .sideBarTapped($0)
 //        })
 //    }
-    
+    @State var appRouter:AppRouter = .menu("拉面")
     var body: some View {
         let _ = Self._printChanges()
         ZStack {
             
-            switch router {
-                case let .menu(category):
-                if let menuCategory = menuStore.menuList.first(where: {$0.categoryName == category}) {
-                    StackContainer(category:menuCategory)
-                } else {
-                    EmptyView()
+            switch appRouter {
+                case let .menu(categoryName):
+                ForEach(menuStore.menuList, id: \.self) { category in
+                    if (categoryName == category.categoryName) {
+                        StackContainer(category:category)
+                            .tag(category.categoryName)
+                    }
                 }
+//                if let menuCategory = menuStore.menuList.first(where: {$0.categoryName == categoryName}) {
+//                    StackContainer(category:menuCategory)
+//                } else {
+//                    EmptyView()
+//                }
                     
                 case let .order(order):
                     EmptyView()
@@ -196,6 +204,10 @@ struct TabViewContainer: View {
 //                        .tag(category.categoryName)
 //                }
 //            }
+            
+        }.environment(\.router) { route in
+            
+            appRouter = route
             
         }
         
@@ -222,6 +234,17 @@ enum OrderRouter: Hashable {
     case shopping
 }
 
+
+struct NavigateEnvironmentKey:EnvironmentKey {
+    static var defaultValue: (AppRouter)->Void = {_ in}
+}
+
+extension EnvironmentValues {
+    var router:(AppRouter)->Void {
+        get { self[NavigateEnvironmentKey.self] }
+        set { self[NavigateEnvironmentKey.self] = newValue }
+    }
+}
 
 
 
