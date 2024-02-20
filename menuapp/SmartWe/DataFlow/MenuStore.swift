@@ -7,6 +7,7 @@
 
 import Observation
 import UIKit
+import SwiftUI
 
 @Observable
 class MenuStore {
@@ -24,7 +25,6 @@ class MenuStore {
     
     var catagorys:[String] {
         var list = menuList.map({$0.categoryName})
-        list.append("shoppingCar")
         return list
     }
     
@@ -34,7 +34,7 @@ class MenuStore {
         }
     }
     
-    var catagory:String {
+    var catagory:String? {
         if catagorys.count > 0 {
             return catagorys[selectBarIndex]
         }
@@ -47,9 +47,13 @@ class MenuStore {
         }
     }
     
-//    var curMenuInfo:MenuCategory {
-//        return menuList.first(where: {$0.categoryName == catagory})!
-//    }
+    var curMenuInfo:MenuCategory? {
+        return menuList.first(where: {$0.categoryName == catagory})
+    }
+    
+    func getCurrentMenu(_ menu:String) -> MenuCategory? {
+        return menuList.first(where: {$0.categoryName == catagory})
+    }
     
     //var selectMenuItem:Menu?
     
@@ -84,6 +88,17 @@ class MenuStore {
     
 }
 
+extension MenuStore {
+    func binding<Value>(
+        for keyPath: KeyPath<MenuStore, Value>,
+        toFunction: @escaping (Value) -> Void
+    ) -> Binding<Value> {
+        Binding<Value>(
+            get: { self[keyPath: keyPath] },
+            set: { toFunction($0) }
+        )
+    }
+}
 
 
 

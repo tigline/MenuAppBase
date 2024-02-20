@@ -13,10 +13,8 @@ struct StackContainer: View {
     var destinations:Binding<[Destination]> {
         .init(get:{store.state.destinations}, set:{store.state.destinations = $0})
     }
-
-    @Environment(\.store.state.sideSelection) var sideSelection
+    
     @Environment(\.store.state.appTheme) var theme
-    @State var category:MenuCategory
     
     @Environment(\.store.menuStore) var menuStore
     @Environment(\.store.cargoStore) var cargoStore
@@ -24,6 +22,7 @@ struct StackContainer: View {
     @State var showPopover = false
     @State var showThemePopover = false
     @State var showCargoView = false
+    let category:MenuCategory
     var body: some View {
         VStack {
             HStack{
@@ -44,7 +43,9 @@ struct StackContainer: View {
                             text: "買い物かご",
                             bgColor: theme.themeColor.mainBackground,
                             textColor: .black) {
-                    showCargoView.toggle()
+                    
+                    
+                    
                 }.background(
                     GeometryReader { geometry in
                         Color.clear
@@ -83,10 +84,9 @@ struct StackContainer: View {
             .padding(.trailing,16)
             .background(theme.themeColor.navBgColor)
                     
-            
-            
+
             NavigationStack(path: destinations) {
-                MenuListView(menuCategory: category)
+                MenuGalleryLazyVGrid(items: category.menuVoList)
                     .navigationDestination(for: Destination.self) { destination in
                         switch destination {
                         case .favoritePerson:
@@ -101,14 +101,13 @@ struct StackContainer: View {
                         }
                     }
             }
-            
             //Spacer()
             
             //.setBackdropSize()
             
         }
         .background(theme.themeColor.contentBg)
-        .environment(\.goOptions) { menu in
+        .environment(\.goOptions) { menu, rect in
             
             if let optionGroupVoList =  menu.optionGroupVoList,
                 optionGroupVoList.count > 0 {
@@ -119,12 +118,15 @@ struct StackContainer: View {
                 cargoStore.addGood(menu, price: menu.currentPrice)
             }
             
-        }
-        .overlay(
-            
-            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
-            alignment: .center // 定位到底部
-        )
+        }.sheet(isPresented: $showOptions, content: {
+            OptionGroupListView(isShowing: $showOptions)
+        })
+        
+//        .overlay(
+//            
+//            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
+//            alignment: .center // 定位到底部
+//        )
         .overlay {
             showCargoView ? ShoppingCarView():nil
         }

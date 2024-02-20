@@ -6,23 +6,21 @@ import Foundation
 import SwiftUI
 import TMDb
 
-struct MenuListView:View {
-    @Environment(\.store.state.appTheme) var theme
-
-    @State var menuCategory: MenuCategory
-    
-
-    var body: some View {
-        MenuGalleryContainer(menuCategory: menuCategory)
-            .background(theme.themeColor.contentBg)
-            .toolbar(.hidden, for: .navigationBar)
-            //.environment(\.isLoading, loader.loading)
-            //.navigationTitle(store.state.sideSelection.localizedString)
-        #if !os(macOS)
-            .navigationBarTitleDisplayMode(.inline)
-        #endif
-    }
-}
+//struct MenuListView:View {
+//    @Environment(\.store.state.appTheme) var theme
+//    
+//    let category:MenuCategory
+//    var body: some View {
+//        MenuGalleryLazyVGrid(items: <#[Menu]#>)
+//            .background(theme.themeColor.contentBg)
+//            .toolbar(.hidden, for: .navigationBar)
+//            //.environment(\.isLoading, loader.loading)
+//            //.navigationTitle(store.state.sideSelection.localizedString)
+//        #if !os(macOS)
+//            .navigationBarTitleDisplayMode(.inline)
+//        #endif
+//    }
+//}
 
 struct MovieGalleryDataSource: View {
     let category: Category

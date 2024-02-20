@@ -6,8 +6,13 @@ import Combine
 import Foundation
 import Observation
 
+
+
+
 @Observable
 final class Store {
+    
+    var router:AppRouter = .menu("")
     
     var state = AppState()
     var menuStore = MenuStore(appService: AppService.appDefault)
@@ -109,3 +114,11 @@ final class Store {
 extension Store {
     static let share = Store()
 }
+
+
+//@Observable
+//enum AppRoute {
+//    case login,
+//    case home
+//    
+//}

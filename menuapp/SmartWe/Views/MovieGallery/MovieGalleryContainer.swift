@@ -6,17 +6,17 @@ import Foundation
 import SwiftUI
 import TMDb
 
-struct MenuGalleryContainer: View {
-    @State var menuCategory: MenuCategory
-    @Environment(\.deviceStatus) private var deviceStatus
-
-    var body: some View {
-        VStack {
-            MenuGalleryLazyVGrid(items: menuCategory.menuVoList)
-        }
-        .animation(.default, value: menuCategory.menuVoList.count)
-    }
-}
+//struct MenuGalleryContainer: View {
+//    
+//    @Environment(\.deviceStatus) private var deviceStatus
+//    @Environment(\.store.menuStore)
+//    var body: some View {
+//        VStack {
+//            MenuGalleryLazyVGrid(items: menuCategory.menuVoList)
+//        }
+//        //.animation(.default, value: menuCategory.menuVoList.count)
+//    }
+//}
 
 struct MovieGalleryContainer: View {
     let movies: AnyRandomAccessCollection<Movie>
@@ -68,39 +68,45 @@ struct MovieGalleryContainer: View {
 
 
 struct MenuGalleryLazyVGrid: View {
-    let items: [Menu]
+    
+    let items:[Menu]
     @Environment(\.isLoading) private var isLoading
     @Environment(\.goOptions) var goOptions
     @Environment(\.store.menuStore.cartIconGlobalFrame) var cartIconGlobalFrame
-    
+    @Environment(\.store.state.appTheme) var theme
     // 新增状态变量
     @State private var selectedItemId: String?
     @State private var animateToCart: Bool = false
+    @State private var showDetailView = false
+    @State private var animationStartFrame: CGRect = .zero
+    @State private var selectedItem: Menu? = nil
     
     private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
     
     var body: some View {
         // 使用 GeometryReader 获取购物车图标的位置
-        GeometryReader { geometry in
+        ZStack {
             ScrollView(.vertical) {
                 let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
                 LazyVGrid(columns: columns, spacing: 18.5) {
                     ForEach(items) { item in
-                        MenuItem(item: item, displayType: .portrait(.middle), onTap: {
-                            selectedItemId = item.menuCode
-                            withAnimation {
-                                animateToCart = true
+                        MenuItem(item: item, displayType: .portrait(.middle))
+                            .onTapGesture {
+                                
+                                withAnimation {
+                                    showDetailView = true
+                                }
                             }
-                            // 延迟重置动画状态，以便动画可以完成
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                animateToCart = false
-                                goOptions(item)
-                            }
-                       })
-//                            // 应用缩放和位置动画
-//                    .scaleEffect(animateToCart && selectedItemId == item.menuCode ? 0.1 : 1)
-//                    .position(x: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midX : geometry.frame(in: .global).minX,
-//                              y: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midY : geometry.frame(in: .global).minY)
+                            .background(GeometryReader { geometry -> Color in
+                                if selectedItem == item && showDetailView {
+                                    animationStartFrame = geometry.frame(in: .global)
+                                    //goOptions(item, animationStartFrame)
+                                }
+                                return Color.clear
+                            })
+                        //                    .scaleEffect(animateToCart && selectedItemId == item.menuCode ? 0.1 : 1)
+                        //                    .position(x: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midX : geometry.frame(in: .global).minX,
+                        //                              y: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midY : geometry.frame(in: .global).minY)
                     }
                 }
                 .padding(.top, 15)
@@ -108,15 +114,40 @@ struct MenuGalleryLazyVGrid: View {
                 if isLoading {
                     ProgressView()
                         .padding(10)
-
+                    
                 }
             }
+            .toolbar(.hidden, for: .navigationBar)
+            .background(theme.themeColor.contentBg)
+            
+            if showDetailView, let selectedItem = selectedItem {
+                
+                DetailView2(text: selectedItem.mainTitle)
+                    .frame(width: 200, height: 200)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                                .shadow(radius: 10)
+                                .position(x: animationStartFrame.midX, y: animationStartFrame.midY)
+                                .scaleEffect(showDetailView ? 1 : 0)
+                                .offset(y: showDetailView ? UIScreen.main.bounds.midY - animationStartFrame.midY : 0)
+                                .animation(.spring(), value: showDetailView)
+            }
+            
         }
     }
 }
 
 
-
+struct DetailView2: View {
+    let text:String
+    var body: some View {
+        //OptionGroupListView(isShowing: $showDetailView)
+        VStack {
+            Text("text")
+        }
+        
+    }
+}
 
 
 
