@@ -72,7 +72,7 @@ struct MenuGalleryLazyVGrid: View {
     let items:[Menu]
     @Environment(\.isLoading) private var isLoading
     @Environment(\.goOptions) var goOptions
-    @Environment(\.store.menuStore.cartIconGlobalFrame) var cartIconGlobalFrame
+    @Environment(\.menuStore.cartIconGlobalFrame) var cartIconGlobalFrame
     @Environment(\.store.state.appTheme) var theme
     // 新增状态变量
     @State private var selectedItemId: String?

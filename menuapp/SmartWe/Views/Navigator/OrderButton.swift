@@ -43,7 +43,7 @@ struct OrderButton: View {
 //    OrderButton()
 //}
 struct CartButton: View {
-    @Environment(\.store.cargoStore) var cargoStore
+    @Environment(\.cargoStore) var cargoStore
     
     let icon:String
     let text:String

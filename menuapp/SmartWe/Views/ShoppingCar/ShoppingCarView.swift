@@ -10,7 +10,7 @@ import SwiftUI
 struct ShoppingCarView: View {
     
     @Environment(\.store.state.appTheme) var theme
-    @Environment(\.store.cargoStore) var cargoStore
+    @Environment(\.cargoStore) var cargoStore
     
     var body: some View {
         

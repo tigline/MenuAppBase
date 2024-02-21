@@ -9,6 +9,13 @@ import TMDb
 struct StoreKey: EnvironmentKey {
     static var defaultValue = Store()
 }
+struct MenuStoreKey: EnvironmentKey {
+    static var defaultValue = MenuStore(appService: AppService.appDefault)
+}
+
+struct CargoStoreKey: EnvironmentKey {
+    static var defaultValue = CargoStore(appService: AppService.appDefault)
+}
 
 struct InWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Bool = { _ in true }
@@ -92,6 +99,22 @@ extension EnvironmentValues {
         get { self[StoreKey.self] }
         set { self[StoreKey.self] = newValue }
     }
+    
+    var menuStore:MenuStore {
+        get { self[MenuStoreKey.self] }
+        set { self[MenuStoreKey.self] = newValue }
+    }
+    
+    var cargoStore:CargoStore {
+        get { self[CargoStoreKey.self] }
+        set { self[CargoStoreKey.self] = newValue }
+    }
+    
+//    var store:Store {
+//        get { self[StoreKey.self] }
+//        set { self[StoreKey.self] = newValue }
+//    }
+    
     var theme: (Assets) -> Void {
         get { self[themeKey.self] }
         set { self[themeKey.self] = newValue }

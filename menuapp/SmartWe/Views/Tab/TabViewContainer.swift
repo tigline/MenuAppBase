@@ -10,23 +10,18 @@ struct SideBarContainer: View {
     @State private var loader = ShopMenuInfoLoader()
 
     @Environment(\.store.state.appTheme) var theme
-    @Environment(\.store.menuStore) var menuStore
-    @Environment(\.router) var router
+    @Environment(\.menuStore) var menuStore
+    
     @State var isLoading = false
     //@State var selectionBar:String?
     
-    var selectionBar: Binding<String?> {
-        menuStore.binding(for: \.catagory, toFunction: {
-            //menuStore.updateTab($0 ?? "")
-            router(.menu($0 ?? ""))
-        })
-    }
+    
     
     var body: some View {
         let _ = Self._printChanges()
         NavigationSplitView {
             
-            SideBar(selectionBar: selectionBar)
+            SideBar()
                 .navigationSplitViewColumnWidth(200)
                 .background(theme.themeColor.mainBackground)
                 
@@ -55,21 +50,28 @@ struct SideBarContainer: View {
 struct SideBar:View {
     
     @Environment(\.store.state.appTheme) var theme
-    @Environment(\.store.menuStore) var menuStore
+    @Environment(\.menuStore) var menuStore
     @Environment(\.isLoading) private var isLoading
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
-    @Binding var selectionBar:String?
-    
+    @Environment(\.appRouter) var appRouter
 //    init() {
 //        selectionBar = menuStore.catagory
 //    }
     
-//    var selectionBar: Binding<String?> {
+    var selectionBar: Binding<String?> {
 //        menuStore.binding(for: \.catagory, toFunction: {
-//            menuStore.updateTab($0 ?? "")
+//            //menuStore.updateTab($0 ?? "")
+//            router(.menu($0 ?? ""))
 //        })
-//    }
+        Binding<String?>(
+            get: { menuStore.catagory },
+            set: {
+                appRouter.updateRouter(.menu($0 ?? ""))
+            }
+        )
+        
+    }
     
     var body: some View {
         let _ = Self._printChanges()
@@ -104,7 +106,7 @@ struct SideBar:View {
     
     @ViewBuilder
     var sidebarList: some View {
-        List(menuStore.catagorys, id: \.self, selection: $selectionBar) { menu in
+        List(menuStore.catagorys, id: \.self, selection: selectionBar) { menu in
             
             NavigationLink(value: menu) {
                 Label(menu, systemImage: "hand.thumbsup.fill")
@@ -165,19 +167,15 @@ struct SideBar:View {
 
 
 struct TabViewContainer: View {
-    @Environment(\.store.menuStore) var menuStore
-    //@Environment(\.store.router) var router
-//    var selection: Binding<String> {
-//        store.binding(for: \.sideSelection, toAction: {
-//            .sideBarTapped($0)
-//        })
-//    }
-    @State var appRouter:AppRouter = .menu("拉面")
+    @Environment(\.menuStore) var menuStore
+    @Environment(\.appRouter) var appRouter
+    
+    
     var body: some View {
         let _ = Self._printChanges()
         ZStack {
             
-            switch appRouter {
+            switch appRouter.router {
                 case let .menu(categoryName):
                 ForEach(menuStore.menuList, id: \.self) { category in
                     if (categoryName == category.categoryName) {
@@ -185,12 +183,7 @@ struct TabViewContainer: View {
                             .tag(category.categoryName)
                     }
                 }
-//                if let menuCategory = menuStore.menuList.first(where: {$0.categoryName == categoryName}) {
-//                    StackContainer(category:menuCategory)
-//                } else {
-//                    EmptyView()
-//                }
-                    
+                //StackContainer(category:categoryName)
                 case let .order(order):
                     EmptyView()
 
@@ -198,35 +191,35 @@ struct TabViewContainer: View {
                     EmptyView()
             }
             
-//            ForEach(menuStore.menuList, id: \.self) { category in
-//                if (menuStore.catagory == category.categoryName) {
-//                    StackContainer(category:category)
-//                        .tag(category.categoryName)
-//                }
-//            }
-            
-        }.environment(\.router) { route in
-            
-            appRouter = route
-            
         }
-        
+
+    }
+}
 //        TabView(selection: selection) {
 //            ForEach(categorys, id: \.self) { category in
 //                StackContainer(category:category)
 //                    .tag(category.categoryName)
 //            }
 //        }
+
+@Observable
+class AppRouter {
+    var router:Router = .menu("")
+
+    func updateRouter(_ route: Router) {
+        router = route
     }
 }
 
-enum AppRouter: Hashable {
+enum Router: Hashable {
     
     case menu(String)
     case order(OrderRouter)
     case setting
     
-    var id: AppRouter { self }
+    var id: Router { self }
+    
+    
 }
 
 enum OrderRouter: Hashable {
@@ -236,13 +229,26 @@ enum OrderRouter: Hashable {
 
 
 struct NavigateEnvironmentKey:EnvironmentKey {
-    static var defaultValue: (AppRouter)->Void = {_ in}
+    static var defaultValue: (AppRouter)->Void = {
+        #if DEBUG
+        print("go to \($0)'s route view")
+        #endif
+    }
+}
+
+struct RouteEnvironmentKey:EnvironmentKey {
+    static var defaultValue:AppRouter = AppRouter()
 }
 
 extension EnvironmentValues {
     var router:(AppRouter)->Void {
         get { self[NavigateEnvironmentKey.self] }
         set { self[NavigateEnvironmentKey.self] = newValue }
+    }
+    
+    var appRouter: AppRouter {
+        get { self[RouteEnvironmentKey.self] }
+        set { self[RouteEnvironmentKey.self] = newValue }
     }
 }
 

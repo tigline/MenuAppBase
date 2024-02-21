@@ -9,9 +9,9 @@ import SwiftUI
 import NukeUI
 
 struct OptionGroupListView: View {
-    @Environment(\.store.menuStore.menuOptionState) var menuOptionState
-    @Environment(\.store.menuStore) var menuStore
-    @Environment(\.store.cargoStore) var cargoStore
+    @Environment(\.menuStore.menuOptionState) var menuOptionState
+    @Environment(\.menuStore) var menuStore
+    @Environment(\.cargoStore) var cargoStore
     @Environment(\.imagePipeline) private var imagePipeline
     @Binding var isShowing: Bool
     var body: some View {

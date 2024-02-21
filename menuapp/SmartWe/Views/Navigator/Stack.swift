@@ -16,8 +16,8 @@ struct StackContainer: View {
     
     @Environment(\.store.state.appTheme) var theme
     
-    @Environment(\.store.menuStore) var menuStore
-    @Environment(\.store.cargoStore) var cargoStore
+    @Environment(\.menuStore) var menuStore
+    @Environment(\.cargoStore) var cargoStore
     @State private var showOptions = false
     @State var showPopover = false
     @State var showThemePopover = false

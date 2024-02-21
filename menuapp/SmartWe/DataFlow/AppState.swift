@@ -17,26 +17,6 @@ struct AppState {
     var appTheme: Assets = .orange
 }
 
-struct ShopMenuState {
-    
-    var categorys:[String] = []
-    var menuInfos:[MenuCategory] = []
-    
-    mutating func updateMenuInfos(_ shopMenuInfo: ShopMenuInfo) {
-      menuInfos = shopMenuInfo.categoryVoList
-    }
-    
-}
-
-struct MenuState: Hashable, Identifiable {
-    var id: Int = 0
-    var categoryName:String = ""
-    var itemList:[Menu] = []
-}
-
-struct ItemState {
-    
-}
 
 
 struct ShopInfo {
