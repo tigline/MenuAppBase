@@ -117,7 +117,7 @@ struct MenuGalleryLazyVGrid: View {
                     
                 }
             }
-            .toolbar(.hidden, for: .navigationBar)
+            //.toolbar(.hidden, for: .navigationBar)
             .background(theme.themeColor.contentBg)
             
             if showDetailView, let selectedItem = selectedItem {

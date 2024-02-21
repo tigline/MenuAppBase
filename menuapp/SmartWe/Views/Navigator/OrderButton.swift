@@ -51,6 +51,8 @@ struct CartButton: View {
     let textColor:Color
     let onTap:()->Void
     
+    @State var hightLight:Bool = false
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Button(action: {

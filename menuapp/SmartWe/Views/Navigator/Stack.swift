@@ -18,75 +18,40 @@ struct StackContainer: View {
     
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore
+    @Environment(\.appRouter) var appRouter
     @State private var showOptions = false
-    @State var showPopover = false
-    @State var showThemePopover = false
+    
     @State var showCargoView = false
-    let category:MenuCategory
+    //let category:MenuCategory
     var body: some View {
         VStack {
-            HStack{
-                
-                OrderButton(icon: "button_bell_ White",
-                            text: "オーダボタン",
-                            bgColor: theme.themeColor.darkRed, 
-                            textColor: .white) {
-                    
-                }
-                OrderButton(icon: "button_ list_black",
-                            text: "注文履歴",
-                            bgColor: theme.themeColor.mainBackground,
-                            textColor: .black) {
-                    
-                }
-                CartButton(icon: "button_shopping car_ black",
-                            text: "買い物かご",
-                            bgColor: theme.themeColor.mainBackground,
-                            textColor: .black) {
-                    
-                    
-                    
-                }.background(
-                    GeometryReader { geometry in
-                        Color.clear
-                            .onAppear {
-                                menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
-                            }
-                    }
-                )
-                Spacer()
-                Button(LocalizedStringKey("setting_theme")){
-        
-                    showThemePopover = true
-                }
-                .padding()
-                .background(theme.themeColor.mainBackground)
-                .cornerRadius(10)
-                .popover(isPresented: $showThemePopover, content: {
-                    ThemePopverMenu(showPopover: $showThemePopover)
-                })
-                
-                OrderButton(icon: "language_Japanese",
-                            text: "日本语",
-                            bgColor: .white,
-                            textColor: .brown) {
-                    showPopover = true
-                }
-                .popover(isPresented: $showPopover, content: {
-                    LanguagePopverMenu(showPopover: $showPopover)
-                })
+
+            ToolbarView()
+            
+            
+            
+            
             
 
-                    
-            }
-            .frame(height: 70)
-            .padding(.leading,31)
-            .padding(.trailing,16)
-            .background(theme.themeColor.navBgColor)
-                    
-
             NavigationStack(path: destinations) {
-                MenuGalleryLazyVGrid(items: category.menuVoList)
+                    VStack {
+                        switch appRouter.router {
+                            case let .menu(categoryName):
+                                
+                                MenuGalleryLazyVGrid(items: menuStore.curMenuInfo?.menuVoList ?? [])
+                            
+                            case .cart:
+                                ShoppingCarView()
+                            
+                            case let .order(order):
+                                EmptyView()
+
+                            case .setting:
+                                EmptyView()
+                        }
+                    }
+                    .toolbar(.hidden, for: .navigationBar)
+                    
                     .navigationDestination(for: Destination.self) { destination in
                         switch destination {
                         case .favoritePerson:
@@ -122,11 +87,11 @@ struct StackContainer: View {
             OptionGroupListView(isShowing: $showOptions)
         })
         
-//        .overlay(
-//            
-//            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
-//            alignment: .center // 定位到底部
-//        )
+        .overlay(
+            
+            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
+            alignment: .center // 定位到底部
+        )
         .overlay {
             showCargoView ? ShoppingCarView():nil
         }
@@ -154,35 +119,76 @@ struct StackContainer: View {
 //    }
 //}
 
-struct OptionsView: View {
-    @Binding var isShowing: Bool
-
+struct ToolbarView: View {
+    @Environment(\.store.state.appTheme) var theme
+    @State var showPopover = false
+    @State var showThemePopover = false
+    @Environment(\.menuStore) var menuStore
+    @Environment(\.appRouter) var appRouter
+    
+    
+    
     var body: some View {
-        ZStack {
-            // 半透明背景
-            Color.black.opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation {
-                        isShowing = false
-                    }
-                }
-
-            // 选项内容
-            VStack(spacing: 20) {
-                Text("选项 1").onTapGesture { print("选项 1 被选中") }
-                Text("选项 2").onTapGesture { print("选项 2 被选中") }
-                Button("关闭") {
-                    withAnimation {
-                        isShowing = false
-                    }
-                }
+        HStack{
+            
+            OrderButton(icon: "button_bell_ White",
+                        text: "オーダボタン",
+                        bgColor: theme.themeColor.darkRed,
+                        textColor: .white) {
+                
             }
-            .frame(width: 300, height: 200)
-            .background(Color.white)
-            .cornerRadius(20)
-            .shadow(radius: 10)
-            .transition(.opacity) // 这里可以自定义转场动画
+            OrderButton(icon: "button_ list_black",
+                        text: "注文履歴",
+                        bgColor: theme.themeColor.mainBackground,
+                        textColor: .black) {
+                
+            }
+            
+            
+            CartButton(icon: "button_shopping car_ black",
+                        text: "買い物かご",
+                        bgColor: theme.themeColor.mainBackground,
+                        textColor: .black) {
+                menuStore.updateTab("買い物かご")
+                appRouter.updateRouter(.cart)
+                
+            }.background(
+                GeometryReader { geometry in
+                    Color.clear
+                        .onAppear {
+                            menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
+                        }
+                }
+            )
+            
+            Spacer()
+            Button(LocalizedStringKey("setting_theme")){
+    
+                showThemePopover = true
+            }
+            .padding()
+            .background(theme.themeColor.mainBackground)
+            .cornerRadius(10)
+            .popover(isPresented: $showThemePopover, content: {
+                ThemePopverMenu(showPopover: $showThemePopover)
+            })
+            
+            OrderButton(icon: "language_Japanese",
+                        text: "日本语",
+                        bgColor: .white,
+                        textColor: .brown) {
+                showPopover = true
+            }
+            .popover(isPresented: $showPopover, content: {
+                LanguagePopverMenu(showPopover: $showPopover)
+            })
+        
+
+                
         }
+        .frame(height: 70)
+        .padding(.leading,31)
+        .padding(.trailing,16)
+        .background(theme.themeColor.navBgColor)
     }
 }

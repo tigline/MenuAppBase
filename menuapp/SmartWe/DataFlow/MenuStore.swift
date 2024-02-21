@@ -24,7 +24,7 @@ class MenuStore {
     }
     
     var catagorys:[String] {
-        var list = menuList.map({$0.categoryName})
+        let list = menuList.map({$0.categoryName})
         return list
     }
     
@@ -36,6 +36,9 @@ class MenuStore {
     
     var catagory:String? {
         if catagorys.count > 0 {
+            if selectBarIndex == -1 {
+                return ""
+            }
             return catagorys[selectBarIndex]
         }
         return ""
@@ -44,6 +47,8 @@ class MenuStore {
     func updateTab(_ tap:String) {
         if let index = catagorys.firstIndex(where: {$0 == tap}) {
             selectBarIndex = index
+        } else {
+            selectBarIndex = -1
         }
     }
     

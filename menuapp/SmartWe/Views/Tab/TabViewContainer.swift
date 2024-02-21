@@ -27,7 +27,7 @@ struct SideBarContainer: View {
                 
             
         } detail: {
-            TabViewContainer()
+            StackContainer()
         }
         .environment(\.isLoading, isLoading)
         .onAppear(perform: {
@@ -60,17 +60,13 @@ struct SideBar:View {
 //    }
     
     var selectionBar: Binding<String?> {
-//        menuStore.binding(for: \.catagory, toFunction: {
-//            //menuStore.updateTab($0 ?? "")
-//            router(.menu($0 ?? ""))
-//        })
         Binding<String?>(
             get: { menuStore.catagory },
             set: {
+                menuStore.updateTab($0 ?? "")
                 appRouter.updateRouter(.menu($0 ?? ""))
             }
         )
-        
     }
     
     var body: some View {
@@ -173,25 +169,30 @@ struct TabViewContainer: View {
     
     var body: some View {
         let _ = Self._printChanges()
-        ZStack {
+        //ZStack {
             
             switch appRouter.router {
                 case let .menu(categoryName):
-                ForEach(menuStore.menuList, id: \.self) { category in
-                    if (categoryName == category.categoryName) {
-                        StackContainer(category:category)
-                            .tag(category.categoryName)
-                    }
+//                ForEach(menuStore.menuList, id: \.self) { category in
+//                    if (categoryName == category.categoryName) {
+//                        StackContainer(category:category)
+//                            .tag(category.categoryName)
+//                    }
+//                }
+                if let category = menuStore.menuList.first(where: {$0.categoryName == categoryName}) {
+                    //StackContainer(category:category)
                 }
-                //StackContainer(category:categoryName)
+                
                 case let .order(order):
                     EmptyView()
 
-                case let .setting:
+                case .setting:
+                    EmptyView()
+                case .cart:
                     EmptyView()
             }
             
-        }
+        //}
 
     }
 }
@@ -214,6 +215,7 @@ class AppRouter {
 enum Router: Hashable {
     
     case menu(String)
+    case cart
     case order(OrderRouter)
     case setting
     
@@ -241,10 +243,10 @@ struct RouteEnvironmentKey:EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    var router:(AppRouter)->Void {
-        get { self[NavigateEnvironmentKey.self] }
-        set { self[NavigateEnvironmentKey.self] = newValue }
-    }
+//    var router:(AppRouter)->Void {
+//        get { self[NavigateEnvironmentKey.self] }
+//        set { self[NavigateEnvironmentKey.self] = newValue }
+//    }
     
     var appRouter: AppRouter {
         get { self[RouteEnvironmentKey.self] }
