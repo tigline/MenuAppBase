@@ -15,21 +15,23 @@ protocol SmartWeService {
 
     func menuItemList(shopCode:String,language:String) async throws -> Response<ShopMenuInfo>
     
+    func sendOrder(_ body:Data) async throws -> Response<Bool>
+    
 }
 
-extension SmartWeService {
-    func activeDevice(machineCode:String) async throws -> Response<MachineInfo> {
-        return try await activeDevice(machineCode: machineCode)
-    }
-    
-//    func categroryList(shopCode:String,machineCode:String) async throws -> Response {
-//        try await categroryList(shopCode: shopCode, machineCode: machineCode)
+//extension SmartWeService {
+//    func activeDevice(machineCode:String) async throws -> Response<MachineInfo> {
+//        return try await activeDevice(machineCode: machineCode)
 //    }
-    
-    func menuItemList(shopCode:String,language:String) async throws -> Response<ShopMenuInfo> {
-        return try await menuItemList(shopCode: shopCode, language: language)
-    }
-}
+//    
+////    func categroryList(shopCode:String,machineCode:String) async throws -> Response {
+////        try await categroryList(shopCode: shopCode, machineCode: machineCode)
+////    }
+//    
+//    func menuItemList(shopCode:String,language:String) async throws -> Response<ShopMenuInfo> {
+//        return try await menuItemList(shopCode: shopCode, language: language)
+//    }
+//}
 
 
 

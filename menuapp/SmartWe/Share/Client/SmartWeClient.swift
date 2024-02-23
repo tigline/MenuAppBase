@@ -94,6 +94,7 @@ private extension SmartWeError {
 
     init?(response: URLResponse) {
         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+        print("statusCode = \(statusCode)")
         guard statusCode != 200 && statusCode != 201 else {
             return nil
         }

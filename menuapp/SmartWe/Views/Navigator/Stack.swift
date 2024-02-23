@@ -27,27 +27,20 @@ struct StackContainer: View {
         VStack {
 
             ToolbarView()
-            
-            
-            
-            
-            
 
             NavigationStack(path: destinations) {
                     VStack {
                         switch appRouter.router {
-                            case let .menu(categoryName):
-                                
-                                MenuGalleryLazyVGrid(items: menuStore.curMenuInfo?.menuVoList ?? [])
-                            
+                        case .menu(_):
+                                MenuGalleryLazyVGrid()
                             case .cart:
                                 ShoppingCarView()
-                            
-                            case let .order(order):
-                                EmptyView()
-
+                            case .order:
+                                OrderView()
                             case .setting:
-                                EmptyView()
+                                SettingAppearance()
+                            case .none:
+                                MenuGalleryLazyVGrid()
                         }
                     }
                     .toolbar(.hidden, for: .navigationBar)
@@ -66,9 +59,6 @@ struct StackContainer: View {
                         }
                     }
             }
-            //Spacer()
-            
-            //.setBackdropSize()
             
         }
         .background(theme.themeColor.contentBg)
@@ -83,9 +73,10 @@ struct StackContainer: View {
                 cargoStore.addGood(menu, price: menu.currentPrice)
             }
             
-        }.sheet(isPresented: $showOptions, content: {
-            OptionGroupListView(isShowing: $showOptions)
-        })
+        }
+//        .sheet(isPresented: $showOptions, content: {
+//            OptionGroupListView(isShowing: $showOptions)
+//        })
         
         .overlay(
             
@@ -141,7 +132,8 @@ struct ToolbarView: View {
                         text: "注文履歴",
                         bgColor: theme.themeColor.mainBackground,
                         textColor: .black) {
-                
+                menuStore.updateTab("注文履歴")
+                appRouter.updateRouter(.order)
             }
             
             

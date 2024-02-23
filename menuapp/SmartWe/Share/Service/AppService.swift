@@ -9,6 +9,8 @@ import Foundation
 
 
 class AppService: SmartWeService {
+    
+    
     private let apisClient: APISClient
 
     init(apisClient: APISClient) {
@@ -21,5 +23,9 @@ class AppService: SmartWeService {
     
     func menuItemList(shopCode: String, language: String) async throws -> Response<ShopMenuInfo> {
         return try await apisClient.post(point: SmartWePostEndpoint.menu(shopCode: shopCode, language: language))
+    }
+    
+    func sendOrder(_ body: Data) async throws -> Response<Bool> {
+        return try await apisClient.post(point: SmartWePostEndpoint.order(body))
     }
 }

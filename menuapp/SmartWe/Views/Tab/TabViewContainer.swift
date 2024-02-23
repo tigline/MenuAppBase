@@ -24,7 +24,6 @@ struct SideBarContainer: View {
             SideBar()
                 .navigationSplitViewColumnWidth(200)
                 .background(theme.themeColor.mainBackground)
-                
             
         } detail: {
             StackContainer()
@@ -77,6 +76,14 @@ struct SideBar:View {
                 .frame(width:200,height: 50)
                 .padding(.top,10)
                 .padding(.bottom,30)
+                .background(theme.themeColor.mainBackground)
+                .gesture(
+                    LongPressGesture(minimumDuration: 0.5)
+                        .onEnded({ _ in
+                            menuStore.updateTab("setting")
+                            appRouter.updateRouter(.setting)
+                        })
+                )
             
             if isLoading {
                 Spacer()
@@ -125,88 +132,17 @@ struct SideBar:View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .scrollContentBackground(.hidden)
     }
-    
-    @ViewBuilder
-    var sidebarScroll: some View {
-        ScrollView(.vertical) {
-            ForEach(menuStore.catagorys, id: \.self) { menu in
-                //let menu = index
-                Button(action: {
-                    menuStore.updateTab(menu)
-                }, label: {
-                    HStack {
-                        
-                        Label(menu, systemImage: "hand.thumbsup.fill")
-                            .foregroundColor(menuStore.catagory == menu ? .white : .init(hex: "#828282"))
-                        Spacer()
-                    }
-                    .padding(EdgeInsets(top: 15, leading: 30, bottom: 10, trailing: 0))
-                    .background(menuStore.catagory == menu ? theme.themeColor.buttonColor : Color.clear)
-                    .cornerRadius(10)
-                })
-                .padding(.vertical)
-                .buttonStyle(.plain)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .padding(.trailing, 5)
-            .padding(.leading, -10)
-            .navigationBarTitle("Sidebar", displayMode: .inline)
-            .navigationBarHidden(true)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(theme.themeColor.mainBackground)
-        }
-        .background(theme.themeColor.mainBackground)
-        .scrollIndicators(.hidden)
-    }
 }
 
 
 
-struct TabViewContainer: View {
-    @Environment(\.menuStore) var menuStore
-    @Environment(\.appRouter) var appRouter
-    
-    
-    var body: some View {
-        let _ = Self._printChanges()
-        //ZStack {
-            
-            switch appRouter.router {
-                case let .menu(categoryName):
-//                ForEach(menuStore.menuList, id: \.self) { category in
-//                    if (categoryName == category.categoryName) {
-//                        StackContainer(category:category)
-//                            .tag(category.categoryName)
-//                    }
-//                }
-                if let category = menuStore.menuList.first(where: {$0.categoryName == categoryName}) {
-                    //StackContainer(category:category)
-                }
-                
-                case let .order(order):
-                    EmptyView()
 
-                case .setting:
-                    EmptyView()
-                case .cart:
-                    EmptyView()
-            }
-            
-        //}
-
-    }
-}
-//        TabView(selection: selection) {
-//            ForEach(categorys, id: \.self) { category in
-//                StackContainer(category:category)
-//                    .tag(category.categoryName)
-//            }
-//        }
 
 @Observable
 class AppRouter {
-    var router:Router = .menu("")
-
+    
+    var router:Router?
+    
     func updateRouter(_ route: Router) {
         router = route
     }
@@ -216,7 +152,7 @@ enum Router: Hashable {
     
     case menu(String)
     case cart
-    case order(OrderRouter)
+    case order
     case setting
     
     var id: Router { self }

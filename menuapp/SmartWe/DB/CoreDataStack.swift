@@ -47,23 +47,23 @@ final class CoreDataStack {
     
     static let shared = CoreDataStack()
 
-    static var preview: CoreDataStack = {
-        let result = CoreDataStack(inMemory: true)
-        let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = FavoriteMovie(context: viewContext)
-            newItem.createTimestamp = Date()
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
-    }()
+//    static var preview: CoreDataStack = {
+//        let result = CoreDataStack(inMemory: true)
+//        let viewContext = result.container.viewContext
+//        for _ in 0..<10 {
+//            let newItem = FavoriteMovie(context: viewContext)
+//            newItem.createTimestamp = Date()
+//        }
+//        do {
+//            try viewContext.save()
+//        } catch {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            let nsError = error as NSError
+//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//        }
+//        return result
+//    }()
 
     let container: NSPersistentContainer
 
@@ -111,6 +111,82 @@ extension CoreDataStack {
             }
         }
     }
+    
+    func updateCargoItem(menuCode:String = "", item: GoodItem? = nil) {
+        container.performBackgroundTask { context in
+            let request = NSFetchRequest<CargoItem>(entityName: "CargoItem")
+            request.fetchLimit = 1
+            request.predicate = NSPredicate(format: "menuCode = %@", menuCode)
+            request.sortDescriptors = [NSSortDescriptor(key: "createTimestamp", ascending: true)]
+            let result = try? context.fetch(request).first
+            if let good = result {
+                //context.delete(good)
+                good.quantity += 1
+                try? context.save()
+            } else {
+                guard let good = item else {
+                    return
+                }
+                let cargoItem = CargoItem(context: context)
+                cargoItem.createTimestamp = .now
+                cargoItem.menuCode = good.menuCode
+                cargoItem.imageUrl = good.image
+                cargoItem.price = good.price
+                cargoItem.tableNo = good.table
+                cargoItem.quantity = Int64(good.quantity)
+                cargoItem.title = good.title
+                cargoItem.options = good.optionCodes.reduce("", { result, option in
+                    result + "," + option
+                })
+                try? context.save()
+            }
+        }
+    }
+    
+    func deleteDataWithMenuCode(menuCode: String) throws {
+        container.performBackgroundTask { context in
+            let request = NSFetchRequest<CargoItem>(entityName: "CargoItem")
+            request.predicate = NSPredicate(format: "menuCode = %@", menuCode)
+            
+            do {
+                if let result = try context.fetch(request).first {
+                    
+                    if result.quantity > 1 {
+                        result.quantity -= 1
+                    } else {
+                        context.delete(result)
+                    }
+                    try context.save()
+                }
+            } catch let error as NSError {
+                print("Error in deleting object: \(error), \(error.userInfo)")
+            }
+        }
+    }
+
+    
+    func batchDeleteDataWithTableNumber(_ tableNumber: String) throws {
+        container.performBackgroundTask { context in
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CargoItem")
+            fetchRequest.predicate = NSPredicate(format: "tableNo = %@", tableNumber)
+
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            deleteRequest.resultType = .resultTypeCount // 如果需要知道删除了多少行
+
+            do {
+                let result = try context.execute(deleteRequest) as? NSBatchDeleteResult
+                if let count = result?.result as? Int {
+                    print("Deleted \(count) records.")
+                }
+                // 重要：通知context变化
+                context.reset()
+            } catch let error as NSError {
+                print("Could not batch delete: \(error), \(error.userInfo)")
+            }
+        }
+    }
+
+    
 
     func updateFavoritePerson(personID: Int) {
         container.performBackgroundTask { context in

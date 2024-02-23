@@ -44,6 +44,8 @@ struct OrderButton: View {
 //}
 struct CartButton: View {
     @Environment(\.cargoStore) var cargoStore
+    @FetchRequest(fetchRequest: CargoItem.CargoRequest)
+    private var shoppingCart: FetchedResults<CargoItem>
     
     let icon:String
     let text:String
@@ -68,8 +70,8 @@ struct CartButton: View {
             })
             .buttonStyle(.plain)
             
-            if cargoStore.shoppingCart.count > 0 {
-                Text("\(cargoStore.goodsCount)")
+            if shoppingCart.count > 0 {
+                Text(goodsCount)
                     .font(.caption2).bold()
                     .foregroundColor(.white)
                     .frame(width: 18, height: 18)
@@ -82,5 +84,12 @@ struct CartButton: View {
             
         }
         
+    }
+    
+    var goodsCount:String {
+        let count = shoppingCart.reduce(into: 0) { count, item in
+            count += item.quantity
+        }
+        return "\(count)"
     }
 }

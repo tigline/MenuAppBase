@@ -40,6 +40,7 @@ enum SmartWePostEndpoint {
     case active(machineCode: String)
     case category(shopCode: String, machineCode: String)
     case menu(shopCode: String, language: String)
+    case order(_ body:Data)
 }
 
 
@@ -66,6 +67,8 @@ extension SmartWePostEndpoint: SWPostEndpoint {
             return Self.basePath.appendingPathComponent("category")
         case .menu(shopCode: _, language: _):
             return Self.basePath.appendingPathComponent("index")
+        case .order(_):
+            return Self.basePath.appendingPathComponent("order")
         }
     }
     
@@ -80,6 +83,9 @@ extension SmartWePostEndpoint: SWPostEndpoint {
         case .menu(shopCode: let shopCode, language: let language):
             return ["shopCode":shopCode,
                     "language":language].toJSONData() ?? Data()
+    
+        case .order(body: let body):
+            return body
         }
     }
 }

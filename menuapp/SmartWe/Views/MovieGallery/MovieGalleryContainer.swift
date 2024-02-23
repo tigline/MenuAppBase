@@ -68,45 +68,32 @@ struct MovieGalleryContainer: View {
 
 
 struct MenuGalleryLazyVGrid: View {
-    
-    let items:[Menu]
+ 
     @Environment(\.isLoading) private var isLoading
     @Environment(\.goOptions) var goOptions
-    @Environment(\.menuStore.cartIconGlobalFrame) var cartIconGlobalFrame
+    @Environment(\.menuStore) var menuStore
     @Environment(\.store.state.appTheme) var theme
-    // 新增状态变量
-    @State private var selectedItemId: String?
-    @State private var animateToCart: Bool = false
-    @State private var showDetailView = false
+
     @State private var animationStartFrame: CGRect = .zero
-    @State private var selectedItem: Menu? = nil
+
     
     private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
-    
+
     var body: some View {
         // 使用 GeometryReader 获取购物车图标的位置
         ZStack {
             ScrollView(.vertical) {
                 let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
                 LazyVGrid(columns: columns, spacing: 18.5) {
-                    ForEach(items) { item in
+                    ForEach(menuStore.curMenuInfo?.menuVoList ?? []) { item in
                         MenuItem(item: item, displayType: .portrait(.middle))
                             .onTapGesture {
                                 
                                 withAnimation {
-                                    showDetailView = true
+                                    goOptions(item, animationStartFrame)
                                 }
                             }
-                            .background(GeometryReader { geometry -> Color in
-                                if selectedItem == item && showDetailView {
-                                    animationStartFrame = geometry.frame(in: .global)
-                                    //goOptions(item, animationStartFrame)
-                                }
-                                return Color.clear
-                            })
-                        //                    .scaleEffect(animateToCart && selectedItemId == item.menuCode ? 0.1 : 1)
-                        //                    .position(x: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midX : geometry.frame(in: .global).minX,
-                        //                              y: animateToCart && selectedItemId == item.menuCode ? cartIconGlobalFrame.midY : geometry.frame(in: .global).minY)
+
                     }
                 }
                 .padding(.top, 15)
@@ -119,35 +106,15 @@ struct MenuGalleryLazyVGrid: View {
             }
             //.toolbar(.hidden, for: .navigationBar)
             .background(theme.themeColor.contentBg)
-            
-            if showDetailView, let selectedItem = selectedItem {
-                
-                DetailView2(text: selectedItem.mainTitle)
-                    .frame(width: 200, height: 200)
-                                .background(Color.white)
-                                .cornerRadius(20)
-                                .shadow(radius: 10)
-                                .position(x: animationStartFrame.midX, y: animationStartFrame.midY)
-                                .scaleEffect(showDetailView ? 1 : 0)
-                                .offset(y: showDetailView ? UIScreen.main.bounds.midY - animationStartFrame.midY : 0)
-                                .animation(.spring(), value: showDetailView)
-            }
+//            .onAppear {
+//                menuStore.updateTab(category)
+//            }
             
         }
     }
 }
 
 
-struct DetailView2: View {
-    let text:String
-    var body: some View {
-        //OptionGroupListView(isShowing: $showDetailView)
-        VStack {
-            Text("text")
-        }
-        
-    }
-}
 
 
 

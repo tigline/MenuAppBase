@@ -24,8 +24,7 @@ class MenuStore {
     }
     
     var catagorys:[String] {
-        let list = menuList.map({$0.categoryName})
-        return list
+        menuList.map({$0.categoryName})
     }
     
     var selectBarIndex:Int = 0 {

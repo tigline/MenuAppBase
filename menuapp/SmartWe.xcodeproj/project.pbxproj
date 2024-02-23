@@ -117,6 +117,7 @@
 		BE0C692D2B7340BB00312FE1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692C2B7340BB00312FE1 /* LoginView.swift */; };
 		BE0C692F2B73528600312FE1 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692E2B73528600312FE1 /* ScanView.swift */; };
 		BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69302B7353CA00312FE1 /* ScanViewController.swift */; };
+		BE25B0602B86E6BD00B896EA /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25B05F2B86E6BD00B896EA /* OrderView.swift */; };
 		BE27EBE32B75F43D0024DB77 /* ThemePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */; };
 		BE27EBE62B7B308D0024DB77 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE52B7B308D0024DB77 /* OptionButton.swift */; };
 		BE27EBE82B7B563E0024DB77 /* OptionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE72B7B563E0024DB77 /* OptionListView.swift */; };
@@ -239,6 +240,7 @@
 		BE0C692C2B7340BB00312FE1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BE0C692E2B73528600312FE1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		BE0C69302B7353CA00312FE1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		BE25B05F2B86E6BD00B896EA /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopverMenu.swift; sourceTree = "<group>"; };
 		BE27EBE52B7B308D0024DB77 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
 		BE27EBE72B7B563E0024DB77 /* OptionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListView.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 		76AC259229C2E250007874DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE25B05E2B86E68800B896EA /* Order */,
 				BE2A84402B7EF196007D11CB /* ShoppingCar */,
 				769AB0BB29D1CC1B008451E6 /* App */,
 				769AB0B829D1CAB1008451E6 /* MenuBar */,
@@ -672,6 +675,14 @@
 				BE0C69272B72206100312FE1 /* AppService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		BE25B05E2B86E68800B896EA /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				BE25B05F2B86E6BD00B896EA /* OrderView.swift */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		BE27EBE42B7B30560024DB77 /* Options */ = {
@@ -872,6 +883,7 @@
 				769002C429C804DC00620A3C /* NowPlayingScrollViewRow.swift in Sources */,
 				76AC25B629C2E381007874DA /* Rate.swift in Sources */,
 				BE0C691B2B71D62000312FE1 /* APISClient.swift in Sources */,
+				BE25B0602B86E6BD00B896EA /* OrderView.swift in Sources */,
 				769AB09A29D1413F008451E6 /* MovieHeader.swift in Sources */,
 				769002CE29C82EB000620A3C /* CategoryCommonScrollView.swift in Sources */,
 				76751E6B29C5C3E10013BBDF /* NowPlayingRowContainer.swift in Sources */,

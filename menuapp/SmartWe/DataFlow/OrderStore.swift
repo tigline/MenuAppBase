@@ -28,11 +28,10 @@ struct Order: Codable, Hashable {
     let tableout:Bool
     let total:Int
     
-    
-    struct OrderLineList: Codable, Hashable {
-        let lineId:Int
-        let menuCode:Int
-        let optioneList:[String]
-        let qty:Int
-    }
+}
+struct OrderLineList: Codable, Hashable {
+    let lineId:String
+    let menuCode:String
+    let optioneList:[String]
+    let qty:Int
 }

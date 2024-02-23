@@ -6,72 +6,95 @@
 //
 
 import Foundation
+import SwiftUI
 
 @Observable
 class CargoStore {
     let appService:AppService
+    
+    let coreDataStack = CoreDataStack.shared
+    
     init(appService: AppService) {
         self.appService = appService
     }
     
-    var shoppingCart:[GoodItem] = []
-    
-    var goodsCount:String {
-        let count = shoppingCart.reduce(into: 0) { count, item in
-            count += item.quantity
-        }
-        
-        return "\(count)"
-    }
-    
-    var subTotle:String {
-        allTotle
-    }
-    
-    var allTotle:String {
-        let all = shoppingCart.reduce(0) { count, item in
-            count + item.price * Double(item.quantity)
-        }
-        return "\(all)"
-    }
-    
-    
     
     func addGood(_ menu:Menu, price:Double, options:[String] = []) {
         
-        if let index = shoppingCart.firstIndex(where: {$0.menu.menuCode == menu.menuCode && $0.optionCodes == options}) {
-            shoppingCart[index].quantity += 1
-        } else {
-            shoppingCart.append(GoodItem(id: shoppingCart.count,
-                                         menu: menu,
-                                         price: price,
-                                         optionCodes: options,
-                                         quantity: 1
-                                        ))
-        }
-    }
-    
-    func addGood(_ item: GoodItem) {
-        if let index = shoppingCart.firstIndex(where: {$0.menu.menuCode == item.menu.menuCode && $0.optionCodes == item.optionCodes}) {
-            shoppingCart[index].quantity += 1
-        } else {
-            shoppingCart.append(item)
-        }
-    }
-    
-    func removeGood(_ item: GoodItem) {
         
-        if let index = shoppingCart.firstIndex(where: {$0.menu.menuCode == item.menu.menuCode && $0.optionCodes == item.optionCodes}) {
-            shoppingCart[index].quantity -= 1
-            if shoppingCart[index].quantity == 0 {
-                shoppingCart.remove(at: index)
-            }
+        let goodItem = GoodItem(id: 0,
+                                menuCode: menu.menuCode,
+                                image: menu.homeImage,
+                                title: menu.mainTitle,
+                                price: price,
+                                optionCodes: options
+                               )
+        
+        coreDataStack.updateCargoItem(menuCode: goodItem.menuCode, item: goodItem)
+    }
+    
+    func addGood(_ item: CargoItem) {
+//        if let index = shoppingCart.firstIndex(where: {$0.menuCode == item.menuCode && $0.optionCodes == item.optionCodes}) {
+//            shoppingCart[index].quantity += 1
+//        } else {
+//            shoppingCart.append(item)
+//        }
+        
+        coreDataStack.updateCargoItem(menuCode: item.menuCode ?? "")
+    }
+    
+    func removeGood(_ item: CargoItem) {
+        do {
+            try coreDataStack.deleteDataWithMenuCode(menuCode: item.menuCode ?? "")
+        } catch {
+            print("removeGood error \(error.localizedDescription)")
         }
+        
+//        if let index = shoppingCart.firstIndex(where: {$0.menuCode == item.menuCode && $0.optionCodes == item.optionCodes}) {
+//            shoppingCart[index].quantity -= 1
+//            if shoppingCart[index].quantity == 0 {
+//                shoppingCart.remove(at: index)
+//            }
+//        }
     }
     
     
     
-    func orderCart() async {
+    func sendCarToOrder(shoppingCart:[CargoItem],
+                        language:String,
+                        machineCode:String,
+                        orderType:Int = 0,
+                        tableNo:String = "08",
+                        takeout:Bool = false) async {
+        
+        let orderLineList = shoppingCart.map { item in
+            OrderLineList(lineId: "10101010",
+                          menuCode: machineCode,
+                          optioneList: [],
+                          qty: 0)
+        }
+        
+        let order = Order(language: language,
+                          machineCode: machineCode,
+                          orderLineList: orderLineList,
+                          orderType: orderType,
+                          tableNo: tableNo,
+                          tableout: takeout,
+                          total: shoppingCart.count)
+        
+        
+        do {
+            let bodyData = try JSONEncoder().encode(order)
+            let result = try await appService.sendOrder(bodyData)
+            if result.code == 200 {
+                //shoppingCart.removeAll()
+                try coreDataStack.batchDeleteDataWithTableNumber(tableNo)
+            }
+        } catch {
+            print("Error encoding or send order: \(error)")
+
+        }
+        
         
     }
 
@@ -85,15 +108,15 @@ extension [String] {
 
 struct GoodItem: Identifiable {
     let id:Int
-    let menu:Menu
+    let menuCode:String
+    let image:String
+    let title:String
     let price:Double
     var optionCodes:[String] = []
     
-    var quantity:Int = 0
+    var quantity:Int = 1
     
-    var title:String {
-        menu.mainTitle
-    }
+
 }
 
 
@@ -101,12 +124,9 @@ extension GoodItem {
     var moneyType:String {
         "¥"
     }
-    var image:String {
-        menu.homeImage
-    }
-    
-    var table:Int {
-        09
+
+    var table:String {
+        "09"
     }
     
     var showPrice:String {
