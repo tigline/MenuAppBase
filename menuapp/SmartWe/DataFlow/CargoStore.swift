@@ -18,6 +18,11 @@ class CargoStore {
         self.appService = appService
     }
     
+    var showOrderAnimate: Bool = false
+    
+    func toggleAnimate(_ value:Bool) {
+        showOrderAnimate = value
+    }
     
     func addGood(_ menu:Menu, price:Double, options:[String] = []) {
         
@@ -65,7 +70,10 @@ class CargoStore {
                         machineCode:String,
                         orderType:Int = 0,
                         tableNo:String = "08",
-                        takeout:Bool = false) async {
+                        takeout:Bool = false,
+                        errorHandle:(Error)->Void
+    ) async {
+        showOrderAnimate = true
         
         let orderLineList = shoppingCart.map { item in
             OrderLineList(lineId: "10101010",
@@ -86,13 +94,15 @@ class CargoStore {
         do {
             let bodyData = try JSONEncoder().encode(order)
             let result = try await appService.sendOrder(bodyData)
+            showOrderAnimate = false
             if result.code == 200 {
                 //shoppingCart.removeAll()
                 try coreDataStack.batchDeleteDataWithTableNumber(tableNo)
             }
         } catch {
+            showOrderAnimate = false
             print("Error encoding or send order: \(error)")
-
+            errorHandle(error)
         }
         
         

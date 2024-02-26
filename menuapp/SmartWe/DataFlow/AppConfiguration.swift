@@ -30,6 +30,8 @@ final class AppConfiguration: ObservableObject {
     
     @AppStorage("menuLaguage") var menuLaguage:String?
     
+    @AppStorage("tableNo") var tableNo:String?
+    
     @AppStorage("loginState") var loginState: LoginState = .logout
 
     static let share = AppConfiguration()

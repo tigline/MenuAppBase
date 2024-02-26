@@ -110,7 +110,7 @@ private extension SmartWeError {
             self = .forbidden
 
         default:
-            self = .unknown
+            self = .unknown(statusCode)
         }
     }
 

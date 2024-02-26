@@ -17,21 +17,13 @@ protocol SmartWeService {
     
     func sendOrder(_ body:Data) async throws -> Response<Bool>
     
+    func callWaiter(_ machineCode: String, _ tableNo:String) async throws -> Response<Bool>
+    
+    func bindTableNo(_ shopCode:String, _ tableNo:String) async throws -> Response<TableInfo>
+    
+    func checkOrder(_ shopCode:String, _ orderKey:String) async throws -> Response<String>
 }
 
-//extension SmartWeService {
-//    func activeDevice(machineCode:String) async throws -> Response<MachineInfo> {
-//        return try await activeDevice(machineCode: machineCode)
-//    }
-//    
-////    func categroryList(shopCode:String,machineCode:String) async throws -> Response {
-////        try await categroryList(shopCode: shopCode, machineCode: machineCode)
-////    }
-//    
-//    func menuItemList(shopCode:String,language:String) async throws -> Response<ShopMenuInfo> {
-//        return try await menuItemList(shopCode: shopCode, language: language)
-//    }
-//}
 
 
 
@@ -49,3 +41,14 @@ struct MachineInfo: Codable {
     let reimburse: Bool?
 }
 
+struct TableInfo: Codable {
+    let tableNo:String
+    var orderKeyList:[SubTable]?
+    
+    
+    struct SubTable: Codable {
+        let orderKey:String
+        let state:Int
+        let subTableNo:String
+    }
+}

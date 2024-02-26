@@ -25,17 +25,15 @@ struct CargoCellView: View {
             
             
             HStack {
-                Image(systemName: "fork.knife.circle.fill")
-                    .frame(width: 50, height: 50)
-                    .background(Color.gray)
-                    .cornerRadius(10)
                 
-                
+                MenuItemPoster(imagePath: URL(string: item.imageUrl ?? ""),
+                               size: CGSize(width: 90, height: 60))
+
                 Text(item.title ?? "")
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("\(item.price)")
+                Text("¥" + "\(Int(item.price))")
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()

@@ -90,6 +90,41 @@ class MenuStore {
         return menuOptionState?.selectOptions.contains(where: {$0.groupCode == group && $0.optionCode == code}) ?? false
     }
     
+    func callWaiter(_ machineCode:String, _ tableNo:String) async {
+        
+        do {
+            let result = try await appService.callWaiter(machineCode, tableNo)
+            if result.data {
+                print("call waiter success")
+            }
+        } catch {
+            print("callWaiter \(error)")
+            
+        }
+    }
+    
+    func bindTableNo(_ shopCode:String, _ tableNo:String) async {
+        do {
+            let result = try await appService.bindTableNo(shopCode, tableNo)
+            if result.code == 200 {
+                print("bindTableNo success")
+            }
+        } catch {
+            print("bindTableNo \(error)")
+        }
+    }
+    
+    func checkOrder(_ shopCode:String, orderKey:String) async {
+        do {
+            let result = try await appService.checkOrder(shopCode, orderKey)
+            if result.code == 200 {
+                print("checkOrder success")
+            }
+        } catch {
+            print("checkOrder \(error)")
+        }
+    }
+    
 }
 
 extension MenuStore {

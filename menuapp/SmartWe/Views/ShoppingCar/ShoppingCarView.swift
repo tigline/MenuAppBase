@@ -11,9 +11,19 @@ struct ShoppingCarView: View {
     
     @Environment(\.store.state.appTheme) var theme
     @Environment(\.cargoStore) var cargoStore
+    @Environment(\.showError) var showError
     @StateObject private var configuration = AppConfiguration.share
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
+    
+//    var showLoading:Binding<Bool> {
+//        Binding<Bool> {
+//            cargoStore.showOrderAnimate
+//        } set: { value, _ in
+//            cargoStore.toggleAnimate(value)
+//        }
+//
+//    }
     
     var goodsCount:String {
         let count = shoppingCart.reduce(into: 0) { count, item in
@@ -30,7 +40,7 @@ struct ShoppingCarView: View {
         let all = shoppingCart.reduce(0) { count, item in
             count + item.price * Double(item.quantity)
         }
-        return "\(all)"
+        return "\(Int(all))"
     }
     
     
@@ -41,10 +51,7 @@ struct ShoppingCarView: View {
                 ContentUnavailableView("ご注文くださいい", systemImage: "exclamationmark.circle")
             }
             .background(.white)
-            
-                
         } else {
-            
             VStack(spacing: 0) {
                 ScrollView(.vertical) {
                     LazyVStack(content: {
@@ -81,16 +88,30 @@ struct ShoppingCarView: View {
             }
             .padding(20)
             .background(theme.themeColor.contentBg)
-            .onAppear {
-                
+            .overlay {
+                cargoStore.showOrderAnimate ? OrderProgressView:nil
             }
-//            .task(id: shoppingCart.count) {
-//                cargoStore.updateShoppingCart(shoppingCart.map({$0}))
-//            }
         }
             
     }
     
+    @ViewBuilder
+    var OrderProgressView: some View {
+        ZStack {
+            VStack(alignment: .center) {
+                Spacer()
+                ProgressView()
+                Spacer()
+                Text("注文しています、お待ちしてください")
+            }
+            .padding()
+            .frame(maxWidth: 200, maxHeight: 200)
+            .background(.white)
+            .clipCornerRadius(15)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .background(.black.opacity(0.3))
+    }
     
     
     @ViewBuilder
@@ -98,11 +119,15 @@ struct ShoppingCarView: View {
         HStack {
             Spacer()
             Button("発信") {
+                
                 Task {
                     
                     await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
                                                     language: configuration.menuLaguage ?? "en",
-                                              machineCode: configuration.machineCode ?? "")
+                                                    machineCode: configuration.machineCode ?? "",
+                                                    errorHandle: { error in
+                        showError(error, "Please try again")
+                    })
                 }
             }
             .foregroundStyle(.white)

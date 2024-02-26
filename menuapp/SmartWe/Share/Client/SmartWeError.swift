@@ -22,7 +22,7 @@ public enum SmartWeError: Error {
     /// Not found.
     case notFound
     /// Unknown error.
-    case unknown
+    case unknown(Int)
     /// Data decode error.
     case decode(Error)
     /// Data encode error.
@@ -52,14 +52,14 @@ extension SmartWeError: LocalizedError {
         case .notFound:
             return "Not Found"
 
-        case .unknown:
-            return "Unknown Error"
+        case .unknown(let errorCode):
+            return "Error code \(errorCode)"
 
-        case .decode:
-            return "Data Decode Error"
+        case .decode(let error):
+            return error.localizedDescription
             
-        case .encode:
-            return "Data Encode Error"
+        case .encode(let error):
+            return error.localizedDescription
         
         }
     }

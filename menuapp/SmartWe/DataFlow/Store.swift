@@ -12,6 +12,7 @@ final class Store {
     
     var state = AppState()
     
+    
     private let environment = AppEnvironment()
     private var effectCancellable: [UUID: AnyCancellable] = [:]
 
