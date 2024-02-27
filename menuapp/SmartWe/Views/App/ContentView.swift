@@ -12,24 +12,14 @@ struct ContentView: View {
     @State private var errorWrapper: ErrorWrapper?
     @State private var isPresentError:Bool = false
 
-
     var body: some View {
         VStack {
-            #if !os(macOS)
             if appConfiguration.loginState == .login {
                 SideBarContainer()
             } else {
                 LoginView()
             }
-                
-            #else
-                StackContainer()
-            #endif
         }
-//        .if(containerName != ""){
-//            $0.overlayContainer(containerName, containerConfiguration: ContainerConfiguration.share)
-//        }
-//        .environment(\.containerName, containerName)
         .environment(\.showError) { error, guidance in
             errorWrapper = ErrorWrapper(error: error, guidance: guidance)
             isPresentError = true
@@ -43,7 +33,6 @@ struct ContentView: View {
         }, message: {
             Text(errorWrapper?.guidance ?? "")
         })
-        
         .syncCoreData() // 同步 booking list 数据
         .preferredColorScheme(.light)
         .environment(\.locale, appConfiguration.appLanguage.locale)

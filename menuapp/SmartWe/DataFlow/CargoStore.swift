@@ -24,6 +24,14 @@ class CargoStore {
         showOrderAnimate = value
     }
     
+    func updateTableNumber(_ number:String = "19") async {
+        try? await coreDataStack.updateCargoKeyValue(key: "tableNo", value: number)
+    }
+    
+    func deleteAll(_ tableNumber:String) {
+        try? coreDataStack.batchDeleteDataWithTableNumber(tableNumber)
+    }
+    
     func addGood(_ menu:Menu, price:Double, options:[String] = []) {
         
         
@@ -112,10 +120,6 @@ class CargoStore {
     
 }
 
-extension [String] {
-    
-}
-
 struct GoodItem: Identifiable {
     let id:Int
     let menuCode:String
@@ -135,8 +139,8 @@ extension GoodItem {
         "¥"
     }
 
-    var table:String {
-        "09"
+    var table:String? {
+        AppConfiguration.share.tableNo
     }
     
     var showPrice:String {

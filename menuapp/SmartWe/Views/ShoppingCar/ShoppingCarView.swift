@@ -15,6 +15,7 @@ struct ShoppingCarView: View {
     @StateObject private var configuration = AppConfiguration.share
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
+    @State private var showTable:Bool = false
     
 //    var showLoading:Binding<Bool> {
 //        Binding<Bool> {
@@ -24,6 +25,10 @@ struct ShoppingCarView: View {
 //        }
 //
 //    }
+    
+    var isNoTableNo:Bool {
+        configuration.tableNo == nil || configuration.tableNo == ""
+    }
     
     var goodsCount:String {
         let count = shoppingCart.reduce(into: 0) { count, item in
@@ -91,6 +96,9 @@ struct ShoppingCarView: View {
             .overlay {
                 cargoStore.showOrderAnimate ? OrderProgressView:nil
             }
+            .sheet(isPresented: $showTable) {
+                SelectTableView()
+            }
         }
             
     }
@@ -118,22 +126,33 @@ struct ShoppingCarView: View {
     var orderButton: some View {
         HStack {
             Spacer()
-            Button("発信") {
-                
-                Task {
-                    
-                    await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
-                                                    language: configuration.menuLaguage ?? "en",
-                                                    machineCode: configuration.machineCode ?? "",
-                                                    errorHandle: { error in
-                        showError(error, "Please try again")
-                    })
+            
+            if isNoTableNo {
+                Button("Select a Table") {
+                    showTable.toggle()
                 }
+                .foregroundStyle(.white)
+                .frame(minWidth: 200, maxHeight: 50)
+                .background(theme.themeColor.buttonColor)
+                .clipCornerRadius(10)
+            } else {
+                Button("発信") {
+                    
+                    Task {
+                        
+                        await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
+                                                        language: configuration.menuLaguage ?? "en",
+                                                        machineCode: configuration.machineCode ?? "",
+                                                        errorHandle: { error in
+                            showError(error, "Please try again")
+                        })
+                    }
+                }
+                .foregroundStyle(.white)
+                .frame(width: 200, height: 50)
+                .background(theme.themeColor.buttonColor)
+                .clipCornerRadius(10)
             }
-            .foregroundStyle(.white)
-            .frame(width: 200, height: 50)
-            .background(.orange)
-            .clipCornerRadius(10)
         }
         
     }

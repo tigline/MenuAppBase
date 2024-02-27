@@ -10,10 +10,20 @@ import SwiftUI
 
 struct ToolbarView: View {
     @Environment(\.store.state.appTheme) var theme
+    @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
     @State var showThemePopover = false
     @Environment(\.menuStore) var menuStore
     @Environment(\.appRouter) var appRouter
+    @Binding var showTable:Bool
+    
+    var tableNo:String {
+        if configuration.tableNo == nil {
+            return "Select a table"
+        }
+        
+        return "Table" + " " + configuration.tableNo!
+    }
     
     var body: some View {
         HStack{
@@ -62,18 +72,33 @@ struct ToolbarView: View {
 //            })
             
             OrderButton(icon: "button_bell_ White",
-                        text: "Select a table",
+                        text: tableNo,
                         bgColor: theme.themeColor.buttonColor,
                         textColor: .white) {
-                
+                showTable = true
             }
             
-            OrderButton(icon: "language_Japanese",
-                        text: "日本语",
-                        bgColor: .white,
-                        textColor: .brown) {
+//            OrderButton(icon: "language_Japanese",
+//                        text: "日本语",
+//                        bgColor: .white,
+//                        textColor: .brown) {
+//                showPopover = true
+//            }
+//            .popover(isPresented: $showPopover, content: {
+//                LanguagePopverMenu(showPopover: $showPopover)
+//            })
+            Button(action: {
                 showPopover = true
-            }
+            }, label: {
+                Image("language_Japanese")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .shadow(color: .black, radius: 6.0, y:5)
+                    
+            })
+            
+            .clipShape(.circle)
             .popover(isPresented: $showPopover, content: {
                 LanguagePopverMenu(showPopover: $showPopover)
             })
@@ -88,6 +113,6 @@ struct ToolbarView: View {
     }
 }
 
-#Preview {
-    ToolbarView()
-}
+//#Preview {
+//    ToolbarView()
+//}

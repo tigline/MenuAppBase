@@ -7,14 +7,13 @@ import SwiftUI
 
 struct SideBarContainer: View {
     @StateObject private var configuration = AppConfiguration.share
-    @State private var loader = ShopMenuInfoLoader()
 
     @Environment(\.store.state.appTheme) var theme
     @Environment(\.menuStore) var menuStore
     
     @State var isLoading = false
     //@State var selectionBar:String?
-    
+    @State var showTable = false
     
     
     var body: some View {
@@ -43,6 +42,14 @@ struct SideBarContainer: View {
                 isLoading = false
             }
         })
+        .onAppear{
+            if configuration.tableNo == nil {
+                showTable = true
+            }
+        }
+        .sheet(isPresented: $showTable) {
+            SelectTableView()
+        }
     }
 }
 

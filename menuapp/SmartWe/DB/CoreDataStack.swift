@@ -143,6 +143,21 @@ extension CoreDataStack {
         }
     }
     
+    func updateCargoKeyValue<T>(key:String, value:T) async throws {
+        try await container.performBackgroundTask { context in
+            let fetchRequest: NSFetchRequest<CargoItem> = CargoItem.fetchRequest()
+            do {
+                let items = try context.fetch(fetchRequest)
+                for item in items {
+                    item.setValue(value as T, forKey: key)
+                }
+                try context.save()
+            } catch {
+                throw error
+            }
+        }
+    }
+    
     func deleteDataWithMenuCode(menuCode: String) throws {
         container.performBackgroundTask { context in
             let request = NSFetchRequest<CargoItem>(entityName: "CargoItem")

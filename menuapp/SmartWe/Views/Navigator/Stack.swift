@@ -20,13 +20,12 @@ struct StackContainer: View {
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.appRouter) var appRouter
     @State private var showOptions = false
-    
-    @State var showCargoView = false
+    @State private var showTable = false
     //let category:MenuCategory
     var body: some View {
         VStack {
 
-            ToolbarView()
+            ToolbarView(showTable: $showTable)
 
             NavigationStack(path: destinations) {
                     VStack {
@@ -74,18 +73,13 @@ struct StackContainer: View {
             }
             
         }
-//        .sheet(isPresented: $showOptions, content: {
-//            OptionGroupListView(isShowing: $showOptions)
-//        })
-        
         .overlay(
-            
             showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
             alignment: .center // 定位到底部
-        )
-        .overlay {
-            showCargoView ? ShoppingCarView():nil
+        ).sheet(isPresented: $showTable) {
+            SelectTableView()
         }
+
     }
     
 
