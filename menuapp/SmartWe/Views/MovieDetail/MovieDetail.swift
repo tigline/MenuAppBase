@@ -32,7 +32,7 @@ struct MovieDetail: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Assets.Colors.mainBackground)
+        .background(AppTheme.Colors.mainBackground)
         .task {
             if let reviews = try? await tmdb.movies.reviews(forMovie: movie.id, page: 1) {
                 self.reviews = reviews.results

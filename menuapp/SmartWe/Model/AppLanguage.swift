@@ -14,7 +14,7 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
     var localizedString: LocalizedStringKey {
         switch self {
         case .jp:
-            return "AppLanguage_English"
+            return "AppLanguage_Japanese"
         case .en:
             return "AppLanguage_English"
         case .zh:

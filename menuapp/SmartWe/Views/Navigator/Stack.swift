@@ -13,8 +13,10 @@ struct StackContainer: View {
     var destinations:Binding<[Destination]> {
         .init(get:{store.state.destinations}, set:{store.state.destinations = $0})
     }
-    
-    @Environment(\.store.state.appTheme) var theme
+    @StateObject private var configuration = AppConfiguration.share
+    var theme:AppTheme {
+        configuration.colorScheme
+    }
     
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore

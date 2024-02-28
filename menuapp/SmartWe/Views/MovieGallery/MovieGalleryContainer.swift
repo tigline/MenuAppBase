@@ -72,7 +72,10 @@ struct MenuGalleryLazyVGrid: View {
     @Environment(\.isLoading) private var isLoading
     @Environment(\.goOptions) var goOptions
     @Environment(\.menuStore) var menuStore
-    @Environment(\.store.state.appTheme) var theme
+    @StateObject private var configuration = AppConfiguration.share
+    var theme:AppTheme {
+        configuration.colorScheme
+    }
 
     @State private var animationStartFrame: CGRect = .zero
 

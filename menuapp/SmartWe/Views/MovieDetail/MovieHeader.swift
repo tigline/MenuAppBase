@@ -36,7 +36,7 @@ struct MovieHeader: View {
             posterAndDescription
         }
         .padding(16)
-        .background(Assets.Colors.rowBackground)
+        .background(AppTheme.Colors.rowBackground)
     }
 
     var title: some View {
@@ -82,9 +82,9 @@ struct MovieHeader: View {
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 5)
-                        .fill(isFavorite ? .clear : Assets.Colors.favorite)
+                        .fill(isFavorite ? .clear : AppTheme.Colors.favorite)
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Assets.Colors.outline, lineWidth: 1)
+                        .stroke(AppTheme.Colors.outline, lineWidth: 1)
                 }
             )
         }

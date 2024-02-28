@@ -13,7 +13,7 @@ struct DownloadPlaceHolder: View {
 
     var body: some View {
         Rectangle()
-            .fill(Assets.Colors.imagePlaceHolder)
+            .fill(AppTheme.Colors.imagePlaceHolder)
             .overlay(
                 ProgressView()
                     .controlSize(size)

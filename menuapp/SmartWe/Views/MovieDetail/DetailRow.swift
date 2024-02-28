@@ -27,6 +27,6 @@ struct DetailRow<Content>: View where Content: View {
         }
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity)
-        .background(Assets.Colors.rowBackground)
+        .background(AppTheme.Colors.rowBackground)
     }
 }

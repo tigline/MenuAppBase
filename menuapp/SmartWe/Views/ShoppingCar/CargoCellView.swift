@@ -46,10 +46,14 @@ struct CargoCellView: View {
                     Button {
                         addOrMinus(.minus, item)
                     } label: {
-                        Image(systemName: "minus.square.fill")
-                            .foregroundStyle(Color.init(hex: "#F8F9FA"))
+                        Image(systemName: "minus")
+                            .frame(width: 10, height: 10)
+                            .foregroundStyle(Color.init(hex: "#01000D"))
                     }
-                    .buttonStyle(.plain)
+                    .frame(width: 30, height: 30)
+                    .buttonStyle(BorderlessButtonStyle())
+                    .background(Color.init(hex: "#F8F9FA"))
+                    .cornerRadius(8)
                     
                     Text("\(item.quantity)")
                         .overlay(
@@ -62,10 +66,15 @@ struct CargoCellView: View {
                     Button {
                         addOrMinus(.add, item)
                     } label: {
-                        Image(systemName: "plus.app.fill")
-                            .foregroundStyle(Color.init(hex: "#F8F9FA"))
+                        Image(systemName: "plus")
+                            .frame(width: 10, height: 10)
+                            .foregroundStyle(Color.init(hex: "#01000D"))
                     }
-                    .buttonStyle(.plain)
+                    .frame(width: 30, height: 30)
+                    .buttonStyle(BorderlessButtonStyle())
+                    .background(Color.init(hex: "#F8F9FA"))
+                    .cornerRadius(8)
+                    
                 }.padding(.vertical)
                 
                 Spacer()

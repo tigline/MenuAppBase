@@ -10,7 +10,7 @@ struct WishlistEmpty: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-            .fill(Assets.Colors.mainBackground)
+            .fill(AppTheme.Colors.mainBackground)
             .padding(.bottom, 20)
             .padding(.horizontal, 16)
             .overlay(
@@ -32,7 +32,7 @@ struct WishlistEmpty: View {
                 }
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Assets.Colors.rowBackground)
+            .background(AppTheme.Colors.rowBackground)
     }
 
     var bookMark: some View {

@@ -25,11 +25,11 @@
 "Genre_western" = "Western";
 
 // Category
-"Category_nowPlaying" = "Suggest";
-"Category_popular" = "Nodoor";
-"Category_upComing" = "Cost";
-"Category_topRate" = "Drink";
-"Category_movieWishlist" = "Desert";
+"Category_nowPlaying" = "おすすめ";
+"Category_popular" = "ラーメン";
+"Category_upComing" = "定食";
+"Category_topRate" = "飲み物";
+"Category_movieWishlist" = "デサート";
 "Category_favoritePerson" = "Favorit";
 
 // Home
@@ -57,7 +57,7 @@
 "Tab_Home" = "Home";
 "Tab_Setting" = "Settings";
 
-"log_out" = "Logout";
+"log_out" = "로그 아웃";
 "setting_theme" = "Theme";
 
 // Setting

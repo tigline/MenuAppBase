@@ -53,7 +53,7 @@ struct NowPlayingBanner: View {
             }
         )
         .padding(.bottom, 15)
-        .background(Assets.Colors.rowBackground)
+        .background(AppTheme.Colors.rowBackground)
     }
 
     var posterSize: CGSize {

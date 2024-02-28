@@ -54,7 +54,7 @@ public struct BookMarkCornerButton: View {
                     VStack {
                         if isFavorite {
                             BookMarkShape()
-                                .fill(Assets.Colors.favorite)
+                                .fill(AppTheme.Colors.favorite)
                                 .overlay(alignment: .top) {
                                     Image(systemName: "checkmark")
                                         .foregroundColor(.black)

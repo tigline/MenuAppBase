@@ -20,7 +20,9 @@ public struct MenuItem: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var isPressed: Bool = false
     @StateObject private var configuration = AppConfiguration.share
-    @Environment(\.store.state.appTheme) var theme
+    var theme:AppTheme {
+        configuration.colorScheme
+    }
 
     private var showBookMark: Bool {
         configuration.showBookMarkInPoster
@@ -85,7 +87,7 @@ public struct MenuItem: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                .background(displayType == .landscape ? .clear : Assets.Colors.rowBackground)
+                .background(displayType == .landscape ? .clear : AppTheme.Colors.rowBackground)
                 .compositingGroup()
                 //.clipShape(clipShape)
                 .contentShape(Rectangle())
@@ -176,7 +178,7 @@ public struct MovieItem: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                .background(displayType == .landscape ? .clear : Assets.Colors.rowBackground)
+                .background(displayType == .landscape ? .clear : AppTheme.Colors.rowBackground)
                 .compositingGroup()
                 .clipShape(clipShape)
                 .contentShape(Rectangle())

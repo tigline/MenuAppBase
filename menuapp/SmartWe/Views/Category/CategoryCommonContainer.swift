@@ -16,7 +16,7 @@ struct CategoryCommonContainer: View {
             )
             CategoryCommonScrollView(category: category)
         }
-        .background(Assets.Colors.rowBackground)
+        .background(AppTheme.Colors.rowBackground)
         .frame(maxWidth: .infinity)
     }
 }

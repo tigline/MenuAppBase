@@ -22,7 +22,7 @@ struct ThemePopverMenu: View {
                         Spacer()
                     }
                     .padding(8)
-                    .background(Assets.orange.themeColor.buttonColor)
+                    .background(AppTheme.orange.themeColor.buttonColor)
                     .cornerRadius(10)
                 })
                 .buttonStyle(.plain)
@@ -37,7 +37,7 @@ struct ThemePopverMenu: View {
                         Spacer()
                     }
                     .padding(8)
-                    .background(Assets.dark.themeColor.mainBackground)
+                    .background(AppTheme.dark.themeColor.mainBackground)
                     .cornerRadius(10)
                 })
                 .buttonStyle(.plain)
@@ -52,7 +52,7 @@ struct ThemePopverMenu: View {
                         Spacer()
                     }
                     .padding(8)
-                    .background(Assets.brown.themeColor.mainBackground)
+                    .background(AppTheme.brown.themeColor.mainBackground)
                     .cornerRadius(10)
                 })
                 .buttonStyle(.plain)

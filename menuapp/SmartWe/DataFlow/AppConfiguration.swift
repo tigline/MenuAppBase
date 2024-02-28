@@ -8,7 +8,7 @@ import TMDb
 
 final class AppConfiguration: ObservableObject {
     /// colorScheme
-    @AppStorage("colorScheme") var colorScheme: ColorSchemeSetting = .system
+    @AppStorage("colorScheme") var colorScheme: AppTheme = .orange
     /// Language
     @AppStorage("language") var appLanguage: AppLanguage = .system
     /// selected genre

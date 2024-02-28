@@ -48,7 +48,7 @@ struct ReviewContainer: View {
         .frame(width: 200, height: 150, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 3)
-                .stroke(Assets.Colors.outline)
+                .stroke(AppTheme.Colors.outline)
         )
     }
 }

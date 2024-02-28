@@ -21,7 +21,7 @@ struct GenreContainer: View {
             )
             GenreScrollView(genreID: genreID)
         }
-        .background(Assets.Colors.rowBackground)
+        .background(AppTheme.Colors.rowBackground)
         .frame(maxWidth: .infinity)
     }
 }

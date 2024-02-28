@@ -21,7 +21,7 @@ struct NowPlayingScrollViewRow: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Assets.Colors.rowBackground)
+        .background(AppTheme.Colors.rowBackground)
     }
 }
 

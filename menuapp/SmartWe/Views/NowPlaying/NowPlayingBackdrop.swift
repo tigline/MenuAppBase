@@ -41,10 +41,10 @@ struct NowPlayingBackdrop: View {
                         Circle()
                             .fill(.secondary)
                         Circle()
-                            .stroke(Assets.Colors.secondWhite, lineWidth: 3)
+                            .stroke(AppTheme.Colors.secondWhite, lineWidth: 3)
                         Image(systemName: "play.fill")
                             .font(.title)
-                            .foregroundColor(Assets.Colors.secondWhite)
+                            .foregroundColor(AppTheme.Colors.secondWhite)
                     }
                     .frame(width: 52, height: 52)
                 }
@@ -55,7 +55,7 @@ struct NowPlayingBackdrop: View {
             Group {
                 if colorScheme == .dark {
                     Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [.clear, Assets.Colors.rowBackground]), startPoint: .top, endPoint: .init(x: 0.5, y: 1)))
+                        .fill(LinearGradient(gradient: Gradient(colors: [.clear, AppTheme.Colors.rowBackground]), startPoint: .top, endPoint: .init(x: 0.5, y: 1)))
                         .frame(height: 40)
                 }
             }

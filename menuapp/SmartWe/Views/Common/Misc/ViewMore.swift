@@ -38,7 +38,7 @@ struct ViewMoreButton: View {
     }
 
     var body: some View {
-        Assets.Colors.rowBackground
+        AppTheme.Colors.rowBackground
             .frame(height: 60)
             .frame(maxWidth: .infinity)
             .overlay(
@@ -50,7 +50,7 @@ struct ViewMoreButton: View {
                     HStack(spacing: 10) {
                         if showSymbol {
                             RoundedRectangle(cornerRadius: 2)
-                                .fill(Assets.Colors.favorite)
+                                .fill(AppTheme.Colors.favorite)
                                 .frame(width: 4)
                                 .padding(.vertical, 8)
                         }
@@ -124,7 +124,7 @@ struct NowPlayingLabel: View {
     }
 
     var body: some View {
-        Assets.Colors.rowBackground
+        AppTheme.Colors.rowBackground
             .frame(height: 60)
             .frame(maxWidth: .infinity)
             .overlay(

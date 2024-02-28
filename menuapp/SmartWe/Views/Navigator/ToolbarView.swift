@@ -9,13 +9,17 @@ import SwiftUI
 
 
 struct ToolbarView: View {
-    @Environment(\.store.state.appTheme) var theme
+
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
     @State var showThemePopover = false
     @Environment(\.menuStore) var menuStore
     @Environment(\.appRouter) var appRouter
     @Binding var showTable:Bool
+    
+    var theme:AppTheme {
+        configuration.colorScheme
+    }
     
     var tableNo:String {
         if configuration.tableNo == nil {
@@ -29,24 +33,21 @@ struct ToolbarView: View {
         HStack{
             
             OrderButton(icon: "button_bell_ White",
-                        text: "オーダボタン",
-                        bgColor: theme.themeColor.darkRed,
-                        textColor: .white) {
+                        text: "オーダボタン"
+                        ) {
                 
             }
             OrderButton(icon: "button_ list_black",
-                        text: "注文履歴",
-                        bgColor: theme.themeColor.mainBackground,
-                        textColor: .black) {
+                        text: "注文履歴"
+                        ) {
                 menuStore.updateTab("注文履歴")
                 appRouter.updateRouter(.order)
             }
             
             
             CartButton(icon: "button_shopping car_ black",
-                        text: "買い物かご",
-                        bgColor: menuStore.catagory == "買い物かご" ? theme.themeColor.buttonColor : theme.themeColor.mainBackground,
-                        textColor: .black) {
+                        text: "買い物かご"
+                        ) {
                 menuStore.updateTab("買い物かご")
                 appRouter.updateRouter(.cart)
                 
@@ -72,9 +73,7 @@ struct ToolbarView: View {
 //            })
             
             OrderButton(icon: "button_bell_ White",
-                        text: tableNo,
-                        bgColor: theme.themeColor.buttonColor,
-                        textColor: .white) {
+                        text: tableNo) {
                 showTable = true
             }
             
@@ -93,20 +92,22 @@ struct ToolbarView: View {
                 Image("language_Japanese")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .shadow(color: .black, radius: 6.0, y:5)
+                    .frame(width: 35, height: 35)
+                    
                     
             })
-            
+            .frame(width: 40, height: 40)
             .clipShape(.circle)
             .popover(isPresented: $showPopover, content: {
                 LanguagePopverMenu(showPopover: $showPopover)
             })
+            .buttonStyle(BorderlessButtonStyle())
+            .shadow(color: .gray, radius: 1, y:1)
         
 
                 
         }
-        .frame(height: 70)
+        .frame(height: 78)
         .padding(.leading,31)
         .padding(.trailing,16)
         .background(theme.themeColor.navBgColor)

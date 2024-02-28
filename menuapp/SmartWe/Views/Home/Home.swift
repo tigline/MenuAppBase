@@ -30,7 +30,7 @@ struct Home: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Assets.Colors.mainBackground)
+        .background(AppTheme.Colors.mainBackground)
         //.navigationTitle(store.state.sideSelection.localizedString)
         #if !os(macOS)
             .toolbar(.hidden, for: .navigationBar)

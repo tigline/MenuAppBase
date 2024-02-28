@@ -8,13 +8,15 @@ import SwiftUI
 struct SideBarContainer: View {
     @StateObject private var configuration = AppConfiguration.share
 
-    @Environment(\.store.state.appTheme) var theme
     @Environment(\.menuStore) var menuStore
     
     @State var isLoading = false
     //@State var selectionBar:String?
     @State var showTable = false
     
+    var theme:AppTheme {
+        configuration.colorScheme
+    }
     
     var body: some View {
         let _ = Self._printChanges()

@@ -8,15 +8,15 @@
 import SwiftUI
 struct SideBar:View {
     
-    @Environment(\.store.state.appTheme) var theme
     @Environment(\.menuStore) var menuStore
     @Environment(\.isLoading) private var isLoading
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
     @Environment(\.appRouter) var appRouter
-//    init() {
-//        selectionBar = menuStore.catagory
-//    }
+
+    var theme:AppTheme {
+        configuration.colorScheme
+    }
     
     var selectionBar: Binding<String?> {
         Binding<String?>(

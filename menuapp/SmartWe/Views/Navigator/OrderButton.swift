@@ -9,11 +9,13 @@ import SwiftUI
 
 struct OrderButton: View {
     //@Environment(\.store.state.appTheme) var theme
+    @StateObject private var configuration = AppConfiguration.share
+    private var appTheme:AppTheme {
+        configuration.colorScheme
+    }
     
     let icon:String
     let text:String
-    let bgColor:Color
-    let textColor:Color
     let onTap:()->Void
     
     var body: some View {
@@ -22,13 +24,14 @@ struct OrderButton: View {
         }, label: {
             HStack {
                 Label(text, image: icon)
-                    .foregroundColor(textColor)
+                    .foregroundColor(appTheme.themeColor.textColor)
             }
             .padding(8)
-            .background(bgColor)
+            .background(appTheme.themeColor.buttonColor)
             .cornerRadius(10)
         })
         .buttonStyle(.plain)
+        .frame(height: 44)
         
     }
 }
@@ -39,10 +42,13 @@ struct CartButton: View {
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
     
+    @StateObject private var configuration = AppConfiguration.share
+    private var appTheme:AppTheme {
+        configuration.colorScheme
+    }
+    
     let icon:String
     let text:String
-    @State var bgColor:Color
-    let textColor:Color
     let onTap:()->Void
     
     @State var hightLight:Bool = false
@@ -54,13 +60,14 @@ struct CartButton: View {
             }, label: {
                 HStack {
                     Label(text, image: icon)
-                        .foregroundColor(textColor)
+                        .foregroundColor(appTheme.themeColor.textColor)
                 }
                 .padding(8)
-                .background(bgColor)
+                .background(appTheme.themeColor.mainBackground)
                 .cornerRadius(10)
             })
             .buttonStyle(.plain)
+            .frame(height: 44)
             
             if shoppingCart.count > 0 {
                 Text(goodsCount)

@@ -14,7 +14,7 @@ struct AppState {
     var checkLanguage: String = "JP"
     var machineInfo: MachineInfo = .createDefault()
     var shopMenuInfo: ShopMenuInfo?
-    var appTheme: Assets = .orange
+    var appTheme: AppTheme = .orange
 }
 
 

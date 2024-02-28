@@ -31,6 +31,18 @@ enum ColorSchemeSetting: Int, CaseIterable, Identifiable {
             return "Setting_BySystem"
         }
     }
+    
+    var color:Color {
+        switch self {
+        
+        case .dark:
+            return .black
+        case .light:
+            return .brown
+        case .system:
+            return .orange
+        }
+    }
 
     var id: Self {
         self

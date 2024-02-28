@@ -26,7 +26,7 @@ struct InOptionlistKey: EnvironmentKey {
 }
 
 struct themeKey: EnvironmentKey {
-    static var defaultValue: (Assets) -> Void = {
+    static var defaultValue: (AppTheme) -> Void = {
         #if DEBUG
         print("select theme \($0.themeColor)")
         #endif
@@ -115,7 +115,7 @@ extension EnvironmentValues {
 //        set { self[StoreKey.self] = newValue }
 //    }
     
-    var theme: (Assets) -> Void {
+    var theme: (AppTheme) -> Void {
         get { self[themeKey.self] }
         set { self[themeKey.self] = newValue }
     }

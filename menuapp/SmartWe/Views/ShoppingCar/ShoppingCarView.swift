@@ -9,13 +9,16 @@ import SwiftUI
 
 struct ShoppingCarView: View {
     
-    @Environment(\.store.state.appTheme) var theme
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.showError) var showError
     @StateObject private var configuration = AppConfiguration.share
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
     @State private var showTable:Bool = false
+    
+    var theme:AppTheme {
+        configuration.colorScheme
+    }
     
 //    var showLoading:Binding<Bool> {
 //        Binding<Bool> {

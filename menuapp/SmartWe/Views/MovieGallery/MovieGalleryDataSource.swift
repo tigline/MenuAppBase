@@ -68,7 +68,7 @@ struct MovieGalleryDataSource: View {
                 guard source == .wishlist else { return }
                 wishlistMovies = await Movie.loadWishlistMovieByIDs(tmdb: tmdb, movieIDs: Array(favoriteMovieIDs.map(\.movieID).map(Int.init)))
             }
-            .background(Assets.Colors.mainBackground)
+            .background(AppTheme.Colors.mainBackground)
         #if !os(macOS)
             //.navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)

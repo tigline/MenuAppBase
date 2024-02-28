@@ -30,7 +30,7 @@ struct GenreList: View {
                     .padding(.horizontal, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 3)
-                            .stroke(Assets.Colors.outline)
+                            .stroke(AppTheme.Colors.outline)
                     )
             }
         }

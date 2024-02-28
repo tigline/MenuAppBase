@@ -40,7 +40,7 @@ struct DetailCredit: View {
 
     var divider: some View {
         RoundedRectangle(cornerRadius: 3)
-            .fill(Assets.Colors.outline)
+            .fill(AppTheme.Colors.outline)
             .frame(height: 0.5)
     }
 

@@ -83,7 +83,7 @@ struct FavoriteButton: View {
                     if isFavorite {
                         Image(systemName: "heart.fill")
                             .bold()
-                            .foregroundColor(Assets.Colors.favorite)
+                            .foregroundColor(AppTheme.Colors.favorite)
                             .transition(.scale(scale: 1.7).combined(with: .opacity))
                     }
                 }

@@ -40,7 +40,7 @@ struct WishlistScrollView: View {
             .padding(.bottom, 22)
         }
         .scrollContentBackground(.hidden)
-        .background(Assets.Colors.rowBackground)
+        .background(AppTheme.Colors.rowBackground)
         .safeAreaInset(edge: .leading) {
             Color.clear
                 .frame(width: 6)
