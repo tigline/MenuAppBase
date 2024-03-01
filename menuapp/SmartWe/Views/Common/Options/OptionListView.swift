@@ -18,6 +18,7 @@ struct OptionListView: View {
         
         VStack(alignment: .leading, content: {
             Text(option.groupName)
+                .font(CustomFonts.optionTitle2Font)
             let columns: [GridItem] = [.init(.adaptive(minimum: 120))]
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(option.optionVoList) { optionVo in

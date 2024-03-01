@@ -56,11 +56,11 @@ struct SideBar:View {
                 
             Spacer()
                 
-            Button(LocalizedStringKey("log_out")){
-                configuration.machineCode = ""
-                configuration.loginState = .logout
-            }
-            .padding()
+//            Button(LocalizedStringKey("log_out")){
+//                configuration.machineCode = ""
+//                configuration.loginState = .logout
+//            }
+//            .padding()
         }
         
     }
@@ -76,8 +76,8 @@ struct SideBar:View {
                     .padding(.leading)
                     .padding(.vertical)
                     .frame(maxWidth: .infinity, alignment:.leading)
-                    .foregroundColor(menuStore.catagory == menu ? .white : .init(hex: "#828282"))
-                    .background(menuStore.catagory == menu ? theme.themeColor.buttonColor : Color.clear)
+                    .foregroundColor(menuStore.catagory == menu ? theme.themeColor.sideBarTextBg : theme.themeColor.sideBarTextDf)
+                    .background(menuStore.catagory == menu ? theme.themeColor.sideBarBtBg : Color.clear)
                     .rightHalfRadius(13)
             }
             .listRowBackground(

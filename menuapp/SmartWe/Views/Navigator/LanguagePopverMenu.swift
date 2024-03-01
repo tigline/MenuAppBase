@@ -17,19 +17,25 @@ struct LanguagePopverMenu: View {
     var body: some View {
             VStack(alignment: .leading) {
                 OrderButton(icon: "language_Japanese",
-                            text: "日本语") {
+                            text: "日本语",
+                            bgColor: theme.themeColor.buttonColor,
+                            textColor: .white) {
                     configuration.appLanguage = .jp
                     showPopover = false
                 }
                     
                 OrderButton(icon: "language_Chinese",
-                            text: "中国语") {
+                            text: "中国语",
+                            bgColor: theme.themeColor.buttonColor,
+                            textColor: .white) {
                     configuration.appLanguage = .zh
                     showPopover = false
                 }
                     
                 OrderButton(icon: "language_English",
-                            text: "英语") {
+                            text: "英语",
+                            bgColor: theme.themeColor.buttonColor,
+                            textColor: .white) {
                     configuration.appLanguage = .en
                     showPopover = false
                 }

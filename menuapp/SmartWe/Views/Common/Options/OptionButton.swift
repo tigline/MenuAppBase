@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct OptionButton: View {
-    @State var backgroud:Color = .init(hex: "#F7F7F7")
-    @State var selectColor:Color = .init(hex: "#FC8F36")
+    
+    @StateObject private var configuration = AppConfiguration.share
+    
+    var backgroud:Color { .init(hex: "#F7F7F7")}
+    var selectColor:Color  { configuration.colorScheme.themeColor.orderBtBg}
     //@Binding var selected:Bool
     let optionVo:OptionVo
     
@@ -32,11 +35,13 @@ struct OptionButton: View {
             HStack{
                 Spacer()
                 Text(optionVo.mainTitle)
+                    .font(CustomFonts.optionButtonFont)
+                    .foregroundStyle(isSelected ? .white : .black)
                     .lineLimit(2)
                 if hasPrice {
                     Spacer()
                     VStack(alignment: .trailing, content: {
-                        RoundedRightAngleTriangle().fill(.orange)
+                        RoundedRightAngleTriangle().fill(configuration.colorScheme.themeColor.orderBtBg)
                             .frame(width: 36, height: 32)
                             .padding(.leading, -20)
                             .overlay {
@@ -67,7 +72,6 @@ struct OptionButton: View {
     //OptionButton(content: "Option", optionCode: "123456")
 //}
 
-import SwiftUI
 
 struct RoundedRightAngleTriangle: Shape {
     func path(in rect: CGRect) -> Path {

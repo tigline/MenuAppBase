@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ThemePopverMenu: View {
-    @Environment(\.theme) var theme
+    @StateObject var configuration = AppConfiguration.share
     @Binding var showPopover:Bool
     var body: some View {
             VStack(alignment: .leading) {
                 Button(action: {
-                    theme(.orange)
+                    configuration.colorScheme = .orange
                     showPopover = false
                 }, label: {
                     HStack {
@@ -28,7 +28,7 @@ struct ThemePopverMenu: View {
                 .buttonStyle(.plain)
                     
                 Button(action: {
-                    theme(.dark)
+                    configuration.colorScheme = .dark
                     showPopover = false
                 }, label: {
                     HStack {
@@ -43,7 +43,7 @@ struct ThemePopverMenu: View {
                 .buttonStyle(.plain)
                     
                 Button(action: {
-                    theme(.brown)
+                    configuration.colorScheme = .brown
                     showPopover = false
                 }, label: {
                     HStack {

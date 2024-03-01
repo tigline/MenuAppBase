@@ -36,7 +36,7 @@ struct ItemShortInfo: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 8)
             .frame(width: displayType.imageSize.width, alignment: .leading)
-            .background(theme.mainBackground)
+            .background(theme.shortInfoBg)
         case .landscape:
             VStack(alignment: .leading, spacing: 8) {
                 titleView
@@ -47,7 +47,7 @@ struct ItemShortInfo: View {
             }
             .padding(.horizontal, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(theme.mainBackground)
+            .background(theme.shortInfoBg)
         }
     }
 
@@ -80,7 +80,7 @@ struct ItemShortInfo: View {
         Text(title)
             .font(.custom("PingFangSC-Regular", size: 13))
             .lineLimit(1)
-            .foregroundColor(theme.textColor)
+            .foregroundColor(theme.shortInfoText)
     }
     
     @ViewBuilder
@@ -88,13 +88,13 @@ struct ItemShortInfo: View {
         VStack {
             Text(subtitle)
                 .font(.custom("Avenir-Heavy", size: 15))
-                .foregroundColor(theme.textColor)
+                .foregroundColor(theme.shortInfoText)
         }
     }
     
     @ViewBuilder
     var addButton: some View {
-        Button(action:{}) {
+        VStack {
             Image(systemName:"plus")
                 .frame(width: 20, height: 20)
                 .foregroundColor(.white)
@@ -105,7 +105,7 @@ struct ItemShortInfo: View {
         }
         .frame(width: 32, height: 32)
         .buttonStyle(BorderlessButtonStyle())
-        .background(theme.buttonColor)
+        .background(theme.addButtonBg)
         .cornerRadius(8)
         
     }

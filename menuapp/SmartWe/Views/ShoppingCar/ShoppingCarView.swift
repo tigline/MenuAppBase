@@ -56,7 +56,7 @@ struct ShoppingCarView: View {
         
         if shoppingCart.isEmpty {
             VStack {
-                ContentUnavailableView("ご注文くださいい", systemImage: "exclamationmark.circle")
+                ContentUnavailableView("ご注文ください", systemImage: "exclamationmark.circle")
             }
             .background(.white)
         } else {
@@ -84,9 +84,13 @@ struct ShoppingCarView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         goodsCountView
+                            .padding(.bottom, 12)
                         priceCountView
+                            .padding(.bottom, 18)
                         totleCountView
+                            .padding(.bottom, 20)
                         orderButton
+                            .padding(.bottom, 35)
                     }
                     
                 }
@@ -153,7 +157,7 @@ struct ShoppingCarView: View {
                 }
                 .foregroundStyle(.white)
                 .frame(width: 200, height: 50)
-                .background(theme.themeColor.buttonColor)
+                .background(theme.themeColor.orderBtBg)
                 .clipCornerRadius(10)
             }
         }
@@ -164,10 +168,14 @@ struct ShoppingCarView: View {
     var goodsCountView: some View {
         HStack {
             Text("数量")
+                .font(CustomFonts.cargoCountFont)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text(goodsCount)
+                .font(CustomFonts.cargoCountFont)
                 .frame(alignment: .trailing)
+                .foregroundStyle(theme.themeColor.cargoTextColor)
         }
     }
     
@@ -176,9 +184,13 @@ struct ShoppingCarView: View {
         HStack {
             Text("小计")
                 .frame(alignment: .leading)
+                .font(CustomFonts.cargoCountFont)
+                .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text(subTotle)
                 .frame(alignment: .trailing)
+                .font(CustomFonts.cargoCountFont)
+                .foregroundStyle(theme.themeColor.cargoTextColor)
         }
     }
     
@@ -186,11 +198,14 @@ struct ShoppingCarView: View {
     var totleCountView: some View {
         HStack {
             Text("合计")
-                .font(.title)
+                .font(CustomFonts.cargoTotalFont)
                 .frame(alignment: .leading)
+                .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text(allTotle)
+                .font(CustomFonts.cargoTotalPriceFont)
                 .frame(alignment: .trailing)
+                .foregroundStyle(theme.themeColor.cargoTextColor)
         }
     }
 }

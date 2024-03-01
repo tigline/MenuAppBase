@@ -9,7 +9,10 @@ import SwiftUI
 import NukeUI
 
 struct CargoCellView: View {
-    
+    @StateObject private var configuration = AppConfiguration.share
+    var themeColor:ThemeColors {
+        configuration.colorScheme.themeColor
+    }
     enum CargoAction {
         case add
         case minus
@@ -31,15 +34,21 @@ struct CargoCellView: View {
 
                 Text(item.title ?? "")
                     .padding(.horizontal)
+                    .font(CustomFonts.carGoMenuFont)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(themeColor.cargoTextColor)
                 
                 Text("¥" + "\(Int(item.price))")
                     .padding(.horizontal)
+                    .font(CustomFonts.carGoMenuFont)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(themeColor.cargoTextColor)
                 Spacer()
                 Text(item.tableNo ?? "Select a Table")
                     .padding(.horizontal)
+                    .font(CustomFonts.carGoMenuFont)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(themeColor.cargoTextColor)
                 
                 HStack {
                     
@@ -52,16 +61,13 @@ struct CargoCellView: View {
                     }
                     .frame(width: 30, height: 30)
                     .buttonStyle(BorderlessButtonStyle())
-                    .background(Color.init(hex: "#F8F9FA"))
+                    .background(themeColor.quantityBtBg)
                     .cornerRadius(8)
                     
                     Text("\(item.quantity)")
-                        .overlay(
-                            Rectangle()
-                                .fill(Color.clear) // 透明填充
-                                .frame(width: 30), // 强制宽度
-                            alignment: .center // 保持内容居中
-                        )
+                        .font(CustomFonts.carGoMenuFont)
+                        .foregroundStyle(themeColor.cargoTextColor)
+                        .frame(width: 30)
                     
                     Button {
                         addOrMinus(.add, item)
@@ -72,7 +78,7 @@ struct CargoCellView: View {
                     }
                     .frame(width: 30, height: 30)
                     .buttonStyle(BorderlessButtonStyle())
-                    .background(Color.init(hex: "#F8F9FA"))
+                    .background(themeColor.quantityBtBg)
                     .cornerRadius(8)
                     
                 }.padding(.vertical)
@@ -84,12 +90,12 @@ struct CargoCellView: View {
             .padding(.vertical, 10)
             .padding(.leading, 45)
             .padding(.trailing, 102)
-            .background(.white)
+            .background(.clear)
             
             Rectangle()
                     .padding(.horizontal, 21)
                     .frame(height: 0.5)
-                    .foregroundColor(.init(hex: "#5C3C23").opacity(0.5))
+                    .foregroundColor(themeColor.cargoLine)
                     
             
         }

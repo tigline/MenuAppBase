@@ -35,42 +35,10 @@ struct MovieGalleryContainer: View {
     }
 }
 
-//struct MenuGalleryLazyVGrid: View {
-//    let items: [Menu]
-//    @Environment(\.isLoading) private var isLoading
-//    @Environment(\.goOptions) var goOptions
-//    private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
-//    var body: some View {
-//        ScrollView(.vertical) {
-//            let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
-//            LazyVGrid(columns: columns, spacing: 18.5) {
-//                ForEach(items) { item in
-//                    MenuItem(item: item, displayType: .portrait(.middle), onTap: {
-//                        withAnimation {
-//                            goOptions(item)
-//                        }
-//                    })
-//                }
-//            }
-//            .padding(.top, 15)
-////            .padding(.horizontal, 32)
-//            if isLoading {
-//                ProgressView()
-//                    .padding(10)
-//            }
-//            
-//        }
-//    }
-//}
-
-
-
 
 
 struct MenuGalleryLazyVGrid: View {
- 
     @Environment(\.isLoading) private var isLoading
-    @Environment(\.goOptions) var goOptions
     @Environment(\.menuStore) var menuStore
     @StateObject private var configuration = AppConfiguration.share
     var theme:AppTheme {
@@ -79,24 +47,15 @@ struct MenuGalleryLazyVGrid: View {
 
     @State private var animationStartFrame: CGRect = .zero
 
-    
     private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
 
     var body: some View {
-        // 使用 GeometryReader 获取购物车图标的位置
         ZStack {
             ScrollView(.vertical) {
                 let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
                 LazyVGrid(columns: columns, spacing: 18.5) {
                     ForEach(menuStore.curMenuInfo?.menuVoList ?? []) { item in
-                        MenuItem(item: item, displayType: .portrait(.middle))
-                            .onTapGesture {
-                                
-                                withAnimation {
-                                    goOptions(item, animationStartFrame)
-                                }
-                            }
-
+                        MenuItem(item: item)
                     }
                 }
                 .padding(.top, 15)
@@ -107,12 +66,7 @@ struct MenuGalleryLazyVGrid: View {
                     
                 }
             }
-            //.toolbar(.hidden, for: .navigationBar)
             .background(theme.themeColor.contentBg)
-//            .onAppear {
-//                menuStore.updateTab(category)
-//            }
-            
         }
     }
 }

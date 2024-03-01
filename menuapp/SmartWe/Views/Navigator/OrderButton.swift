@@ -9,13 +9,15 @@ import SwiftUI
 
 struct OrderButton: View {
     //@Environment(\.store.state.appTheme) var theme
-    @StateObject private var configuration = AppConfiguration.share
-    private var appTheme:AppTheme {
-        configuration.colorScheme
-    }
+//    @StateObject private var configuration = AppConfiguration.share
+//    private var appTheme:AppTheme {
+//        configuration.colorScheme
+//    }
     
     let icon:String
     let text:String
+    let bgColor:Color
+    let textColor:Color
     let onTap:()->Void
     
     var body: some View {
@@ -24,10 +26,10 @@ struct OrderButton: View {
         }, label: {
             HStack {
                 Label(text, image: icon)
-                    .foregroundColor(appTheme.themeColor.textColor)
+                    .foregroundColor(textColor)
             }
             .padding(8)
-            .background(appTheme.themeColor.buttonColor)
+            .background(bgColor)
             .cornerRadius(10)
         })
         .buttonStyle(.plain)
@@ -42,13 +44,10 @@ struct CartButton: View {
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
     
-    @StateObject private var configuration = AppConfiguration.share
-    private var appTheme:AppTheme {
-        configuration.colorScheme
-    }
-    
     let icon:String
     let text:String
+    let bgColor:Color
+    let textColor:Color
     let onTap:()->Void
     
     @State var hightLight:Bool = false
@@ -60,10 +59,10 @@ struct CartButton: View {
             }, label: {
                 HStack {
                     Label(text, image: icon)
-                        .foregroundColor(appTheme.themeColor.textColor)
+                        .foregroundColor(textColor)
                 }
                 .padding(8)
-                .background(appTheme.themeColor.mainBackground)
+                .background(bgColor)
                 .cornerRadius(10)
             })
             .buttonStyle(.plain)

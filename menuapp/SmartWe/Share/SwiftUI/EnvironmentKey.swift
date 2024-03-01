@@ -74,9 +74,9 @@ struct GoCategoryKey: EnvironmentKey {
 }
 
 struct GoOptionsKey: EnvironmentKey {
-    static var defaultValue: (Menu, CGRect) -> Void = {
+    static var defaultValue: (UIImage, CGRect) -> Void = {
         #if DEBUG
-        print("go to \($0.mainTitle) \($1)'s options view")
+        print("go to \($0) \($1)'s options view")
         #endif
     }
 }
@@ -120,7 +120,7 @@ extension EnvironmentValues {
         set { self[themeKey.self] = newValue }
     }
     
-    var goOptions: (Menu,CGRect) -> Void {
+    var goOptions: (UIImage,CGRect) -> Void {
         get { self[GoOptionsKey.self] }
         set { self[GoOptionsKey.self] = newValue }
     }

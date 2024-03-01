@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import NukeUI
 
 struct OptionGroupListView: View {
     @Environment(\.menuStore.menuOptionState) var menuOptionState
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.imagePipeline) private var imagePipeline
+    @StateObject private var configuration = AppConfiguration.share
+    
     @Binding var isShowing: Bool
     var body: some View {
         ZStack {
@@ -22,53 +23,75 @@ struct OptionGroupListView: View {
                 .onTapGesture {
                     withAnimation {
                         isShowing = false
+                        
                     }
                 }
-            HStack(alignment:.top, content:  {
+            HStack(alignment:.top, spacing: 1, content:  {
                 //image area
-                VStack(spacing: 10, content: {
-                    LazyImage(url: URL(string:  menuOptionState?.images.first ?? ""))
-                        .pipeline(imagePipeline)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 280, height: 300)
-                        .clipCornerRadius(10)
-                    HStack(spacing: 10, content: {
-                        LazyImage(url: URL(string:  menuOptionState?.images.last ?? ""))
-                            .pipeline(imagePipeline)
-                            //.aspectRatio(contentMode: .fill)
-                            .frame(width: 135, height: 130)
-                            .clipCornerRadius(10)
+                VStack(spacing: 15, content: {
+
+                    AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                        image
+                            .resizable()
+                            //.aspectRatio(contentMode: .fit)
+                            //.scaledToFit()
                             .clipped()
-                        LazyImage(url: URL(string:  menuOptionState?.images.last ?? ""))
-                            .pipeline(imagePipeline)
-                            //.aspectRatio(contentMode: .fill)
-                            .frame(width: 135, height: 130)
-                            .clipCornerRadius(10)
-                            .clipped()
+                            
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(maxHeight: .infinity)
+                    .clipCornerRadius(8)
+                    
+                    
+                    HStack(spacing: 15, content: {
+                        
+                        AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                            image
+                                .resizable()
+                                .clipped()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .clipCornerRadius(8)
+                        
+                        AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                            image
+                                .resizable()
+                                .clipped()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .clipCornerRadius(8)
+
                     })
+                    .frame(height: 150)
                     
                 })
-                .frame(width: 280, height: 440)
                 .padding()
+                .frame(width: 360)
+                
                 //option area
                 ZStack(alignment: .topTrailing) {
                     VStack(alignment: .leading, spacing: 20, content: {
                         Text(menuOptionState?.mainTitle ?? "")
-                            .font(.title)
+                            .font(CustomFonts.optionTitle1Font)
+                            .foregroundStyle(.black)
                         Text(menuOptionState?.subTitle ?? "")
-                            .font(.subheadline)
+                            .font(CustomFonts.optionDetailFont)
+                            .foregroundStyle(AppTheme.Colors.optionDetailColor)
                         optionView
                     })
                     closeButton
                     
                 }
-                .frame(height: 440)
                 .padding()
                 
             })
+            .frame(height: 540)
             .background(.white)
             .clipCornerRadius(10)
-            .padding(.horizontal,100)
+            .padding(.horizontal,60)
         }
         .environment(\.inOptionlist) {
             menuStore.inOptionlist($0, $1)
@@ -87,47 +110,57 @@ struct OptionGroupListView: View {
                 isShowing = false
             }
         } label: {
-            Image(systemName: "xmark.circle")
+            Image("close")
         }
     }
     
     @ViewBuilder
     var optionView: some View {
-        ScrollView(.vertical) {
-            LazyVStack(alignment: .leading) {
-                if let optionGroups = menuOptionState?.optionList {
-                    ForEach(optionGroups) { optionGroup in
-                        OptionListView(option: optionGroup)
+        
+        VStack {
+            ScrollView(.vertical) {
+                LazyVStack(alignment: .leading) {
+                    if let optionGroups = menuOptionState?.optionList {
+                        ForEach(optionGroups) { optionGroup in
+                            OptionListView(option: optionGroup)
+                        }
                     }
                 }
-                VStack(alignment: .center, content: {
-                    Button("確認する") {
-                        
-                        guard let menuOptionState = menuStore.menuOptionState else {
-                            return
-                        }
-                        cargoStore.addGood(menuOptionState.optionGoodInfo.0,
-                                           price: menuOptionState.optionGoodInfo.1,
-                                           options: menuOptionState.optionGoodInfo.2)
-                        
-                        withAnimation {
-                            isShowing = false
-                        }
-                    }
-                    .frame(height: 50)
-                    .padding(.horizontal, 100)
-                    .buttonStyle(.plain)
-                    .foregroundStyle(.white)
-                    .background(.orange)
-                    .clipCornerRadius(10)
-                    
-                })
-                .padding(.top, 50)
-                .frame(maxWidth: .infinity)
+                
             }
+            .scrollIndicators(.hidden)
             
+            VStack(alignment: .center, content: {
+                Button(action: {
+                    // 你的按钮行为
+                    guard let menuOptionState = menuStore.menuOptionState else {
+                        return
+                    }
+                    cargoStore.addGood(menuOptionState.optionGoodInfo.0,
+                                       price: menuOptionState.optionGoodInfo.1,
+                                       options: menuOptionState.optionGoodInfo.2)
+                    
+                    withAnimation {
+                        isShowing = false
+                    }
+                }) {
+                    Text("確認する")
+                        .foregroundColor(.white)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
+                        .contentShape(Rectangle()) // 确保整个按钮区域都能响应点击
+                }
+                .background(configuration.colorScheme.themeColor.orderBtBg)
+                .clipCornerRadius(10)
+                .padding(.horizontal, 100)
+                .buttonStyle(.plain)
+                
+            })
+            //.padding(.bottom, 50)
+            .frame(maxWidth: .infinity)
         }
-        .scrollIndicators(.hidden)
+        
+        
     }
 }
 

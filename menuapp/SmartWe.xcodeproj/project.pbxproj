@@ -133,6 +133,7 @@
 		BE573E3C2B8C4E5600226D3A /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE573E3B2B8C4E5600226D3A /* ToolbarView.swift */; };
 		BEBABF6A2B8C6FDA003C4680 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBABF692B8C6FDA003C4680 /* ErrorWrapper.swift */; };
 		BEBABF6C2B8C878B003C4680 /* SelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBABF6B2B8C878B003C4680 /* SelectTableView.swift */; };
+		BED31E6C2B904DCA00BE74D8 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED31E6B2B904DCA00BE74D8 /* ImageView.swift */; };
 		BEF0EBC02B75E60C00EAB2D9 /* LanguagePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */; };
 		BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */; };
 		BEF9C0A62B74C657000D259B /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A52B74C657000D259B /* OrderButton.swift */; };
@@ -262,6 +263,7 @@
 		BE8EA0922B6C6FD7004555DF /* SmartWe.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SmartWe.entitlements; sourceTree = "<group>"; };
 		BEBABF692B8C6FDA003C4680 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		BEBABF6B2B8C878B003C4680 /* SelectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTableView.swift; sourceTree = "<group>"; };
+		BED31E6B2B904DCA00BE74D8 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		BEEB36462B8EF49E005DBB10 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BEEB36472B8EF4BB005DBB10 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePopverMenu.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				76AC25AD29C2E37B007874DA /* MovieItemPoster.swift */,
 				76AC25AF29C2E37C007874DA /* MovieItem.swift */,
 				76AC25B029C2E37C007874DA /* MovieShortInfo.swift */,
+				BED31E6B2B904DCA00BE74D8 /* ImageView.swift */,
 			);
 			path = MovieItem;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 				93DEC8322B83A08700C8DF8A /* SwiftUIAView.swift in Sources */,
 				BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */,
 				769002CA29C826FF00620A3C /* ViewMore.swift in Sources */,
+				BED31E6C2B904DCA00BE74D8 /* ImageView.swift in Sources */,
 				76751E4F29C542110013BBDF /* AppState.swift in Sources */,
 				76AC25C829C2EAA1007874DA /* TMDBConfiguration.swift in Sources */,
 				769AB0B729D1BE68008451E6 /* DetailFullScreenCoverBackdrop.swift in Sources */,

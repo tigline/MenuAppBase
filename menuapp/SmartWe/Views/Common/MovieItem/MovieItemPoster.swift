@@ -67,7 +67,7 @@ struct MenuItemPoster: View {
         .frame(width: size.width, height: size.height)
         .clipped()
         .compositingGroup()
-        .background(Color.orange)
+        //.background(Color.orange)
         .if(showShadow) {
             $0.shadow(radius: 3)
         }

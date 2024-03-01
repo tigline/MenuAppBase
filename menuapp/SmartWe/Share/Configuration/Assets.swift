@@ -20,7 +20,9 @@ enum AppTheme:Int, CaseIterable, Identifiable {
         static let secondWhite = Color("secondWhite")
         static let outline = Color.secondary.opacity(0.3)
         static let windowBackground = Color.secondary.opacity(0.1)
+        static let optionDetailColor = Color.init(hex: "#909399")
     }
+    
     var id: Self {
         self
     }
@@ -35,9 +37,46 @@ struct ThemeColors {
     let sideBarBtBg:Color
     let cargoLine:Color
     let sideBarTextBg:Color
+    let sideBarTextDf:Color
     let quantityBtBg:Color
     let toolBarBtBg:Color
+    let toolBarTextBgOn:Color
+    let toolBarTextBgOff:Color
+    let shortInfoBg:Color
+    let shortInfoText:Color
+    let addButtonBg:Color
+    let cargoTextColor:Color
     let textColor:Color
+}
+
+struct CustomFonts {
+    static let pingFangSCMedium = Font.custom("PingFangSC-Medium", size: 16)
+    static let optionTitle1Font = Font.custom("PingFangSC-Medium", size: 20)
+    
+    static let optionTitle2Font = Font.custom("PingFangSC-Medium", size: 15)
+    
+    static let optionButtonFont = Font.custom("PingFangSC-Regular", size: 13)
+    
+    static let optionDetailFont = Font.custom("PingFangSC-Regular", size: 13)
+    
+    static let optionOrderFont = Font.custom("PingFangSC-Regular", size: 14)
+    
+    static let sideBarTextFont = Font.custom("PingFangSC-Regular", size: 17)
+    
+    static let mentitleFont = Font.custom("PingFangSC-Regular", size: 13)
+    
+    static let menPriceFont = Font.custom("Avenir-Heavy", size: 15)
+    
+    static let languageFont = Font.custom("PingFangSC-Semibold", size: 15)
+    
+    static let carGoMenuFont = Font.custom("PingFangSC-Semibold", size: 18)
+    
+    static let cargoQuantityFont = Font.custom("Avenir-Heavy", size: 18)
+    
+    static let cargoCountFont = Font.custom("PingFangSC-Regular", size: 15)
+    
+    static let cargoTotalFont = Font.custom("PingFangSC-Semibold", size: 20)
+    static let cargoTotalPriceFont = Font.custom("Avenir-Heavy", size: 23)
 }
 
 extension AppTheme {
@@ -51,21 +90,35 @@ extension AppTheme {
                                orderBtBg: .init(hex: "#FC8F36"),
                                sideBarBtBg: .init(hex: "#FC8F36"),
                                cargoLine: .init(hex: "#5C3C23"),
-                               sideBarTextBg: .init(hex:"#828282"), 
+                               sideBarTextBg: .white,
+                               sideBarTextDf: .init(hex:"#828282"),
                                quantityBtBg: .init(hex: "#F8F9FA"),
                                toolBarBtBg: .white,
+                               toolBarTextBgOn: .white,
+                               toolBarTextBgOff: .black,
+                               shortInfoBg: .white, 
+                               shortInfoText: .black,
+                               addButtonBg: .init(hex: "#FC8F36"),
+                               cargoTextColor: .init(red: 92/255, green: 60/255, blue: 35/255),
                                textColor: .black)
         case .dark:
             return ThemeColors(mainBackground: Color("darkMain"),
-                               navBgColor: Color("darkGrey"),
-                               contentBg: .init(red: 34/255, green: 38/255, blue: 38/255),
+                               navBgColor: .init(red: 34/255, green: 38/255, blue: 38/255),
+                               contentBg: Color("darkGrey"),//.init(red: 34/255, green: 38/255, blue: 38/255),
                                buttonColor: Color("darkMain"),
                                orderBtBg: Color("darkRed"),
                                sideBarBtBg: Color("darkGrey"),
                                cargoLine: .init(red: 129/255, green: 129/255, blue: 129/255),
                                sideBarTextBg: .white, 
+                               sideBarTextDf: .white,
                                quantityBtBg: .white,
                                toolBarBtBg: Color("darkMain"),
+                               toolBarTextBgOn: .white,
+                               toolBarTextBgOff: .white, 
+                               shortInfoBg: Color("darkMain"), 
+                               shortInfoText: .white,
+                               addButtonBg: Color("darkGrey"),
+                               cargoTextColor: .white,
                                textColor: .white)
         case .brown:
             return ThemeColors(mainBackground: .init(red: 92/255, green: 60/255, blue: 35/255),
@@ -73,11 +126,18 @@ extension AppTheme {
                                contentBg: .init(red: 239/255, green: 219/255, blue: 204/255),
                                buttonColor: .init(red: 92/255, green: 60/255, blue: 35/255),
                                orderBtBg: Color("darkRed"),
-                               sideBarBtBg: .init(hex: "#FC8F36"),
-                               cargoLine: .init(hex: "#F7F7F7"), 
-                               sideBarTextBg: .init(red: 165/255, green: 142/255, blue: 124/255),
+                               sideBarBtBg: .white,
+                               cargoLine: .init(hex: "#F7F7F7"),
+                               sideBarTextBg: .init(red: 92/255, green: 60/255, blue: 35/255),
+                               sideBarTextDf: .white,
                                quantityBtBg: .white,
                                toolBarBtBg: .init(red: 246/255, green: 244/255, blue: 245/255),
+                               toolBarTextBgOn: .white,
+                               toolBarTextBgOff: .black, 
+                               shortInfoBg: .white, 
+                               shortInfoText: .black, 
+                               addButtonBg: .init(red: 92/255, green: 60/255, blue: 35/255),
+                               cargoTextColor: .white,
                                textColor: .white)
         
         }

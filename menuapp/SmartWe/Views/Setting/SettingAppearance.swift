@@ -7,15 +7,7 @@ import SwiftUI
 
 struct SettingAppearance: View {
     @StateObject private var configuration = AppConfiguration.share
-//    @Environment(\.store.state.appTheme) var appTheme
-//    @Environment(\.theme) var theme
-//    
-//    var settingTheme:Binding<AppTheme> {
-//        Binding<AppTheme>(
-//            get: {appTheme},
-//            set: {theme($0)}
-//        )
-//    }
+    @State private var logoutPresent:Bool = false
     
     var body: some View {
             
@@ -72,7 +64,7 @@ struct SettingAppearance: View {
                 
                 Section {
                     Button(action: {
-                        
+                        logoutPresent.toggle()
                     }, label: {
                         HStack(alignment: .center){
                             Spacer()
@@ -85,6 +77,30 @@ struct SettingAppearance: View {
             }
             .navigationTitle(SettingCategory.appearance.localizedString)
             .navigationBarTitleDisplayMode(.inline)
+            .alert("Are you sure to logout", isPresented: $logoutPresent) {
+                Button {
+                    configuration.machineCode = ""
+                    configuration.loginState = .logout
+                    logoutPresent.toggle()
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Sure")
+                            
+                        Spacer()
+                    }
+                }.foregroundStyle(.red)
+                
+                Button {
+                    logoutPresent.toggle()
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Cancel")
+                        Spacer()
+                    }
+                }
+            }
 
         
 

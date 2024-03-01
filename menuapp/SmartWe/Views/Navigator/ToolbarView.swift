@@ -32,48 +32,58 @@ struct ToolbarView: View {
     var body: some View {
         HStack{
             
-            OrderButton(icon: "button_bell_ White",
-                        text: "オーダボタン"
-                        ) {
+            OrderButton(icon: "button_bell_white",
+                        text: "オーダボタン",
+                        bgColor: theme.themeColor.orderBtBg,
+                        textColor: .white) {
                 
             }
-            OrderButton(icon: "button_ list_black",
-                        text: "注文履歴"
-                        ) {
+        
+            OrderButton(icon: "button_list_white",
+                        text: "注文履歴",
+                        bgColor: theme.themeColor.toolBarBtBg,
+                        textColor: theme.themeColor.toolBarTextBgOff) {
                 menuStore.updateTab("注文履歴")
                 appRouter.updateRouter(.order)
             }
             
             
-            CartButton(icon: "button_shopping car_ black",
-                        text: "買い物かご"
-                        ) {
+            CartButton(icon: "button_shopping_car_white",
+                        text: "買い物かご",
+                        bgColor: menuStore.catagory == "買い物かご" ? theme.themeColor.sideBarBtBg : theme.themeColor.toolBarBtBg,
+                        textColor: theme.themeColor.toolBarTextBgOff) {
                 menuStore.updateTab("買い物かご")
                 appRouter.updateRouter(.cart)
                 
-            }.background(
-                GeometryReader { geometry in
-                    Color.clear
-                        .onAppear {
-                            menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
-                        }
-                }
-            )
+            }
+//            .background(
+//                GeometryReader { geometry in
+//                    Color.clear
+//                        .onAppear {
+//                            menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
+//                            print("買い物かご Frame : \(geometry.frame(in: .global))")
+//                        }
+//                }
+//            )
             
             Spacer()
-//            Button(LocalizedStringKey("setting_theme")){
-//    
-//                showThemePopover = true
-//            }
-//            .padding()
-//            .background(theme.themeColor.mainBackground)
-//            .cornerRadius(10)
-//            .popover(isPresented: $showThemePopover, content: {
-//                ThemePopverMenu(showPopover: $showThemePopover)
-//            })
+            Button(LocalizedStringKey("setting_theme")){
+    
+                showThemePopover = true
+            }
+            .padding()
+            .frame(height: 44)
+            .foregroundStyle(theme.themeColor.toolBarTextBgOff)
+            .background(theme.themeColor.toolBarBtBg)
+            .cornerRadius(10)
+            .popover(isPresented: $showThemePopover, content: {
+                ThemePopverMenu(showPopover: $showThemePopover)
+            })
             
-            OrderButton(icon: "button_bell_ White",
-                        text: tableNo) {
+            OrderButton(icon: "button_bell_white",
+                        text: tableNo,
+                        bgColor: theme.themeColor.orderBtBg,
+                        textColor: .white) {
                 showTable = true
             }
             

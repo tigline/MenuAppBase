@@ -21,8 +21,10 @@ struct StackContainer: View {
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.appRouter) var appRouter
+
     @State private var showOptions = false
     @State private var showTable = false
+    
     //let category:MenuCategory
     var body: some View {
         VStack {
@@ -63,24 +65,27 @@ struct StackContainer: View {
             
         }
         .background(theme.themeColor.contentBg)
-        .environment(\.goOptions) { menu, rect in
+//        .environment(\.goOptions) { menu, rect in
             
-            if let optionGroupVoList =  menu.optionGroupVoList,
-                optionGroupVoList.count > 0 {
-                menuStore.selectMenuItem(menu)
-                showOptions.toggle()
-            } else {
-                //add to shopping car
-                cargoStore.addGood(menu, price: menu.currentPrice)
-            }
+//            if let optionGroupVoList =  menu.optionGroupVoList,
+//                optionGroupVoList.count > 0 {
+//                menuStore.selectMenuItem(menu)
+//                showOptions.toggle()
+//            } else {
+//                //add to shopping car
+//                cargoStore.addGood(menu, price: menu.currentPrice)
+//            }
             
-        }
-        .overlay(
-            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
-            alignment: .center // 定位到底部
-        ).sheet(isPresented: $showTable) {
+//        }
+//        .overlay(
+//            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
+//            alignment: .center // 定位到底部
+//        )
+        .sheet(isPresented: $showTable) {
             SelectTableView()
         }
+
+      
 
     }
     
