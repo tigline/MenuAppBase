@@ -74,9 +74,9 @@ struct GoCategoryKey: EnvironmentKey {
 }
 
 struct GoOptionsKey: EnvironmentKey {
-    static var defaultValue: (UIImage, CGRect) -> Void = {
+    static var defaultValue: (Menu, UIImage, CGRect) -> Void = {
         #if DEBUG
-        print("go to \($0) \($1)'s options view")
+        print("go to \($0) \($1) \($2)'s options view")
         #endif
     }
 }
@@ -110,20 +110,17 @@ extension EnvironmentValues {
         set { self[CargoStoreKey.self] = newValue }
     }
     
-//    var store:Store {
-//        get { self[StoreKey.self] }
-//        set { self[StoreKey.self] = newValue }
-//    }
     
     var theme: (AppTheme) -> Void {
         get { self[themeKey.self] }
         set { self[themeKey.self] = newValue }
     }
     
-    var goOptions: (UIImage,CGRect) -> Void {
+    var goOptions: (Menu, UIImage, CGRect) -> Void {
         get { self[GoOptionsKey.self] }
         set { self[GoOptionsKey.self] = newValue }
     }
+    
     // check if in favorite movie list
     var inWishlist: (Int) -> Bool {
         get { self[InWishlistKey.self] }

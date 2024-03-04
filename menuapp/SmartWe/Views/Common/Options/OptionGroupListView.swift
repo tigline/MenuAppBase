@@ -10,96 +10,110 @@ import SwiftUI
 struct OptionGroupListView: View {
     @Environment(\.menuStore.menuOptionState) var menuOptionState
     @Environment(\.menuStore) var menuStore
-    @Environment(\.cargoStore) var cargoStore
+    @Environment(\.goOptions) var addGood
     @Environment(\.imagePipeline) private var imagePipeline
     @StateObject private var configuration = AppConfiguration.share
     
+
+    @State private var isLandscape:Bool = false
+    var onAddAtion:(MenuOptionState)->Void
+    
+    
     @Binding var isShowing: Bool
     var body: some View {
-        ZStack {
-            // 半透明背景
-            Color.black.opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation {
-                        isShowing = false
-                        
-                    }
-                }
-            HStack(alignment:.top, spacing: 1, content:  {
-                //image area
-                VStack(spacing: 15, content: {
+        GeometryReader { geometry in
 
-                    AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
-                        image
-                            .resizable()
+            ZStack {
+                // 半透明背景
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation {
+                            isShowing = false
+                            
+                        }
+                    }
+                HStack(alignment:.top, spacing: 1, content:  {
+                    //image area
+                    VStack(spacing: 15, content: {
+                        
+                        AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                            image
+                                .resizable()
                             //.aspectRatio(contentMode: .fit)
                             //.scaledToFit()
-                            .clipped()
+                                .clipped()
                             
-                    } placeholder: {
-                        ProgressView()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(maxHeight: .infinity)
+                        .clipCornerRadius(8)
+                        
+                        
+                        HStack(spacing: 15, content: {
+                            
+                            AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                                image
+                                    .resizable()
+                                    .clipped()
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .clipCornerRadius(8)
+                            
+                            AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                                image
+                                    .resizable()
+                                    .clipped()
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .clipCornerRadius(8)
+                            
+                        })
+                        .frame(height: 150)
+                        
+                    })
+                    .padding()
+                    .frame(width: 360)
+                    
+                    //option area
+                    ZStack(alignment: .topTrailing) {
+                        VStack(alignment: .leading, spacing: 20, content: {
+                            Text(menuOptionState?.mainTitle ?? "")
+                                .font(CustomFonts.optionTitle1Font)
+                                .foregroundStyle(.black)
+                            Text(menuOptionState?.subTitle ?? "")
+                                .font(CustomFonts.optionDetailFont)
+                                .foregroundStyle(AppTheme.Colors.optionDetailColor)
+                            optionView
+                        })
+                        closeButton
+                        
                     }
-                    .frame(maxHeight: .infinity)
-                    .clipCornerRadius(8)
-                    
-                    
-                    HStack(spacing: 15, content: {
-                        
-                        AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
-                            image
-                                .resizable()
-                                .clipped()
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .clipCornerRadius(8)
-                        
-                        AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
-                            image
-                                .resizable()
-                                .clipped()
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .clipCornerRadius(8)
-
-                    })
-                    .frame(height: 150)
-                    
+                    .padding()
                 })
-                .padding()
-                .frame(width: 360)
-                
-                //option area
-                ZStack(alignment: .topTrailing) {
-                    VStack(alignment: .leading, spacing: 20, content: {
-                        Text(menuOptionState?.mainTitle ?? "")
-                            .font(CustomFonts.optionTitle1Font)
-                            .foregroundStyle(.black)
-                        Text(menuOptionState?.subTitle ?? "")
-                            .font(CustomFonts.optionDetailFont)
-                            .foregroundStyle(AppTheme.Colors.optionDetailColor)
-                        optionView
-                    })
-                    closeButton
-                    
-                }
-                .padding()
-                
-            })
-            .frame(height: 540)
-            .background(.white)
-            .clipCornerRadius(10)
-            .padding(.horizontal,60)
+                .frame(height: 540)
+                .background(.white)
+                .clipCornerRadius(10)
+                .padding(.leading, isLandscape ? 260:60)
+                .padding(.trailing, 60)
+            }
+            .environment(\.inOptionlist) {
+                menuStore.inOptionlist($0, $1)
+            }
+            .environment(\.updateOptionlist) {code,groud in
+                menuStore.updateSelectOption(code, groud)
+            }
+            .onAppear {
+                isLandscape = geometry.size.width > geometry.size.height
+            }
+            .onChange(of: geometry.size.width, initial: false) { oldWidth, newWidth in
+                isLandscape = newWidth > geometry.size.height
+            }
+            
         }
-        .environment(\.inOptionlist) {
-            menuStore.inOptionlist($0, $1)
-        }
-        .environment(\.updateOptionlist) {code,groud in
-            menuStore.updateSelectOption(code, groud)
-        }
-        
         
     }
     
@@ -136,12 +150,11 @@ struct OptionGroupListView: View {
                     guard let menuOptionState = menuStore.menuOptionState else {
                         return
                     }
-                    cargoStore.addGood(menuOptionState.optionGoodInfo.0,
-                                       price: menuOptionState.optionGoodInfo.1,
-                                       options: menuOptionState.optionGoodInfo.2)
                     
                     withAnimation {
                         isShowing = false
+                    } completion: {
+                        onAddAtion(menuOptionState)
                     }
                 }) {
                     Text("確認する")

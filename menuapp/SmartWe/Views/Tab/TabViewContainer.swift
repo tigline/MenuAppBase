@@ -9,16 +9,17 @@ struct SideBarContainer: View {
     @StateObject private var configuration = AppConfiguration.share
 
     @Environment(\.menuStore) var menuStore
+    @Environment(\.cargoStore) var cargoStore
     
     @State var isLoading = false
-    //@State var selectionBar:String?
     @State var showTable = false
     
-    @State private var carGoAnimation:Bool = false
+    @State private var carGoAnimation = false
+    @State private var showAddAnimation = false
+    @State private var showOptions = false
     @State private var selectItem:UIImage?
     @State private var animationItemFrame = CGRect.zero
-    @State private var cartIconFrame = CGRect(x: 500, y: 50, width: 200, height: 54)
-    @State private var cornerRadius: CGFloat = 0
+
     
     var theme:AppTheme {
         configuration.colorScheme
@@ -60,40 +61,69 @@ struct SideBarContainer: View {
             .sheet(isPresented: $showTable) {
                 SelectTableView()
             }
-            .environment(\.goOptions) { menu, rect in
-                animationItemFrame = rect
-                selectItem = menu
-            }
             
             
         }
+        .environment(\.goOptions) { menu, image, rect in
+            animationItemFrame = rect
+            selectItem = image
+            
+            if let optionGroupVoList =  menu.optionGroupVoList,
+                optionGroupVoList.count > 0 {
+                menuStore.selectMenuItem(menu)
+                showOptions.toggle()
+            } else {
+                //add to shopping car
+                cargoStore.addGood(menu, price: menu.currentPrice)
+                showAddAnimation.toggle()
+            }
+            
+        }
+        .environment(\.addGood) { menu, price, options  in
+            
+            cargoStore.addGood(menu,
+                               price: price,
+                               options: options)
+            showAddAnimation.toggle()
+        }
+        .overlay(
+            showOptions ? OptionGroupListView(onAddAtion: { state in
+                cargoStore.addGood(state.optionGoodInfo.0,
+                                   price: state.optionGoodInfo.1,
+                                   options: state.optionGoodInfo.2)
+                showAddAnimation.toggle()
+            }, isShowing: $showOptions) : nil,
+            
+            alignment: .center // 定位到底部
+        )
         .overlay {
-            if let animatedItem = selectItem {
+            if showAddAnimation {
+                if let animatedItem = selectItem  {
                     GeometryReader { geometry in
                         
                         let originX = animationItemFrame.midX - geometry.frame(in: .global).minX
                         let originY = animationItemFrame.midY - geometry.frame(in: .global).minY
                         let image = Image(uiImage: animatedItem)
                             .clipShape(.circle)
-                            .scaleEffect(0.2)
+                            .scaleEffect(carGoAnimation ? 0.1:1)
                             
                         image
-                                .position(x: originX,
-                                          y: originY)
-                                .offset(x: carGoAnimation ? (600 - originX):0, y: carGoAnimation ? (50-originY):0)
-                                
-                                .onAppear {
-                                    withAnimation {
-                                        carGoAnimation.toggle()
-                                        
-                                    } completion: {
-                                        carGoAnimation.toggle()
-                                        selectItem = nil
-                                    }
+                            .position(x: originX,
+                                      y: originY)
+                            .offset(x: carGoAnimation ? (menuStore.cartIconGlobalFrame.midX - originX):0, y: carGoAnimation ? (menuStore.cartIconGlobalFrame.minY-originY):0)
+                            
+                            .onAppear {
+                                withAnimation(.easeInOut) {
+                                    carGoAnimation.toggle()
+                                    
+                                } completion: {
+                                    carGoAnimation.toggle()
+                                    showAddAnimation.toggle()
+                                    selectItem = nil
                                 }
+                            }
+                        }
                     }
-                    
-                    
                 }
         }
         

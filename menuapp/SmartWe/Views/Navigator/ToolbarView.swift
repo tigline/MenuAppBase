@@ -56,15 +56,14 @@ struct ToolbarView: View {
                 appRouter.updateRouter(.cart)
                 
             }
-//            .background(
-//                GeometryReader { geometry in
-//                    Color.clear
-//                        .onAppear {
-//                            menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
-//                            print("買い物かご Frame : \(geometry.frame(in: .global))")
-//                        }
-//                }
-//            )
+            .background(
+                GeometryReader { geometry in
+                    Color.clear
+                        .task {
+                            menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
+                        }
+                }
+            )
             
             Spacer()
             Button(LocalizedStringKey("setting_theme")){

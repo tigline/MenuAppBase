@@ -11,16 +11,14 @@ import TMDb
 import UIKit
 
 public struct MenuItem: View {
-     let item: Menu
-//     let category: Category?
-//     let genreID: Genre.ID?
+    let item: Menu
     let displayType: DisplayType = .portrait(.middle)
     @Environment(\.goOptions) var goOptions
-    @State private var isPressed: Bool = false
+    @Environment(\.addGood) var addGood
     @State var geomeFrame: CGRect = .zero
-    @State var animation: Bool = false
+    
     @StateObject private var configuration = AppConfiguration.share
-    @State private var snapshotImage: UIImage? = nil
+    
     var theme:AppTheme {
         configuration.colorScheme
     }
@@ -28,22 +26,6 @@ public struct MenuItem: View {
     private var showBookMark: Bool {
         configuration.showBookMarkInPoster
     }
-
-//    init(
-//        item: Menu?,
-//        category: Category? = nil,
-//        genreID: Genre.ID? = nil,
-//        displayType: DisplayType,
-//        namespace: Namespace.ID,
-//        menu: Menu
-//    ) {
-//        self.item = item
-//        self.category = category
-//        self.genreID = genreID
-//        self.displayType = displayType
-//        self.namespace = namespace
-//        self.selectedItem = menu
-//    }
 
     private var layout: AnyLayout {
         switch displayType {
@@ -67,8 +49,9 @@ public struct MenuItem: View {
             
             itemView
                 .onTapGesture {
-                    isPressed.toggle()
-                    //goOptions(item, geomeFrame)
+                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                        goOptions(item ,snapshotView(animateView), geomeFrame)
+                    }
                 }
 
                 .background(
@@ -76,35 +59,33 @@ public struct MenuItem: View {
                         let renderSize = geometry.frame(in: .global)
                         Color.clear
                             .task(id: renderSize) {
-                                geomeFrame = geometry.frame(in: .global)
+                                geomeFrame = geometry.frame(in: .global) //获取自身Frame
                             }
                     }
                 )
             
-            if isPressed {
-                animateView
-                    .frame(width: geomeFrame.width, height: geomeFrame.height)
-                    .clipShape(Circle())
-                    .scaleEffect(animation ? 0.2:1)
-                    .onAppear {
-                        withAnimation {
-                            animation.toggle()
-                        } completion: {
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                
-                                goOptions(snapshotView(animateView), geomeFrame)
-                                
-                            }
-                            
-                            isPressed.toggle()
-                            animation.toggle()
-                            
-                        }
-
-                    }
-            }
-            
-            
+//            if isPressed {
+//                animateView
+//                    .frame(width: geomeFrame.width, height: geomeFrame.height)
+//                    .clipShape(Circle())
+//                    .scaleEffect(animation ? 0.1:1)
+//                    .onAppear {
+//                        withAnimation(.easeInOut) {
+//                            animation.toggle()
+//                        } completion: {
+//                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+//                                
+//                                goOptions(snapshotView(animateView), geomeFrame)
+//                                
+//                            }
+//                            
+//                            isPressed.toggle()
+//                            animation.toggle()
+//                            
+//                        }
+//
+//                    }
+//            }
         }
        
     }
