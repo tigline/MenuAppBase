@@ -80,6 +80,31 @@ struct CustomFonts {
 }
 
 extension AppTheme {
+    
+    var orderListIcon: String {
+        switch self {
+        
+        case .orange:
+            return "button_list_black"
+        case .dark:
+            return "button_list_white"
+        case .brown:
+            return "button_list_black"
+        }
+    }
+    
+    var shoppingCarIcon: String {
+        switch self {
+        
+        case .orange:
+            return "button_shopping_car_black"
+        case .dark:
+            return "button_shopping_car_white"
+        case .brown:
+            return "button_shopping_car_black"
+        }
+    }
+    
     var themeColor:ThemeColors {
         switch self {
         case .orange:

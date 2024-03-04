@@ -39,7 +39,7 @@ struct ToolbarView: View {
                 
             }
         
-            OrderButton(icon: "button_list_white",
+            OrderButton(icon: theme.orderListIcon,
                         text: "注文履歴",
                         bgColor: theme.themeColor.toolBarBtBg,
                         textColor: theme.themeColor.toolBarTextBgOff) {
@@ -48,7 +48,7 @@ struct ToolbarView: View {
             }
             
             
-            CartButton(icon: "button_shopping_car_white",
+            CartButton(icon: theme.shoppingCarIcon,
                         text: "買い物かご",
                         bgColor: menuStore.catagory == "買い物かご" ? theme.themeColor.sideBarBtBg : theme.themeColor.toolBarBtBg,
                         textColor: theme.themeColor.toolBarTextBgOff) {
