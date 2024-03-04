@@ -79,13 +79,6 @@ struct SideBarContainer: View {
             }
             
         }
-        .environment(\.addGood) { menu, price, options  in
-            
-            cargoStore.addGood(menu,
-                               price: price,
-                               options: options)
-            showAddAnimation.toggle()
-        }
         .overlay(
             showOptions ? OptionGroupListView(onAddAtion: { state in
                 cargoStore.addGood(state.optionGoodInfo.0,

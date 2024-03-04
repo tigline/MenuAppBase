@@ -14,7 +14,6 @@ public struct MenuItem: View {
     let item: Menu
     let displayType: DisplayType = .portrait(.middle)
     @Environment(\.goOptions) var goOptions
-    @Environment(\.addGood) var addGood
     @State var geomeFrame: CGRect = .zero
     
     @StateObject private var configuration = AppConfiguration.share

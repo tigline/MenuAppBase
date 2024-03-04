@@ -23,15 +23,15 @@ struct Order: Codable, Hashable {
     let language:String
     let machineCode:String
     let orderLineList:[OrderLineList]
-    let orderType:Int
-    let tableNo:String
-    let tableout:Bool
+    var orderType:Int?
+    var tableNo:String?
+    var tableout:Bool?
     let total:Int
     
 }
 struct OrderLineList: Codable, Hashable {
-    let lineId:String
+    var lineId:String?
     let menuCode:String
-    let optioneList:[String]
+    var optioneList:[String]?
     let qty:Int
 }

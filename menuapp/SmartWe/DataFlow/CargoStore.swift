@@ -84,10 +84,14 @@ class CargoStore {
         showOrderAnimate = true
         
         let orderLineList = shoppingCart.map { item in
-            OrderLineList(lineId: "10101010",
-                          menuCode: machineCode,
-                          optioneList: [],
-                          qty: 0)
+            if item.options != nil {
+                OrderLineList(menuCode: machineCode,
+                              qty: Int(item.quantity))
+            } else {
+                OrderLineList(menuCode: machineCode,
+                              optioneList: item.options?.split(separator: ",").map { String($0) },
+                              qty: Int(item.quantity))
+            }
         }
         
         let order = Order(language: language,
