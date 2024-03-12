@@ -125,6 +125,7 @@
 		BE27EBEC2B7C51490024DB77 /* MenuStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBEB2B7C51490024DB77 /* MenuStore.swift */; };
 		BE27EBEE2B7C519E0024DB77 /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBED2B7C519E0024DB77 /* OrderStore.swift */; };
 		BE27EBF02B7C9C0F0024DB77 /* CargoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBEF2B7C9C0F0024DB77 /* CargoStore.swift */; };
+		BE2A3D912B9EFE29004FF513 /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A3D902B9EFE29004FF513 /* OrderDetail.swift */; };
 		BE2A84422B7EF1C0007D11CB /* ShoppingCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */; };
 		BE2A84442B7F29B0007D11CB /* CargoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84432B7F29B0007D11CB /* CargoCellView.swift */; };
 		BE2A84462B7F4B7A007D11CB /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */; };
@@ -254,6 +255,7 @@
 		BE27EBEB2B7C51490024DB77 /* MenuStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuStore.swift; sourceTree = "<group>"; };
 		BE27EBED2B7C519E0024DB77 /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
 		BE27EBEF2B7C9C0F0024DB77 /* CargoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoStore.swift; sourceTree = "<group>"; };
+		BE2A3D902B9EFE29004FF513 /* OrderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetail.swift; sourceTree = "<group>"; };
 		BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCarView.swift; sourceTree = "<group>"; };
 		BE2A84432B7F29B0007D11CB /* CargoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoCellView.swift; sourceTree = "<group>"; };
 		BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 				769F247929CEFA7700C550B8 /* SettingCategory.swift */,
 				769F248929CF10E700C550B8 /* AppLanguage.swift */,
 				BE0C69152B71CA3500312FE1 /* MenuItem.swift */,
+				BE2A3D902B9EFE29004FF513 /* OrderDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				BE27EBE32B75F43D0024DB77 /* ThemePopverMenu.swift in Sources */,
 				769002A629C67ACB00620A3C /* Model.xcdatamodeld in Sources */,
 				769F247E29CF001C00C550B8 /* SettingHome.swift in Sources */,
+				BE2A3D912B9EFE29004FF513 /* OrderDetail.swift in Sources */,
 				BE2A84462B7F4B7A007D11CB /* SwiftUIView.swift in Sources */,
 				769002B229C6DF6B00620A3C /* Category.swift in Sources */,
 				7652A73E29CD52E9000D7A4A /* FetchRequest.swift in Sources */,

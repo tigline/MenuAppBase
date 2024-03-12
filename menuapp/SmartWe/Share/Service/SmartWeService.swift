@@ -22,6 +22,8 @@ protocol SmartWeService {
     func bindTableNo(_ shopCode:String, _ tableNo:String) async throws -> Response<TableInfo>
     
     func checkOrder(_ shopCode:String, _ orderKey:String) async throws -> Response<String>
+    
+    func orderDetail(_ machineCode:String) async throws -> Response<String>
 }
 
 

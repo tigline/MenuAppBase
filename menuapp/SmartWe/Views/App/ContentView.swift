@@ -33,6 +33,7 @@ struct ContentView: View {
         }, message: {
             Text(errorWrapper?.guidance ?? "")
         })
+        
         .syncCoreData() // 同步 booking list 数据
         .preferredColorScheme(.light)
         .environment(\.locale, appConfiguration.appLanguage.locale)

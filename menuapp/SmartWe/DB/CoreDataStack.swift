@@ -186,15 +186,23 @@ extension CoreDataStack {
             fetchRequest.predicate = NSPredicate(format: "tableNo = %@", tableNumber)
 
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            deleteRequest.resultType = .resultTypeCount // 如果需要知道删除了多少行
+            deleteRequest.resultType = .resultTypeObjectIDs // 如果需要知道删除了多少行
 
             do {
                 let result = try context.execute(deleteRequest) as? NSBatchDeleteResult
-                if let count = result?.result as? Int {
-                    print("Deleted \(count) records.")
-                }
-                // 重要：通知context变化
-                context.reset()
+//                if let count = result?.result as? Int {
+//                    print("Deleted \(count) records.")
+//                }
+//                context.reset()
+                
+                let objs = result?.result as? [NSManagedObjectID] ?? []
+                        // Create a change dictionary. Create different key-value pairs based on the type of data change. Insert: NSInsertedObjectIDsKey, Update: NSUpdatedObjectIDsKey, Delete: NSDeletedObjectIDsKey.
+                let changes: [AnyHashable: Any] = [NSDeletedObjectsKey: objs]
+                // Merge changes
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.container.viewContext])
+                
+                
+                //NotificationCenter.default.post(name: .NSManagedObjectContextDidSave, object: context)
             } catch let error as NSError {
                 print("Could not batch delete: \(error), \(error.userInfo)")
             }

@@ -77,19 +77,20 @@ class CargoStore {
                         language:String,
                         machineCode:String,
                         orderType:Int = 0,
-                        tableNo:String = "08",
+                        tableNo:String,
                         takeout:Bool = false,
-                        errorHandle:(Error)->Void
+                        totalPrice:String,
+                        errorHandle:(Error?)->Void
     ) async {
         showOrderAnimate = true
         
         let orderLineList = shoppingCart.map { item in
-            if item.options != nil {
-                OrderLineList(menuCode: machineCode,
+            if item.options == nil {
+                OrderLineList(menuCode: item.menuCode ?? "",
                               qty: Int(item.quantity))
             } else {
-                OrderLineList(menuCode: machineCode,
-                              optioneList: item.options?.split(separator: ",").map { String($0) },
+                OrderLineList(menuCode: item.menuCode ?? "",
+                              optionList: item.options?.split(separator: ",").map { String($0) },
                               qty: Int(item.quantity))
             }
         }
@@ -99,18 +100,26 @@ class CargoStore {
                           orderLineList: orderLineList,
                           orderType: orderType,
                           tableNo: tableNo,
-                          tableout: takeout,
-                          total: shoppingCart.count)
+                          takeout: takeout,
+                          total: totalPrice
+        )
         
         
         do {
-            let bodyData = try JSONEncoder().encode(order)
-            let result = try await appService.sendOrder(bodyData)
+            
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted // Optional: Make the output easier to read
+            let jsonData = try encoder.encode(order)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print(jsonString)
+            }
+            
+            let result = try await appService.sendOrder(jsonData)
             showOrderAnimate = false
             if result.code == 200 {
-                //shoppingCart.removeAll()
                 try coreDataStack.batchDeleteDataWithTableNumber(tableNo)
             }
+            errorHandle(nil)
         } catch {
             showOrderAnimate = false
             print("Error encoding or send order: \(error)")

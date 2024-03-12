@@ -42,6 +42,7 @@ enum SmartWePostEndpoint {
     case category(shopCode: String, machineCode: String)
     case menu(shopCode: String, language: String)
     case order(_ body:Data)
+    case orderDetail(machineCode: String)
     case bindTable(shopCode: String, tableNo:String)
     case checkOrder(shopCode: String, orderKey:String)
 }
@@ -79,6 +80,8 @@ extension SmartWePostEndpoint: SWPostEndpoint {
             return Self.basePath.appendingPathComponent("table/list")
         case .checkOrder(_, _):
             return Self.basePath.appendingPathComponent("check")
+        case .orderDetail(_):
+            return Self.basePath.appendingPathComponent("order/detail")
         }
     }
     
@@ -101,6 +104,8 @@ extension SmartWePostEndpoint: SWPostEndpoint {
         case .checkOrder(shopCode: let shopCode, orderKey: let orderKey):
             return ["shopCode":shopCode,
                     "orderKey":orderKey].toJSONData() ?? Data()
+        case .orderDetail(machineCode: let machineCode):
+            return ["machineCode":machineCode].toJSONData() ?? Data()
         }
     }
 }

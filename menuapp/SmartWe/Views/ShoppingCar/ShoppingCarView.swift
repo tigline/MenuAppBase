@@ -15,19 +15,12 @@ struct ShoppingCarView: View {
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
     @State private var showTable:Bool = false
+    @State private var showSuccess:Bool = false
     
     var theme:AppTheme {
         configuration.colorScheme
     }
     
-//    var showLoading:Binding<Bool> {
-//        Binding<Bool> {
-//            cargoStore.showOrderAnimate
-//        } set: { value, _ in
-//            cargoStore.toggleAnimate(value)
-//        }
-//
-//    }
     
     var isNoTableNo:Bool {
         configuration.tableNo == nil || configuration.tableNo == ""
@@ -40,21 +33,20 @@ struct ShoppingCarView: View {
         return "\(count)"
     }
     
-    var subTotle:String {
-        allTotle
+    var subTotal:String {
+        allTotal
     }
     
-    var allTotle:String {
+    var allTotal:String {
         let all = shoppingCart.reduce(0) { count, item in
             count + item.price * Double(item.quantity)
         }
         return "\(Int(all))"
     }
     
-    
     var body: some View {
         
-        if shoppingCart.isEmpty {
+        if shoppingCart.isEmpty && !showSuccess {
             VStack {
                 ContentUnavailableView("ご注文ください", systemImage: "exclamationmark.circle")
             }
@@ -106,6 +98,14 @@ struct ShoppingCarView: View {
             .sheet(isPresented: $showTable) {
                 SelectTableView()
             }
+            .alert("ご注文あれがどうございました", isPresented: $showSuccess) {
+                Button {
+                    showSuccess = false
+                } label: {
+                    Text("確認")
+                }
+
+            }
         }
             
     }
@@ -146,13 +146,20 @@ struct ShoppingCarView: View {
                 Button("発信") {
                     
                     Task {
-                        
+                        print("sendCarToOrder start")
                         await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
                                                         language: configuration.menuLaguage ?? "en",
                                                         machineCode: configuration.machineCode ?? "",
+                                                        tableNo: configuration.tableNo ?? "",
+                                                        totalPrice: allTotal,
                                                         errorHandle: { error in
-                            showError(error, "Please try again")
+                            if let getError = error {
+                                showError(error!, "Please try again")
+                            } else {
+                                showSuccess.toggle()
+                            }
                         })
+                        
                     }
                 }
                 .foregroundStyle(.white)
@@ -187,7 +194,7 @@ struct ShoppingCarView: View {
                 .font(CustomFonts.cargoCountFont)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
-            Text(subTotle)
+            Text(allTotal)
                 .frame(alignment: .trailing)
                 .font(CustomFonts.cargoCountFont)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
@@ -202,7 +209,7 @@ struct ShoppingCarView: View {
                 .frame(alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
-            Text(allTotle)
+            Text(allTotal)
                 .font(CustomFonts.cargoTotalPriceFont)
                 .frame(alignment: .trailing)
                 .foregroundStyle(theme.themeColor.cargoTextColor)

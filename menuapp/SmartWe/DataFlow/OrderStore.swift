@@ -17,6 +17,8 @@ class OrderStore {
         self.service = service
     }
     
+    
+    
 }
 
 struct Order: Codable, Hashable {
@@ -25,13 +27,13 @@ struct Order: Codable, Hashable {
     let orderLineList:[OrderLineList]
     var orderType:Int?
     var tableNo:String?
-    var tableout:Bool?
-    let total:Int
+    var takeout:Bool?
+    let total:String
     
 }
 struct OrderLineList: Codable, Hashable {
     var lineId:String?
     let menuCode:String
-    var optioneList:[String]?
+    var optionList:[String]?
     let qty:Int
 }
