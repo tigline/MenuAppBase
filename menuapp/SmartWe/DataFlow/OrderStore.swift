@@ -13,11 +13,32 @@ class OrderStore {
     var orderList:[Order] = []
     var currentOrder:Order?
     
+    var currentError:String?
+    
     init(service:AppService) {
         self.service = service
     }
     
-    
+    func orderList(machineCode:String, handleError:(String?)->Void) async {
+        
+        do {
+            let result = try await service.orderDetail(machineCode)
+            if result.code == 200 {
+                
+                
+                handleError(nil)
+            } else {
+                handleError("Load Failied")
+            }
+            
+        } catch {
+            currentError = error.localizedDescription
+            print("Error encoding or send order: \(error)")
+            handleError(error.localizedDescription)
+        }
+
+         
+    }
     
 }
 

@@ -117,6 +117,10 @@
 		BE0C692D2B7340BB00312FE1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692C2B7340BB00312FE1 /* LoginView.swift */; };
 		BE0C692F2B73528600312FE1 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C692E2B73528600312FE1 /* ScanView.swift */; };
 		BE0C69312B7353CA00312FE1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0C69302B7353CA00312FE1 /* ScanViewController.swift */; };
+		BE1C2AD12BA2E99E00DEB7E6 /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C2AD02BA2E99E00DEB7E6 /* APIResource.swift */; };
+		BE1C2AD32BA2EB2F00DEB7E6 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C2AD22BA2EB2F00DEB7E6 /* APIRequest.swift */; };
+		BE1C2AD52BA2EB6D00DEB7E6 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C2AD42BA2EB6D00DEB7E6 /* NetworkRequest.swift */; };
+		BE1C2AD72BA2EE1E00DEB7E6 /* MenuResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C2AD62BA2EE1E00DEB7E6 /* MenuResource.swift */; };
 		BE25B0602B86E6BD00B896EA /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25B05F2B86E6BD00B896EA /* OrderView.swift */; };
 		BE27EBE32B75F43D0024DB77 /* ThemePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */; };
 		BE27EBE62B7B308D0024DB77 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE27EBE52B7B308D0024DB77 /* OptionButton.swift */; };
@@ -247,6 +251,10 @@
 		BE0C692C2B7340BB00312FE1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BE0C692E2B73528600312FE1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		BE0C69302B7353CA00312FE1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		BE1C2AD02BA2E99E00DEB7E6 /* APIResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResource.swift; sourceTree = "<group>"; };
+		BE1C2AD22BA2EB2F00DEB7E6 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		BE1C2AD42BA2EB6D00DEB7E6 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		BE1C2AD62BA2EE1E00DEB7E6 /* MenuResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuResource.swift; sourceTree = "<group>"; };
 		BE25B05F2B86E6BD00B896EA /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopverMenu.swift; sourceTree = "<group>"; };
 		BE27EBE52B7B308D0024DB77 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
@@ -687,6 +695,9 @@
 				BE0C69202B71EEF500312FE1 /* URL+QueryItem.swift */,
 				BE0C69252B72117500312FE1 /* Response.swift */,
 				935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */,
+				BE1C2AD02BA2E99E00DEB7E6 /* APIResource.swift */,
+				BE1C2AD22BA2EB2F00DEB7E6 /* APIRequest.swift */,
+				BE1C2AD42BA2EB6D00DEB7E6 /* NetworkRequest.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -696,6 +707,7 @@
 			children = (
 				BE0C69232B720F2200312FE1 /* SmartWeService.swift */,
 				BE0C69272B72206100312FE1 /* AppService.swift */,
+				BE1C2AD62BA2EE1E00DEB7E6 /* MenuResource.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -835,6 +847,7 @@
 				76AC258529C2E23A007874DA /* ContentView.swift in Sources */,
 				BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */,
 				76AC25B429C2E37C007874DA /* MovieShortInfo.swift in Sources */,
+				BE1C2AD12BA2E99E00DEB7E6 /* APIResource.swift in Sources */,
 				76AC25B229C2E37C007874DA /* BookMarkButton.swift in Sources */,
 				762FCA8629CC718300030A57 /* Binding.swift in Sources */,
 				76751E4D29C541D70013BBDF /* Reducer.swift in Sources */,
@@ -865,6 +878,7 @@
 				76751E6929C5922D0013BBDF /* Assets.swift in Sources */,
 				76AC25CB29C2EB06007874DA /* TMDBEnviromentKey.swift in Sources */,
 				769AB0A429D17C6E008451E6 /* MovieSpecific.swift in Sources */,
+				BE1C2AD32BA2EB2F00DEB7E6 /* APIRequest.swift in Sources */,
 				769002B029C6DB9900620A3C /* Array.swift in Sources */,
 				BE27EBEA2B7B631E0024DB77 /* OptionGroupListView.swift in Sources */,
 				76A0D34F29C9727A002C3286 /* Genre_SortBy.swift in Sources */,
@@ -898,6 +912,7 @@
 				769002B229C6DF6B00620A3C /* Category.swift in Sources */,
 				7652A73E29CD52E9000D7A4A /* FetchRequest.swift in Sources */,
 				769AB0BA29D1CAC1008451E6 /* MenuBar.swift in Sources */,
+				BE1C2AD72BA2EE1E00DEB7E6 /* MenuResource.swift in Sources */,
 				BE573E382B8C4D4C00226D3A /* SideBar.swift in Sources */,
 				769AB09629D1407B008451E6 /* GenreList.swift in Sources */,
 				BE573E3A2B8C4D8F00226D3A /* AppRouter.swift in Sources */,
@@ -907,6 +922,7 @@
 				769AB0AC29D19DAE008451E6 /* URL.swift in Sources */,
 				7652A73929CD3E99000D7A4A /* ErrorHandler.swift in Sources */,
 				76AC25FF29C3F4D0007874DA /* MovieGenre.swift in Sources */,
+				BE1C2AD52BA2EB6D00DEB7E6 /* NetworkRequest.swift in Sources */,
 				7652A74429CD6EA5000D7A4A /* MovieGalleryContainer.swift in Sources */,
 				769F248429CF003D00C550B8 /* SettingGenres.swift in Sources */,
 				7652A74229CD6C0E000D7A4A /* MovieExtension.swift in Sources */,

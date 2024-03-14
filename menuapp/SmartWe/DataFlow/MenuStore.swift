@@ -90,15 +90,17 @@ class MenuStore {
         return menuOptionState?.selectOptions.contains(where: {$0.groupCode == group && $0.optionCode == code}) ?? false
     }
     
-    func callWaiter(_ machineCode:String, _ tableNo:String) async {
+    func callWaiter(_ machineCode:String, _ tableNo:String, _ handleResult:(String)->Void) async {
         
         do {
             let result = try await appService.callWaiter(machineCode, tableNo)
             if result.data {
                 print("call waiter success")
+                handleResult("call waiter success")
             }
         } catch {
-            print("callWaiter \(error)")
+            print("callWaiter \(error.localizedDescription)")
+            handleResult("callWaiter \(error.localizedDescription)")
             
         }
     }

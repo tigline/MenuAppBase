@@ -8,7 +8,13 @@
 import SwiftUI
 
 
+
 struct OrderView: View {
+    
+    @Environment(\.orderStore) var orderStore
+    @Environment(\.showError) var showError
+    @StateObject private var configuration = AppConfiguration.share
+    
     var body: some View {
         VStack {
             Text("Empty")

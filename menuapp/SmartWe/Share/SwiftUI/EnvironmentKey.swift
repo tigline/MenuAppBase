@@ -17,6 +17,11 @@ struct CargoStoreKey: EnvironmentKey {
     static var defaultValue = CargoStore(appService: AppService.appDefault)
 }
 
+struct OrderStoreKey: EnvironmentKey {
+    
+    static var defaultValue = OrderStore(service: AppService.appDefault)
+}
+
 struct InWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Bool = { _ in true }
 }
@@ -108,6 +113,11 @@ extension EnvironmentValues {
     var cargoStore:CargoStore {
         get { self[CargoStoreKey.self] }
         set { self[CargoStoreKey.self] = newValue }
+    }
+    
+    var orderStore:OrderStore {
+        get { self[OrderStoreKey.self] }
+        set { self[OrderStoreKey.self] = newValue }
     }
     
     

@@ -90,7 +90,7 @@ extension SmartWeClient {
 
 }
 
-private extension SmartWeError {
+extension SmartWeError {
 
     init?(response: URLResponse) {
         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1

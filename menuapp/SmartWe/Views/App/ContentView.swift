@@ -10,6 +10,8 @@ struct ContentView: View {
     @Environment(\.store) var store
     @StateObject private var appConfiguration = AppConfiguration.share
     @State private var errorWrapper: ErrorWrapper?
+    @State private var alertWrapper: AlertWrapper?
+    @State private var isPresentAlert:Bool = false
     @State private var isPresentError:Bool = false
 
     var body: some View {
@@ -32,6 +34,19 @@ struct ContentView: View {
             }
         }, message: {
             Text(errorWrapper?.guidance ?? "")
+        })
+        .environment(\.showAlert) { title, content in
+            alertWrapper = AlertWrapper(title: title, content: content)
+            isPresentAlert = true
+        }
+        .alert(alertWrapper?.title ?? "",
+               
+               isPresented: $isPresentAlert, actions: {
+            Button("Ok") {
+                isPresentAlert = false
+            }
+        }, message: {
+            Text(alertWrapper?.content ?? "")
         })
         
         .syncCoreData() // 同步 booking list 数据

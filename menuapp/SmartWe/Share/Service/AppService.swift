@@ -9,6 +9,8 @@ import Foundation
 
 
 class AppService: SmartWeService {
+    
+    
 
     private let apisClient: APISClient
 
@@ -21,7 +23,7 @@ class AppService: SmartWeService {
     }
     
     func menuItemList(shopCode: String, language: String) async throws -> Response<ShopMenuInfo> {
-        return try await apisClient.post(point: SmartWePostEndpoint.menu(shopCode: shopCode, language: language))
+        return try await APIRequest(resource: MenuResource(shopCode: shopCode, machineCode: language)).execute()
     }
     
     func sendOrder(_ body: Data) async throws -> Response<Bool> {
@@ -38,5 +40,9 @@ class AppService: SmartWeService {
     
     func checkOrder(_ shopCode: String, _ orderKey: String) async throws -> Response<String> {
         return try await apisClient.post(point: SmartWePostEndpoint.checkOrder(shopCode: shopCode, orderKey: orderKey))
+    }
+    
+    func orderDetail(_ machineCode: String) async throws -> Response<String> {
+        return try await apisClient.post(point: SmartWePostEndpoint.orderDetail(machineCode: machineCode))
     }
 }

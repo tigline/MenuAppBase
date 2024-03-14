@@ -23,3 +23,20 @@ extension EnvironmentValues {
         set { self[ShowErrorEnvironmentKey.self] = newValue }
     }
 }
+
+struct AlertWrapper: Identifiable {
+    let id = UUID()
+    let title: String
+    let content: String?
+}
+
+struct ShowAlertEnvironmentKey: EnvironmentKey {
+    static var defaultValue: (String, String?) -> Void = { _, _ in }
+}
+
+extension EnvironmentValues {
+    var showAlert: (String, String?) -> Void {
+        get { self[ShowAlertEnvironmentKey.self] }
+        set { self[ShowAlertEnvironmentKey.self] = newValue }
+    }
+}

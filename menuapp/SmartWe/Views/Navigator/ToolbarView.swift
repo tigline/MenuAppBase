@@ -15,6 +15,7 @@ struct ToolbarView: View {
     @State var showThemePopover = false
     @Environment(\.menuStore) var menuStore
     @Environment(\.appRouter) var appRouter
+    @Environment(\.showAlert) var showAlert
     @Binding var showTable:Bool
     
     var theme:AppTheme {
@@ -36,6 +37,12 @@ struct ToolbarView: View {
                         text: "オーダボタン",
                         bgColor: theme.themeColor.orderBtBg,
                         textColor: .white) {
+                Task{
+                    await menuStore.callWaiter(configuration.machineCode ?? "", configuration.tableNo ?? "", {
+                        message in
+                        showAlert(message,nil)
+                    })
+                }
                 
             }
         
