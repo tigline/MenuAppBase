@@ -23,14 +23,15 @@ struct CategoryVo: Codable {
     let custOrderDetailsList: [CustOrderDetails]?
 }
 
-struct CustOrderDetails: Codable {
+struct CustOrderDetails: Codable, Identifiable {
+    var id:Int {self.lineId}
     let goodsNum: String?
     let image: String?
-    let lineId: Int?
+    let lineId: Int
     let mainTitle: String?
     let optionVoListMsgList: [[String]]?
     let optionVoListMsgMap: [String: [String]]?
     let orderTime: String?
-    let price: Int?
-    let qty: Int?
+    let price: Int
+    let qty: Int
 }

@@ -71,6 +71,9 @@ class CargoStore {
 //        }
     }
     
+    func cleanShoppingCar(table:String) async throws {
+        try coreDataStack.batchDeleteDataWithTableNumber(table)
+    }
     
     
     func sendCarToOrder(shoppingCart:[CargoItem],
@@ -117,9 +120,11 @@ class CargoStore {
             let result = try await appService.sendOrder(jsonData)
             showOrderAnimate = false
             if result.code == 200 {
-                try coreDataStack.batchDeleteDataWithTableNumber(tableNo)
+                errorHandle(nil)
+            } else {
+                errorHandle(nil)
             }
-            errorHandle(nil)
+            
         } catch {
             showOrderAnimate = false
             print("Error encoding or send order: \(error)")

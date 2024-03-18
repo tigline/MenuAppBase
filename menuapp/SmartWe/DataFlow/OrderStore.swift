@@ -42,19 +42,4 @@ class OrderStore {
     
 }
 
-struct Order: Codable, Hashable {
-    let language:String
-    let machineCode:String
-    let orderLineList:[OrderLineList]
-    var orderType:Int?
-    var tableNo:String?
-    var takeout:Bool?
-    let total:String
-    
-}
-struct OrderLineList: Codable, Hashable {
-    var lineId:String?
-    let menuCode:String
-    var optionList:[String]?
-    let qty:Int
-}
+

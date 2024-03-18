@@ -48,14 +48,22 @@ struct ShoppingCarView: View {
         
         if shoppingCart.isEmpty && !showSuccess {
             VStack {
-                ContentUnavailableView("ご注文ください", systemImage: "exclamationmark.circle")
+                ContentUnavailableView {
+                    Label("", systemImage: "exclamationmark.circle")
+                        .foregroundStyle(theme.themeColor.toolBarTextBgOff)
+                } description: {
+                    Text("ご注文ください")
+                        .foregroundStyle(theme.themeColor.toolBarTextBgOff)
+                        .font(.title2)
+                }
             }
-            .background(.white)
+            .background(theme.themeColor.mainBackground)
+            .padding(20)
         } else {
             VStack(spacing: 0) {
                 ScrollView(.vertical) {
                     LazyVStack(content: {
-                        ForEach(shoppingCart) { item in
+                        ForEach(shoppingCart.reversed()) { item in
                             CargoCellView(item: item, addOrMinus: { action, item in
                                 switch action {
                                 case .add:
@@ -101,6 +109,10 @@ struct ShoppingCarView: View {
             .alert("ご注文あれがどうございました", isPresented: $showSuccess) {
                 Button {
                     showSuccess = false
+                    Task {
+                        try await cargoStore.cleanShoppingCar(table: configuration.tableNo ?? "")
+                    }
+                    
                 } label: {
                     Text("確認")
                 }
@@ -154,7 +166,7 @@ struct ShoppingCarView: View {
                                                         totalPrice: allTotal,
                                                         errorHandle: { error in
                             if let getError = error {
-                                showError(error!, "Please try again")
+                                showError(getError, "Please try again")
                             } else {
                                 showSuccess.toggle()
                             }

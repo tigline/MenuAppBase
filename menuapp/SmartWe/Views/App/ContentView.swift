@@ -23,7 +23,7 @@ struct ContentView: View {
             }
         }
         .environment(\.showError) { error, guidance in
-            errorWrapper = ErrorWrapper(error: error, guidance: guidance)
+            errorWrapper = ErrorWrapper(error: error, guidance: guidance ?? "")
             isPresentError = true
         }
         .alert(errorWrapper?.error.localizedDescription ?? "Error",
