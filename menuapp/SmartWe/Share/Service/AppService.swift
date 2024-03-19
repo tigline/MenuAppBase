@@ -42,7 +42,7 @@ class AppService: SmartWeService {
         return try await apisClient.post(point: SmartWePostEndpoint.checkOrder(shopCode: shopCode, orderKey: orderKey))
     }
     
-    func orderDetail(_ machineCode: String) async throws -> Response<OrderDetail> {
-        return try await apisClient.post(point: SmartWePostEndpoint.orderDetail(machineCode: machineCode))
-    }
+//    func orderDetail(_ machineCode: String) async throws -> Response<OrderDetail> {
+//        return try await apisClient.post(point: SmartWePostEndpoint.orderDetail(machineCode: machineCode))
+//    }
 }

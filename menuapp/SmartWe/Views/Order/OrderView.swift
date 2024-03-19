@@ -24,7 +24,7 @@ struct OrderView: View {
     }
     
     var table:String {
-        return configuration.tableNo ?? ""
+        return configuration.machineCode ?? ""
     }
     
     
@@ -44,6 +44,7 @@ struct OrderView: View {
                     }
                     .background(theme.themeColor.mainBackground)
                 }
+                .padding(20)
                 
                 
             } else {
@@ -97,9 +98,11 @@ struct OrderView: View {
             }
 
         }
-        .padding(20)
         .frame(maxHeight:.infinity)
         .background(theme.themeColor.contentBg)
+//        .overlay {
+//            
+//        }
         
     }
     
@@ -155,11 +158,17 @@ struct OrderView: View {
     var orderButton: some View {
         HStack {
             Spacer()
-            Button("お会計") {
+            
+            Button(action: {
                 Task {
                     print("sendCarToOrder start")
                 }
-            }
+            }, label: {
+                Text("お会計")
+                    .frame(maxWidth: .infinity)
+                    .contentShape(Rectangle())
+            })
+            .buttonStyle(.plain)
             .foregroundStyle(.white)
             .frame(width: 200, height: 50)
             .background(theme.themeColor.orderBtBg)

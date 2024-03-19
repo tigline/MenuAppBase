@@ -53,7 +53,7 @@ struct SettingAppearance: View {
 
 
                     // Theme
-                    Picker("Setting_Language_Label", selection: configuration.$appLanguage) {
+                    Picker("Setting_Language_Label", selection: $configuration.appLanguage) {
                         ForEach(AppLanguage.allCases) { language in
                             Text(language.localizedString)
                                 .tag(language)

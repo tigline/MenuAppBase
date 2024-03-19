@@ -131,7 +131,7 @@ extension CoreDataStack {
                 cargoItem.createTimestamp = .now
                 cargoItem.menuCode = good.menuCode
                 cargoItem.imageUrl = good.image
-                cargoItem.price = good.price
+                cargoItem.price = Double(good.price)
                 cargoItem.tableNo = good.table
                 cargoItem.quantity = Int64(good.quantity)
                 cargoItem.title = good.title

@@ -23,7 +23,7 @@ protocol SmartWeService {
     
     func checkOrder(_ shopCode:String, _ orderKey:String) async throws -> Response<String>
     
-    func orderDetail(_ machineCode:String) async throws -> Response<OrderDetail>
+    //func orderDetail(_ machineCode:String) async throws -> Response<OrderDetail>
 }
 
 

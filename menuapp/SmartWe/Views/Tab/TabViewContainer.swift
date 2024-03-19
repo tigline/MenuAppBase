@@ -39,20 +39,18 @@ struct SideBarContainer: View {
                 StackContainer()
             }
             .environment(\.isLoading, isLoading)
-            .onAppear(perform: {
-                Task {
-                    
-                    isLoading = true
-                    guard let shopCode = configuration.shopCode else {
-                        return
-                    }
-                    guard let language = configuration.menuLaguage else {
-                        return
-                    }
-                    await menuStore.load(shopCode:shopCode, language:language)
-                    isLoading = false
-                }
-            })
+//            .onAppear(perform: {
+//                Task {
+//                    
+//                    isLoading = true
+//                    guard let shopCode = configuration.shopCode else {
+//                        return
+//                    }
+//                    let language = configuration.appLanguage
+//                    await menuStore.load(shopCode:shopCode, language:language.sourceId)
+//                    isLoading = false
+//                }
+//            })
             .onAppear{
                 if configuration.tableNo == nil {
                     showTable = true
@@ -60,6 +58,16 @@ struct SideBarContainer: View {
             }
             .sheet(isPresented: $showTable) {
                 SelectTableView()
+            }
+            .onReceive(configuration.$appLanguage){ lan in
+                Task {
+                    isLoading = true
+                    guard let shopCode = configuration.shopCode else {
+                        return
+                    }
+                    await menuStore.load(shopCode:shopCode, language:lan.sourceId)
+                    isLoading = false
+                }
             }
             
             
@@ -74,18 +82,14 @@ struct SideBarContainer: View {
                 showOptions.toggle()
             } else {
                 //add to shopping car
-                cargoStore.addGood(menu, price: menu.currentPrice)
+                cargoStore.addGood(menu, price: Int(menu.currentPrice))
                 showAddAnimation.toggle()
             }
             
         }
         .overlay(
-            showOptions ? OptionGroupListView(onAddAtion: { state in
-                cargoStore.addGood(state.optionGoodInfo.0,
-                                   price: state.optionGoodInfo.1,
-                                   options: state.optionGoodInfo.2)
-                showAddAnimation.toggle()
-            }, isShowing: $showOptions) : nil,
+            showOptions ? OptionGroupListView(model: OptionGroupListView.Model(menu: menuStore.selectMenuItem!), 
+                                              isShowing: $showOptions) : nil,
             
             alignment: .center // 定位到底部
         )

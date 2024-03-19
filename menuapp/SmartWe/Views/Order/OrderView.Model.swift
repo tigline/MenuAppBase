@@ -18,11 +18,11 @@ extension OrderView {
         
         var allOrderList: [CustOrderDetails] {
             
-            guard let categoryVos = orderInfo?.categoryVos else {
+            guard let categoryVos = orderInfo?.custOrderDetailsList else {
                 return []
             }
             
-            return categoryVos.reversed().flatMap{$0.custOrderDetailsList ?? []}
+            return categoryVos.reversed().compactMap{$0}
         }
         
         var totalQty:String {
@@ -35,7 +35,7 @@ extension OrderView {
         }
         
         var allTax:String {
-            let price = allOrderList.reduce(0){$0 + $1.qty}*10
+            let price = allOrderList.reduce(0){$0 + $1.price}
             return "(\(price/11))"
         }
         
@@ -80,7 +80,7 @@ struct OrderDetailResource:APIResource {
     
     var body: Data? {
         ["shopCode":shopCode,
-        "tableNo":table].toJSONData() ?? Data()
+        "machineCode":table].toJSONData() ?? Data()
     }
     
     let shopCode:String

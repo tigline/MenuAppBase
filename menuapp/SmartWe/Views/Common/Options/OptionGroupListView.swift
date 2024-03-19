@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct OptionGroupListView: View {
-    @Environment(\.menuStore.menuOptionState) var menuOptionState
-    @Environment(\.menuStore) var menuStore
-    @Environment(\.goOptions) var addGood
+    //@Environment(\.menuStore.menuOptionState) var menuOptionState
+    //@Environment(\.menuStore) var menuStore
+    //@Environment(\.goOptions) var addGood
     @Environment(\.imagePipeline) private var imagePipeline
     @StateObject private var configuration = AppConfiguration.share
-    
 
     @State private var isLandscape:Bool = false
-    var onAddAtion:(MenuOptionState)->Void
     
-    
+    @State var model: Model
     @Binding var isShowing: Bool
+
     var body: some View {
         GeometryReader { geometry in
 
@@ -37,7 +36,7 @@ struct OptionGroupListView: View {
                     //image area
                     VStack(spacing: 15, content: {
                         
-                        AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                        AsyncImage(url: URL(string: model.images.first ?? "")) { image in
                             image
                                 .resizable()
                             //.aspectRatio(contentMode: .fit)
@@ -53,7 +52,7 @@ struct OptionGroupListView: View {
                         
                         HStack(spacing: 15, content: {
                             
-                            AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
                                 image
                                     .resizable()
                                     .clipped()
@@ -62,7 +61,7 @@ struct OptionGroupListView: View {
                             }
                             .clipCornerRadius(8)
                             
-                            AsyncImage(url: URL(string:  menuOptionState?.images.first ?? "")) { image in
+                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
                                 image
                                     .resizable()
                                     .clipped()
@@ -81,10 +80,18 @@ struct OptionGroupListView: View {
                     //option area
                     ZStack(alignment: .topTrailing) {
                         VStack(alignment: .leading, spacing: 20, content: {
-                            Text(menuOptionState?.mainTitle ?? "")
-                                .font(CustomFonts.optionTitle1Font)
-                                .foregroundStyle(.black)
-                            Text(menuOptionState?.subTitle ?? "")
+                            HStack {
+                                Text(model.mainTitle)
+                                    .font(CustomFonts.optionTitle1Font)
+                                    .foregroundStyle(.black)
+                                Spacer()
+                                Text("¥ " + "\(model.totlePrice)")
+                                    .font(CustomFonts.cargoTotalPriceFont)
+                                    .foregroundStyle(configuration.colorScheme.themeColor.orderBtBg)
+                            }
+                            .padding(.trailing, 60)
+
+                            Text(model.subTitle)
                                 .font(CustomFonts.optionDetailFont)
                                 .foregroundStyle(AppTheme.Colors.optionDetailColor)
                             optionView
@@ -101,10 +108,10 @@ struct OptionGroupListView: View {
                 .padding(.trailing, 60)
             }
             .environment(\.inOptionlist) {
-                menuStore.inOptionlist($0, $1)
+                model.inOptionlist($0, $1)
             }
-            .environment(\.updateOptionlist) {code,groud in
-                menuStore.updateSelectOption(code, groud)
+            .environment(\.updateOptionlist) {code,groud,price in
+                model.updateOption(code, groud, price)
             }
             .onAppear {
                 isLandscape = geometry.size.width > geometry.size.height
@@ -134,27 +141,20 @@ struct OptionGroupListView: View {
         VStack {
             ScrollView(.vertical) {
                 LazyVStack(alignment: .leading) {
-                    if let optionGroups = menuOptionState?.optionList {
-                        ForEach(optionGroups) { optionGroup in
-                            OptionListView(option: optionGroup)
-                        }
+                    ForEach(model.optionList) { optionGroup in
+                        OptionListView(option: optionGroup)
                     }
                 }
-                
             }
             .scrollIndicators(.hidden)
             
             VStack(alignment: .center, content: {
                 Button(action: {
-                    // 你的按钮行为
-                    guard let menuOptionState = menuStore.menuOptionState else {
-                        return
-                    }
                     
                     withAnimation {
                         isShowing = false
                     } completion: {
-                        onAddAtion(menuOptionState)
+                        model.addGood()
                     }
                 }) {
                     Text("確認する")
@@ -177,38 +177,7 @@ struct OptionGroupListView: View {
     }
 }
 
-extension View {
-    func clipCornerRadius(_ cornerRadius:CGFloat) -> some View {
-        clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-    }
-    
-    func rightHalfRadius(_ cornerRadius:CGFloat) -> some View {
-        clipShape(RightHalfRoundedRectangle(radius: cornerRadius))
-    }
-}
 
-struct RightHalfRoundedRectangle: Shape {
-    var radius: CGFloat
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        let topLeft = rect.origin
-        let topRight = CGPoint(x: rect.maxX, y: rect.minY)
-        let bottomLeft = CGPoint(x: rect.minX, y: rect.maxY)
-        let bottomRight = CGPoint(x: rect.maxX, y: rect.maxY)
-        
-        path.move(to: CGPoint(x: topLeft.x, y: topLeft.y))
-        path.addLine(to: CGPoint(x: topRight.x - radius, y: topRight.y))
-        path.addArc(center: CGPoint(x: topRight.x - radius, y: topRight.y + radius), radius: radius, startAngle: .degrees(-90), endAngle: .degrees(0), clockwise: false)
-        path.addLine(to: CGPoint(x: bottomRight.x, y: bottomRight.y - radius))
-        path.addArc(center: CGPoint(x: bottomRight.x - radius, y: bottomRight.y - radius), radius: radius, startAngle: .degrees(0), endAngle: .degrees(90), clockwise: false)
-        path.addLine(to: CGPoint(x: bottomLeft.x, y: bottomLeft.y))
-        path.closeSubpath()
-        
-        return path
-    }
-}
 
 //#Preview {
 //    @State var isShow:Bool = false

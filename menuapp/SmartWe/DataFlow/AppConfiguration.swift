@@ -10,7 +10,12 @@ final class AppConfiguration: ObservableObject {
     /// colorScheme
     @AppStorage("colorScheme") var colorScheme: AppTheme = .orange
     /// Language
-    @AppStorage("language") var appLanguage: AppLanguage = .system
+    //@AppStorage("language") var appLanguage: AppLanguage = .system
+    @Published var appLanguage: AppLanguage = .system {
+        didSet {
+            UserDefaults.standard.set(appLanguage.rawValue, forKey: "language")
+        }
+    }
     /// selected genre
     @AppStorage("genres") var genres: [Int] = Genres.allCases.map { $0.rawValue }
     /// show book mark button in movie poster
@@ -35,4 +40,11 @@ final class AppConfiguration: ObservableObject {
     @AppStorage("loginState") var loginState: LoginState = .logout
 
     static let share = AppConfiguration()
+    
+    init() {
+        if let language = UserDefaults.standard.integer(forKey: "language") as Int?,
+           let appLanguage = AppLanguage(rawValue: language) {
+           self.appLanguage = appLanguage
+        }
+    }
 }

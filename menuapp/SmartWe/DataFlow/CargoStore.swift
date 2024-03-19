@@ -32,9 +32,7 @@ class CargoStore {
         try? coreDataStack.batchDeleteDataWithTableNumber(tableNumber)
     }
     
-    func addGood(_ menu:Menu, price:Double, options:[String] = []) {
-        
-        
+    func addGood(_ menu:Menu, price:Int, options:[String] = []) {
         let goodItem = GoodItem(id: 0,
                                 menuCode: menu.menuCode,
                                 image: menu.homeImage,
@@ -47,12 +45,6 @@ class CargoStore {
     }
     
     func addGood(_ item: CargoItem) {
-//        if let index = shoppingCart.firstIndex(where: {$0.menuCode == item.menuCode && $0.optionCodes == item.optionCodes}) {
-//            shoppingCart[index].quantity += 1
-//        } else {
-//            shoppingCart.append(item)
-//        }
-        
         coreDataStack.updateCargoItem(menuCode: item.menuCode ?? "")
     }
     
@@ -62,13 +54,6 @@ class CargoStore {
         } catch {
             print("removeGood error \(error.localizedDescription)")
         }
-        
-//        if let index = shoppingCart.firstIndex(where: {$0.menuCode == item.menuCode && $0.optionCodes == item.optionCodes}) {
-//            shoppingCart[index].quantity -= 1
-//            if shoppingCart[index].quantity == 0 {
-//                shoppingCart.remove(at: index)
-//            }
-//        }
     }
     
     func cleanShoppingCar(table:String) async throws {
@@ -78,6 +63,7 @@ class CargoStore {
     
     func sendCarToOrder(shoppingCart:[CargoItem],
                         language:String,
+                        shopCode:String,
                         machineCode:String,
                         orderType:Int = 0,
                         tableNo:String,
@@ -98,7 +84,8 @@ class CargoStore {
             }
         }
         
-        let order = Order(language: language,
+        let order = Order(language: language, 
+                          shopCode: shopCode,
                           machineCode: machineCode,
                           orderLineList: orderLineList,
                           orderType: orderType,
@@ -143,7 +130,7 @@ struct GoodItem: Identifiable {
     let menuCode:String
     let image:String
     let title:String
-    let price:Double
+    let price:Int
     var optionCodes:[String] = []
     
     var quantity:Int = 1

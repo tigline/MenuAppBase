@@ -17,11 +17,6 @@ struct CargoStoreKey: EnvironmentKey {
     static var defaultValue = CargoStore(appService: AppService.appDefault)
 }
 
-struct OrderStoreKey: EnvironmentKey {
-    
-    static var defaultValue = OrderStore(service: AppService.appDefault)
-}
-
 struct InWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Bool = { _ in true }
 }
@@ -63,9 +58,9 @@ struct UpdateMovieWishlistKey: EnvironmentKey {
 }
 
 struct UpdateMenuOptionlistKey: EnvironmentKey {
-    static var defaultValue: (String, String) -> Void = {
+    static var defaultValue: (String, String, Double) -> Void = {
         #if DEBUG
-            print("update option old:\($0) new:\($1) in menu option list")
+            print("update option old:\($0) new:\($1) \($2) in menu option list")
         #endif
     }
 }
@@ -115,12 +110,6 @@ extension EnvironmentValues {
         set { self[CargoStoreKey.self] = newValue }
     }
     
-    var orderStore:OrderStore {
-        get { self[OrderStoreKey.self] }
-        set { self[OrderStoreKey.self] = newValue }
-    }
-    
-    
     var theme: (AppTheme) -> Void {
         get { self[themeKey.self] }
         set { self[themeKey.self] = newValue }
@@ -160,7 +149,7 @@ extension EnvironmentValues {
         set { self[UpdateMovieWishlistKey.self] = newValue }
     }
     
-    var updateOptionlist: (String, String) -> Void {
+    var updateOptionlist: (String, String, Double) -> Void {
         get { self[UpdateMenuOptionlistKey.self] }
         set { self[UpdateMenuOptionlistKey.self] = newValue }
     }

@@ -115,6 +115,7 @@ struct ShoppingCarView: View {
                     
                 } label: {
                     Text("確認")
+                        .contentShape(Rectangle())
                 }
 
             }
@@ -155,12 +156,13 @@ struct ShoppingCarView: View {
                 .background(theme.themeColor.buttonColor)
                 .clipCornerRadius(10)
             } else {
-                Button("発信") {
-                    
+                
+                Button {
                     Task {
                         print("sendCarToOrder start")
                         await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
-                                                        language: configuration.menuLaguage ?? "en",
+                                                        language: configuration.menuLaguage ?? "",
+                                                        shopCode: configuration.shopCode ?? "",
                                                         machineCode: configuration.machineCode ?? "",
                                                         tableNo: configuration.tableNo ?? "",
                                                         totalPrice: allTotal,
@@ -173,11 +175,16 @@ struct ShoppingCarView: View {
                         })
                         
                     }
+                } label: {
+                    Text("発信")
+                        .frame(maxWidth: .infinity)
+
                 }
                 .foregroundStyle(.white)
                 .frame(width: 200, height: 50)
                 .background(theme.themeColor.orderBtBg)
                 .clipCornerRadius(10)
+                
             }
         }
         

@@ -30,7 +30,7 @@ struct OptionButton: View {
     
     var body: some View {
         Button(action: {
-            updateOptionlist(optionVo.optionCode, optionVo.group)
+            updateOptionlist(optionVo.optionCode, optionVo.group, optionVo.currentPrice)
         }, label: {
             HStack{
                 Spacer()
@@ -73,30 +73,3 @@ struct OptionButton: View {
 //}
 
 
-struct RoundedRightAngleTriangle: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        let curveSize: CGFloat = 13.0 // 控制曲线大小
-        
-        // 三角形的三个顶点
-        let topLeft = CGPoint(x: rect.minX, y: rect.minY)
-        let TopRight = CGPoint(x: rect.maxX, y: rect.minY)
-        let bottomRight = CGPoint(x: rect.maxX, y: rect.maxY)
-        
-        // 开始绘制路径
-        path.move(to: topLeft)
-        
-        // 添加到右上角的线
-        path.addLine(to: CGPoint(x: TopRight.x, y: TopRight.y - curveSize))
-    
-        
-        // 添加到右下角的线
-        path.addLine(to: bottomRight)
-        
-        // 完成闭合路径
-        path.closeSubpath()
-        
-        return path
-    }
-}

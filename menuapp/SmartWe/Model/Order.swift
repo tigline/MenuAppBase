@@ -8,6 +8,7 @@
 import Foundation
 struct Order: Codable, Hashable {
     let language:String
+    let shopCode:String
     let machineCode:String
     let orderLineList:[OrderLineList]
     var orderType:Int?

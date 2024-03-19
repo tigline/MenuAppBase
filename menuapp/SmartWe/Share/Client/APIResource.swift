@@ -57,6 +57,9 @@ extension APIResource {
         
         urlRequest.httpMethod = method.rawValue
         if let getBody = body {
+            if let jsonString = String(data: getBody, encoding: .utf8) {
+                print("send data: \(jsonString)")
+            }
             urlRequest.httpBody = getBody
         }
 
