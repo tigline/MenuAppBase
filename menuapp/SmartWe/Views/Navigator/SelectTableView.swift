@@ -17,32 +17,61 @@ struct SelectTableView: View {
     @Environment(\.dismiss) var dimiss
 //    @Binding var isPresented:Bool
 //    @State private var tableNo:Int
-    let rows = [
-            GridItem(.fixed(30), spacing: 1),
-            GridItem(.fixed(60), spacing: 10),
-            GridItem(.fixed(90), spacing: 20),
-            GridItem(.fixed(10), spacing: 50)
+    let columns = [
+            GridItem(.adaptive(minimum: 150))
         ]
+    let model = Model()
+    
+    @State private var isLoading:Bool = false
+    
     var body: some View {
-        VStack(alignment: .center) {
-            TextField("TableNumber", text: $tableNo)
-                .keyboardType(.numberPad)
-                .padding()
-            Button("Ok") {
-                Task {
-                    await cargoStore.updateTableNumber(tableNo)
-                    configuration.tableNo = tableNo
+        
+        ZStack {
+            
+            if model.tableList == nil {
+                ProgressView().padding(10)
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(model.tableList!, id: \.self) { item in
+                            TabelView(tableInfo: item)
+                        }
+                    }
                 }
-                dimiss()
+                .padding()
+            }
+            
+            
+        }.task {
+            do {
+                isLoading = true
+                try await model.load(shopCode: configuration.shopCode ?? "")
+                isLoading = false
+            } catch {
+                isLoading = false
+                
             }
         }
+
+//        VStack(alignment: .center) {
+//            TextField("TableNumber", text: $tableNo)
+//                .keyboardType(.numberPad)
+//                .padding()
+//            Button("Ok") {
+//                Task {
+//                    await cargoStore.updateTableNumber(tableNo)
+//                    configuration.tableNo = tableNo
+//                }
+//                dimiss()
+//            }
+//        }
     }
     
 }
 
-//#Preview {
-//    SelectTableView(isPresented: true) as! any View
-//}
+#Preview {
+    SelectTableView()
+}
 
 
 struct ShowInputTableEnvironmentKey: EnvironmentKey {

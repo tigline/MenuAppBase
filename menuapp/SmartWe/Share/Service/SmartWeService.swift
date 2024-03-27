@@ -29,28 +29,6 @@ protocol SmartWeService {
 
 
 
-struct MachineInfo: Codable {
-    let linePayChannelMap: [String: Bool]?
-    let languages: [String]
-    let machineType: String
-    let tableNo: String?
-    let shopCode: String
-    let machineCode: String
-    let logoImage: String
-    let homeImages: [String]?
-    let lineup: Bool?
-    let actuarial: Bool?
-    let reimburse: Bool?
-}
 
-struct TableInfo: Codable {
-    let tableNo:String
-    var orderKeyList:[SubTable]?
-    
-    
-    struct SubTable: Codable {
-        let orderKey:String
-        let state:Int
-        let subTableNo:String
-    }
-}
+
+
