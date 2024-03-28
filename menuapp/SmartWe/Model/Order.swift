@@ -12,7 +12,7 @@ struct Order: Codable, Hashable {
     let machineCode:String
     let orderLineList:[OrderLineList]
     var orderType:Int?
-    var tableNo:String?
+    var orderKey:String?
     var takeout:Bool?
     let total:String
     

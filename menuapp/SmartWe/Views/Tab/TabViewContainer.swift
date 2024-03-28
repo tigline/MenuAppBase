@@ -4,15 +4,17 @@
 
 import Foundation
 import SwiftUI
+//import CoreData
 
 struct SideBarContainer: View {
     @StateObject private var configuration = AppConfiguration.share
 
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore
+    //@Environment(\.managedObjectContext) private var context
     
     @State var isLoading = false
-    @State var showTable = false
+    //@State var showTable = false
     
     @State private var carGoAnimation = false
     @State private var showAddAnimation = false
@@ -52,13 +54,21 @@ struct SideBarContainer: View {
 //                }
 //            })
             .onAppear{
-                if configuration.tableNo == nil {
-                    showTable = true
-                }
+                //if configuration.orderKey == nil {
+                
+                //    showTable = true
+                //}
+//                NotificationCenter.default.addObserver(
+//                    forName: .NSManagedObjectContextObjectsDidChange,
+//                    object: self.context,
+//                    queue: nil) { notification in
+//                        // 处理变化
+//                        self.handleContextChange(notification: notification)
+//                }
             }
-            .sheet(isPresented: $showTable) {
-                SelectTableView()
-            }
+//            .sheet(isPresented: $showTable) {
+//                SelectTableView()
+//            }
             .onReceive(configuration.$appLanguage){ lan in
                 Task {
                     isLoading = true
@@ -69,6 +79,9 @@ struct SideBarContainer: View {
                     isLoading = false
                 }
             }
+//            .onDisappear {
+//                NotificationCenter.default.removeObserver(self)
+//            }
             
             
         }
@@ -89,7 +102,7 @@ struct SideBarContainer: View {
         }
         .overlay(
             showOptions ? OptionGroupListView(model: OptionGroupListView.Model(menu: menuStore.selectMenuItem!), 
-                                              isShowing: $showOptions) : nil,
+                                              isShowing: $showOptions, isShowAdd: $showAddAnimation) : nil,
             
             alignment: .center // 定位到底部
         )
@@ -127,6 +140,28 @@ struct SideBarContainer: View {
         
         
     }
+    
+//    private func handleContextChange(notification: Notification) {
+//        if let userInfo = notification.userInfo {
+//            if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
+//                // 检查是否是你关心的表的变化
+//                updateLastChangedDate()
+//            }
+//            if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
+//                // 同上
+//                updateLastChangedDate()
+//            }
+//            if let updates = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
+//                // 同上
+//                updateLastChangedDate()
+//            }
+//        }
+//    }
+//    
+//    func updateLastChangedDate() {
+//        let now = Date()
+//        UserDefaults.standard.set(now, forKey: "LastChangedDate")
+//    }
 }
 
 

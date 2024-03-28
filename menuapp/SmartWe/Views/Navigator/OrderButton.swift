@@ -25,7 +25,7 @@ struct OrderButton: View {
             onTap()
         }, label: {
             HStack {
-                Label(text, image: icon)
+                Label(LocalizedStringKey(text), image: icon)
                     .foregroundColor(textColor)
             }
             .padding(8)

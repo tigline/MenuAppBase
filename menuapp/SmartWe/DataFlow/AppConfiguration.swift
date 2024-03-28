@@ -37,6 +37,10 @@ final class AppConfiguration: ObservableObject {
     
     @AppStorage("tableNo") var tableNo:String?
     
+    @AppStorage("orderKey") var orderKey:String?
+    
+    @AppStorage("lastChangedDate") var lastChangedDate: Double = Date().timeIntervalSince1970
+    
     @AppStorage("loginState") var loginState: LoginState = .logout
 
     static let share = AppConfiguration()

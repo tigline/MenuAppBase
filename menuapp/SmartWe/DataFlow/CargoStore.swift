@@ -66,7 +66,7 @@ class CargoStore {
                         shopCode:String,
                         machineCode:String,
                         orderType:Int = 0,
-                        tableNo:String,
+                        orderKey:String,
                         takeout:Bool = false,
                         totalPrice:String,
                         errorHandle:(Error?)->Void
@@ -89,7 +89,7 @@ class CargoStore {
                           machineCode: machineCode,
                           orderLineList: orderLineList,
                           orderType: orderType,
-                          tableNo: tableNo,
+                          orderKey: orderKey,
                           takeout: takeout,
                           total: totalPrice
         )
