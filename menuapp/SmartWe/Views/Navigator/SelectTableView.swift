@@ -22,7 +22,7 @@ struct SelectTableView: View {
         ]
     let model = Model()
     
-    @State private var isLoading:Bool = false
+    //@State private var isLoading:Bool = false
     
     var body: some View {
         
@@ -33,7 +33,7 @@ struct SelectTableView: View {
             } else {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(model.tableList!, id: \.self) { item in
+                        ForEach(model.tableList ?? [], id: \.self) { item in
                             TabelView(tableInfo: item)
                         }
                     }
@@ -44,11 +44,11 @@ struct SelectTableView: View {
             
         }.task {
             do {
-                isLoading = true
+                //isLoading = true
                 try await model.load(shopCode: configuration.shopCode ?? "")
-                isLoading = false
+                //isLoading = false
             } catch {
-                isLoading = false
+                //isLoading = false
                 
             }
         }

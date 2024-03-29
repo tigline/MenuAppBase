@@ -11,11 +11,16 @@ struct ShoppingCarView: View {
     
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.showError) var showError
+    @Environment(\.showTable) var showTable
+    
     @StateObject private var configuration = AppConfiguration.share
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
-    @State private var showTable:Bool = false
+
     @State private var showSuccess:Bool = false
+    @State private var showOrder:Bool = false
+    //var checkTimer:Timer?
+    
     
     var theme:AppTheme {
         configuration.colorScheme
@@ -35,6 +40,18 @@ struct ShoppingCarView: View {
     
     var subTotal:String {
         allTotal
+    }
+    
+
+    
+    var showOrderReminder:Bool {
+        let nowTime = Date().timeIntervalSince1970
+        let lastItemTime = configuration.lastChangedDate
+        // more than 5 minutes
+        if nowTime - lastItemTime > 30 && !shoppingCart.isEmpty {
+            return true
+        }
+        return false
     }
     
     var allTotal:String {
@@ -103,9 +120,9 @@ struct ShoppingCarView: View {
             .overlay {
                 cargoStore.showOrderAnimate ? OrderProgressView:nil
             }
-            .sheet(isPresented: $showTable) {
-                SelectTableView()
-            }
+//            .sheet(isPresented: $showTable) {
+//                SelectTableView()
+//            }
             .alert("ご注文あれがどうございました", isPresented: $showSuccess) {
                 Button {
                     showSuccess = false
@@ -119,8 +136,50 @@ struct ShoppingCarView: View {
                 }
 
             }
+            .alert("ご注文しましょうか", isPresented: $showOrder) {
+                Button {
+                    Task {
+                        print("sendCarToOrder start")
+                        orderAction()
+                        
+                    }
+                } label: {
+                    Text("確認")
+                        .contentShape(Rectangle())
+                }
+                Button {
+                    configuration.lastChangedDate = Date().timeIntervalSince1970
+                } label: {
+                    Text("继续点餐")
+                        .contentShape(Rectangle())
+                }
+
+            }
+//            .onAppear{
+//                showOrder = showOrderReminder
+//            }
         }
             
+    }
+    
+    func orderAction()  {
+        Task {
+            print("sendCarToOrder start")
+            await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
+                                            language: configuration.menuLaguage ?? "",
+                                            shopCode: configuration.shopCode ?? "",
+                                            machineCode: configuration.machineCode ?? "",
+                                            orderKey: configuration.orderKey ?? "",
+                                            totalPrice: allTotal,
+                                            errorHandle: { error in
+                if let getError = error {
+                    showError(getError, "Please try again")
+                } else {
+                    showSuccess.toggle()
+                }
+            })
+            
+        }
     }
     
     @ViewBuilder
@@ -149,10 +208,10 @@ struct ShoppingCarView: View {
             
             if isNoTableNo {
                 Button("Select a Table") {
-                    showTable.toggle()
+                    showTable(true)
                 }
                 .foregroundStyle(.white)
-                .frame(minWidth: 200, maxHeight: 50)
+                .frame(minWidth: 200, minHeight: 50)
                 .background(theme.themeColor.buttonColor)
                 .clipCornerRadius(10)
             } else {
@@ -160,19 +219,7 @@ struct ShoppingCarView: View {
                 Button {
                     Task {
                         print("sendCarToOrder start")
-                        await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
-                                                        language: configuration.menuLaguage ?? "",
-                                                        shopCode: configuration.shopCode ?? "",
-                                                        machineCode: configuration.machineCode ?? "",
-                                                        tableNo: configuration.tableNo ?? "",
-                                                        totalPrice: allTotal,
-                                                        errorHandle: { error in
-                            if let getError = error {
-                                showError(getError, "Please try again")
-                            } else {
-                                showSuccess.toggle()
-                            }
-                        })
+                        orderAction()
                         
                     }
                 } label: {
@@ -236,6 +283,6 @@ struct ShoppingCarView: View {
     }
 }
 
-#Preview {
-    ShoppingCarView()
-}
+//#Preview {
+//    ShoppingCarView(, showTable: <#Binding<Bool>#>)
+//}

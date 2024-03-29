@@ -21,6 +21,10 @@ struct InWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Bool = { _ in true }
 }
 
+struct showEnterTableKey: EnvironmentKey {
+    static var defaultValue: (Bool) -> Void = { _ in }
+}
+
 struct InOptionlistKey: EnvironmentKey {
     static var defaultValue: (String, String) -> Bool = { _,_  in false }
 }
@@ -163,6 +167,11 @@ extension EnvironmentValues {
     var isLoading: Bool {
         get { self[MovieIsLoadingKey.self] }
         set { self[MovieIsLoadingKey.self] = newValue }
+    }
+    
+    var showTable: (Bool) -> Void {
+        get { self[showEnterTableKey.self] }
+        set { self[showEnterTableKey.self] = newValue }
     }
 
     // set nowPlaying backdrop size in compact mode

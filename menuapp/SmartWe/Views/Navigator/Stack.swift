@@ -21,15 +21,16 @@ struct StackContainer: View {
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.appRouter) var appRouter
-
-    @State private var showOptions = false
-    @State private var showTable = false
     
+    @State private var password:String = ""
+    @State private var showOptions = false
+    @State private var showTable:Bool = false
+    @State private var showPWAlert:Bool = false
     //let category:MenuCategory
     var body: some View {
         VStack {
 
-            ToolbarView(showTable: $showTable)
+            ToolbarView()
 
             NavigationStack(path: destinations) {
                     VStack {
@@ -65,25 +66,50 @@ struct StackContainer: View {
             
         }
         .background(theme.themeColor.contentBg)
-//        .environment(\.goOptions) { menu, rect in
+        .environment(\.showTable) { showTable in
+            showPWAlert = showTable
+        }
+        .onAppear{
+            if configuration.tableNo == nil {
+                showPWAlert = true
+            }
+        }
+        .onChange(of: configuration.tableNo, { oldValue, newValue in
+            if configuration.tableNo == nil {
+                showPWAlert = true
+            }
+        })
+        .alert("Please input password", isPresented: $showPWAlert) {
             
-//            if let optionGroupVoList =  menu.optionGroupVoList,
-//                optionGroupVoList.count > 0 {
-//                menuStore.selectMenuItem(menu)
-//                showOptions.toggle()
-//            } else {
-//                //add to shopping car
-//                cargoStore.addGood(menu, price: menu.currentPrice)
-//            }
+            SecureField("password", text: $password)
+                .keyboardType(.numberPad)
+                .padding()
             
-//        }
-//        .overlay(
-//            showOptions ? OptionGroupListView(isShowing: $showOptions):nil,
-//            alignment: .center // 定位到底部
-//        )
+            Button(role:.none) {
+                if password == "" {
+                    showPWAlert = false
+                    showTable = true
+                } else {
+                    showPWAlert = true
+                }
+            } label: {
+                HStack {
+                    Spacer()
+                    Text("Login")
+                    Spacer()
+                }
+            }
+            
+            Button("Cancel", role: .cancel){
+                
+            }
+            
+        }
         .sheet(isPresented: $showTable) {
             SelectTableView()
         }
+
+        
 
       
 

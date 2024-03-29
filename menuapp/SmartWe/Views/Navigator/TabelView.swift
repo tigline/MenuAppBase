@@ -101,7 +101,8 @@ struct TabelView: View {
                         Button("确定"){
                             
                             configuration.tableNo = model.tableInfo.seatNumber + "-" + "\(subTableNo)"
-                            configuration.tableNo = model.subTablelOrderkeys[subTableNo]
+                            configuration.orderKey = model.subTablelOrderkeys[subTableNo]
+                            showPopover = false
                         }
                         
                     }

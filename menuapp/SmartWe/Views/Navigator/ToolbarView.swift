@@ -16,9 +16,8 @@ struct ToolbarView: View {
     @Environment(\.menuStore) var menuStore
     @Environment(\.appRouter) var appRouter
     @Environment(\.showAlert) var showAlert
-    @Binding var showTable:Bool
-    @State var password:String = ""
-    @State var showPWAlert:Bool = false
+    @Environment(\.showTable) var showTable
+    
     
     var theme:AppTheme {
         configuration.colorScheme
@@ -36,7 +35,7 @@ struct ToolbarView: View {
         HStack{
             
             OrderButton(icon: "button_bell_white",
-                        text: "オーダボタン",
+                        text: "order_button",
                         bgColor: theme.themeColor.orderBtBg,
                         textColor: .white) {
                 Task{
@@ -92,7 +91,7 @@ struct ToolbarView: View {
                         text: tableNo,
                         bgColor: theme.themeColor.orderBtBg,
                         textColor: .white) {
-                showPWAlert = true
+                showTable(true)
             }
             
 //            OrderButton(icon: "language_Japanese",
@@ -129,32 +128,7 @@ struct ToolbarView: View {
         .padding(.leading,31)
         .padding(.trailing,16)
         .background(theme.themeColor.navBgColor)
-        .alert("Please input password", isPresented: $showPWAlert) {
-            
-            SecureField("password", text: $password)
-                .keyboardType(.numberPad)
-                .padding()
-            
-            Button(role:.none) {
-                if password == "" {
-                    showPWAlert = false
-                    showTable = true
-                } else {
-                    showPWAlert = true
-                }
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Login")
-                    Spacer()
-                }
-            }
-            
-            Button("Cancel", role: .cancel){
-                
-            }
-            
-        }
+        
 
     }
 }

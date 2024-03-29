@@ -13,7 +13,7 @@ extension SelectTableView {
         
         var tableList:[TableInfo]?
         
-
+        @MainActor
         func load(shopCode:String) async throws {
             
             let resource = SelectTableResource(shopCode: shopCode)
