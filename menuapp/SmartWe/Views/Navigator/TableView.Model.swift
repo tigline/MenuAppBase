@@ -22,23 +22,23 @@ extension TabelView {
             TableState(rawValue: tableInfo.state) ?? .empty
         }
         
-        var seatCount:String {
-            tableInfo.seatAttributeVo.howPeople + "人席"
+        var seatCount:LocalizedStringKey {
+            LocalizedStringKey("\(tableInfo.seatAttributeVo.howPeople)seat_count_text")
         }
         
-        var floor:String {
-            tableInfo.seatAttributeVo.floor + "階"
+        var floor:LocalizedStringKey {
+            LocalizedStringKey("\(tableInfo.seatAttributeVo.floor)floor_text")
         }
         
         
-        func subTableInfo(_ index:Int) -> String {
+        func subTableInfo(_ index:Int) -> LocalizedStringKey {
             
             if subTablelOrderkeys.count < index {return "Not a Seat"}
             
             if subTablelOrderkeys[index].isEmpty {
-                return "No." + "\(index + 1) " +  "未开席"
+                return "\(index + 1) table_not_opened"
             } else {
-                return "No." + "\(index + 1) " +  "已开席"
+                return "\(index + 1) table_opened"
             }
             
         }
@@ -80,13 +80,13 @@ extension TabelView {
                 switch self {
                 
                 case .empty:
-                    return "空席"
+                    return "seat_state_empty"
                 case .ready:
-                    return "待席"
+                    return "seat_state_standby"
                 case .used:
-                    return "使用中"
+                    return "seat_state_used"
                 case .full:
-                    return "满席"
+                    return "seat_state_full"
                 }
             }
             

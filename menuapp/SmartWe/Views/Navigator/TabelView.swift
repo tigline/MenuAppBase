@@ -45,10 +45,6 @@ struct TabelView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.init(hex: "#D2B48C"))
-
-//            Rectangle()
-//                    .frame(height: 0.5)
-//                    .foregroundColor(theme.themeColor.cargoLine)
             
             HStack {
                 
@@ -56,11 +52,6 @@ struct TabelView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(model.state.textColor)
                     .font(.title3)
-                
- 
-//                Rectangle()
-//                        .frame(width: 0.5)
-//                        .foregroundColor(.white)
                 
                 Button {
                     showPopover = true
@@ -92,13 +83,13 @@ struct TabelView: View {
                         }
                     }
                     .padding()
-                    .alert("是否选定该席位", isPresented: $showAlert) {
+                    .alert("select_table_title", isPresented: $showAlert) {
                         
-                        Button("取消", role: .cancel){
+                        Button("cancel_text", role: .cancel){
                             
                         }
                         
-                        Button("确定"){
+                        Button("sure_text"){
                             
                             configuration.tableNo = model.tableInfo.seatNumber + "-" + "\(subTableNo)"
                             configuration.orderKey = model.subTablelOrderkeys[subTableNo]

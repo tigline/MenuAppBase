@@ -23,12 +23,12 @@ struct ToolbarView: View {
         configuration.colorScheme
     }
     
-    var tableNo:String {
+    var tableNo:LocalizedStringKey {
         if configuration.tableNo == nil {
-            return "Select a table"
+            return LocalizedStringKey("select_a_table")
         }
         
-        return "Table" + " " + configuration.tableNo!
+        return LocalizedStringKey("table_no.\(configuration.tableNo ?? "")")
     }
     
     var body: some View {
@@ -48,19 +48,19 @@ struct ToolbarView: View {
             }
         
             OrderButton(icon: theme.orderListIcon,
-                        text: "注文履歴",
+                        text: "booking_history",
                         bgColor: theme.themeColor.toolBarBtBg,
                         textColor: theme.themeColor.toolBarTextBgOff) {
-                menuStore.updateTab("注文履歴")
+                menuStore.updateTab("booking_history")
                 appRouter.updateRouter(.order)
             }
             
             
             CartButton(icon: theme.shoppingCarIcon,
-                        text: "買い物かご",
-                        bgColor: menuStore.catagory == "買い物かご" ? theme.themeColor.sideBarBtBg : theme.themeColor.toolBarBtBg,
+                        text: "shopping_car",
+                        bgColor: menuStore.catagory == "shopping_car" ? theme.themeColor.sideBarBtBg : theme.themeColor.toolBarBtBg,
                         textColor: theme.themeColor.toolBarTextBgOff) {
-                menuStore.updateTab("買い物かご")
+                menuStore.updateTab("shopping_car")
                 appRouter.updateRouter(.cart)
                 
             }
@@ -106,7 +106,7 @@ struct ToolbarView: View {
             Button(action: {
                 showPopover = true
             }, label: {
-                Image("language_Japanese")
+                Image(configuration.appLanguage.flag)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 35, height: 35)

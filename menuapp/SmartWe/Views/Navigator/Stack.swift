@@ -79,9 +79,9 @@ struct StackContainer: View {
                 showPWAlert = true
             }
         })
-        .alert("Please input password", isPresented: $showPWAlert) {
+        .alert("input_password_title", isPresented: $showPWAlert) {
             
-            SecureField("password", text: $password)
+            SecureField("password_text", text: $password)
                 .keyboardType(.numberPad)
                 .padding()
             
@@ -95,12 +95,12 @@ struct StackContainer: View {
             } label: {
                 HStack {
                     Spacer()
-                    Text("Login")
+                    Text("sure_text")
                     Spacer()
                 }
             }
             
-            Button("Cancel", role: .cancel){
+            Button("cancel_text", role: .cancel){
                 
             }
             
@@ -108,10 +108,6 @@ struct StackContainer: View {
         .sheet(isPresented: $showTable) {
             SelectTableView()
         }
-
-        
-
-      
 
     }
     

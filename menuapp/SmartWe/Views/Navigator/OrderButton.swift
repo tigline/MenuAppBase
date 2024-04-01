@@ -15,7 +15,7 @@ struct OrderButton: View {
 //    }
     
     let icon:String
-    let text:String
+    let text:LocalizedStringKey
     let bgColor:Color
     let textColor:Color
     let onTap:()->Void
@@ -25,8 +25,35 @@ struct OrderButton: View {
             onTap()
         }, label: {
             HStack {
-                Label(LocalizedStringKey(text), image: icon)
+                Label(text, image: icon)
                     .foregroundColor(textColor)
+            }
+            .padding(8)
+            .background(bgColor)
+            .cornerRadius(10)
+        })
+        .buttonStyle(.plain)
+        .frame(height: 44)
+        
+    }
+}
+
+struct ExpandButton: View {
+    
+    let icon:String
+    let text:LocalizedStringKey
+    let bgColor:Color
+    let textColor:Color
+    let onTap:()->Void
+    
+    var body: some View {
+        Button(action: {
+            onTap()
+        }, label: {
+            HStack {
+                Label(text, image: icon)
+                    .foregroundColor(textColor)
+                Spacer()
             }
             .padding(8)
             .background(bgColor)
@@ -45,7 +72,7 @@ struct CartButton: View {
     private var shoppingCart: FetchedResults<CargoItem>
     
     let icon:String
-    let text:String
+    let text:LocalizedStringKey
     let bgColor:Color
     let textColor:Color
     let onTap:()->Void

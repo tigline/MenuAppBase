@@ -5,6 +5,35 @@
 
 
 "log_out" = "로그 아웃";
-"setting_theme" = "Theme";
+"setting_theme" = "주제";
+"order_button" = "호출 버튼";
+"select_a_table" = "테이블 선택";
+"table_no.%@" = "테이블 %@";
+"booking_history" = "주문 내역";
+"shopping_car" = "장바구니";
+"input_password_title" = "비밀번호를 입력해주세요";
+"password_text" = "비밀번호";
+"sure_text" = "확신하는";
+"cancel_text" = "취소";
+"select_table_title" = "이 좌석을 선택할지 여부";
+"%@seat_count_text" = "%@좌석";
+"%@floor_text" = "%@바닥";
+"%lld table_not_opened" = "No.%lld 아직 열리지 않음";
+"%lld table_opened" = "No.%lld 이미 열었습니다";
+"seat_state_empty" = "사용되지 않음";
+"seat_state_standby" = "기다리다";
+"seat_state_used" = "사용";
+"seat_state_full" = "가득한";
+"logout_caution" = "로그아웃하시겠습니까?";
 
-"order_button" = "オーダボタン";
+"version_info" = "버전 정보";
+"shop_info" = "상점 정보";
+"setting" = "설정";
+"language" = "언어";
+"shop_name" = "이름";
+"shop_address" = "주소";
+"shop_tel" = "전화번호";
+
+"orange_text" = "오렌지색";
+"dark_text" = "어둠";
+"brown_text" = "갈색";

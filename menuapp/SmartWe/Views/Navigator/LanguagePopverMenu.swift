@@ -11,16 +11,18 @@ struct LanguagePopverMenu: View {
     @Binding var showPopover:Bool
     @StateObject private var configuration = AppConfiguration.share
     @Environment(\.menuStore) var menuStore
+    @State private var maxWidth:CGFloat = 0
     
     var theme:AppTheme {
         configuration.colorScheme
     }
     var body: some View {
             VStack(alignment: .leading) {
-                OrderButton(icon: "language_Japanese",
+                
+                ExpandButton(icon: "language_Japanese",
                             text: "日本語",
-                            bgColor: theme.themeColor.buttonColor,
-                            textColor: .white) {
+                            bgColor: configuration.appLanguage == .jp ? theme.themeColor.buttonColor:.clear,
+                            textColor: configuration.appLanguage == .jp ? .white:.black) {
                     configuration.appLanguage = .jp
                     showPopover = false
                     Task {
@@ -30,10 +32,10 @@ struct LanguagePopverMenu: View {
                     
                 }
                     
-                OrderButton(icon: "language_Chinese",
+                ExpandButton(icon: "language_Chinese",
                             text: "中文",
-                            bgColor: theme.themeColor.buttonColor,
-                            textColor: .white) {
+                            bgColor: configuration.appLanguage == .zh ? theme.themeColor.buttonColor:.clear,
+                            textColor: configuration.appLanguage == .zh ? .white:.black) {
                     configuration.appLanguage = .zh
                     showPopover = false
                     Task {
@@ -42,10 +44,10 @@ struct LanguagePopverMenu: View {
                     }
                 }
                     
-                OrderButton(icon: "language_English",
+                ExpandButton(icon: "language_English",
                             text: "English",
-                            bgColor: theme.themeColor.buttonColor,
-                            textColor: .white) {
+                            bgColor: configuration.appLanguage == .en ? theme.themeColor.buttonColor:.clear,
+                            textColor: configuration.appLanguage == .en ? .white:.black) {
                     configuration.appLanguage = .en
                     showPopover = false
                     Task {
@@ -53,11 +55,10 @@ struct LanguagePopverMenu: View {
                         await reloadMenuByLan(language.sourceId)
                     }
                 }
-                
-                OrderButton(icon: "language_Korea",
+                ExpandButton(icon: "language_Korean",
                             text: "한국말",
-                            bgColor: theme.themeColor.buttonColor,
-                            textColor: .white) {
+                            bgColor: configuration.appLanguage == .ko ? theme.themeColor.buttonColor:.clear,
+                            textColor: configuration.appLanguage == .ko ? .white:.black) {
                     configuration.appLanguage = .ko
                     showPopover = false
                     Task {
@@ -77,7 +78,15 @@ struct LanguagePopverMenu: View {
             return
         }
         
-        //await menuStore.load(shopCode:shopCode, language:lan)
+        await menuStore.load(shopCode:shopCode, language:lan)
+    }
+}
+
+struct MaxWidthPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 

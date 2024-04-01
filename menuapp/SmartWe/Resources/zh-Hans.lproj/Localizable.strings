@@ -5,5 +5,35 @@
 
 "log_out" = "登出";
 "setting_theme" = "主题";
-
 "order_button" = "呼叫按钮";
+"select_a_table" = "请选桌号";
+"table_no.%@" = "桌号 %@";
+"booking_history" = "历史订单";
+"shopping_car" = "购物车";
+"input_password_title" = "请输入密码";
+"password_text" = "密码";
+"sure_text" = "确定";
+"cancel_text" = "取消";
+"select_table_title" = "是否选定该席位";
+"%@seat_count_text" = "%@人桌";
+"%@floor_text" = "%@楼";
+"%lld table_not_opened" = "No.%lld 未开席";
+"%lld table_opened" = "No.%lld 已开席";
+"seat_state_empty" = "未使用";
+"seat_state_standby" = "待席";
+"seat_state_used" = "使用中";
+"seat_state_full" = "满席";
+"logout_caution" = "确定退出吗";
+
+
+"version_info" = "版本信息";
+"shop_info" = "商店信息";
+"setting" = "设置";
+"language" = "语言";
+"shop_name" = "名称";
+"shop_address" = "地址";
+"shop_tel" = "电话";
+
+"orange_text" = "橙色";
+"dark_text" = "暗黑";
+"brown_text" = "棕色";

@@ -5,6 +5,35 @@
 
 
 "log_out" = "ログアウト";
-"setting_theme" = "Theme";
-
+"setting_theme" = "テーマ";
 "order_button" = "オーダボタン";
+"select_a_table" = "テーブルを選択してください";
+"table_no.%@" = "テーブル %@";
+"booking_history" = "注文履歴";
+"shopping_car" = "買い物かご";
+"input_password_title" = "パスワードを入力してください";
+"password_text" = "パスワード";
+"sure_text" = "確認";
+"cancel_text" = "キャンセル";
+"select_table_title" = "この席を選択するかどうか";
+"%@seat_count_text" = "%@人席";
+"%@floor_text" = "%@階";
+"%lld table_not_opened" = "No.%lld まだオープンしていません";
+"%lld table_opened" = "No.%lld すでにオープンしています";
+"seat_state_empty" = "空の";
+"seat_state_standby" = "待って";
+"seat_state_used" = "使用する";
+"seat_state_full" = "満";
+"logout_caution" = "ログアウトしてもよろしいですか";
+
+"version_info" = "バージョン情報";
+"shop_info" = "店舗情報";
+"setting" = "設定";
+"language" = "言語";
+"shop_name" = "名前";
+"shop_address" = "住所";
+"shop_tel" = "電話番号";
+
+"orange_text" = "オレンジ";
+"dark_text" = "ダーク";
+"brown_text" = "茶色";

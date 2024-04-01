@@ -15,15 +15,15 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
     var localizedString: LocalizedStringKey {
         switch self {
         case .jp:
-            return "AppLanguage_Japanese"
+            return "日本語"
         case .en:
-            return "AppLanguage_English"
+            return "English"
         case .zh:
-            return "AppLanguage_Chinese"
+            return "中文"
         case .system:
-            return "Setting_BySystem"
+            return "system"
         case .ko:
-            return "AppLanguage_Korea"
+            return "한국"
         }
     }
 
@@ -58,6 +58,22 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
             return .init(identifier: "ja-JP")
         case .ko:
             return .init(identifier: "ko-KR")
+        }
+    }
+    
+    var flag: String {
+        switch self {
+            
+        case .jp:
+            return "language_Japanese"
+        case .en:
+            return "language_English"
+        case .zh:
+            return "language_Chinese"
+        case .ko:
+            return "language_Korean"
+        case .system:
+            return "language_Jpanese"
         }
     }
 }

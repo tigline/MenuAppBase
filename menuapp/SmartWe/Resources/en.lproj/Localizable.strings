@@ -6,6 +6,35 @@
 
 "log_out" = "Logout";
 "setting_theme" = "Theme";
-
 "order_button" = "Order Button";
+"select_a_table" = "Select a Table";
+"table_no.%@" = "Table %@";
+"booking_history" = "Booking History";
+"shopping_car" = "Shopping Car";
+"input_password_title" = "Please input password";
+"password_text" = "Password";
+"sure_text" = "Sure";
+"cancel_text" = "Cancel";
+"select_table_title" = "Whether to select this seat";
+"%@seat_count_text" = "%@ Seats";
+"%@floor_text" = "Floor %@";
+"%lld table_not_opened" = "No.%lld Not open yet";
+"%lld table_opened" = "No.%lld Already opened";
+"seat_state_empty" = "Not Used";
+"seat_state_standby" = "Standby";
+"seat_state_used" = "Used";
+"seat_state_full" = "Full";
+"logout_caution" = "Are you sure to logout";
 
+
+"version_info" = "Version information";
+"shop_info" = "Shop information";
+"setting" = "Setting";
+"language" = "Language";
+"shop_name" = "Name";
+"shop_address" = "Address";
+"shop_tel" = "TEL";
+
+"orange_text" = "Orange";
+"dark_text" = "Dark";
+"brown_text" = "Brow";

@@ -12,7 +12,7 @@ struct SettingAppearance: View {
     var body: some View {
             
             Form {
-                Section(header: Text("版本信息")) {
+                Section(header: Text("version_info")) {
                     LabeledContent {
                         Text("1.0.0")
                     } label: {
@@ -20,30 +20,30 @@ struct SettingAppearance: View {
                     }
                 }
                 
-                Section(header: Text("店铺信息")) {
+                Section(header: Text("shop_info")) {
                                    
                     LabeledContent {
                         Text("甘兰牛肉面")
                     } label: {
-                        Text("名称")
+                        Text("shop_name")
                     }
                     
                     LabeledContent {
                         Text("日本桥")
                     } label: {
-                        Text("地址")
+                        Text("shop_address")
                     }
                     
                     LabeledContent {
                         Text("06-8888-9999")
                     } label: {
-                        Text("电话")
+                        Text("shop_tel")
                     }
                 }
                 
-                Section(header: Text("设置")) {
+                Section(header: Text("setting")) {
                     // Language
-                    Picker("Setting_ColorScheme_Label", selection: $configuration.colorScheme) {
+                    Picker("setting_theme", selection: $configuration.colorScheme) {
                         ForEach(AppTheme.allCases) { theme in
                             Text(theme.localizedString)
                                 .tag(theme.rawValue)
@@ -53,7 +53,7 @@ struct SettingAppearance: View {
 
 
                     // Theme
-                    Picker("Setting_Language_Label", selection: $configuration.appLanguage) {
+                    Picker("language", selection: $configuration.appLanguage) {
                         ForEach(AppLanguage.allCases) { language in
                             Text(language.localizedString)
                                 .tag(language)
@@ -77,7 +77,7 @@ struct SettingAppearance: View {
             }
             .navigationTitle(SettingCategory.appearance.localizedString)
             .navigationBarTitleDisplayMode(.inline)
-            .alert("Are you sure to logout", isPresented: $logoutPresent) {
+            .alert("logout_caution", isPresented: $logoutPresent) {
                 Button {
                     configuration.machineCode = ""
                     configuration.loginState = .logout
@@ -85,7 +85,7 @@ struct SettingAppearance: View {
                 } label: {
                     HStack {
                         Spacer()
-                        Text("Sure")
+                        Text("sure_text")
                             
                         Spacer()
                     }
@@ -96,7 +96,7 @@ struct SettingAppearance: View {
                 } label: {
                     HStack {
                         Spacer()
-                        Text("Cancel")
+                        Text("cancel_text")
                         Spacer()
                     }
                 }

@@ -173,11 +173,11 @@ extension AppTheme {
     var localizedString: LocalizedStringKey {
         switch self {
         case .orange:
-            return "Orange"
+            return "orange_text"
         case .dark:
-            return "Dark"
+            return "dark_text"
         case .brown:
-            return "Brow"
+            return "brown_text"
         
         }
     }

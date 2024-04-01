@@ -81,9 +81,9 @@ struct ContentView: View {
             }
             
             if appConfiguration.tableNo != nil && appConfiguration.orderKey != nil {
-                Task {
-                    await model.startCheck(appConfiguration.shopCode,appConfiguration.orderKey)
-                }
+//                Task {
+//                    await model.startCheck(appConfiguration.shopCode,appConfiguration.orderKey)
+//                }
             }
         }
 

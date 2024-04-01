@@ -446,13 +446,6 @@
 			path = Wishlist;
 			sourceTree = "<group>";
 		};
-		769002D029C83B4000620A3C /* FavoritePerson */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FavoritePerson;
-			sourceTree = "<group>";
-		};
 		769AB0B329D1BD21008451E6 /* OverlayContainer */ = {
 			isa = PBXGroup;
 			children = (
@@ -578,7 +571,6 @@
 				769F247329CEEC2100C550B8 /* Tab */,
 				76629CE629CE7AD600FA75AA /* Navigator */,
 				761044E529CC2A9F004EFAA2 /* MovieGallery */,
-				769002D029C83B4000620A3C /* FavoritePerson */,
 				769002CF29C83B3400620A3C /* Wishlist */,
 				769002C529C825CD00620A3C /* Common */,
 				769002B829C6EBF000620A3C /* Category */,
