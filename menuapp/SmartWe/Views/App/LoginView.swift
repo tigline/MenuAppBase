@@ -12,7 +12,6 @@ struct LoginView: View {
     @State private var showLoginError = false
     @State private var openScanView = false
     @State private var loginError = "Login failed"
-    @Environment(\.store) var store
     @StateObject private var configuration = AppConfiguration.share
     @Environment(\.smartwe) var smartwe
     var body: some View {
@@ -82,7 +81,6 @@ struct LoginView: View {
         Task {
             let result = try await smartwe.activeDevice(machineCode: text)
             if result.code == 200 {
-                store.send(.updateMachineInfo(result.data))
                 configuration.machineCode = result.data.machineCode
                 configuration.shopCode = result.data.shopCode
                 configuration.logoImage = result.data.logoImage

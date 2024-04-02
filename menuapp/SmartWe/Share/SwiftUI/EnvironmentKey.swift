@@ -4,11 +4,8 @@
 
 import Foundation
 import SwiftUI
-import TMDb
 
-struct StoreKey: EnvironmentKey {
-    static var defaultValue = Store()
-}
+
 struct MenuStoreKey: EnvironmentKey {
     static var defaultValue = MenuStore(appService: AppService.appDefault)
 }
@@ -37,22 +34,6 @@ struct themeKey: EnvironmentKey {
     }
 }
 
-struct GoMovieDetailFromHomeKey: EnvironmentKey {
-    static var defaultValue: (Category, Movie) -> Void = {
-        #if DEBUG
-            print("goto (\($0)):(\($1.title))'s detail view")
-        #endif
-    }
-}
-
-struct GoMovieDetailFormCategoryKey: EnvironmentKey {
-    static var defaultValue: (Movie) -> Void = {
-        #if DEBUG
-            print("goto (\($0.title))'s detail view")
-        #endif
-    }
-}
-
 struct UpdateMovieWishlistKey: EnvironmentKey {
     static var defaultValue: (Int) -> Void = {
         #if DEBUG
@@ -69,13 +50,6 @@ struct UpdateMenuOptionlistKey: EnvironmentKey {
     }
 }
 
-struct GoCategoryKey: EnvironmentKey {
-    static var defaultValue: (Destination) -> Void = {
-        #if DEBUG
-            print("go to \($0.debugDescription)'s gallery view")
-        #endif
-    }
-}
 
 struct GoOptionsKey: EnvironmentKey {
     static var defaultValue: (Menu, UIImage, CGRect) -> Void = {
@@ -98,12 +72,7 @@ struct OverlayContainerSceneName: EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    
-    var store:Store {
-        get { self[StoreKey.self] }
-        set { self[StoreKey.self] = newValue }
-    }
-    
+
     var menuStore:MenuStore {
         get { self[MenuStoreKey.self] }
         set { self[MenuStoreKey.self] = newValue }
@@ -134,19 +103,7 @@ extension EnvironmentValues {
         get { self[InOptionlistKey.self] }
         set { self[InOptionlistKey.self] = newValue }
     }
-
-    // go to movie detail view from home
-    var goDetailFromHome: (Category, Movie) -> Void {
-        get { self[GoMovieDetailFromHomeKey.self] }
-        set { self[GoMovieDetailFromHomeKey.self] = newValue }
-    }
-
-    // go to movie detail view from movie gallery
-    var goDetailFromCategory: (Movie) -> Void {
-        get { self[GoMovieDetailFormCategoryKey.self] }
-        set { self[GoMovieDetailFormCategoryKey.self] = newValue }
-    }
-
+    
     // add movie into favorite list
     var updateWishlist: (Int) -> Void {
         get { self[UpdateMovieWishlistKey.self] }
@@ -156,12 +113,6 @@ extension EnvironmentValues {
     var updateOptionlist: (String, String, Double) -> Void {
         get { self[UpdateMenuOptionlistKey.self] }
         set { self[UpdateMenuOptionlistKey.self] = newValue }
-    }
-
-    // go to category gallery view
-    var goCategory: (Destination) -> Void {
-        get { self[GoCategoryKey.self] }
-        set { self[GoCategoryKey.self] = newValue }
     }
 
     var isLoading: Bool {

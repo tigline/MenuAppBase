@@ -3,7 +3,6 @@
 //
 
 import Foundation
-import TMDb
 
 extension Array: RawRepresentable where Element: Codable {
     public init?(rawValue: String) {
@@ -23,9 +22,3 @@ extension Array: RawRepresentable where Element: Codable {
     }
 }
 
-extension Sequence where Iterator.Element == Movie {
-    func uniqueMovie() -> [Iterator.Element] {
-        var seen: Set<Int> = []
-        return filter { seen.insert($0.id).inserted }
-    }
-}

@@ -9,10 +9,6 @@ import Foundation
 import SwiftUI
 
 struct StackContainer: View {
-    @Environment(\.store) var store
-    var destinations:Binding<[Destination]> {
-        .init(get:{store.state.destinations}, set:{store.state.destinations = $0})
-    }
     @StateObject private var configuration = AppConfiguration.share
     var theme:AppTheme {
         configuration.colorScheme
@@ -32,7 +28,7 @@ struct StackContainer: View {
 
             ToolbarView()
 
-            NavigationStack(path: destinations) {
+            NavigationStack() {
                     VStack {
                         switch appRouter.router {
                         case .menu(_):
@@ -49,19 +45,6 @@ struct StackContainer: View {
                     }
                     .toolbar(.hidden, for: .navigationBar)
                     
-                    .navigationDestination(for: Destination.self) { destination in
-                        switch destination {
-                        case .favoritePerson:
-                            EmptyView()
-                        case .movieDetail(_):
-                            // movie Detail
-                            EmptyView()
-                        case .personDetail:
-                            EmptyView()
-                        default:
-                            EmptyView()
-                        }
-                    }
             }
             
         }

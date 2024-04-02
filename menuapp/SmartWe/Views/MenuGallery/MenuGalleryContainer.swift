@@ -4,22 +4,6 @@
 
 import Foundation
 import SwiftUI
-import TMDb
-
-//struct MenuGalleryContainer: View {
-//    
-//    @Environment(\.deviceStatus) private var deviceStatus
-//    @Environment(\.store.menuStore)
-//    var body: some View {
-//        VStack {
-//            MenuGalleryLazyVGrid(items: menuCategory.menuVoList)
-//        }
-//        //.animation(.default, value: menuCategory.menuVoList.count)
-//    }
-//}
-
-
-
 
 struct MenuGalleryLazyVGrid: View {
     @Environment(\.isLoading) private var isLoading
@@ -39,7 +23,7 @@ struct MenuGalleryLazyVGrid: View {
                 let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
                 LazyVGrid(columns: columns, spacing: 18.5) {
                     ForEach(menuStore.curMenuInfo?.menuVoList ?? []) { item in
-                        MenuItem(item: item)
+                        MenuItemView(item: item)
                     }
                 }
                 .padding(.top, 15)

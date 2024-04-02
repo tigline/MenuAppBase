@@ -7,10 +7,9 @@ import Foundation
 import Nuke
 import NukeUI
 import SwiftUI
-import TMDb
 import UIKit
 
-public struct MenuItem: View {
+public struct MenuItemView: View {
     let item: Menu
     let displayType: DisplayType = .portrait(.middle)
     @Environment(\.goOptions) var goOptions

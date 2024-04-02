@@ -19,3 +19,22 @@ struct MachineInfo: Codable {
     let actuarial: Bool?
     let reimburse: Bool?
 }
+
+extension MachineInfo {
+    static func createDefault() -> MachineInfo {
+        return MachineInfo(
+            linePayChannelMap: nil,
+            languages: ["EN"],
+            machineType: "CUSTER_PAD",
+            tableNo: nil,
+            shopCode: "DEFAULT_SHOP",
+            machineCode: "DEFAULT_MACHINE",
+            logoImage: "http://example.com/default_logo.bmp",
+            homeImages: nil,
+            lineup: nil,
+            actuarial: nil,
+            reimburse: nil
+        )
+    }
+    
+}

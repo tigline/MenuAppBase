@@ -23,19 +23,19 @@ struct SettingAppearance: View {
                 Section(header: Text("shop_info")) {
                                    
                     LabeledContent {
-                        Text("甘兰牛肉面")
+                        Text(configuration.shopName)
                     } label: {
                         Text("shop_name")
                     }
                     
                     LabeledContent {
-                        Text("日本桥")
+                        Text(configuration.shopAddress)
                     } label: {
                         Text("shop_address")
                     }
                     
                     LabeledContent {
-                        Text("06-8888-9999")
+                        Text(configuration.shopTel)
                     } label: {
                         Text("shop_tel")
                     }
@@ -75,7 +75,6 @@ struct SettingAppearance: View {
                     })
                 }
             }
-            .navigationTitle(SettingCategory.appearance.localizedString)
             .navigationBarTitleDisplayMode(.inline)
             .alert("logout_caution", isPresented: $logoutPresent) {
                 Button {

@@ -7,7 +7,6 @@ import SwiftUI
 import SwiftUIOverlayContainer
 
 struct ContentView: View {
-    @Environment(\.store) var store
     @StateObject var appConfiguration = AppConfiguration.share
     @Environment(\.scenePhase) private var scenePhase
     @State private var errorWrapper: ErrorWrapper?
@@ -92,20 +91,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        #if os(iOS)
-            ContentView()
-                //.environmentObject(Store())
-                .environment(\.deviceStatus, .compact)
-                .previewDevice(.iPhoneName)
-
-            ContentView()
-                //.environmentObject(Store())
-                .environment(\.deviceStatus, .regular)
-                .previewDevice(.iPadName)
-        #else
-            ContentView()
-                //.environmentObject(Store())
-                .environment(\.deviceStatus, .macOS)
-        #endif
+        ContentView()
     }
 }

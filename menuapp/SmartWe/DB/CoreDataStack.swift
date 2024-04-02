@@ -4,7 +4,6 @@
 
 import CoreData
 import Foundation
-import TMDb
 
 final class CoreDataStack {
 //    static let share = CoreDataStack()
