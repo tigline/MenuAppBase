@@ -165,17 +165,3 @@ struct SideBarContainer: View {
 }
 
 
-
-//struct TabViewContainer_Previews: PreviewProvider {
-//    static var previews: some View {
-//        #if os(iOS)
-////            TabViewContainer()
-////                .environmentObject(Store.share)
-////                .previewDevice(.iPhoneName)
-//
-//        SideBarContainer()
-//                .environment(\.deviceStatus, .regular)
-//                .previewDevice(.iPadName)
-//        #endif
-//    }
-//}

@@ -5,7 +5,7 @@
 import SwiftUI
 
 @main
-struct MovieHunterApp: App {
+struct MenuApp: App {
     let stack = CoreDataStack.shared
     var body: some Scene {
         WindowGroup {

@@ -26,11 +26,11 @@
 		769AB0AC29D19DAE008451E6 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AB0AB29D19DAE008451E6 /* URL.swift */; };
 		769AB0B229D1BCE5008451E6 /* SwiftUIOverlayContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 769AB0B129D1BCE5008451E6 /* SwiftUIOverlayContainer */; };
 		769AB0B529D1BD32008451E6 /* ContainerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AB0B429D1BD32008451E6 /* ContainerConfiguration.swift */; };
-		769F247529CEEC2F00C550B8 /* TabViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F247429CEEC2F00C550B8 /* TabViewContainer.swift */; };
+		769F247529CEEC2F00C550B8 /* SideBarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F247429CEEC2F00C550B8 /* SideBarContainer.swift */; };
 		769F248029CF002800C550B8 /* SettingAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F247F29CF002800C550B8 /* SettingAppearance.swift */; };
 		769F248A29CF10E700C550B8 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F248929CF10E700C550B8 /* AppLanguage.swift */; };
 		76A0D35129C979AD002C3286 /* EnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0D35029C979AD002C3286 /* EnvironmentKey.swift */; };
-		76AC258329C2E23A007874DA /* MovieHunterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC258229C2E23A007874DA /* MovieHunterApp.swift */; };
+		76AC258329C2E23A007874DA /* MenuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC258229C2E23A007874DA /* MenuApp.swift */; };
 		76AC258529C2E23A007874DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC258429C2E23A007874DA /* ContentView.swift */; };
 		76AC258729C2E23B007874DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76AC258629C2E23B007874DA /* Assets.xcassets */; };
 		76AC258B29C2E23B007874DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76AC258A29C2E23B007874DA /* Preview Assets.xcassets */; };
@@ -118,12 +118,12 @@
 		769002AF29C6DB9900620A3C /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		769AB0AB29D19DAE008451E6 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		769AB0B429D1BD32008451E6 /* ContainerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerConfiguration.swift; sourceTree = "<group>"; };
-		769F247429CEEC2F00C550B8 /* TabViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewContainer.swift; sourceTree = "<group>"; };
+		769F247429CEEC2F00C550B8 /* SideBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarContainer.swift; sourceTree = "<group>"; };
 		769F247F29CF002800C550B8 /* SettingAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAppearance.swift; sourceTree = "<group>"; };
 		769F248929CF10E700C550B8 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		76A0D35029C979AD002C3286 /* EnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentKey.swift; sourceTree = "<group>"; };
 		76AC257F29C2E23A007874DA /* SmartWe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWe.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		76AC258229C2E23A007874DA /* MovieHunterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHunterApp.swift; sourceTree = "<group>"; };
+		76AC258229C2E23A007874DA /* MenuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuApp.swift; sourceTree = "<group>"; };
 		76AC258429C2E23A007874DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		76AC258629C2E23B007874DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76AC258A29C2E23B007874DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -207,14 +207,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		761044E529CC2A9F004EFAA2 /* MenuGallery */ = {
-			isa = PBXGroup;
-			children = (
-				7652A74329CD6EA5000D7A4A /* MenuGalleryContainer.swift */,
-			);
-			path = MenuGallery;
-			sourceTree = "<group>";
-		};
 		7652A73C29CD52DD000D7A4A /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,19 +215,18 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		76629CE629CE7AD600FA75AA /* Navigator */ = {
+		76629CE629CE7AD600FA75AA /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				76629CE729CE7AF600FA75AA /* Stack.swift */,
-				BE573E3B2B8C4E5600226D3A /* ToolbarView.swift */,
 				BEBABF6B2B8C878B003C4680 /* SelectTableView.swift */,
 				BE82C82D2BABBEE100506EAF /* SelectTableView.Model.swift */,
 				BE82C8312BABF3F800506EAF /* TabelView.swift */,
 				BE82C8332BABFCCD00506EAF /* TableView.Model.swift */,
-				BEF9C0A52B74C657000D259B /* OrderButton.swift */,
 				BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */,
+				7652A74329CD6EA5000D7A4A /* MenuGalleryContainer.swift */,
 			);
-			path = Navigator;
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		76751E4B29C541C30013BBDF /* DataFlow */ = {
@@ -262,6 +253,8 @@
 		769002C529C825CD00620A3C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BEF9C0A52B74C657000D259B /* OrderButton.swift */,
+				769AB0B329D1BD21008451E6 /* OverlayContainer */,
 				BE27EBE42B7B30560024DB77 /* Options */,
 				769002C829C826F700620A3C /* Misc */,
 				76AC259F29C2E2E9007874DA /* MenuItem */,
@@ -288,7 +281,7 @@
 		769AB0BB29D1CC1B008451E6 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				76AC258229C2E23A007874DA /* MovieHunterApp.swift */,
+				76AC258229C2E23A007874DA /* MenuApp.swift */,
 				76AC258429C2E23A007874DA /* ContentView.swift */,
 				BE0555862BB401C700CC3897 /* ContenView.Model.swift */,
 				BE0C692C2B7340BB00312FE1 /* LoginView.swift */,
@@ -298,16 +291,16 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		769F247329CEEC2100C550B8 /* Tab */ = {
+		769F247329CEEC2100C550B8 /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
-				769F247429CEEC2F00C550B8 /* TabViewContainer.swift */,
+				769F247429CEEC2F00C550B8 /* SideBarContainer.swift */,
 				BE573E372B8C4D4C00226D3A /* SideBar.swift */,
 				93DEC8312B83A08700C8DF8A /* SwiftUIAView.swift */,
 				BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */,
 				BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */,
 			);
-			path = Tab;
+			path = SideBar;
 			sourceTree = "<group>";
 		};
 		769F247629CEFA2700C550B8 /* Setting */ = {
@@ -377,14 +370,13 @@
 		76AC259229C2E250007874DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BE25B05E2B86E68800B896EA /* Order */,
-				BE2A84402B7EF196007D11CB /* ShoppingCar */,
 				769AB0BB29D1CC1B008451E6 /* App */,
-				769AB0B329D1BD21008451E6 /* OverlayContainer */,
+				769F247329CEEC2100C550B8 /* SideBar */,
+				BE5142A62BBB9829006D2732 /* TopBar */,
+				76629CE629CE7AD600FA75AA /* Menu */,
+				BE2A84402B7EF196007D11CB /* ShoppingCar */,
+				BE25B05E2B86E68800B896EA /* Order */,
 				769F247629CEFA2700C550B8 /* Setting */,
-				769F247329CEEC2100C550B8 /* Tab */,
-				76629CE629CE7AD600FA75AA /* Navigator */,
-				761044E529CC2A9F004EFAA2 /* MenuGallery */,
 				769002C529C825CD00620A3C /* Common */,
 			);
 			path = Views;
@@ -523,6 +515,14 @@
 			path = ShoppingCar;
 			sourceTree = "<group>";
 		};
+		BE5142A62BBB9829006D2732 /* TopBar */ = {
+			isa = PBXGroup;
+			children = (
+				BE573E3B2B8C4E5600226D3A /* ToolbarView.swift */,
+			);
+			path = TopBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -614,7 +614,7 @@
 				769F248029CF002800C550B8 /* SettingAppearance.swift in Sources */,
 				769AB0B529D1BD32008451E6 /* ContainerConfiguration.swift in Sources */,
 				BE0C69212B71EEF500312FE1 /* URL+QueryItem.swift in Sources */,
-				769F247529CEEC2F00C550B8 /* TabViewContainer.swift in Sources */,
+				769F247529CEEC2F00C550B8 /* SideBarContainer.swift in Sources */,
 				BE1C2AD92BA8076100DEB7E6 /* OrderView.Model.swift in Sources */,
 				BE0C69242B720F2200312FE1 /* SmartWeService.swift in Sources */,
 				76AC25B329C2E37C007874DA /* MenuItemView.swift in Sources */,
@@ -640,7 +640,7 @@
 				BE0C692D2B7340BB00312FE1 /* LoginView.swift in Sources */,
 				BE0C691D2B71ED9200312FE1 /* SmartWeError.swift in Sources */,
 				BEBABF6A2B8C6FDA003C4680 /* ErrorWrapper.swift in Sources */,
-				76AC258329C2E23A007874DA /* MovieHunterApp.swift in Sources */,
+				76AC258329C2E23A007874DA /* MenuApp.swift in Sources */,
 				76629CE829CE7AF600FA75AA /* Stack.swift in Sources */,
 				76751E6929C5922D0013BBDF /* Assets.swift in Sources */,
 				BE1C2ADB2BA807D400DEB7E6 /* Order.swift in Sources */,
@@ -841,6 +841,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartWe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SmartWe;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSCameraUsageDescription = "For scan machine code";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -856,7 +858,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartwe.admin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -886,6 +888,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartWe/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SmartWe;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSCameraUsageDescription = "For scan machine code";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -901,7 +905,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartwe.admin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

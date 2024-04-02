@@ -74,18 +74,18 @@ struct ToolbarView: View {
             )
             
             Spacer()
-            Button(LocalizedStringKey("setting_theme")){
-    
-                showThemePopover = true
-            }
-            .padding()
-            .frame(height: 44)
-            .foregroundStyle(theme.themeColor.toolBarTextBgOff)
-            .background(theme.themeColor.toolBarBtBg)
-            .cornerRadius(10)
-            .popover(isPresented: $showThemePopover, content: {
-                ThemePopverMenu(showPopover: $showThemePopover)
-            })
+//            Button(LocalizedStringKey("setting_theme")){
+//    
+//                showThemePopover = true
+//            }
+//            .padding()
+//            .frame(height: 44)
+//            .foregroundStyle(theme.themeColor.toolBarTextBgOff)
+//            .background(theme.themeColor.toolBarBtBg)
+//            .cornerRadius(10)
+//            .popover(isPresented: $showThemePopover, content: {
+//                ThemePopverMenu(showPopover: $showThemePopover)
+//            })
             
             OrderButton(icon: "button_bell_white",
                         text: tableNo,
@@ -94,15 +94,7 @@ struct ToolbarView: View {
                 showTable(true)
             }
             
-//            OrderButton(icon: "language_Japanese",
-//                        text: "日本语",
-//                        bgColor: .white,
-//                        textColor: .brown) {
-//                showPopover = true
-//            }
-//            .popover(isPresented: $showPopover, content: {
-//                LanguagePopverMenu(showPopover: $showPopover)
-//            })
+
             Button(action: {
                 showPopover = true
             }, label: {

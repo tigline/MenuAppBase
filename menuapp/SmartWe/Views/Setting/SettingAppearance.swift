@@ -9,14 +9,23 @@ struct SettingAppearance: View {
     @StateObject private var configuration = AppConfiguration.share
     @State private var logoutPresent:Bool = false
     
+    
+    let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "App Name"
+
+    let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
+
+    let appBuild = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
+
+    
+    
     var body: some View {
             
             Form {
                 Section(header: Text("version_info")) {
                     LabeledContent {
-                        Text("1.0.0")
+                        Text(appVersion + "(\(appBuild))")
                     } label: {
-                        Text("SmartWe App")
+                        Text(appName)
                     }
                 }
                 
