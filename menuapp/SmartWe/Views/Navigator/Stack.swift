@@ -53,9 +53,9 @@ struct StackContainer: View {
                         switch destination {
                         case .favoritePerson:
                             EmptyView()
-                        case .movieDetail(let movie):
+                        case .movieDetail(_):
                             // movie Detail
-                            MovieDetailContainer(movie: movie)
+                            EmptyView()
                         case .personDetail:
                             EmptyView()
                         default:
