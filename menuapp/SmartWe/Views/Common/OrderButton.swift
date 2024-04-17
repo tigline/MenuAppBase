@@ -24,9 +24,19 @@ struct OrderButton: View {
         Button(action: {
             onTap()
         }, label: {
-            HStack {
-                Label(text, image: icon)
-                    .foregroundColor(textColor)
+            HStack(alignment: .center) {
+//                Label(text, image: icon)
+//                    .foregroundColor(textColor)
+//                    .frame(height: 44)
+                
+                Image(icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32,height: 32)
+                
+                Text(text)
+                    .foregroundStyle(textColor)
+                
             }
             .padding(8)
             .background(bgColor)

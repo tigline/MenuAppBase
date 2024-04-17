@@ -87,7 +87,7 @@ struct ToolbarView: View {
 //                ThemePopverMenu(showPopover: $showThemePopover)
 //            })
             
-            OrderButton(icon: "button_bell_white",
+            OrderButton(icon: "table_icon",
                         text: tableNo,
                         bgColor: theme.themeColor.orderBtBg,
                         textColor: .white) {
