@@ -47,19 +47,19 @@ struct ToolbarView: View {
                 
             }
         
-            OrderButton(icon: theme.orderListIcon,
+            OrderButton(icon: menuStore.catagory == "booking_history" ? theme.orderListIconOn: theme.orderListIcon,
                         text: "booking_history",
-                        bgColor: theme.themeColor.toolBarBtBg,
-                        textColor: theme.themeColor.toolBarTextBgOff) {
+                        bgColor: menuStore.catagory == "booking_history" ? theme.themeColor.sideBarBtBg : theme.themeColor.toolBarBtBg,
+                        textColor: menuStore.catagory == "booking_history" ? theme.themeColor.toolBarTextBgOn : theme.themeColor.toolBarTextBgOff) {
                 menuStore.updateTab("booking_history")
                 appRouter.updateRouter(.order)
             }
             
             
-            CartButton(icon: theme.shoppingCarIcon,
+            CartButton(icon: menuStore.catagory == "shopping_car" ? theme.shoppingCarIconOn:theme.shoppingCarIcon,
                         text: "shopping_car",
                         bgColor: menuStore.catagory == "shopping_car" ? theme.themeColor.sideBarBtBg : theme.themeColor.toolBarBtBg,
-                        textColor: theme.themeColor.toolBarTextBgOff) {
+                       textColor: menuStore.catagory == "shopping_car" ? theme.themeColor.toolBarTextBgOn : theme.themeColor.toolBarTextBgOff) {
                 menuStore.updateTab("shopping_car")
                 appRouter.updateRouter(.cart)
                 

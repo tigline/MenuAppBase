@@ -25,7 +25,7 @@ struct OptionButton: View {
     }
     
     var hasPrice:Bool {
-        optionVo.currentPrice > 0
+        optionVo.currentPrice != 0
     }
     
     var body: some View {
@@ -41,11 +41,13 @@ struct OptionButton: View {
                 if hasPrice {
                     Spacer()
                     VStack(alignment: .trailing, content: {
-                        RoundedRightAngleTriangle().fill(configuration.colorScheme.themeColor.orderBtBg)
+                        RoundedRightAngleTriangle().fill(
+                            optionVo.currentPrice>0 ? Color.red:Color.green
+                        )
                             .frame(width: 36, height: 32)
                             .padding(.leading, -20)
                             .overlay {
-                                Text("+" + "\(Int(optionVo.currentPrice))")
+                                Text("\(Int(optionVo.currentPrice))")
                                     .foregroundStyle(.white)
                                     .font(.system(size: 10))
                                     .rotationEffect(.degrees(38))

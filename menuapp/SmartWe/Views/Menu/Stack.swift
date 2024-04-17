@@ -71,7 +71,7 @@ struct StackContainer: View {
             
             Button(role:.none) {
                 if password == configuration.password {
-                    showTable.toggle()
+                    showTable = true
                 } else {
                     showPWResult.toggle()
                 }

@@ -10,6 +10,10 @@ struct MenuStoreKey: EnvironmentKey {
     static var defaultValue = MenuStore(appService: AppService.appDefault)
 }
 
+struct SoundManagerKey: EnvironmentKey {
+    static var defaultValue = SoundManager()
+}
+
 struct CargoStoreKey: EnvironmentKey {
     static var defaultValue = CargoStore(appService: AppService.appDefault)
 }
@@ -72,6 +76,11 @@ struct OverlayContainerSceneName: EnvironmentKey {
 }
 
 extension EnvironmentValues {
+    
+    var soundPlayer:SoundManager {
+        get { self[SoundManagerKey.self] }
+        set { self[SoundManagerKey.self] = newValue }
+    }
 
     var menuStore:MenuStore {
         get { self[MenuStoreKey.self] }

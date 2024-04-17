@@ -95,6 +95,8 @@
 		BEF0EBC02B75E60C00EAB2D9 /* LanguagePopverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */; };
 		BEF9C0A42B74B8B2000D259B /* LogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */; };
 		BEF9C0A62B74C657000D259B /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF9C0A52B74C657000D259B /* OrderButton.swift */; };
+		BEFC34C72BCFC29600CE906E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFC34C62BCFC29600CE906E /* SoundManager.swift */; };
+		BEFC34C92BCFC51B00CE906E /* 14428.wav in Resources */ = {isa = PBXBuildFile; fileRef = BEFC34C82BCFC51B00CE906E /* 14428.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -186,6 +188,8 @@
 		BEF0EBBF2B75E60C00EAB2D9 /* LanguagePopverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePopverMenu.swift; sourceTree = "<group>"; };
 		BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoImageView.swift; sourceTree = "<group>"; };
 		BEF9C0A52B74C657000D259B /* OrderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderButton.swift; sourceTree = "<group>"; };
+		BEFC34C62BCFC29600CE906E /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		BEFC34C82BCFC51B00CE906E /* 14428.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 14428.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,6 +439,7 @@
 		76AC25B829C2E4AF007874DA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BEFC34C82BCFC51B00CE906E /* 14428.wav */,
 				76AC25BD29C2E4C2007874DA /* Localizable.strings */,
 			);
 			path = Resources;
@@ -478,6 +483,7 @@
 				BE0C69272B72206100312FE1 /* AppService.swift */,
 				BE0555842BB3FCEB00CC3897 /* OrderCheckResource.swift */,
 				BE1C2AD62BA2EE1E00DEB7E6 /* MenuResource.swift */,
+				BEFC34C62BCFC29600CE906E /* SoundManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFC34C92BCFC51B00CE906E /* 14428.wav in Resources */,
 				76AC258B29C2E23B007874DA /* Preview Assets.xcassets in Resources */,
 				76AC25BB29C2E4C2007874DA /* Localizable.strings in Resources */,
 				76443C2B29D27A9A00D23BB0 /* README.md in Resources */,
@@ -652,6 +659,7 @@
 				761044E429CC1ACE004EFAA2 /* ButtonStyle.swift in Sources */,
 				BE0C69282B72206100312FE1 /* AppService.swift in Sources */,
 				BEF0EBC02B75E60C00EAB2D9 /* LanguagePopverMenu.swift in Sources */,
+				BEFC34C72BCFC29600CE906E /* SoundManager.swift in Sources */,
 				BE573E3C2B8C4E5600226D3A /* ToolbarView.swift in Sources */,
 				76AC25AC29C2E369007874DA /* Pipeline.swift in Sources */,
 				BE27EBE62B7B308D0024DB77 /* OptionButton.swift in Sources */,
@@ -849,7 +857,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -896,7 +904,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";

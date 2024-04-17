@@ -55,12 +55,14 @@ struct TabelView: View {
                 
                 if model.subTablelOrderkeys.count > 0 {
                     
-                    Button {
-                        showPopover = true
-                    } label: {
+//                    Button {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                            showPopover = true
+//                        }
+//                    } label: {
                         Image(systemName: "chevron.forward")
                             .foregroundStyle(model.state.textColor)
-                    }
+                    //}
                     .frame(width: 44)
                     .popover(isPresented: $showPopover, content: {
                         //LanguagePopverMenu(showPopover: $showPopover)

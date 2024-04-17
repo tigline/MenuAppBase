@@ -16,14 +16,13 @@ struct MenuGalleryLazyVGrid: View {
     @State private var animationStartFrame: CGRect = .zero
 
     private let minWidth: CGFloat = DisplayType.portrait(.middle).imageSize.width + 10
-
     var body: some View {
         ZStack {
             ScrollView(.vertical) {
                 let columns: [GridItem] = [.init(.adaptive(minimum: minWidth))]
                 LazyVGrid(columns: columns, spacing: 18.5) {
                     ForEach(menuStore.curMenuInfo?.menuVoList ?? []) { item in
-                        MenuItemView(item: item)
+                        MenuItemView(item: item).frame(minHeight: 150)
                     }
                 }
                 .padding(.top, 15)

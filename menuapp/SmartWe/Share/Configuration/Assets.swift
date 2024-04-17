@@ -93,11 +93,35 @@ extension AppTheme {
         }
     }
     
+    var orderListIconOn: String {
+        switch self {
+        
+        case .orange:
+            return "button_list_white"
+        case .dark:
+            return "button_list_white"
+        case .brown:
+            return "button_list_black"
+        }
+    }
+    
     var shoppingCarIcon: String {
         switch self {
         
         case .orange:
             return "button_shopping_car_black"
+        case .dark:
+            return "button_shopping_car_white"
+        case .brown:
+            return "button_shopping_car_black"
+        }
+    }
+    
+    var shoppingCarIconOn: String {
+        switch self {
+        
+        case .orange:
+            return "button_shopping_car_white"
         case .dark:
             return "button_shopping_car_white"
         case .brown:
@@ -157,8 +181,8 @@ extension AppTheme {
                                sideBarTextDf: .white,
                                quantityBtBg: .white,
                                toolBarBtBg: .init(red: 246/255, green: 244/255, blue: 245/255),
-                               toolBarTextBgOn: .white,
-                               toolBarTextBgOff: .black, 
+                               toolBarTextBgOn: .black,
+                               toolBarTextBgOff: .black,
                                shortInfoBg: .white, 
                                shortInfoText: .black, 
                                addButtonBg: .init(red: 92/255, green: 60/255, blue: 35/255),

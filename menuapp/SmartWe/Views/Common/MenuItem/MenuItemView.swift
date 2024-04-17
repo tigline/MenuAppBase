@@ -12,7 +12,8 @@ import UIKit
 public struct MenuItemView: View {
     let item: Menu
     let displayType: DisplayType = .portrait(.middle)
-    @Environment(\.goOptions) var goOptions
+    @Environment(\.goOptions) private var goOptions
+    @Environment(\.soundPlayer) private var soundPlayer
     @State var geomeFrame: CGRect = .zero
     
     @StateObject private var configuration = AppConfiguration.share
@@ -44,6 +45,7 @@ public struct MenuItemView: View {
             
             itemView
                 .onTapGesture {
+                    soundPlayer.playSound(soundFileName: "14428")
                     DispatchQueue.main.asyncAfter(deadline: .now()) {
                         goOptions(item ,snapshotView(animateView), geomeFrame)
                     }
@@ -58,29 +60,6 @@ public struct MenuItemView: View {
                             }
                     }
                 )
-            
-//            if isPressed {
-//                animateView
-//                    .frame(width: geomeFrame.width, height: geomeFrame.height)
-//                    .clipShape(Circle())
-//                    .scaleEffect(animation ? 0.1:1)
-//                    .onAppear {
-//                        withAnimation(.easeInOut) {
-//                            animation.toggle()
-//                        } completion: {
-//                            DispatchQueue.main.asyncAfter(deadline: .now()) {
-//                                
-//                                goOptions(snapshotView(animateView), geomeFrame)
-//                                
-//                            }
-//                            
-//                            isPressed.toggle()
-//                            animation.toggle()
-//                            
-//                        }
-//
-//                    }
-//            }
         }
        
     }
@@ -183,7 +162,7 @@ public enum DisplayType: Equatable {
         case .portrait(.small):
             return .init(width: 150, height: 223)
         case .portrait(.middle):
-            return .init(width: 260, height: 160)
+            return .init(width: 220, height: 220)
         case .portrait(.large):
             // TODO: - 设置成正确的 Large 尺寸
             return .init(width: 174, height: 260)
