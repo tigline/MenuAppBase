@@ -53,51 +53,56 @@ struct TabelView: View {
                     .foregroundColor(model.state.textColor)
                     .font(.title3)
                 
-                Button {
-                    showPopover = true
-                } label: {
-                    Image(systemName: "chevron.forward")
-                        .foregroundStyle(model.state.textColor)
-                }
-                .frame(width: 44)
-                .popover(isPresented: $showPopover, content: {
-                    //LanguagePopverMenu(showPopover: $showPopover)
-                    VStack {
-                        ForEach(model.subTablelOrderkeys.indices, id: \.self) { index in
-                            Button {
-                                if model.subTablelOrderkeys[index].isEmpty {
-                                    
-                                } else {
-                                    subTableNo = index
-                                    showAlert = true
+                if model.subTablelOrderkeys.count > 0 {
+                    
+                    Button {
+                        showPopover = true
+                    } label: {
+                        Image(systemName: "chevron.forward")
+                            .foregroundStyle(model.state.textColor)
+                    }
+                    .frame(width: 44)
+                    .popover(isPresented: $showPopover, content: {
+                        //LanguagePopverMenu(showPopover: $showPopover)
+                        VStack {
+                            ForEach(model.subTablelOrderkeys.indices, id: \.self) { index in
+                                Button {
+                                    if model.subTablelOrderkeys[index].isEmpty {
+                                        
+                                    } else {
+                                        subTableNo = index
+                                        showAlert = true
+                                    }
+                                } label: {
+                                    Text(model.subTableInfo(index))
+                                        .frame(maxWidth: .infinity, minHeight:44)
+                                        .padding(.horizontal)
+                                        .foregroundStyle(.white)
+                                        .background(model.seatButtonColor(index))
+                                        .clipCornerRadius(8)
                                 }
-                            } label: {
-                                Text(model.subTableInfo(index))
-                                    .frame(maxWidth: .infinity, minHeight:44)
-                                    .padding(.horizontal)
-                                    .foregroundStyle(.white)
-                                    .background(model.seatButtonColor(index))
-                                    .clipCornerRadius(8)
+                                
+                            }
+                        }
+                        .padding()
+                        .alert("select_table_title", isPresented: $showAlert) {
+                            
+                            Button("cancel_text", role: .cancel){
+                                
+                            }
+                            
+                            Button("sure_text"){
+                                
+                                configuration.tableNo = model.tableInfo.seatNumber + "-" + "\(subTableNo+1)"
+                                configuration.orderKey = model.subTablelOrderkeys[subTableNo]
+                                
+                                print("\(model.subTablelOrderkeys)")
+                                showPopover = false
                             }
                             
                         }
-                    }
-                    .padding()
-                    .alert("select_table_title", isPresented: $showAlert) {
-                        
-                        Button("cancel_text", role: .cancel){
-                            
-                        }
-                        
-                        Button("sure_text"){
-                            
-                            configuration.tableNo = model.tableInfo.seatNumber + "-" + "\(subTableNo)"
-                            configuration.orderKey = model.subTablelOrderkeys[subTableNo]
-                            showPopover = false
-                        }
-                        
-                    }
-                })
+                    })
+                }
 
             }
             .frame(height: 44)

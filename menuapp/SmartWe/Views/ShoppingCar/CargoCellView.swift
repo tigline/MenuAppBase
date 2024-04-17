@@ -23,6 +23,10 @@ struct CargoCellView: View {
     
     @State private var quantity:Int = 999
     
+    var tableNo:LocalizedStringKey {
+        LocalizedStringKey(item.tableNo ?? "select_a_table")
+    }
+    
     var body: some View {
         VStack {
             
@@ -44,7 +48,7 @@ struct CargoCellView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(themeColor.cargoTextColor)
                 Spacer()
-                Text(item.tableNo ?? "Select a Table")
+                Text(tableNo)
                     .padding(.horizontal)
                     .font(CustomFonts.carGoMenuFont)
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -37,3 +37,33 @@
 "orange_text" = "오렌지색";
 "dark_text" = "어둠";
 "brown_text" = "갈색";
+
+"not_shopping_tips" = "주문해주세요";
+
+"item_count" = "수량";
+
+"shopping_price" = "소계";
+
+"all_shopping_price" = "총계";
+
+"shopping_car_to_order" = "주문하기";
+
+"ordering_tips" = "주문 중입니다, 기다려 주세요";
+
+"order_success_tips" = "주문해 주셔서 감사합니다";
+
+"not_booking_tips" = "주문 없음";
+
+"amount_price" = "총 금액";
+
+"tax_price" = "세금 포함";
+
+"tax_flog" = "(세금 포함)";
+
+"operation_password" = "운영 비밀번호";
+"password_reset" = "비밀번호 재설정";
+"password_reset_tips" = "새 비밀번호를 입력하세요";
+"password_error" = "비밀번호가 틀렸습니다";
+"password_reinput" = "다시 입력하세요";
+"reset_password" = "비밀번호 재설정";
+"password_is_empty" = "비밀번호를 비워둘 수 없습니다";

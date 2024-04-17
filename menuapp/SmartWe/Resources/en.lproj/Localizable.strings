@@ -38,3 +38,33 @@
 "orange_text" = "Orange";
 "dark_text" = "Dark";
 "brown_text" = "Brow";
+
+"not_shopping_tips" = "Please place an order";
+
+"item_count" = "Quantity";
+
+"shopping_price" = "Subtotal";
+
+"all_shopping_price" = "Total";
+
+"shopping_car_to_order" = "Place Order";
+
+"ordering_tips" = "Ordering, please wait";
+
+"order_success_tips" = "Thank you for your order";
+
+"not_booking_tips" = "No orders";
+
+"amount_price" = "Total Amount";
+
+"tax_price" = "Tax Included";
+
+"tax_flog" = "(Incl. tax)";
+
+"operation_password" = "Operation Password";
+"password_reset" = "Reset Password";
+"password_reset_tips" = "Please enter a new password";
+"password_error" = "Incorrect Password";
+"password_reinput" = "Re-enter Password";
+"reset_password" = "Reset Password";
+"password_is_empty" = "Password cannot be empty";

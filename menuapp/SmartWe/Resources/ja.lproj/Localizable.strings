@@ -37,3 +37,26 @@
 "orange_text" = "オレンジ";
 "dark_text" = "ダーク";
 "brown_text" = "茶色";
+
+
+"not_shopping_tips" = "ご注文ください";
+"item_count" = "数量";
+"shopping_price" = "小计";
+"all_shopping_price" = "合计";
+"shopping_car_to_order" = "発信";
+"ordering_tips" = "注文しています、お待ちしてください";
+"order_success_tips" = "ご注文あれがどうございました";
+
+
+"not_booking_tips" = "注文がなし";
+"amount_price" = "合計金額";
+"tax_price" = "内消費税";
+"tax_flog" = "(税込)";
+
+"operation_password" = "操作パスワード";
+"password_reset" = "パスワードのリセット";
+"password_reset_tips" = "新しいパスワードを入力してください";
+"password_error" = "パスワードが正しくありません";
+"password_reinput" = "再入力してください";
+"reset_password" = "パスワードをリセットする";
+"password_is_empty" = "パスワードを空にすることはできません";

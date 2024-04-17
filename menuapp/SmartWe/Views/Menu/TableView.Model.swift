@@ -60,12 +60,7 @@ extension TabelView {
         }
         
         var subTablelOrderkeys:[String] {
-            [
-                "alsmldjn",
-                "",
-                "ashjbfk",
-                "",
-            ]
+            tableInfo.orderKeys ?? []
         }
         
         

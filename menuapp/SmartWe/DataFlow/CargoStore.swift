@@ -69,6 +69,7 @@ class CargoStore {
                         orderKey:String,
                         takeout:Bool = false,
                         totalPrice:String,
+                        tableNo:String,
                         errorHandle:(Error?)->Void
     ) async {
         showOrderAnimate = true
@@ -86,12 +87,14 @@ class CargoStore {
         
         let order = Order(language: language, 
                           shopCode: shopCode,
-                          machineCode: machineCode,
+                          //machineCode: machineCode,
                           orderLineList: orderLineList,
                           orderType: orderType,
                           orderKey: orderKey,
                           takeout: takeout,
-                          total: totalPrice
+                          total: totalPrice,
+                          tableNo: tableNo
+                          
         )
         
         

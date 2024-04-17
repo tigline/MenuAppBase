@@ -9,12 +9,13 @@ import Foundation
 struct Order: Codable, Hashable {
     let language:String
     let shopCode:String
-    let machineCode:String
+    //let machineCode:String
     let orderLineList:[OrderLineList]
     var orderType:Int?
     var orderKey:String?
     var takeout:Bool?
     let total:String
+    let tableNo:String
     
 }
 struct OrderLineList: Codable, Hashable {

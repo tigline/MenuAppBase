@@ -40,12 +40,14 @@ extension OrderView {
         }
         
         
-        @MainActor func fetchOrders(shopCode:String, table:String) async throws {
+        @MainActor func fetchOrders(shopCode:String, machineCode:String, table:String) async throws {
+            guard table != "" else { return }
             guard !isLoading else { return }
             defer {isLoading = false}
             isLoading = true
             
             let request = APIRequest(resource: OrderDetailResource(shopCode: shopCode,
+                                                                   machineCode: machineCode,
                                                                    table: table))
             do {
                 let result = try await request.execute()
@@ -80,10 +82,13 @@ struct OrderDetailResource:APIResource {
     
     var body: Data? {
         ["shopCode":shopCode,
-        "machineCode":table].toJSONData() ?? Data()
+        "orderKey":table
+         //"orderKey":table
+        ].toJSONData() ?? Data()
     }
     
     let shopCode:String
+    let machineCode:String
     let table:String
     
     

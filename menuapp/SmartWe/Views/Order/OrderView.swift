@@ -24,7 +24,11 @@ struct OrderView: View {
     }
     
     var table:String {
-        return configuration.machineCode ?? ""
+        return configuration.orderKey ?? ""
+    }
+    
+    var machineCode:String {
+        configuration.machineCode ?? ""
     }
     
     
@@ -38,7 +42,7 @@ struct OrderView: View {
                         Label("", systemImage: "exclamationmark.circle")
                             .foregroundStyle(theme.themeColor.toolBarTextBgOff)
                     } description: {
-                        Text("注文がなし")
+                        Text("not_booking_tips")
                             .foregroundStyle(theme.themeColor.toolBarTextBgOff)
                             .font(.title2)
                     }
@@ -74,9 +78,9 @@ struct OrderView: View {
                             priceCountView
                                 .padding(.bottom, 18)
                             totleCountView
-                                .padding(.bottom, 20)
-                            orderButton
                                 .padding(.bottom, 35)
+//                            orderButton
+//                                .padding(.bottom, 35)
                         }
                         
                     }
@@ -92,6 +96,7 @@ struct OrderView: View {
         .task {
             do {
                 try await model.fetchOrders(shopCode: shopCode,
+                                            machineCode: machineCode,
                                             table: table)
             } catch {
                 showError(error, nil)
@@ -100,16 +105,32 @@ struct OrderView: View {
         }
         .frame(maxHeight:.infinity)
         .background(theme.themeColor.contentBg)
-//        .overlay {
-//            
-//        }
+        
+        .onChange(of: configuration.orderKey) { oldValue, newValue in
+            
+            Task{
+                if newValue != nil {
+                    do {
+                        try await model.fetchOrders(shopCode: shopCode,
+                                                    machineCode: machineCode,
+                                                    table: newValue!)
+                    } catch {
+                        showError(error, nil)
+                    }
+                }
+            }
+            
+            
+
+            
+        }
         
     }
     
     @ViewBuilder
     var goodsCountView: some View {
         HStack {
-            Text("点数")
+            Text("item_count")
                 .font(CustomFonts.cargoCountFont)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
@@ -124,16 +145,16 @@ struct OrderView: View {
     @ViewBuilder
     var priceCountView: some View {
         HStack {
-            Text("合計金額")
+            Text("amount_price")
                 .frame(alignment: .leading)
                 .font(CustomFonts.cargoCountFont)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             
-            Text(model.totalPrice)
+            Text("¥ " + model.totalPrice)
                 .font(CustomFonts.cargoTotalFont)
                 .foregroundStyle(theme.themeColor.orderBtBg)
-            + Text(" (税込)")
+            + Text("tax_flog")
                 .font(CustomFonts.cargoCountFont)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
         }
@@ -142,7 +163,7 @@ struct OrderView: View {
     @ViewBuilder
     var totleCountView: some View {
         HStack {
-            Text("内消費税")
+            Text("tax_price")
                 .font(CustomFonts.cargoCountFont)
                 .frame(alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)

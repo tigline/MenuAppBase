@@ -24,6 +24,11 @@ extension ContentView {
             guard let order = orderKey else {
                 return
             }
+            
+            if isChecking == true {
+                stopRepeatingTask()
+                try? await Task.sleep(nanoseconds: 10_000_000_000)
+            }
             isChecking = true
             await checkTask(shop, order)
         }

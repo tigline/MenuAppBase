@@ -81,7 +81,6 @@
 		BE2A3D912B9EFE29004FF513 /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A3D902B9EFE29004FF513 /* OrderDetail.swift */; };
 		BE2A84422B7EF1C0007D11CB /* ShoppingCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */; };
 		BE2A84442B7F29B0007D11CB /* CargoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84432B7F29B0007D11CB /* CargoCellView.swift */; };
-		BE2A84462B7F4B7A007D11CB /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */; };
 		BE573E382B8C4D4C00226D3A /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE573E372B8C4D4C00226D3A /* SideBar.swift */; };
 		BE573E3A2B8C4D8F00226D3A /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE573E392B8C4D8F00226D3A /* AppRouter.swift */; };
 		BE573E3C2B8C4E5600226D3A /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE573E3B2B8C4E5600226D3A /* ToolbarView.swift */; };
@@ -170,7 +169,6 @@
 		BE2A3D902B9EFE29004FF513 /* OrderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetail.swift; sourceTree = "<group>"; };
 		BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCarView.swift; sourceTree = "<group>"; };
 		BE2A84432B7F29B0007D11CB /* CargoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoCellView.swift; sourceTree = "<group>"; };
-		BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		BE573E372B8C4D4C00226D3A /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		BE573E392B8C4D8F00226D3A /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		BE573E3B2B8C4E5600226D3A /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
@@ -510,7 +508,6 @@
 			children = (
 				BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */,
 				BE2A84432B7F29B0007D11CB /* CargoCellView.swift */,
-				BE2A84452B7F4B7A007D11CB /* SwiftUIView.swift */,
 			);
 			path = ShoppingCar;
 			sourceTree = "<group>";
@@ -662,7 +659,6 @@
 				BE1C2ADD2BA81A0B00DEB7E6 /* OrderCellView.swift in Sources */,
 				769002A629C67ACB00620A3C /* Model.xcdatamodeld in Sources */,
 				BE2A3D912B9EFE29004FF513 /* OrderDetail.swift in Sources */,
-				BE2A84462B7F4B7A007D11CB /* SwiftUIView.swift in Sources */,
 				7652A73E29CD52E9000D7A4A /* FetchRequest.swift in Sources */,
 				BE1C2AD72BA2EE1E00DEB7E6 /* MenuResource.swift in Sources */,
 				BE82C82C2BA95E0200506EAF /* OptionGroupListView.Model.swift in Sources */,
@@ -858,7 +854,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartwe.admin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -905,7 +901,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartwe.admin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

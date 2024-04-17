@@ -37,3 +37,33 @@
 "orange_text" = "橙色";
 "dark_text" = "暗黑";
 "brown_text" = "棕色";
+
+"not_shopping_tips" = "请下单";
+
+"item_count" = "数量";
+
+"shopping_price" = "小计";
+
+"all_shopping_price" = "总计";
+
+"shopping_car_to_order" = "下单";
+
+"ordering_tips" = "正在下单，请等待";
+
+"order_success_tips" = "感谢您的下单";
+
+"not_booking_tips" = "无订单";
+
+"amount_price" = "总金额";
+
+"tax_price" = "含税";
+
+"tax_flog" = "(含税)";
+
+"operation_password" = "操作密码";
+"password_reset" = "重设密码";
+"password_reset_tips" = "请输入新密码";
+"password_error" = "密码不正确";
+"password_reinput" = "重新输入";
+"reset_password" = "重新设置";
+"password_is_empty" = "密码不可为空";

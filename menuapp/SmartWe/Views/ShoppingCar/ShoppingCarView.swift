@@ -69,7 +69,7 @@ struct ShoppingCarView: View {
                     Label("", systemImage: "exclamationmark.circle")
                         .foregroundStyle(theme.themeColor.toolBarTextBgOff)
                 } description: {
-                    Text("ご注文ください")
+                    Text("not_shopping_tips")
                         .foregroundStyle(theme.themeColor.toolBarTextBgOff)
                         .font(.title2)
                 }
@@ -123,7 +123,7 @@ struct ShoppingCarView: View {
 //            .sheet(isPresented: $showTable) {
 //                SelectTableView()
 //            }
-            .alert("ご注文あれがどうございました", isPresented: $showSuccess) {
+            .alert("order_success_tips", isPresented: $showSuccess) {
                 Button {
                     showSuccess = false
                     Task {
@@ -131,30 +131,30 @@ struct ShoppingCarView: View {
                     }
                     
                 } label: {
-                    Text("確認")
+                    Text("sure_text")
                         .contentShape(Rectangle())
                 }
 
             }
-            .alert("ご注文しましょうか", isPresented: $showOrder) {
-                Button {
-                    Task {
-                        print("sendCarToOrder start")
-                        orderAction()
-                        
-                    }
-                } label: {
-                    Text("確認")
-                        .contentShape(Rectangle())
-                }
-                Button {
-                    configuration.lastChangedDate = Date().timeIntervalSince1970
-                } label: {
-                    Text("继续点餐")
-                        .contentShape(Rectangle())
-                }
-
-            }
+//            .alert("ご注文しましょうか", isPresented: $showOrder) {
+//                Button {
+//                    Task {
+//                        print("sendCarToOrder start")
+//                        orderAction()
+//                        
+//                    }
+//                } label: {
+//                    Text("sure_text")
+//                        .contentShape(Rectangle())
+//                }
+//                Button {
+//                    configuration.lastChangedDate = Date().timeIntervalSince1970
+//                } label: {
+//                    Text("继续点餐")
+//                        .contentShape(Rectangle())
+//                }
+//
+//            }
 //            .onAppear{
 //                showOrder = showOrderReminder
 //            }
@@ -171,6 +171,7 @@ struct ShoppingCarView: View {
                                             machineCode: configuration.machineCode ?? "",
                                             orderKey: configuration.orderKey ?? "",
                                             totalPrice: allTotal,
+                                            tableNo: configuration.tableNo ?? "",
                                             errorHandle: { error in
                 if let getError = error {
                     showError(getError, "Please try again")
@@ -189,7 +190,7 @@ struct ShoppingCarView: View {
                 Spacer()
                 ProgressView()
                 Spacer()
-                Text("注文しています、お待ちしてください")
+                Text("ordering_tips")
             }
             .padding()
             .frame(maxWidth: 200, maxHeight: 200)
@@ -207,9 +208,10 @@ struct ShoppingCarView: View {
             Spacer()
             
             if isNoTableNo {
-                Button("Select a Table") {
+                Button("select_a_table") {
                     showTable(true)
                 }
+                .padding(.horizontal)
                 .foregroundStyle(.white)
                 .frame(minWidth: 200, minHeight: 50)
                 .background(theme.themeColor.buttonColor)
@@ -223,7 +225,7 @@ struct ShoppingCarView: View {
                         
                     }
                 } label: {
-                    Text("発信")
+                    Text("shopping_car_to_order")
                         .frame(maxWidth: .infinity)
 
                 }
@@ -240,7 +242,7 @@ struct ShoppingCarView: View {
     @ViewBuilder
     var goodsCountView: some View {
         HStack {
-            Text("数量")
+            Text("item_count")
                 .font(CustomFonts.cargoCountFont)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
@@ -255,12 +257,12 @@ struct ShoppingCarView: View {
     @ViewBuilder
     var priceCountView: some View {
         HStack {
-            Text("小计")
+            Text("shopping_price")
                 .frame(alignment: .leading)
                 .font(CustomFonts.cargoCountFont)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
-            Text(allTotal)
+            Text("¥ "+allTotal)
                 .frame(alignment: .trailing)
                 .font(CustomFonts.cargoCountFont)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
@@ -270,12 +272,12 @@ struct ShoppingCarView: View {
     @ViewBuilder
     var totleCountView: some View {
         HStack {
-            Text("合计")
+            Text("all_shopping_price")
                 .font(CustomFonts.cargoTotalFont)
                 .frame(alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
-            Text(allTotal)
+            Text("¥ "+allTotal)
                 .font(CustomFonts.cargoTotalPriceFont)
                 .frame(alignment: .trailing)
                 .foregroundStyle(theme.themeColor.cargoTextColor)

@@ -74,15 +74,15 @@ struct ContentView: View {
         }
         .onChange(of: appConfiguration.orderKey) { oldValue, newValue in
             
-            if appConfiguration.orderKey == nil {
+            if newValue == nil {
                 model.stopRepeatingTask()
                 return
             }
             
-            if appConfiguration.tableNo != nil && appConfiguration.orderKey != nil {
-//                Task {
-//                    await model.startCheck(appConfiguration.shopCode,appConfiguration.orderKey)
-//                }
+            if appConfiguration.tableNo != nil && newValue != nil {
+                Task {
+                    await model.startCheck(appConfiguration.shopCode,newValue)
+                }
             }
         }
 

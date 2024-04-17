@@ -22,6 +22,7 @@ struct StackContainer: View {
     @State private var showOptions = false
     @State private var showTable:Bool = false
     @State private var showPWAlert:Bool = false
+    @State private var showPWResult:Bool = false
     //let category:MenuCategory
     var body: some View {
         VStack {
@@ -69,12 +70,12 @@ struct StackContainer: View {
                 .padding()
             
             Button(role:.none) {
-                if password == "" {
-                    showPWAlert = false
-                    showTable = true
+                if password == configuration.password {
+                    showTable.toggle()
                 } else {
-                    showPWAlert = true
+                    showPWResult.toggle()
                 }
+                password = ""
             } label: {
                 HStack {
                     Spacer()
@@ -84,9 +85,24 @@ struct StackContainer: View {
             }
             
             Button("cancel_text", role: .cancel){
-                
+                password = ""
             }
             
+        }
+        .alert("password_error", isPresented: $showPWResult) {
+            
+            Button(role:.none) {
+                showPWAlert = true
+            } label: {
+                HStack {
+                    Spacer()
+                    Text("password_reinput")
+                    Spacer()
+                }
+            }
+            
+            Button("cancel_text", role: .cancel){
+            }
         }
         .sheet(isPresented: $showTable) {
             SelectTableView()
