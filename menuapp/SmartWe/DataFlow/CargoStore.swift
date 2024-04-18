@@ -48,9 +48,9 @@ class CargoStore {
         coreDataStack.updateCargoItem(menuCode: item.menuCode ?? "")
     }
     
-    func removeGood(_ item: CargoItem) {
+    func removeGood(_ item: CargoItem, isAll:Bool = false) {
         do {
-            try coreDataStack.deleteDataWithMenuCode(menuCode: item.menuCode ?? "")
+            try coreDataStack.deleteDataWithMenuCode(menuCode: item.menuCode ?? "", isAll: isAll)
         } catch {
             print("removeGood error \(error.localizedDescription)")
         }

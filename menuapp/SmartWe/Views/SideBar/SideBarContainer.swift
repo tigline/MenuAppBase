@@ -13,7 +13,7 @@ struct SideBarContainer: View {
     @Environment(\.cargoStore) var cargoStore
     
     @State var isLoading = false
-    
+    @StateObject private var animationManager = AnimationQueueManager()
     @State private var carGoAnimation = false
     @State private var showAddAnimation = false
     @State private var showOptions = false
@@ -54,7 +54,14 @@ struct SideBarContainer: View {
             }
             
         }
+        .overlay(
+            showOptions ? OptionGroupListView(model: OptionGroupListView.Model(menu: menuStore.selectMenuItem!),
+                                              isShowing: $showOptions, isShowAdd: $showAddAnimation) : nil,
+            
+            alignment: .center
+        )
         .environment(\.goOptions) { menu, image, rect in
+            //这里开始触发动画
             animationItemFrame = rect
             selectItem = image
             
@@ -65,45 +72,34 @@ struct SideBarContainer: View {
             } else {
                 //add to shopping car
                 cargoStore.addGood(menu, price: Int(menu.currentPrice))
-                showAddAnimation.toggle()
+                showAddAnimation = true
+                animationManager.enqueue(animation: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        carGoAnimation = true
+                    }
+                }, completion: {
+                    carGoAnimation = false
+                    showAddAnimation = false
+                    selectItem = nil
+                })
             }
             
         }
-        .overlay(
-            showOptions ? OptionGroupListView(model: OptionGroupListView.Model(menu: menuStore.selectMenuItem!), 
-                                              isShowing: $showOptions, isShowAdd: $showAddAnimation) : nil,
-            
-            alignment: .center
-        )
         .overlay {
-            if showAddAnimation {
-                if let animatedItem = selectItem  {
-                    GeometryReader { geometry in
-                        
-                        let originX = animationItemFrame.midX - geometry.frame(in: .global).minX
-                        let originY = animationItemFrame.midY - geometry.frame(in: .global).minY
-                        let image = Image(uiImage: animatedItem)
-                            .clipShape(.circle)
-                            .scaleEffect(carGoAnimation ? 0.1:1)
-                            
-                        image
-                            .position(x: originX,
-                                      y: originY)
-                            .offset(x: carGoAnimation ? (menuStore.cartIconGlobalFrame.midX - originX):0, y: carGoAnimation ? (menuStore.cartIconGlobalFrame.minY-originY):0)
-                            
-                            .onAppear {
-                                withAnimation(.easeInOut) {
-                                    carGoAnimation.toggle()
-                                    
-                                } completion: {
-                                    carGoAnimation.toggle()
-                                    showAddAnimation.toggle()
-                                    selectItem = nil
-                                }
-                            }
-                        }
-                    }
+            if showAddAnimation && selectItem != nil {
+                GeometryReader { geometry in
+                    let originX = animationItemFrame.midX - geometry.frame(in: .global).minX
+                    let originY = animationItemFrame.midY - geometry.frame(in: .global).minY
+                    let image = Image(uiImage: selectItem!)
+                        .clipShape(Circle())
+                        .scaleEffect(carGoAnimation ? 0.1 : 1)
+                    
+                    image
+                        .position(x: originX, y: originY)
+                        .offset(x: carGoAnimation ? (menuStore.cartIconGlobalFrame.midX - originX) : 0,
+                                y: carGoAnimation ? (menuStore.cartIconGlobalFrame.minY - originY) : 0)
                 }
+            }
         }
 
     }
@@ -111,3 +107,30 @@ struct SideBarContainer: View {
 }
 
 
+class AnimationQueueManager: ObservableObject {
+    @Published var animationQueue: [AnimationTask] = []
+    @Published var isAnimating: Bool = false
+
+    func enqueue(animation: @escaping () -> Void, completion: @escaping () -> Void) {
+        animationQueue.append(AnimationTask(action: animation, completion: completion))
+        executeNextAnimation()
+    }
+
+    private func executeNextAnimation() {
+        guard !isAnimating, !animationQueue.isEmpty else { return }
+        
+        let currentTask = animationQueue.removeFirst()
+        isAnimating = true
+        currentTask.action()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { // Adjust based on actual animation time
+            currentTask.completion()
+            self.isAnimating = false
+            self.executeNextAnimation()
+        }
+    }
+}
+
+struct AnimationTask {
+    let action: () -> Void
+    let completion: () -> Void
+}

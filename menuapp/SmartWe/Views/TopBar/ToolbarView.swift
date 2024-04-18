@@ -74,18 +74,6 @@ struct ToolbarView: View {
             )
             
             Spacer()
-//            Button(LocalizedStringKey("setting_theme")){
-//    
-//                showThemePopover = true
-//            }
-//            .padding()
-//            .frame(height: 44)
-//            .foregroundStyle(theme.themeColor.toolBarTextBgOff)
-//            .background(theme.themeColor.toolBarBtBg)
-//            .cornerRadius(10)
-//            .popover(isPresented: $showThemePopover, content: {
-//                ThemePopverMenu(showPopover: $showThemePopover)
-//            })
             
             OrderButton(icon: "table_icon",
                         text: tableNo,

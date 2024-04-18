@@ -93,22 +93,23 @@ struct ShoppingCarView: View {
             .padding(20)
         } else {
             VStack(spacing: 0) {
-                ScrollView(.vertical) {
-                    LazyVStack(content: {
-                        ForEach(shoppingCart.reversed()) { item in
-                            CargoCellView(item: item, addOrMinus: { action, item in
-                                switch action {
-                                case .add:
-                  
-                                    cargoStore.addGood(item)
-                                case .minus:
-                                 
-                                    cargoStore.removeGood(item)
-                                }
-                            })
-                        }
-                    })
+                List {
+                    ForEach(shoppingCart.reversed(), id: \.id) { item in // 确保您的item类型有唯一标识符
+                        CargoCellView(item: item, addOrMinus: { action, item in
+                            switch action {
+                            case .add:
+                                cargoStore.addGood(item)
+                            case .minus:
+                                cargoStore.removeGood(item)
+                            }
+                        })
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
+                        
+                    }
+                    .onDelete(perform: deleteItems)
                 }
+                .listStyle(PlainListStyle())
                 .background(theme.themeColor.mainBackground)
                 
                 HStack {
@@ -135,9 +136,6 @@ struct ShoppingCarView: View {
             .overlay {
                 cargoStore.showOrderAnimate ? OrderProgressView:nil
             }
-//            .sheet(isPresented: $showTable) {
-//                SelectTableView()
-//            }
             .alert("order_success_tips", isPresented: $showSuccess) {
                 Button {
                     showSuccess = false
@@ -175,6 +173,13 @@ struct ShoppingCarView: View {
 //            }
         }
             
+    }
+    
+    func deleteItems(at offsets: IndexSet) {
+        guard let firstIndex = offsets.first else { return }
+        let originalIndex = shoppingCart.count - 1 - firstIndex
+        let item = shoppingCart[originalIndex]
+        cargoStore.removeGood(item, isAll: true)
     }
     
     func orderAction()  {

@@ -157,7 +157,7 @@ extension CoreDataStack {
         }
     }
     
-    func deleteDataWithMenuCode(menuCode: String) throws {
+    func deleteDataWithMenuCode(menuCode: String, isAll:Bool = false) throws {
         container.performBackgroundTask { context in
             let request = NSFetchRequest<CargoItem>(entityName: "CargoItem")
             request.predicate = NSPredicate(format: "menuCode = %@", menuCode)
@@ -165,7 +165,7 @@ extension CoreDataStack {
             do {
                 if let result = try context.fetch(request).first {
                     
-                    if result.quantity > 1 {
+                    if result.quantity > 1 && !isAll {
                         result.quantity -= 1
                     } else {
                         context.delete(result)
