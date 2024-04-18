@@ -74,3 +74,7 @@
 "camera_access_denied" = "相机访问被拒绝";
 "access_in_settings" = "请在设置中启用相机访问。";
 "settings_text" = "设置";
+
+"swipeToDelete" = "删除";
+"tag_title" = "温馨提示";
+"show_del_cart_item_tag" = "是否要删除商品？";

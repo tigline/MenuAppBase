@@ -19,6 +19,8 @@ struct ShoppingCarView: View {
 
     @State private var showSuccess:Bool = false
     @State private var showOrder:Bool = false
+    @State private var showDelete:Bool = false
+    @State private var deleteItem:CargoItem?
     //var checkTimer:Timer?
     
     
@@ -100,14 +102,25 @@ struct ShoppingCarView: View {
                             case .add:
                                 cargoStore.addGood(item)
                             case .minus:
-                                cargoStore.removeGood(item)
+                                if item.quantity == 1 {
+                                    showDelete.toggle()
+                                } else {
+                                    cargoStore.removeGood(item)
+                                }
                             }
                         })
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button("swipeToDelete", role: .destructive) {
+                                deleteItem = item
+                                showDelete.toggle()
+                            }
+                        }
                         
                     }
-                    .onDelete(perform: deleteItems)
+                    
+                    //.onDelete(perform: deleteItems)
                 }
                 .listStyle(PlainListStyle())
                 .background(theme.themeColor.mainBackground)
@@ -149,28 +162,34 @@ struct ShoppingCarView: View {
                 }
 
             }
-//            .alert("ご注文しましょうか", isPresented: $showOrder) {
-//                Button {
-//                    Task {
-//                        print("sendCarToOrder start")
-//                        orderAction()
-//                        
-//                    }
-//                } label: {
-//                    Text("sure_text")
-//                        .contentShape(Rectangle())
-//                }
-//                Button {
-//                    configuration.lastChangedDate = Date().timeIntervalSince1970
-//                } label: {
-//                    Text("继续点餐")
-//                        .contentShape(Rectangle())
-//                }
-//
-//            }
-//            .onAppear{
-//                showOrder = showOrderReminder
-//            }
+            .alert("tag_title", isPresented: $showDelete) {
+                Button {
+                    guard let item = deleteItem else {
+                        return
+                    }
+                    cargoStore.removeGood(item, isAll: true)
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("sure_text")
+                        Spacer()
+                    }
+                }.foregroundStyle(.red)
+                
+                Button(role: .cancel) {
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("cancel_text")
+                        Spacer()
+                    }
+                }
+            } message: {
+                Text("show_del_cart_item_tag")
+            }
+
+            
+            
         }
             
     }
@@ -304,6 +323,8 @@ struct ShoppingCarView: View {
         }
     }
 }
+
+
 
 //#Preview {
 //    ShoppingCarView(, showTable: <#Binding<Bool>#>)

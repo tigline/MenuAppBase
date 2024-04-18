@@ -74,3 +74,7 @@
 "camera_access_denied" = "카메라 접근 거부됨";
 "access_in_settings" = "설정에서 카메라 접근을 활성화하세요.";
 "settings_text" = "설정";
+
+"swipeToDelete" = "삭제";
+"tag_title" = "친절한 팁";
+"show_del_cart_item_tag" = "상품을 삭제하시겠습니까?";

@@ -75,3 +75,7 @@
 "camera_access_denied" = "Camera Access Denied";
 "access_in_settings" = "Please enable camera access in your settings.";
 "settings_text" = "Settings";
+
+"swipeToDelete" = "Delete";
+"tag_title" = "Reminder";
+"show_del_cart_item_tag" = "Remove item？";
