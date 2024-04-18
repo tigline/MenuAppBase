@@ -54,10 +54,25 @@ struct ShoppingCarView: View {
         return false
     }
     
-    var allTotal:String {
+    var allTotal: String {
         let all = shoppingCart.reduce(0) { count, item in
             count + item.price * Double(item.quantity)
         }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal // 设置数字格式为十进制，这将包括千位分隔符
+        formatter.groupingSeparator = "," // 设置千位分隔符为逗号，可以根据地区需要调整
+        formatter.groupingSize = 3 // 设置分组的大小为3位数字
+
+        let formattedNumber = formatter.string(from: NSNumber(value: Int(all)))
+        return formattedNumber ?? "\(Int(all))"
+    }
+
+    var sendTotal: String {
+        let all = shoppingCart.reduce(0) { count, item in
+            count + item.price * Double(item.quantity)
+        }
+        
         return "\(Int(all))"
     }
     
@@ -170,7 +185,7 @@ struct ShoppingCarView: View {
                                             shopCode: configuration.shopCode ?? "",
                                             machineCode: configuration.machineCode ?? "",
                                             orderKey: configuration.orderKey ?? "",
-                                            totalPrice: allTotal,
+                                            totalPrice: sendTotal,
                                             tableNo: configuration.tableNo ?? "",
                                             errorHandle: { error in
                 if let getError = error {

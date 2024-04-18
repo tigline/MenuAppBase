@@ -25,10 +25,6 @@ struct OrderButton: View {
             onTap()
         }, label: {
             HStack(alignment: .center) {
-//                Label(text, image: icon)
-//                    .foregroundColor(textColor)
-//                    .frame(height: 44)
-                
                 Image(icon)
                     .resizable()
                     .scaledToFit()

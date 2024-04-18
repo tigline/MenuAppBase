@@ -24,7 +24,7 @@ class CargoStore {
         showOrderAnimate = value
     }
     
-    func updateTableNumber(_ number:String = "19") async {
+    func updateTableNumber(_ number:String? = "19") async {
         try? await coreDataStack.updateCargoKeyValue(key: "tableNo", value: number)
     }
     

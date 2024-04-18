@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabelView: View {
     @StateObject private var configuration = AppConfiguration.share
+    @Environment(\.cargoStore) var cargoStore
     @State private var showPopover = false
     @State private var showAlert = false
     @State private var subTableNo:Int = 0
@@ -94,12 +95,16 @@ struct TabelView: View {
                             }
                             
                             Button("sure_text"){
+                                Task{
+                                    configuration.tableNo = model.tableInfo.seatNumber + "-" + "\(subTableNo+1)"
+                                    configuration.orderKey = model.subTablelOrderkeys[subTableNo]
+                                    
+                                    await cargoStore.updateTableNumber(configuration.tableNo)
+                                    
+                                    print("\(model.subTablelOrderkeys)")
+                                    showPopover = false
+                                }
                                 
-                                configuration.tableNo = model.tableInfo.seatNumber + "-" + "\(subTableNo+1)"
-                                configuration.orderKey = model.subTablelOrderkeys[subTableNo]
-                                
-                                print("\(model.subTablelOrderkeys)")
-                                showPopover = false
                             }
                             
                         }

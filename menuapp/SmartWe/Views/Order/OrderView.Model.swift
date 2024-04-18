@@ -27,16 +27,29 @@ extension OrderView {
         
         var totalQty:String {
             
-            "\(allOrderList.reduce(0){$0 + $1.qty})"
+            //"\(allOrderList.reduce(0){$0 + $1.qty})"
+            formatMoney(allOrderList.reduce(0){$0 + $1.qty})
         }
         
         var totalPrice:String {
-            "\(allOrderList.reduce(0){$0 + $1.price})"
+            //"\(allOrderList.reduce(0){$0 + $1.price})"
+            formatMoney(allOrderList.reduce(0){$0 + $1.price})
         }
         
         var allTax:String {
             let price = allOrderList.reduce(0){$0 + $1.price}
-            return "(\(price/11))"
+            return "(¥\(formatMoney(price/11)))"
+        }
+        
+        func formatMoney(_ value:Int)->String {
+            
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal // 设置数字格式为十进制，这将包括千位分隔符
+            formatter.groupingSeparator = "," // 设置千位分隔符为逗号，可以根据地区需要调整
+            formatter.groupingSize = 3 // 设置分组的大小为3位数字
+
+            let formattedNumber = formatter.string(from: NSNumber(value: Int(value)))
+            return formattedNumber ?? "\(Int(value))"
         }
         
         
