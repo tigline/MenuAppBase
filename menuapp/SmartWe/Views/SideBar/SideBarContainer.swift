@@ -56,7 +56,9 @@ struct SideBarContainer: View {
         }
         .overlay(
             showOptions ? OptionGroupListView(model: OptionGroupListView.Model(menu: menuStore.selectMenuItem!),
-                                              isShowing: $showOptions, isShowAdd: $showAddAnimation) : nil,
+                                              isShowing: $showOptions, isShowAdd:{
+                                                  runAnimation()
+                                              }) : nil,
             
             alignment: .center
         )
@@ -72,16 +74,9 @@ struct SideBarContainer: View {
             } else {
                 //add to shopping car
                 cargoStore.addGood(menu, price: Int(menu.currentPrice))
-                showAddAnimation = true
-                animationManager.enqueue(animation: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        carGoAnimation = true
-                    }
-                }, completion: {
-                    carGoAnimation = false
-                    showAddAnimation = false
-                    selectItem = nil
-                })
+                
+                
+                runAnimation()
             }
             
         }
@@ -102,6 +97,19 @@ struct SideBarContainer: View {
             }
         }
 
+    }
+    
+    func runAnimation() {
+        showAddAnimation = true
+        animationManager.enqueue(animation: {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                carGoAnimation = true
+            }
+        }, completion: {
+            carGoAnimation = false
+            showAddAnimation = false
+            selectItem = nil
+        })
     }
     
 }

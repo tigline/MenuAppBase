@@ -18,7 +18,7 @@ struct OptionGroupListView: View {
     
     @State var model: Model
     @Binding var isShowing: Bool
-    @Binding var isShowAdd: Bool
+    let isShowAdd: ()->Void
 
     var body: some View {
         GeometryReader { geometry in
@@ -156,7 +156,7 @@ struct OptionGroupListView: View {
                         isShowing = false
                     } completion: {
                         model.addGood()
-                        isShowAdd.toggle()
+                        isShowAdd()
                     }
                 }) {
                     Text("確認する")
