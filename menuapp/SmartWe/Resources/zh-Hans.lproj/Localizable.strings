@@ -67,3 +67,10 @@
 "password_reinput" = "重新输入";
 "reset_password" = "重新设置";
 "password_is_empty" = "密码不可为空";
+
+"login_text" = "登录";
+"login_failed" = "登录失败";
+"input_machine_code" = "请输入机器码";
+"camera_access_denied" = "相机访问被拒绝";
+"access_in_settings" = "请在设置中启用相机访问。";
+"settings_text" = "设置";

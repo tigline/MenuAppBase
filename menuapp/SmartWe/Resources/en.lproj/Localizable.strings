@@ -68,3 +68,10 @@
 "password_reinput" = "Re-enter Password";
 "reset_password" = "Reset Password";
 "password_is_empty" = "Password cannot be empty";
+
+"login_text" = "Login";
+"login_failed" = "Login Failed";
+"input_machine_code" = "Please Input Machine Code";
+"camera_access_denied" = "Camera Access Denied";
+"access_in_settings" = "Please enable camera access in your settings.";
+"settings_text" = "Settings";

@@ -60,3 +60,10 @@
 "password_reinput" = "再入力してください";
 "reset_password" = "パスワードをリセットする";
 "password_is_empty" = "パスワードを空にすることはできません";
+
+"login_text" = "ログイン";
+"login_failed" = "ログインに失敗しました";
+"input_machine_code" = "マシンコードを入力してください";
+"camera_access_denied" = "カメラのアクセスが拒否されました";
+"access_in_settings" = "設定でカメラのアクセスを有効にしてください。";
+"settings_text" = "設定";

@@ -67,3 +67,10 @@
 "password_reinput" = "다시 입력하세요";
 "reset_password" = "비밀번호 재설정";
 "password_is_empty" = "비밀번호를 비워둘 수 없습니다";
+
+"login_text" = "로그인";
+"login_failed" = "로그인 실패";
+"input_machine_code" = "기계 코드를 입력하세요";
+"camera_access_denied" = "카메라 접근 거부됨";
+"access_in_settings" = "설정에서 카메라 접근을 활성화하세요.";
+"settings_text" = "설정";

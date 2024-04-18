@@ -18,6 +18,7 @@ struct LoginView: View {
         VStack {
             HStack{
                 Image("smartwe.logo")
+                    
                 Text("SmartWe")
                     .font(.title)
                     .bold()
@@ -27,13 +28,16 @@ struct LoginView: View {
             
             //输入框与扫码一体化
             HStack {
-                TextField("请输入设备码", text: $text)
+                TextField("input_machine_code", text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 300)
                     
                 
                 Button(action: scanAction) {
                     Image(systemName: "camera.viewfinder")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 32)
                         .foregroundColor(.blue)
                 }
                 .buttonStyle(BorderlessButtonStyle())
@@ -41,13 +45,14 @@ struct LoginView: View {
 
             }
             .padding()
-            Button("Login", action: loginAction)
+            Button("login_text", action: loginAction)
                 .buttonStyle(.borderedProminent)
+                
                 
             
             
-        }.alert("Login failed", isPresented: $showLoginError) {
-            Button("OK") {
+        }.alert("login_failed", isPresented: $showLoginError) {
+            Button("sure_text") {
                 showLoginError = false
                 // Handle the acknowledgement.
             }
@@ -55,7 +60,7 @@ struct LoginView: View {
             Text(loginError)
         }
         //弹出ScanView
-        .sheet(isPresented: .constant(openScanView), content: {
+        .sheet(isPresented: $openScanView, content: {
             ScanView(scannedCode: $text, openScanView: $openScanView)
         })
         

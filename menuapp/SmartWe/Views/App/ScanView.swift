@@ -11,11 +11,12 @@ import AVFoundation
 struct ScanView: View {
     @Binding var scannedCode: String
     @Binding var openScanView: Bool
+    @State private var showingAlert = false
     
     var body: some View {
         VStack {
             HStack {
-                Button("Cancel") {
+                Button("cancel_text") {
                     openScanView = false
                 }
                 .padding(.top)
@@ -28,9 +29,46 @@ struct ScanView: View {
                 openScanView = false
 
             })
+        }.onAppear{
+            //检查相机权限
+            checkCameraAccess()
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(
+                title: Text("camera_access_denied"),
+                message: Text("access_in_settings"),
+                dismissButton: .default(Text("settings_text"), action: {
+                    // 跳转到设置应用
+                    if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                })
+            )
         }
         
     }
+    
+    func checkCameraAccess() {
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+            case .authorized:
+                // 已授权，无需做任何事情
+                break
+            case .notDetermined:
+                // 未请求权限，发起请求
+                AVCaptureDevice.requestAccess(for: .video) { granted in
+                    if !granted {
+                        // 用户拒绝，更新 UI 反映状态
+                        showingAlert = true
+                    }
+                }
+            case .denied, .restricted:
+                // 权限被拒绝或受限，显示警告提示用户
+                showingAlert = true
+            @unknown default:
+                // 处理未知情况
+                break
+            }
+        }
 }
 
 //#Preview {
