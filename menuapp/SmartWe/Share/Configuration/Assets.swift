@@ -73,7 +73,9 @@ struct CustomFonts {
     
     static let cargoQuantityFont = Font.custom("Avenir-Heavy", size: 18)
     
-    static let cargoCountFont = Font.custom("PingFangSC-Regular", size: 15)
+    static let cargoCountFont = Font.custom("PingFangSC-Regular", size: 17)
+    
+    static let orderCountFont = Font.custom("PingFangSC-Semibold", size: 15)
     
     static let cargoTotalFont = Font.custom("PingFangSC-Semibold", size: 20)
     static let cargoTotalPriceFont = Font.custom("Avenir-Heavy", size: 23)

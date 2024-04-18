@@ -51,7 +51,11 @@ struct StackContainer: View {
         }
         .background(theme.themeColor.contentBg)
         .environment(\.showTable) { showTable in
-            showPWAlert = showTable
+            
+            DispatchQueue.main.async {
+                self.showPWAlert = showTable
+                //print("showPWAlert set to \(showPWAlert)")
+            }
         }
         .onAppear{
             if configuration.tableNo == nil {

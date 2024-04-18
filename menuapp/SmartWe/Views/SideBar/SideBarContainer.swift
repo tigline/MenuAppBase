@@ -11,10 +11,8 @@ struct SideBarContainer: View {
 
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore
-    //@Environment(\.managedObjectContext) private var context
     
     @State var isLoading = false
-    //@State var showTable = false
     
     @State private var carGoAnimation = false
     @State private var showAddAnimation = false
@@ -41,48 +39,19 @@ struct SideBarContainer: View {
                 StackContainer()
             }
             .environment(\.isLoading, isLoading)
-//            .onAppear(perform: {
-//                Task {
-//                    
-//                    isLoading = true
-//                    guard let shopCode = configuration.shopCode else {
-//                        return
-//                    }
-//                    let language = configuration.appLanguage
-//                    await menuStore.load(shopCode:shopCode, language:language.sourceId)
-//                    isLoading = false
-//                }
-//            })
-            .onAppear{
-                //if configuration.orderKey == nil {
-                
-                //    showTable = true
-                //}
-//                NotificationCenter.default.addObserver(
-//                    forName: .NSManagedObjectContextObjectsDidChange,
-//                    object: self.context,
-//                    queue: nil) { notification in
-//                        // 处理变化
-//                        self.handleContextChange(notification: notification)
-//                }
-            }
-//            .sheet(isPresented: $showTable) {
-//                SelectTableView()
-//            }
             .onReceive(configuration.$appLanguage){ lan in
                 Task {
                     isLoading = true
                     guard let shopCode = configuration.shopCode else {
                         return
                     }
-                    await menuStore.load(shopCode:shopCode, language:lan.sourceId)
+                    guard let machineCode = configuration.machineCode else {
+                        return
+                    }
+                    await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan.sourceId)
                     isLoading = false
                 }
             }
-//            .onDisappear {
-//                NotificationCenter.default.removeObserver(self)
-//            }
-            
             
         }
         .environment(\.goOptions) { menu, image, rect in
@@ -104,7 +73,7 @@ struct SideBarContainer: View {
             showOptions ? OptionGroupListView(model: OptionGroupListView.Model(menu: menuStore.selectMenuItem!), 
                                               isShowing: $showOptions, isShowAdd: $showAddAnimation) : nil,
             
-            alignment: .center // 定位到底部
+            alignment: .center
         )
         .overlay {
             if showAddAnimation {
@@ -136,32 +105,9 @@ struct SideBarContainer: View {
                     }
                 }
         }
-        
-        
-        
+
     }
     
-//    private func handleContextChange(notification: Notification) {
-//        if let userInfo = notification.userInfo {
-//            if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
-//                // 检查是否是你关心的表的变化
-//                updateLastChangedDate()
-//            }
-//            if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
-//                // 同上
-//                updateLastChangedDate()
-//            }
-//            if let updates = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
-//                // 同上
-//                updateLastChangedDate()
-//            }
-//        }
-//    }
-//    
-//    func updateLastChangedDate() {
-//        let now = Date()
-//        UserDefaults.standard.set(now, forKey: "LastChangedDate")
-//    }
 }
 
 

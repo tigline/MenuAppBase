@@ -117,8 +117,8 @@ struct ShoppingCarView: View {
                     VStack {
                         goodsCountView
                             .padding(.bottom, 12)
-                        priceCountView
-                            .padding(.bottom, 18)
+//                        priceCountView
+//                            .padding(.bottom, 18)
                         totleCountView
                             .padding(.bottom, 20)
                         orderButton
@@ -258,7 +258,7 @@ struct ShoppingCarView: View {
     var goodsCountView: some View {
         HStack {
             Text("item_count")
-                .font(CustomFonts.cargoCountFont)
+                .font(CustomFonts.orderCountFont)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()

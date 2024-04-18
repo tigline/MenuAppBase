@@ -13,7 +13,7 @@ protocol SmartWeService {
 
 //    func categroryList(shopCode:String,machineCode:String) async throws -> Response
 
-    func menuItemList(shopCode:String,language:String) async throws -> Response<ShopMenuInfo>
+    func menuItemList(shopCode: String, machineCode:String, language: String) async throws -> Response<ShopMenuInfo>
     
     func sendOrder(_ body:Data) async throws -> Response<Bool>
     

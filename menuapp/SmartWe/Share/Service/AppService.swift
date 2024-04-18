@@ -22,8 +22,8 @@ class AppService: SmartWeService {
         return try await apisClient.post(point: SmartWePostEndpoint.active(machineCode: machineCode))
     }
     
-    func menuItemList(shopCode: String, language: String) async throws -> Response<ShopMenuInfo> {
-        return try await APIRequest(resource: MenuResource(shopCode: shopCode, machineCode: language)).execute()
+    func menuItemList(shopCode: String, machineCode:String, language: String) async throws -> Response<ShopMenuInfo> {
+        return try await APIRequest(resource: MenuResource(shopCode: shopCode, machineCode: machineCode, language: language)).execute()
     }
     
     func sendOrder(_ body: Data) async throws -> Response<Bool> {

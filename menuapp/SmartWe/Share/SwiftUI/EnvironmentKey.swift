@@ -18,10 +18,6 @@ struct CargoStoreKey: EnvironmentKey {
     static var defaultValue = CargoStore(appService: AppService.appDefault)
 }
 
-struct InWishlistKey: EnvironmentKey {
-    static var defaultValue: (Int) -> Bool = { _ in true }
-}
-
 struct showEnterTableKey: EnvironmentKey {
     static var defaultValue: (Bool) -> Void = { _ in }
 }
@@ -34,14 +30,6 @@ struct themeKey: EnvironmentKey {
     static var defaultValue: (AppTheme) -> Void = {
         #if DEBUG
         print("select theme \($0.themeColor)")
-        #endif
-    }
-}
-
-struct UpdateMovieWishlistKey: EnvironmentKey {
-    static var defaultValue: (Int) -> Void = {
-        #if DEBUG
-            print("update movie id:\($0) in favorite movie list")
         #endif
     }
 }
@@ -63,7 +51,7 @@ struct GoOptionsKey: EnvironmentKey {
     }
 }
 
-struct MovieIsLoadingKey: EnvironmentKey {
+struct MenuIsLoadingKey: EnvironmentKey {
     static var defaultValue: Bool = false
 }
 
@@ -102,21 +90,10 @@ extension EnvironmentValues {
         set { self[GoOptionsKey.self] = newValue }
     }
     
-    // check if in favorite movie list
-    var inWishlist: (Int) -> Bool {
-        get { self[InWishlistKey.self] }
-        set { self[InWishlistKey.self] = newValue }
-    }
     
     var inOptionlist: (String, String) -> Bool {
         get { self[InOptionlistKey.self] }
         set { self[InOptionlistKey.self] = newValue }
-    }
-    
-    // add movie into favorite list
-    var updateWishlist: (Int) -> Void {
-        get { self[UpdateMovieWishlistKey.self] }
-        set { self[UpdateMovieWishlistKey.self] = newValue }
     }
     
     var updateOptionlist: (String, String, Double) -> Void {
@@ -125,8 +102,8 @@ extension EnvironmentValues {
     }
 
     var isLoading: Bool {
-        get { self[MovieIsLoadingKey.self] }
-        set { self[MovieIsLoadingKey.self] = newValue }
+        get { self[MenuIsLoadingKey.self] }
+        set { self[MenuIsLoadingKey.self] = newValue }
     }
     
     var showTable: (Bool) -> Void {

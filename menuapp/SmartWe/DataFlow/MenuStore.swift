@@ -72,9 +72,9 @@ class MenuStore {
         self.appService = appService
     }
     
-    @MainActor func load(shopCode: String, language: String) async {
+    @MainActor func load(shopCode: String, machineCode:String, language: String) async {
         do {
-            let result = try await appService.menuItemList(shopCode: shopCode, language: language)
+            let result = try await appService.menuItemList(shopCode: shopCode, machineCode: machineCode, language: language)
             if result.code == 200 {
                 shopMenuInfo = result.data
             }

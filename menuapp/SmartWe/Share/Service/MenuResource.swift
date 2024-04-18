@@ -16,10 +16,12 @@ struct MenuResource: APIResource {
     
     var body: Data? {
         ["shopCode":shopCode,
-        "machineCode":machineCode].toJSONData() ?? Data()
+         "machineCode":machineCode,
+         "language":language].toJSONData() ?? Data()
     }
     
     let shopCode:String
     let machineCode:String
+    let language:String
 
 }

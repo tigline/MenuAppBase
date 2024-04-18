@@ -77,8 +77,10 @@ struct LanguagePopverMenu: View {
         guard let shopCode = configuration.shopCode else {
             return
         }
-        
-        await menuStore.load(shopCode:shopCode, language:lan)
+        guard let machineCode = configuration.machineCode else {
+            return
+        }
+        await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan)
     }
 }
 

@@ -25,6 +25,10 @@ extension OrderView {
             return categoryVos.reversed().compactMap{$0}
         }
         
+        func clearOrder() {
+            orderInfo = nil
+        }
+        
         var totalQty:String {
             
             //"\(allOrderList.reduce(0){$0 + $1.qty})"

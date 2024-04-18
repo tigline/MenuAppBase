@@ -117,6 +117,8 @@ struct OrderView: View {
                     } catch {
                         showError(error, nil)
                     }
+                } else {
+                    model.clearOrder()
                 }
             }
             
@@ -131,7 +133,7 @@ struct OrderView: View {
     var goodsCountView: some View {
         HStack {
             Text("item_count")
-                .font(CustomFonts.cargoCountFont)
+                .font(CustomFonts.orderCountFont)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
@@ -147,7 +149,7 @@ struct OrderView: View {
         HStack {
             Text("amount_price")
                 .frame(alignment: .leading)
-                .font(CustomFonts.cargoCountFont)
+                .font(CustomFonts.orderCountFont)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             
@@ -164,7 +166,7 @@ struct OrderView: View {
     var totleCountView: some View {
         HStack {
             Text("tax_price")
-                .font(CustomFonts.cargoCountFont)
+                .font(CustomFonts.orderCountFont)
                 .frame(alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
