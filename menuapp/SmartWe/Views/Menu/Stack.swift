@@ -35,9 +35,9 @@ struct StackContainer: View {
                         case .menu(_):
                                 MenuGalleryLazyVGrid()
                             case .cart:
-                                ShoppingCarView()
+                                ShoppingCarView().ignoresSafeArea(.keyboard)
                             case .order:
-                                OrderView()
+                                OrderView().ignoresSafeArea(.keyboard)
                             case .setting:
                                 SettingAppearance()
                             case .none:
@@ -69,7 +69,7 @@ struct StackContainer: View {
         })
         .alert("input_password_title", isPresented: $showPWAlert) {
             
-            SecureField("password_text", text: $password)
+            SecureField("", text: $password)//password_text
                 .keyboardType(.numberPad)
                 .padding()
             

@@ -55,18 +55,20 @@ struct OrderView: View {
                 
                 
                 VStack(spacing: 0) {
-                    ScrollView(.vertical) {
-                        LazyVStack(content: {
-                            ForEach(model.allOrderList) { item in
-                                OrderCellView(imageUrl: item.image ?? "",
-                                              orderTime: item.orderTime ?? "",
-                                              title: item.mainTitle ?? "",
-                                              optionInfo: item.optionVoListMsgMap ?? [:],
-                                              quntity: item.qty,
-                                              price: item.price)
-                            }
-                        })
+                    List{
+                        ForEach(model.allOrderList, id: \.id) { item in
+                            OrderCellView(imageUrl: item.image ?? "",
+                                          orderTime: item.orderTime ?? "",
+                                          title: item.mainTitle ?? "",
+                                          optionInfo: item.optionVoListMsgMap ?? [:],
+                                          quntity: item.qty,
+                                          price: item.price)
+                        }
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
+
                     }
+                    .listStyle(PlainListStyle())
                     .background(theme.themeColor.mainBackground)
                     
                     HStack {

@@ -135,7 +135,7 @@ struct SettingAppearance: View {
             }
             .alert("password_reset_tips", isPresented: $showResetPw) {
                 
-                TextField("password_text", text: $password)
+                TextField("", text: $password)//password_text
                     .keyboardType(.numberPad)
                     .padding()
                 

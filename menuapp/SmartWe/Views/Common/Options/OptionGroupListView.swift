@@ -47,35 +47,11 @@ struct OptionGroupListView: View {
                         } placeholder: {
                             ProgressView()
                         }
-                        .frame(maxHeight: .infinity)
                         .clipCornerRadius(8)
                         
-                        Spacer()
-                        
-                        
-//                        HStack(spacing: 15, content: {
-//                            
-//                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
-//                                image
-//                                    .resizable()
-//                                    .clipped()
-//                            } placeholder: {
-//                                ProgressView()
-//                            }
-//                            .clipCornerRadius(8)
-//                            
-//                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
-//                                image
-//                                    .resizable()
-//                                    .clipped()
-//                            } placeholder: {
-//                                ProgressView()
-//                            }
-//                            .clipCornerRadius(8)
-//                            
-//                        })
-//                        .frame(height: 150)
-                        
+                        Text(model.subTitle)
+                            .font(CustomFonts.optionDetailFont)
+                            .foregroundStyle(AppTheme.Colors.optionDetailColor)
                     })
                     .padding()
                     .frame(width: 360)
@@ -94,9 +70,7 @@ struct OptionGroupListView: View {
                             }
                             .padding(.trailing, 60)
 
-                            Text(model.subTitle)
-                                .font(CustomFonts.optionDetailFont)
-                                .foregroundStyle(AppTheme.Colors.optionDetailColor)
+                            
                             optionView
                         })
                         closeButton
@@ -187,3 +161,25 @@ struct OptionGroupListView: View {
 //    @State var isShow:Bool = false
 //    OptionGroupListView(optionGroups: sampleOptionGroups, isShowing: $isShow)
 //}
+//                        HStack(spacing: 15, content: {
+//
+//                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
+//                                image
+//                                    .resizable()
+//                                    .clipped()
+//                            } placeholder: {
+//                                ProgressView()
+//                            }
+//                            .clipCornerRadius(8)
+//
+//                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
+//                                image
+//                                    .resizable()
+//                                    .clipped()
+//                            } placeholder: {
+//                                ProgressView()
+//                            }
+//                            .clipCornerRadius(8)
+//
+//                        })
+//                        .frame(height: 150)

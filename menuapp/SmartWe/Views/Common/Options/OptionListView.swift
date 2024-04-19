@@ -20,7 +20,7 @@ struct OptionListView: View {
             Text(option.groupName)
                 .font(CustomFonts.optionTitle2Font)
             let columns: [GridItem] = [.init(.adaptive(minimum: 120))]
-            LazyVGrid(columns: columns, spacing: 15) {
+            LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(option.optionVoList) { optionVo in
                     OptionButton(optionVo: optionVo)
                 }

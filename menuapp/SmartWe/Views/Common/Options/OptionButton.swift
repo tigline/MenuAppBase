@@ -40,15 +40,25 @@ struct OptionButton: View {
         Button(action: {
             updateOptionlist(optionVo.optionCode, optionVo.group, optionVo.currentPrice)
         }, label: {
-            ZStack(alignment:.topTrailing){
-                HStack{
+            ZStack{
+                VStack{
                     Spacer()
-                    Text(optionVo.mainTitle)
-                        .font(CustomFonts.optionButtonFont)
-                        .foregroundStyle(isSelected ? .white : .black)
-                        .lineLimit(2)
-                    Spacer()
+                    HStack{
+                        Spacer()
+                    
+                        Text(optionVo.mainTitle)
+                            .font(CustomFonts.optionButtonFont)
+                            .foregroundStyle(isSelected ? .white : .black)
+                            .lineLimit(2)
+                            
+                        Spacer()
+                    }
+                    .frame(height: 40)
+                    .background(isSelected ? selectColor : backgroud)
+                    .cornerRadius(8)
+                
                 }
+                
                 
                 if hasPrice {
                     HStack{
@@ -67,10 +77,10 @@ struct OptionButton: View {
                 }
             }
             .clipped(antialiased: false)
-            .frame(height: 40)
+            .frame(height: 45)
             .buttonStyle(.plain)
-            .background(isSelected ? selectColor : backgroud)
-            .cornerRadius(8)
+            
+            
         })
         
     }
