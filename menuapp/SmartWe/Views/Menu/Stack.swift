@@ -62,11 +62,11 @@ struct StackContainer: View {
                 showPWAlert = true
             }
         }
-        .onChange(of: configuration.tableNo, { oldValue, newValue in
-            if configuration.tableNo == nil {
-                showPWAlert = true
-            }
-        })
+//        .onChange(of: configuration.tableNo, { oldValue, newValue in
+//            if configuration.tableNo == nil {
+//                showPWAlert = true
+//            }
+//        })
         .alert("input_password_title", isPresented: $showPWAlert) {
             
             SecureField("", text: $password)//password_text

@@ -31,8 +31,6 @@ struct OrderView: View {
         configuration.machineCode ?? ""
     }
     
-    
-    
     var body: some View {
         VStack {
             
@@ -88,8 +86,12 @@ struct OrderView: View {
                         
                     }
                     .padding(.trailing, 120)
-                    .background(theme.themeColor.mainBackground)
                     .frame(height: 220)
+                    .background(
+                        RoundedRectangle(cornerRadius: 0)
+                            .fill(theme.themeColor.mainBackground)
+                            .shadow(radius: 1, x: 0, y: -1)
+                    )
                 }
                 .padding(20)
                 .background(theme.themeColor.contentBg)
