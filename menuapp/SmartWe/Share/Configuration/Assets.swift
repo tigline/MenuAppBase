@@ -28,7 +28,7 @@ enum AppTheme:Int, CaseIterable, Identifiable {
     }
 }
 
-struct ThemeColors {
+struct ThemeColors:Equatable {
     let mainBackground:Color// = Color("darkMain")
     let navBgColor:Color
     let contentBg:Color

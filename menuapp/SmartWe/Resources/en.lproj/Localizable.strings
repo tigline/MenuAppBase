@@ -80,3 +80,6 @@
 "tag_title" = "Reminder";
 "show_del_cart_item_tag" = "Remove item？";
 "call_waiter_success" = "Call waiter success, Please wait for a moment.";
+
+"show_order_cargo_text" = "Confirm order?";
+"clear_all" = "Empty all?";

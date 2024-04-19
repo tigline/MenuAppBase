@@ -94,6 +94,17 @@ struct SideBarContainer: View {
                 }
             }
         }
+        .onChange(of: configuration.colorScheme) { oldValue, newValue in
+            switch newValue {
+            case .dark:
+                //UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
+                break
+            case .brown:
+                break
+            default:
+                break
+            }
+        }
 
     }
     

@@ -79,3 +79,6 @@
 "tag_title" = "温馨提示";
 "show_del_cart_item_tag" = "是否要删除商品？";
 "call_waiter_success" = "呼叫成功，请稍等一会";
+
+"show_order_cargo_text" = "确认下单吗？";
+"clear_all" = "清空购物车？";

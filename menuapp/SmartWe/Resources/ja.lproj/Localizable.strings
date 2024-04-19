@@ -72,3 +72,7 @@
 "tag_title" = "お知らせ";
 "show_del_cart_item_tag" = "商品を削除しますか?";
 "call_waiter_success" = "成功しました。しばらくお待ちください";
+
+"show_order_cargo_text" = "注文を確認しますか?";
+
+"clear_all" = "ショッピングカートをクリア？";

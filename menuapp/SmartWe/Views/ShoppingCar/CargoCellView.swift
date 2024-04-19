@@ -16,6 +16,7 @@ struct CargoCellView: View {
     enum CargoAction {
         case add
         case minus
+        case remove
     }
     
     let item:CargoItem
@@ -89,11 +90,21 @@ struct CargoCellView: View {
                 
                 Spacer()
                 
+                Button {
+                    addOrMinus(.remove, item)
+                } label: {
+                    Image("delete_icon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30)
+                }
+                .padding(.leading, 40)
+
                 
             }
             .padding(.vertical, 10)
             .padding(.leading, 45)
-            .padding(.trailing, 102)
+            .padding(.trailing, 22)
             .background(.clear)
             
             Rectangle()

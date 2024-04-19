@@ -20,6 +20,8 @@ struct ShoppingCarView: View {
     @State private var showSuccess:Bool = false
     @State private var showOrder:Bool = false
     @State private var showDelete:Bool = false
+    @State private var showBooking:Bool = false
+    @State private var showClear:Bool = false
     @State private var deleteItem:CargoItem?
     //var checkTimer:Timer?
     
@@ -103,10 +105,14 @@ struct ShoppingCarView: View {
                                 cargoStore.addGood(item)
                             case .minus:
                                 if item.quantity == 1 {
+                                    deleteItem = item
                                     showDelete.toggle()
                                 } else {
                                     cargoStore.removeGood(item)
                                 }
+                            case .remove:
+                                deleteItem = item
+                                showDelete.toggle()
                             }
                         })
                         .listRowInsets(EdgeInsets())
@@ -126,8 +132,41 @@ struct ShoppingCarView: View {
                 .background(theme.themeColor.mainBackground)
                 
                 HStack {
-                    Color.clear
-                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    if(configuration.tableNo != nil) {
+                        VStack(alignment: .leading) {
+                            Spacer()
+                            HStack{
+                                Button(action: {
+                                    showClear.toggle()
+                                }, label: {
+                                    Image(systemName: "xmark")
+                                        .frame(width: 40, height: 40, alignment: .center)
+                                        .foregroundStyle(theme.themeColor.orderBtBg)
+                                        
+                                        //.border(theme.themeColor.orderBtBg, width: 2)
+                                        .clipShape(Circle())
+                                        .overlay(
+                                            Circle()
+                                                .stroke(theme.themeColor.orderBtBg, lineWidth: 2)
+                                        )
+                                        
+                                })
+                                .padding(.bottom, 45)
+                                .padding(.leading, 45)
+                                Spacer()
+                            }
+                            
+                        }
+                        .frame(maxWidth:.infinity)
+                    } else {
+                        Color.clear
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                    }
+                    
+
+                    
                     VStack {
                         goodsCountView
                             .padding(.bottom, 12)
@@ -187,9 +226,53 @@ struct ShoppingCarView: View {
             } message: {
                 Text("show_del_cart_item_tag")
             }
-
             
-            
+            .alert("tag_title", isPresented: $showBooking) {
+                Button {
+                    orderAction()
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("sure_text")
+                        Spacer()
+                    }
+                }.foregroundStyle(.red)
+                
+                Button(role: .cancel) {
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("cancel_text")
+                        Spacer()
+                    }
+                }
+            } message: {
+                Text("show_order_cargo_text")
+            }
+            .alert("tag_title", isPresented: $showClear) {
+                Button {
+                    Task {
+                        try await cargoStore.cleanShoppingCar(table: configuration.tableNo ?? "")
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("sure_text")
+                        Spacer()
+                    }
+                }.foregroundStyle(.red)
+                
+                Button(role: .cancel) {
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("cancel_text")
+                        Spacer()
+                    }
+                }
+            } message: {
+                Text("clear_all")
+            }
         }
             
     }
@@ -260,7 +343,7 @@ struct ShoppingCarView: View {
                 Button {
                     Task {
                         print("sendCarToOrder start")
-                        orderAction()
+                        showBooking.toggle()
                         
                     }
                 } label: {

@@ -79,3 +79,7 @@
 "tag_title" = "친절한 팁";
 "show_del_cart_item_tag" = "상품을 삭제하시겠습니까?";
 "call_waiter_success" = "통화가 성공되었습니다. 잠시만 기다려주세요.";
+
+"show_order_cargo_text" = "주문을 확인하시겠습니까?";
+
+"clear_all" = "장바구니 비우기？";
