@@ -83,13 +83,13 @@ class MenuStore {
         }
     }
     
-    func callWaiter(_ machineCode:String, _ tableNo:String, _ handleResult:(String)->Void) async {
+    func callWaiter(_ machineCode:String, _ tableNo:String, _ handleResult:(LocalizedStringKey)->Void) async {
         
         do {
             let result = try await appService.callWaiter(machineCode, tableNo)
             if result.data {
                 print("call waiter success")
-                handleResult("call waiter success")
+                handleResult("call_waiter_success")
             }
         } catch {
             print("callWaiter \(error.localizedDescription)")

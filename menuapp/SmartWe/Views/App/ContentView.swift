@@ -31,7 +31,7 @@ struct ContentView: View {
         .alert(errorWrapper?.error.localizedDescription ?? "Error",
                
                isPresented: $isPresentError, actions: {
-            Button("Ok") {
+            Button("sure_text") {
                 isPresentError = false
             }
         }, message: {
@@ -44,7 +44,7 @@ struct ContentView: View {
         .alert(alertWrapper?.title ?? "",
                
                isPresented: $isPresentAlert, actions: {
-            Button("Ok") {
+            Button("sure_text") {
                 isPresentAlert = false
             }
         }, message: {

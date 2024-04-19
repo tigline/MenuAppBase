@@ -26,16 +26,16 @@ extension EnvironmentValues {
 
 struct AlertWrapper: Identifiable {
     let id = UUID()
-    let title: String
+    let title: LocalizedStringKey
     let content: String?
 }
 
 struct ShowAlertEnvironmentKey: EnvironmentKey {
-    static var defaultValue: (String, String?) -> Void = { _, _ in }
+    static var defaultValue: (LocalizedStringKey, String?) -> Void = { _, _ in }
 }
 
 extension EnvironmentValues {
-    var showAlert: (String, String?) -> Void {
+    var showAlert: (LocalizedStringKey, String?) -> Void {
         get { self[ShowAlertEnvironmentKey.self] }
         set { self[ShowAlertEnvironmentKey.self] = newValue }
     }

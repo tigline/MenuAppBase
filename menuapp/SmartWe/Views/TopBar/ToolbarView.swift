@@ -70,6 +70,9 @@ struct ToolbarView: View {
                         .task {
                             menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
                         }
+                        .onChange(of: configuration.appLanguage) { oldValue, newValue in
+                            menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
+                        }
                 }
             )
             
@@ -79,7 +82,9 @@ struct ToolbarView: View {
                         text: tableNo,
                         bgColor: theme.themeColor.orderBtBg,
                         textColor: .white) {
-                showTable(true)
+                DispatchQueue.main.async {
+                    showTable(true)
+                }
             }
             
 

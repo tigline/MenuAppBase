@@ -28,10 +28,10 @@ struct OptionGroupListView: View {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
-                        withAnimation {
+                        //withAnimation {
                             isShowing = false
                             
-                        }
+                        //}
                     }
                 HStack(alignment:.top, spacing: 1, content:  {
                     //image area
@@ -40,8 +40,8 @@ struct OptionGroupListView: View {
                         AsyncImage(url: URL(string: model.images.first ?? "")) { image in
                             image
                                 .resizable()
-                            //.aspectRatio(contentMode: .fit)
-                            //.scaledToFit()
+                                //.scaledToFit()
+                                .aspectRatio(1, contentMode: .fit)
                                 .clipped()
                             
                         } placeholder: {
@@ -50,29 +50,31 @@ struct OptionGroupListView: View {
                         .frame(maxHeight: .infinity)
                         .clipCornerRadius(8)
                         
+                        Spacer()
                         
-                        HStack(spacing: 15, content: {
-                            
-                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
-                                image
-                                    .resizable()
-                                    .clipped()
-                            } placeholder: {
-                                ProgressView()
-                            }
-                            .clipCornerRadius(8)
-                            
-                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
-                                image
-                                    .resizable()
-                                    .clipped()
-                            } placeholder: {
-                                ProgressView()
-                            }
-                            .clipCornerRadius(8)
-                            
-                        })
-                        .frame(height: 150)
+                        
+//                        HStack(spacing: 15, content: {
+//                            
+//                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
+//                                image
+//                                    .resizable()
+//                                    .clipped()
+//                            } placeholder: {
+//                                ProgressView()
+//                            }
+//                            .clipCornerRadius(8)
+//                            
+//                            AsyncImage(url: URL(string:  model.images.first ?? "")) { image in
+//                                image
+//                                    .resizable()
+//                                    .clipped()
+//                            } placeholder: {
+//                                ProgressView()
+//                            }
+//                            .clipCornerRadius(8)
+//                            
+//                        })
+//                        .frame(height: 150)
                         
                     })
                     .padding()
@@ -159,7 +161,7 @@ struct OptionGroupListView: View {
                         isShowAdd()
                     }
                 }) {
-                    Text("確認する")
+                    Text("sure_text")
                         .foregroundColor(.white)
                         .frame(height: 50)
                         .frame(maxWidth: .infinity)

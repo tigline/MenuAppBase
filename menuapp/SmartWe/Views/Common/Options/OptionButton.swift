@@ -28,39 +28,45 @@ struct OptionButton: View {
         optionVo.currentPrice != 0
     }
     
+    var optionPrice:String {
+        if optionVo.currentPrice < 0 {
+            "-¥\(-Int(optionVo.currentPrice))"
+        } else {
+            "¥\(Int(optionVo.currentPrice))"
+        }
+    }
+    
     var body: some View {
         Button(action: {
             updateOptionlist(optionVo.optionCode, optionVo.group, optionVo.currentPrice)
         }, label: {
-            HStack{
-                Spacer()
-                Text(optionVo.mainTitle)
-                    .font(CustomFonts.optionButtonFont)
-                    .foregroundStyle(isSelected ? .white : .black)
-                    .lineLimit(2)
-                if hasPrice {
+            ZStack(alignment:.topTrailing){
+                HStack{
                     Spacer()
-                    VStack(alignment: .trailing, content: {
-                        RoundedRightAngleTriangle().fill(
-                            optionVo.currentPrice>0 ? Color.red:Color.green
-                        )
-                            .frame(width: 36, height: 32)
-                            .padding(.leading, -20)
-                            .overlay {
-                                Text("\(Int(optionVo.currentPrice))")
-                                    .foregroundStyle(.white)
-                                    .font(.system(size: 10))
-                                    .rotationEffect(.degrees(38))
-                                    .padding(.bottom, 10)
-                                    .padding(.leading, -12)
-                            }
-                        Spacer()
-                    })
-                    
-                } else {
+                    Text(optionVo.mainTitle)
+                        .font(CustomFonts.optionButtonFont)
+                        .foregroundStyle(isSelected ? .white : .black)
+                        .lineLimit(2)
                     Spacer()
                 }
+                
+                if hasPrice {
+                    HStack{
+                        Spacer()
+                        VStack{
+                            Text(optionPrice)
+                                .padding(5)
+                                .foregroundStyle(.white)
+                                .font(.system(size: 12))
+                                .background(optionVo.currentPrice>0 ? Color.red:Color.green)
+                                .clipCornerRadius(5)
+                            Spacer()
+                        }.clipped(antialiased: false)
+                    }.clipped(antialiased: false)
+                    
+                }
             }
+            .clipped(antialiased: false)
             .frame(height: 40)
             .buttonStyle(.plain)
             .background(isSelected ? selectColor : backgroud)
@@ -75,3 +81,20 @@ struct OptionButton: View {
 //}
 
 
+//                    Spacer()
+//                    VStack(alignment: .trailing, content: {
+//                        RoundedRightAngleTriangle().fill(
+//                            optionVo.currentPrice>0 ? Color.red:Color.green
+//                        )
+//                        .frame(width: 46, height: 38)
+//                        .padding(.leading, -20)
+//
+//                        .overlay {
+//                            Text("\(Int(optionVo.currentPrice))")
+//                                .foregroundStyle(.white)
+//                                .font(.system(size: 12))
+//                                .rotationEffect(.degrees(38))
+//                                .padding(.bottom, 10)
+//                                .padding(.leading, -12)
+//                        }
+//                    })

@@ -74,8 +74,6 @@ struct SideBarContainer: View {
             } else {
                 //add to shopping car
                 cargoStore.addGood(menu, price: Int(menu.currentPrice))
-                
-                
                 runAnimation()
             }
             
