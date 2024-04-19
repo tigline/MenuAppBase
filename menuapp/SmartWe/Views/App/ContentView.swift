@@ -52,7 +52,7 @@ struct ContentView: View {
         })
         
         //.syncCoreData() // 同步 booking list 数据
-        .preferredColorScheme(.light)
+        //.preferredColorScheme(.light)
         .environment(\.locale, appConfiguration.appLanguage.locale)
         .onChange(of: scenePhase) { old, newScenePhase in
             switch newScenePhase {

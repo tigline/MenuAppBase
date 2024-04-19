@@ -115,7 +115,9 @@ struct TabelView: View {
             .frame(height: 44)
             .background(model.state.bgColor)
             .onTapGesture {
-                showPopover = true
+                DispatchQueue.main.async {
+                    showPopover = true
+                }
             }
             
         }

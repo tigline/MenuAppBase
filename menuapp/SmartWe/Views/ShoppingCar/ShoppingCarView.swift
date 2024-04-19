@@ -123,6 +123,7 @@ struct ShoppingCarView: View {
                                 showDelete.toggle()
                             }
                         }
+                        .background(theme.themeColor.mainBackground)
                         
                     }
                     
@@ -179,7 +180,7 @@ struct ShoppingCarView: View {
                     }
                     
                 }
-                .padding(.trailing, 120)
+                .padding(.trailing, 80)
                 .background(theme.themeColor.mainBackground)
                 .frame(height: 220)
             }

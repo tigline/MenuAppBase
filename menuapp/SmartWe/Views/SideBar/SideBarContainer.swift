@@ -25,6 +25,17 @@ struct SideBarContainer: View {
         configuration.colorScheme
     }
     
+    var staturBarTheme:ColorScheme {
+        switch configuration.colorScheme {
+        case .dark:
+            return .dark
+        case .brown:
+            return .light
+        default:
+            return .light
+        }
+    }
+    
     var body: some View {
         let _ = Self._printChanges()
         
@@ -52,6 +63,7 @@ struct SideBarContainer: View {
                     isLoading = false
                 }
             }
+            .preferredColorScheme(staturBarTheme)
             
         }
         .overlay(
@@ -94,17 +106,18 @@ struct SideBarContainer: View {
                 }
             }
         }
-        .onChange(of: configuration.colorScheme) { oldValue, newValue in
-            switch newValue {
-            case .dark:
-                //UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
-                break
-            case .brown:
-                break
-            default:
-                break
-            }
-        }
+        
+//        .onChange(of: configuration.colorScheme) { oldValue, newValue in
+//            switch newValue {
+//            case .dark:
+//                //UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
+//                break
+//            case .brown:
+//                break
+//            default:
+//                break
+//            }
+//        }
 
     }
     

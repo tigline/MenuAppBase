@@ -66,6 +66,7 @@ struct OrderView: View {
                         }
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
+                        .background(theme.themeColor.mainBackground)
 
                     }
                     .listStyle(PlainListStyle())
