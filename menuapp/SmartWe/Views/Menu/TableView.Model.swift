@@ -72,13 +72,15 @@ extension TabelView {
             return "SubTableInfo is \(parameter)"
         }
         
-        var subTablelOrderkeys:[String] {
+        var subTablelOrderkeys:[String]
+        {
             tableInfo.orderKeys ?? []
         }
         
+        
         @MainActor
         func openSeat(shopCode:String, seatNumber:String, subSeat:Int) async throws {
-            
+            let tableNo = tableInfo.seatNumber + "ー" + "\(subSeat+1)"
             if subTablelOrderkeys[subSeat] == "" {
                 let resource = OpenSeatResource(shopCode: shopCode, seatNumber: seatNumber, subSeat: subSeat+1)
                 let request = APIRequest(resource: resource)
@@ -86,18 +88,14 @@ extension TabelView {
                 do {
                     let result = try await request.execute()
                     if result.code == 200 {
-                        tableInfo.state = result.data.state//.first{$0.seatNumber == tableInfo.seatNumber} ?? tableInfo
+                        tableInfo.state = result.data.state
                         
-                        if let _ = tableInfo.orderKeys?[subSeat],
-                            let newKey = result.data.orderKey {
-
-                            self.tableInfo.orderKeys?[subSeat] = newKey
+                        if let newKey = result.data.orderKey {
                             
-                            appData.tableNo = tableInfo.seatNumber + "ー" + "\(subSeat+1)"
-                            appData.orderKey = subTablelOrderkeys[subSeat]
-                            await updateTableNumber(appData.tableNo)
+                            appData.tableNo = tableNo
+                            appData.orderKey = newKey
+                            await updateTableNumber(tableNo)
                         }
-                        
                         
                     } else {
                         throw CustomError.createCustomError()
@@ -107,10 +105,9 @@ extension TabelView {
                     throw error
                 }
             } else {
-                appData.tableNo = tableInfo.seatNumber + "ー" + "\(subSeat+1)"
+                appData.tableNo = tableNo
                 appData.orderKey = subTablelOrderkeys[subSeat]
-                
-                await updateTableNumber(appData.tableNo)
+                await updateTableNumber(tableNo)
             }
         }
         

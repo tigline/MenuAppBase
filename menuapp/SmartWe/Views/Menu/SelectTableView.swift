@@ -51,6 +51,11 @@ struct SelectTableView: View {
                 //isLoading = false
                 
             }
+        }.onChange(of: configuration.orderKey) { oldValue, newValue in
+            Task {
+                try await model.load(shopCode: configuration.shopCode ?? "")
+            }
+            
         }
 
 //        VStack(alignment: .center) {
