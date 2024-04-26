@@ -55,7 +55,7 @@ extension ContentView {
                                            _ orderKey:String) async throws {
             try await withCheckedThrowingContinuation { continuation in
                     let request = APIRequest(resource: OrderCheckResource(shopCode: shopCode,
-                                                                                          machineCode: orderKey))
+                                                                          orderKey: orderKey))
                     Task {
                         do {
                             let result = try await request.execute()

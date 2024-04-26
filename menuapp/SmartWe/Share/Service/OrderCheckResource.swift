@@ -16,9 +16,9 @@ struct OrderCheckResource:APIResource {
     
     var body: Data? {
         ["shopCode":shopCode,
-        "machineCode":machineCode].toJSONData() ?? Data()
+        "orderKey":orderKey].toJSONData() ?? Data()
     }
     
     let shopCode:String
-    let machineCode:String
+    let orderKey:String
 }

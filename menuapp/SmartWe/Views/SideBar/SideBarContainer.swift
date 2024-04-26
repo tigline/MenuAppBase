@@ -11,6 +11,7 @@ struct SideBarContainer: View {
 
     @Environment(\.menuStore) var menuStore
     @Environment(\.cargoStore) var cargoStore
+    @Environment(\.soundPlayer) private var soundPlayer
     
     @State var isLoading = false
     @StateObject private var animationManager = AnimationQueueManager()
@@ -85,6 +86,7 @@ struct SideBarContainer: View {
                 showOptions.toggle()
             } else {
                 //add to shopping car
+                soundPlayer.playSound(soundFileName: "14428")
                 cargoStore.addGood(menu, price: Int(menu.currentPrice))
                 runAnimation()
             }

@@ -97,11 +97,11 @@ struct TableInfo:Identifiable, Codable, Equatable, Hashable {
     let currentTime:String?
     let orderKey:String?
     let orderQty:Int?
-    let orderKeys:[String]?
-    let seatAttributeVo:SeatAttributeVo
+    var orderKeys:[String]?
+    let seatAttributeVo:SeatAttributeVo?
     let seatNumber:String
     let shopCode:String
-    let state:Int
+    var state:Int
     
     
     struct SeatAttributeVo: Codable, Equatable, Hashable {
@@ -111,3 +111,14 @@ struct TableInfo:Identifiable, Codable, Equatable, Hashable {
     
     
 }
+//{
+//    "shopCode":"UGE4RRQR",
+//    "seatNumber":"お席：００６ー１",
+//    "subSeat":1,
+//    "orderKey":null,
+//    "orderKeyQty":null,
+//    "orderKeys":["https://waiter-sit.smartwe.co.jp/index?p=1qELv7ixzKNE8zXT2jQLW"],
+//    "state":1,
+//    "seatAttributeVo":null,
+//    "currentTime":"2024-04-25 18:03:03"
+//}

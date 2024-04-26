@@ -18,11 +18,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            if appConfiguration.loginState == .login {
-                SideBarContainer()
-            } else {
-                LoginView()
-            }
+            LoginView()
         }
         .environment(\.showError) { error, guidance in
             errorWrapper = ErrorWrapper(error: error, guidance: guidance ?? "")

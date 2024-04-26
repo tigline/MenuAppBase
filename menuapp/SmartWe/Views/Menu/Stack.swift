@@ -32,7 +32,7 @@ struct StackContainer: View {
             NavigationStack() {
                     VStack {
                         switch appRouter.router {
-                        case .menu(_):
+                            case .menu(_):
                                 MenuGalleryLazyVGrid()
                             case .cart:
                                 ShoppingCarView().ignoresSafeArea(.keyboard)
@@ -42,6 +42,7 @@ struct StackContainer: View {
                                 SettingAppearance()
                             case .none:
                                 MenuGalleryLazyVGrid()
+                            
                         }
                     }
                     .toolbar(.hidden, for: .navigationBar)
@@ -69,11 +70,18 @@ struct StackContainer: View {
 //        })
         .alert("input_password_title", isPresented: $showPWAlert) {
             
-            SecureField("", text: $password)//password_text
+            SecureField("password_text", text: $password)//password_text
                 .keyboardType(.numberPad)
                 .padding()
             
             Button(role:.none) {
+                
+                #if DEBUG
+                if password == "" {
+                    password = "123456"
+                }
+                #endif
+                
                 if password == configuration.password {
                     showTable = true
                 } else {

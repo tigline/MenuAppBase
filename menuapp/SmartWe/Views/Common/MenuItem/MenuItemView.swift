@@ -13,7 +13,6 @@ public struct MenuItemView: View {
     let item: Menu
     let displayType: DisplayType = .portrait(.middle)
     @Environment(\.goOptions) private var goOptions
-    @Environment(\.soundPlayer) private var soundPlayer
     @State var geomeFrame: CGRect = .zero
     
     @StateObject private var configuration = AppConfiguration.share
@@ -45,7 +44,7 @@ public struct MenuItemView: View {
             
             itemView
                 .onTapGesture {
-                    soundPlayer.playSound(soundFileName: "14428")
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now()) {
                         goOptions(item ,snapshotView(animateView), geomeFrame)
                     }

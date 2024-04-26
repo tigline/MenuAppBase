@@ -12,6 +12,7 @@ struct OptionGroupListView: View {
     //@Environment(\.menuStore) var menuStore
     //@Environment(\.goOptions) var addGood
     @Environment(\.imagePipeline) private var imagePipeline
+    @Environment(\.soundPlayer) private var soundPlayer
     @StateObject private var configuration = AppConfiguration.share
 
     @State private var isLandscape:Bool = false
@@ -74,6 +75,8 @@ struct OptionGroupListView: View {
                             optionView
                         })
                         closeButton
+                            .padding(.top, -10)
+                            .padding(.trailing, -10)
                         
                     }
                     .padding()
@@ -109,6 +112,9 @@ struct OptionGroupListView: View {
             }
         } label: {
             Image("close")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30, height: 30)
         }
     }
     
@@ -127,7 +133,7 @@ struct OptionGroupListView: View {
             
             VStack(alignment: .center, content: {
                 Button(action: {
-                    
+                    soundPlayer.playSound(soundFileName: "14428")
                     withAnimation {
                         isShowing = false
                     } completion: {

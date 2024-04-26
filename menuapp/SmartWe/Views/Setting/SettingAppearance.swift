@@ -11,6 +11,9 @@ struct SettingAppearance: View {
     @State private var password:String = ""
     @State private var showResetPw:Bool = false
     @State private var showPWResult:Bool = false
+    @Environment(\.appRouter) var appRouter
+    
+    let coreDataStack = CoreDataStack.shared
     
     
     
@@ -109,11 +112,16 @@ struct SettingAppearance: View {
             .navigationBarTitleDisplayMode(.inline)
             .alert("logout_caution", isPresented: $logoutPresent) {
                 Button {
-                    configuration.machineCode = nil
-                    configuration.orderKey = nil
-                    configuration.tableNo = nil
-                    configuration.loginState = .logout
-                    logoutPresent.toggle()
+                    Task {
+                        try coreDataStack.batchDeleteDataWithTableNumber(configuration.tableNo ?? "")
+                        configuration.machineCode = nil
+                        configuration.orderKey = nil
+                        configuration.tableNo = nil
+                        appRouter.router = nil
+                        configuration.loginState = .logout
+                    }
+                    
+                    //logoutPresent.toggle()
                 } label: {
                     HStack {
                         Spacer()
@@ -124,7 +132,7 @@ struct SettingAppearance: View {
                 }.foregroundStyle(.red)
                 
                 Button(role: .cancel) {
-                    logoutPresent.toggle()
+                    //logoutPresent.toggle()
                 } label: {
                     HStack {
                         Spacer()

@@ -9,30 +9,30 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var text: String = ""
-    @State private var showLoginError = false
+//    @State private var showLoginError = false
     @State private var openScanView = false
-    @State private var loginError = "Login failed"
-    @StateObject private var configuration = AppConfiguration.share
-    @Environment(\.smartwe) var smartwe
+//    @State private var loginError = "Login failed"
+    //@StateObject private var configuration = AppConfiguration.share
+    @Environment(\.showError) private var showError
+    
+    private let model = Model(appData: AppConfiguration.share)
+
+
     var body: some View {
         VStack {
             HStack{
                 Image("smartwe.logo")
-                    
                 Text("SmartWe")
                     .font(.title)
                     .bold()
                     .foregroundStyle(.blue)
-                
             }
             
-            //输入框与扫码一体化
             HStack {
                 TextField("input_machine_code", text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 300)
                     
-                
                 Button(action: scanAction) {
                     Image(systemName: "camera.viewfinder")
                         .resizable()
@@ -41,27 +41,27 @@ struct LoginView: View {
                         .foregroundColor(.blue)
                 }
                 .buttonStyle(BorderlessButtonStyle())
-                
 
             }
             .padding()
             Button("login_text", action: loginAction)
                 .buttonStyle(.borderedProminent)
-                
-                
-            
-            
-        }.alert("login_failed", isPresented: $showLoginError) {
-            Button("sure_text") {
-                showLoginError = false
-                // Handle the acknowledgement.
-            }
-        } message: {
-            Text(loginError)
+
         }
+//        .alert("login_failed", isPresented: $showLoginError) {
+//            Button("sure_text") {
+//                showLoginError = false
+//                // Handle the acknowledgement.
+//            }
+//        } message: {
+//            Text(loginError)
+//        }
         //弹出ScanView
         .sheet(isPresented: $openScanView, content: {
             ScanView(scannedCode: $text, openScanView: $openScanView)
+        })
+        .fullScreenCover(isPresented: model.loginSuccess, content: {
+            SideBarContainer()
         })
         
         
@@ -74,25 +74,21 @@ struct LoginView: View {
     }
     
     func loginAction() {
-        
         print("loginAction")
         
+        #if DEBUG
         if text == "" {
 //            loginError = "machine code should not be empty"
 //            showLoginError = true
             text = "hd36G5rUu7bZc5xAMr"
         }
-    
+        #endif
+        
         Task {
-            let result = try await smartwe.activeDevice(machineCode: text)
-            if result.code == 200 {
-                configuration.machineCode = result.data.machineCode
-                configuration.shopCode = result.data.shopCode
-                configuration.logoImage = result.data.logoImage
-                configuration.menuLaguage = result.data.languages[0]
-                configuration.loginState = .login
-            } else {
-                showLoginError = true
+            do {
+                try await model.login(shopCode: text)
+            } catch {
+                showError(error, "Login Failured")
             }
         }
     }
@@ -103,11 +99,3 @@ struct LoginView: View {
 }
 
 
-enum LoginState:Int, CaseIterable, Identifiable {
-    case logout
-    case login
-    
-    var id:Self {
-        return self
-    }
-}

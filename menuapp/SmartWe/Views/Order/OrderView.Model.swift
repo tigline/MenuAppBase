@@ -22,7 +22,7 @@ extension OrderView {
                 return []
             }
             
-            return categoryVos.reversed().compactMap{$0}
+            return categoryVos //.reversed().compactMap{$0}
         }
         
         func clearOrder() {

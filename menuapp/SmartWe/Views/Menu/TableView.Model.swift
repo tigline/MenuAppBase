@@ -9,25 +9,38 @@ import Foundation
 import SwiftUI
 
 extension TabelView {
-    
+    @Observable
     class Model {
         
-        let tableInfo:TableInfo
+        let appData:AppConfiguration
         
-        init(tableInfo: TableInfo) {
+        let coreDataStack = CoreDataStack.shared
+        
+        var tableInfo:TableInfo
+        
+        init(tableInfo: TableInfo, appData:AppConfiguration) {
             self.tableInfo = tableInfo
+            self.appData = appData
         }
         
         var state:TableState {
             TableState(rawValue: tableInfo.state) ?? .empty
         }
         
+        var howPeople:String {
+            tableInfo.seatAttributeVo?.howPeople ?? ""
+        }
+        
+        var floorNumber:String {
+            tableInfo.seatAttributeVo?.floor ?? ""
+        }
+        
         var seatCount:LocalizedStringKey {
-            LocalizedStringKey("\(tableInfo.seatAttributeVo.howPeople)seat_count_text")
+            LocalizedStringKey("\(howPeople)seat_count_text")
         }
         
         var floor:LocalizedStringKey {
-            LocalizedStringKey("\(tableInfo.seatAttributeVo.floor)floor_text")
+            LocalizedStringKey("\(floorNumber)floor_text")
         }
         
         
@@ -63,7 +76,47 @@ extension TabelView {
             tableInfo.orderKeys ?? []
         }
         
+        @MainActor
+        func openSeat(shopCode:String, seatNumber:String, subSeat:Int) async throws {
+            
+            if subTablelOrderkeys[subSeat] == "" {
+                let resource = OpenSeatResource(shopCode: shopCode, seatNumber: seatNumber, subSeat: subSeat+1)
+                let request = APIRequest(resource: resource)
+                
+                do {
+                    let result = try await request.execute()
+                    if result.code == 200 {
+                        tableInfo.state = result.data.state//.first{$0.seatNumber == tableInfo.seatNumber} ?? tableInfo
+                        
+                        if let _ = tableInfo.orderKeys?[subSeat],
+                            let newKey = result.data.orderKey {
+
+                            self.tableInfo.orderKeys?[subSeat] = newKey
+                            
+                            appData.tableNo = tableInfo.seatNumber + "ー" + "\(subSeat+1)"
+                            appData.orderKey = subTablelOrderkeys[subSeat]
+                            await updateTableNumber(appData.tableNo)
+                        }
+                        
+                        
+                    } else {
+                        throw CustomError.createCustomError()
+                    }
+                    
+                } catch {
+                    throw error
+                }
+            } else {
+                appData.tableNo = tableInfo.seatNumber + "ー" + "\(subSeat+1)"
+                appData.orderKey = subTablelOrderkeys[subSeat]
+                
+                await updateTableNumber(appData.tableNo)
+            }
+        }
         
+        func updateTableNumber(_ number:String? = "19") async {
+            try? await coreDataStack.updateCargoKeyValue(key: "tableNo", value: number)
+        }
         
         enum TableState:Int {
             case empty
@@ -118,5 +171,27 @@ extension TabelView {
         
         
     }
+    
+}
+
+
+struct OpenSeatResource:APIResource {
+    typealias ModelType = Response<TableInfo>
+    
+    var path: String = "/pad/web/ipad/table/open"
+    
+    var method: HttpMethod = .POST
+    
+    var body: Data? {
+        ["shopCode":shopCode,
+         "seatNumber":seatNumber,
+         "subSeat":subSeat
+        ].toJSONData() ?? Data()
+    }
+    
+    let shopCode:String
+    let seatNumber:String
+    let subSeat:Int
+    
     
 }

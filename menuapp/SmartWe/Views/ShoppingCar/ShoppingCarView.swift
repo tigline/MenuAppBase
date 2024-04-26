@@ -112,7 +112,10 @@ struct ShoppingCarView: View {
                                 }
                             case .remove:
                                 deleteItem = item
-                                showDelete.toggle()
+                                DispatchQueue.main.async{
+                                    showDelete.toggle()
+                                }
+                                
                             }
                         })
                         .listRowInsets(EdgeInsets())
@@ -336,8 +339,12 @@ struct ShoppingCarView: View {
             Spacer()
             
             if isNoTableNo {
-                Button("select_a_table") {
+                Button {
                     showTable(true)
+                } label: {
+                    Text("select_a_table")
+                        .frame(maxWidth: .infinity)
+
                 }
                 .padding(.horizontal)
                 .foregroundStyle(.white)

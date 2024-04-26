@@ -8,19 +8,24 @@
 import SwiftUI
 
 struct TabelView: View {
-    @StateObject private var configuration = AppConfiguration.share
-    @Environment(\.cargoStore) var cargoStore
+    
     @State private var showPopover = false
     @State private var showAlert = false
     @State private var subTableNo:Int = 0
     @State private var orderKey:String = ""
+    
+    @Environment(\.showError) private var showError
 
     private var theme:AppTheme {
-        configuration.colorScheme
+        model.appData.colorScheme
     }
     
     private var model:Model {
-        Model(tableInfo: tableInfo)
+        Model(tableInfo: tableInfo, appData: AppConfiguration.share)
+    }
+    
+    private var shopCode:String {
+        model.appData.shopCode ?? ""
     }
     
     let tableInfo:TableInfo
@@ -70,12 +75,8 @@ struct TabelView: View {
                         VStack {
                             ForEach(model.subTablelOrderkeys.indices, id: \.self) { index in
                                 Button {
-                                    if model.subTablelOrderkeys[index].isEmpty {
-                                        
-                                    } else {
                                         subTableNo = index
                                         showAlert = true
-                                    }
                                 } label: {
                                     Text(model.subTableInfo(index))
                                         .frame(maxWidth: .infinity, minHeight:44)
@@ -96,13 +97,17 @@ struct TabelView: View {
                             
                             Button("sure_text"){
                                 Task{
-                                    configuration.tableNo = model.tableInfo.seatNumber + "-" + "\(subTableNo+1)"
-                                    configuration.orderKey = model.subTablelOrderkeys[subTableNo]
                                     
-                                    await cargoStore.updateTableNumber(configuration.tableNo)
+                                    do {
+                                        try await model.openSeat(shopCode:shopCode,
+                                                                 seatNumber:model.tableInfo.seatNumber,
+                                                                    subSeat:subTableNo)
+                                        showPopover = false
+                                    } catch {
+                                        showError(error,nil)
+                                        //showPopover = false
+                                    }
                                     
-                                    print("\(model.subTablelOrderkeys)")
-                                    showPopover = false
                                 }
                                 
                             }

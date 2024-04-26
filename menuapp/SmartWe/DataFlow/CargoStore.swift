@@ -60,7 +60,7 @@ class CargoStore {
         try coreDataStack.batchDeleteDataWithTableNumber(table)
     }
     
-    
+    @MainActor
     func sendCarToOrder(shoppingCart:[CargoItem],
                         language:String,
                         shopCode:String,

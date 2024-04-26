@@ -42,18 +42,20 @@ struct CargoCellView: View {
                     .font(CustomFonts.carGoMenuFont)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(themeColor.cargoTextColor)
+                Spacer()
                 
                 Text("¥" + "\(Int(item.price))")
                     .padding(.horizontal)
                     .font(CustomFonts.carGoMenuFont)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    //.frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(themeColor.cargoTextColor)
-                Spacer()
-                Text(tableNo)
-                    .padding(.horizontal)
-                    .font(CustomFonts.carGoMenuFont)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundStyle(themeColor.cargoTextColor)
+                    .padding(.trailing, 50)
+                
+//                Text(tableNo)
+//                    .padding(.horizontal)
+//                    .font(CustomFonts.carGoMenuFont)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .foregroundStyle(themeColor.cargoTextColor)
                 
                 HStack {
                     

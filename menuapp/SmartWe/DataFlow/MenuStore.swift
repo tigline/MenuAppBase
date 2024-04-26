@@ -26,7 +26,7 @@ class MenuStore {
     }
     
     var menuCatagorys:[String] {
-        catagorys + ["booking_history","shopping_car"]
+        catagorys + ["booking_history","shopping_car","setting"]
     }
     
     var selectBarIndex:Int = 0 {
@@ -39,6 +39,9 @@ class MenuStore {
         if menuCatagorys.count > 0 {
             if selectBarIndex == -1 {
                 return ""
+            }
+            if selectBarIndex >= menuCatagorys.count {
+                return menuCatagorys[0]
             }
             return menuCatagorys[selectBarIndex]
         }
@@ -54,7 +57,12 @@ class MenuStore {
     }
     
     var curMenuInfo:MenuCategory? {
-        return menuList.first(where: {$0.categoryName == catagory})
+        if let item = menuList.first(where: {$0.categoryName == catagory}) {
+            return item
+        } else if menuList.count > 0 {
+            return menuList[0]
+        }
+        return nil
     }
     
     func getCurrentMenu(_ menu:String) -> MenuCategory? {
