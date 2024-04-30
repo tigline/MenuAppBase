@@ -71,7 +71,10 @@ struct ToolbarView: View {
                             menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
                         }
                         .onChange(of: configuration.appLanguage) { oldValue, newValue in
-                            menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
+                            DispatchQueue.main.async {
+                                menuStore.cartIconGlobalFrame = geometry.frame(in: .global)
+                            }
+                            
                         }
                 }
             )

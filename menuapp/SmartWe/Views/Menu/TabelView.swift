@@ -42,11 +42,11 @@ struct TabelView: View {
                 Text(model.tableInfo.seatNumber)
                     .foregroundColor(.white)
                     .font(.largeTitle)
-                
-                Text(model.state.localizedString)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(.white)
-                    .font(.title3)
+                Spacer()
+//                Text(model.state.localizedString)
+//                    .frame(maxWidth: .infinity, alignment: .center)
+//                    .foregroundColor(.white)
+//                    .font(.title3)
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

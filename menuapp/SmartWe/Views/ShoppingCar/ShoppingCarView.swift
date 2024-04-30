@@ -144,16 +144,15 @@ struct ShoppingCarView: View {
                                 Button(action: {
                                     showClear.toggle()
                                 }, label: {
-                                    Image(systemName: "xmark")
+                                    Image("clear_icon")
+                                        .resizable()
+                                        .scaledToFit()
                                         .frame(width: 40, height: 40, alignment: .center)
-                                        .foregroundStyle(theme.themeColor.orderBtBg)
-                                        
-                                        //.border(theme.themeColor.orderBtBg, width: 2)
-                                        .clipShape(Circle())
-                                        .overlay(
-                                            Circle()
-                                                .stroke(theme.themeColor.orderBtBg, lineWidth: 2)
-                                        )
+//                                        .clipShape(Circle())
+//                                        .overlay(
+//                                            Circle()
+//                                                .stroke(theme.themeColor.orderBtBg, lineWidth: 2)
+//                                        )
                                         
                                 })
                                 .padding(.bottom, 45)

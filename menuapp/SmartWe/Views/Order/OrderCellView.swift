@@ -22,10 +22,11 @@ struct OrderCellView: View {
     let price:Int
     
     var optionContent:String {
+        optionInfo.count > 0 ?
         optionInfo.map{ key, value in
             "\(key): \(value.joined(separator: ", "))"
             
-        }.joined(separator: "、") + "。"
+        }.joined(separator: "、") + "。" : ""
         
     }
     
