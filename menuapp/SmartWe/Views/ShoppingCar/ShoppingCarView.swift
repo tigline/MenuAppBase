@@ -144,15 +144,22 @@ struct ShoppingCarView: View {
                                 Button(action: {
                                     showClear.toggle()
                                 }, label: {
-                                    Image("clear_icon")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 40, height: 40, alignment: .center)
+//                                    Image("clear_icon")
+//                                        .resizable()
+//                                        .scaledToFit()
+//                                        .frame(width: 40, height: 40, alignment: .center)
 //                                        .clipShape(Circle())
 //                                        .overlay(
 //                                            Circle()
 //                                                .stroke(theme.themeColor.orderBtBg, lineWidth: 2)
 //                                        )
+                                    Text("clear_button")
+                                        .padding(.horizontal)
+                                        .frame(height: 50, alignment: .center)
+                                        .foregroundStyle(.white)
+                                        .background(.gray)
+                                        .clipCornerRadius(10)
+                                        
                                         
                                 })
                                 .padding(.bottom, 45)
@@ -296,7 +303,7 @@ struct ShoppingCarView: View {
         Task {
             print("sendCarToOrder start")
             await cargoStore.sendCarToOrder(shoppingCart: shoppingCart.map({$0}),
-                                            language: configuration.menuLaguage ?? "",
+                                            language: configuration.appLanguage.sourceId,
                                             shopCode: configuration.shopCode ?? "",
                                             machineCode: configuration.machineCode ?? "",
                                             orderKey: configuration.orderKey ?? "",

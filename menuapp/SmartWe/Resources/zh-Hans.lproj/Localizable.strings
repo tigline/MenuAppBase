@@ -82,3 +82,4 @@
 
 "show_order_cargo_text" = "确认下单吗？";
 "clear_all" = "清空购物车？";
+"clear_button" = "清空";

@@ -15,20 +15,24 @@ struct OrderView: View {
     @StateObject var configuration = AppConfiguration.share
     @State private var model = Model()
     
-    var theme:AppTheme {
+    private var theme:AppTheme {
         configuration.colorScheme
     }
     
-    var shopCode:String {
+    private var shopCode:String {
         return configuration.shopCode ?? ""
     }
     
-    var table:String {
+    private var table:String {
         return configuration.orderKey ?? ""
     }
     
-    var machineCode:String {
+    private var machineCode:String {
         configuration.machineCode ?? ""
+    }
+    
+    private var language:String {
+        configuration.appLanguage.sourceId
     }
     
     var body: some View {
@@ -99,14 +103,7 @@ struct OrderView: View {
             
         }
         .task {
-            do {
-                try await model.fetchOrders(shopCode: shopCode,
-                                            machineCode: machineCode,
-                                            table: table)
-            } catch {
-                showError(error, nil)
-            }
-
+            await loadTask(table: table, lan: language)
         }
         .frame(maxHeight:.infinity)
         .background(theme.themeColor.contentBg)
@@ -115,23 +112,30 @@ struct OrderView: View {
             
             Task{
                 if newValue != nil {
-                    do {
-                        try await model.fetchOrders(shopCode: shopCode,
-                                                    machineCode: machineCode,
-                                                    table: newValue!)
-                    } catch {
-                        showError(error, nil)
-                    }
+                    await loadTask(table: table, lan: language)
                 } else {
                     model.clearOrder()
                 }
             }
-            
-            
-
-            
+        }
+        .onChange(of: configuration.appLanguage) { oldValue, newValue in
+            Task{
+                await loadTask(table: table, lan: newValue.sourceId)
+            }
         }
         
+        
+    }
+    
+    private func loadTask(table:String, lan:String) async {
+        do {
+            try await model.fetchOrders(shopCode: shopCode,
+                                        machineCode: machineCode,
+                                        table: table,
+                                        lan: lan)
+        } catch {
+            showError(error, nil)
+        }
     }
     
     @ViewBuilder

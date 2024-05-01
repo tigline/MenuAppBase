@@ -102,7 +102,7 @@ public struct MenuItemView: View {
             )
             ItemShortInfo(
                 title: item.mainTitle,
-                subtitle: String(Int(item.price)) + " 円",
+                subtitle: String(Int(item.currentPrice)) + " 円",
                 displayType: displayType,
                 theme: theme.themeColor
             )

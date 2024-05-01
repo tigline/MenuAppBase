@@ -35,7 +35,7 @@ extension LoginView {
                     appData.machineCode = result.data.machineCode
                     appData.shopCode = result.data.shopCode
                     appData.logoImage = result.data.logoImage
-                    appData.menuLaguage = result.data.languages[0]
+                    appData.appLanguage = .jp //result.data.languages[0]
                     appData.loginState = .login
                 }
                 

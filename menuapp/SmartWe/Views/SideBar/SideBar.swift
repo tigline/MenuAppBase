@@ -13,7 +13,8 @@ struct SideBar:View {
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
     @Environment(\.appRouter) var appRouter
-
+    @State private var tapCount = 0
+    @State private var lastTapTime = Date()
     var theme:AppTheme {
         configuration.colorScheme
     }
@@ -37,14 +38,31 @@ struct SideBar:View {
                 .padding(.top,10)
                 .padding(.bottom,30)
                 .background(theme.themeColor.mainBackground)
-                .gesture(
-                    LongPressGesture(minimumDuration: 0.5)
-                        .onEnded({ _ in
-                            menuStore.updateTab("setting")
-                            appRouter.updateRouter(.setting)
-                        })
-                )
-            
+//                .gesture(
+//                    LongPressGesture(minimumDuration: 0.5)
+//                        .onEnded({ _ in
+//                            menuStore.updateTab("setting")
+//                            appRouter.updateRouter(.setting)
+//                        })
+//                )
+                .onTapGesture {
+                    let now = Date()
+                    if now.timeIntervalSince(self.lastTapTime) > 1 {
+                        self.tapCount = 0
+                    }
+
+                    self.tapCount += 1
+                    self.lastTapTime = now
+                    print("tapCount = \(tapCount)")
+                    if self.tapCount == 7 {
+                        self.tapCount = 0
+                        menuStore.updateTab("setting")
+                        appRouter.updateRouter(.setting)
+                        return
+                    }
+
+                }
+
             if isLoading {
                 Spacer()
                 ProgressView().padding(10)
@@ -72,8 +90,8 @@ struct SideBar:View {
         List(menuStore.catagorys, id: \.self, selection: selectionBar) { menu in
             
             NavigationLink(value: menu) {
-                Label(menu, systemImage: "hand.thumbsup.fill")
-                    .padding(.leading)
+                Text(menu)
+                    .padding(.leading, 30)
                     .padding(.vertical)
                     .frame(maxWidth: .infinity, alignment:.leading)
                     .foregroundColor(menuStore.catagory == menu ? theme.themeColor.sideBarTextBg : theme.themeColor.sideBarTextDf)
@@ -93,3 +111,4 @@ struct SideBar:View {
         .scrollContentBackground(.hidden)
     }
 }
+

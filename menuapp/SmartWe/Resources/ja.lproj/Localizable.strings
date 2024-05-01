@@ -76,3 +76,5 @@
 "show_order_cargo_text" = "注文を確認しますか?";
 
 "clear_all" = "ショッピングカートをクリア？";
+
+"clear_button" = "クリア";

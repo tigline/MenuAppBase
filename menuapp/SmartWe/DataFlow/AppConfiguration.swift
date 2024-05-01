@@ -30,7 +30,7 @@ final class AppConfiguration: ObservableObject {
     
     @AppStorage("shopCode") var shopCode:String?
     
-    @AppStorage("menuLaguage") var menuLaguage:String?
+    //@AppStorage("menuLaguage") var menuLaguage:String?
     
     @AppStorage("tableNo") var tableNo:String?
     
