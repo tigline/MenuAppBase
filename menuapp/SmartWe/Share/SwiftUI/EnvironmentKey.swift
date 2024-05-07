@@ -6,9 +6,9 @@ import Foundation
 import SwiftUI
 
 
-struct MenuStoreKey: EnvironmentKey {
-    static var defaultValue = MenuStore(appService: AppService.appDefault)
-}
+//struct MenuStoreKey: EnvironmentKey {
+//    static var defaultValue = MenuStore(appService: AppService.appDefault)
+//}
 
 struct SoundManagerKey: EnvironmentKey {
     static var defaultValue = SoundManager()
@@ -70,10 +70,10 @@ extension EnvironmentValues {
         set { self[SoundManagerKey.self] = newValue }
     }
 
-    var menuStore:MenuStore {
-        get { self[MenuStoreKey.self] }
-        set { self[MenuStoreKey.self] = newValue }
-    }
+//    var menuStore:MenuStore {
+//        get { self[MenuStoreKey.self] }
+//        set { self[MenuStoreKey.self] = newValue }
+//    }
     
     var cargoStore:CargoStore {
         get { self[CargoStoreKey.self] }

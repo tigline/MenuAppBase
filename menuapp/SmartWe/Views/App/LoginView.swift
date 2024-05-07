@@ -14,6 +14,7 @@ struct LoginView: View {
 //    @State private var loginError = "Login failed"
     //@StateObject private var configuration = AppConfiguration.share
     @Environment(\.showError) private var showError
+    @State var menuStore = MenuStore(appService: AppService.appDefault)
     
     private let model = Model(appData: AppConfiguration.share)
 
@@ -61,7 +62,7 @@ struct LoginView: View {
             ScanView(scannedCode: $text, openScanView: $openScanView)
         })
         .fullScreenCover(isPresented: model.loginSuccess, content: {
-            SideBarContainer()
+            SideBarContainer().environment(menuStore)
         })
         
         
@@ -86,6 +87,7 @@ struct LoginView: View {
         
         Task {
             do {
+                menuStore.selectBarIndex = 0
                 try await model.login(shopCode: text)
             } catch {
                 showError(error, "Login Failured")

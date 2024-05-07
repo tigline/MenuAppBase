@@ -9,7 +9,7 @@ import SwiftUI
 struct SideBarContainer: View {
     @StateObject private var configuration = AppConfiguration.share
 
-    @Environment(\.menuStore) var menuStore
+    @Environment(MenuStore.self) var menuStore
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.soundPlayer) private var soundPlayer
     

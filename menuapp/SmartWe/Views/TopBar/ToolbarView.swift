@@ -13,7 +13,7 @@ struct ToolbarView: View {
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false
     @State var showThemePopover = false
-    @Environment(\.menuStore) var menuStore
+    @Environment(MenuStore.self) var menuStore
     @Environment(\.appRouter) var appRouter
     @Environment(\.showAlert) var showAlert
     @Environment(\.showTable) var showTable

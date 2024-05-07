@@ -8,7 +8,7 @@
 import SwiftUI
 struct SideBar:View {
     
-    @Environment(\.menuStore) var menuStore
+    @Environment(MenuStore.self) var menuStore
     @Environment(\.isLoading) private var isLoading
     @StateObject private var configuration = AppConfiguration.share
     @State var showPopover = false

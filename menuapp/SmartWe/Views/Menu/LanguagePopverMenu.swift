@@ -10,7 +10,7 @@ import SwiftUI
 struct LanguagePopverMenu: View {
     @Binding var showPopover:Bool
     @StateObject private var configuration = AppConfiguration.share
-    @Environment(\.menuStore) var menuStore
+    @Environment(MenuStore.self) var menuStore
     @State private var maxWidth:CGFloat = 0
     
     var theme:AppTheme {

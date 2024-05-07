@@ -14,7 +14,7 @@ struct StackContainer: View {
         configuration.colorScheme
     }
     
-    @Environment(\.menuStore) var menuStore
+    @Environment(MenuStore.self) var menuStore
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.appRouter) var appRouter
     
