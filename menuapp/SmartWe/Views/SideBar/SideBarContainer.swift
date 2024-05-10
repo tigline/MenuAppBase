@@ -21,6 +21,11 @@ struct SideBarContainer: View {
     @State private var selectItem:UIImage?
     @State private var animationItemFrame = CGRect.zero
 
+    @State private var errorWrapper: ErrorWrapper?
+    @State private var alertWrapper: AlertWrapper?
+    @State private var isPresentAlert:Bool = false
+    @State private var isPresentError:Bool = false
+    
     
     var theme:AppTheme {
         configuration.colorScheme
@@ -108,6 +113,32 @@ struct SideBarContainer: View {
                 }
             }
         }
+        .environment(\.showError) { error, guidance in
+            errorWrapper = ErrorWrapper(error: error, guidance: guidance ?? "")
+            isPresentError = true
+        }
+        .alert(errorWrapper?.error.localizedDescription ?? "Error",
+               
+               isPresented: $isPresentError, actions: {
+            Button("sure_text") {
+                isPresentError = false
+            }
+        }, message: {
+            Text(errorWrapper?.guidance ?? "")
+        })
+        .environment(\.showAlert) { title, content in
+            alertWrapper = AlertWrapper(title: title, content: content)
+            isPresentAlert = true
+        }
+        .alert(alertWrapper?.title ?? "",
+               
+               isPresented: $isPresentAlert, actions: {
+            Button("sure_text") {
+                isPresentAlert = false
+            }
+        }, message: {
+            Text(alertWrapper?.content ?? "")
+        })
         
 //        .onChange(of: configuration.colorScheme) { oldValue, newValue in
 //            switch newValue {

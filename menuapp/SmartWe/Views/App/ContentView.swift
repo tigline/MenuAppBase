@@ -9,10 +9,7 @@ import SwiftUIOverlayContainer
 struct ContentView: View {
     @StateObject var appConfiguration = AppConfiguration.share
     @Environment(\.scenePhase) private var scenePhase
-    @State private var errorWrapper: ErrorWrapper?
-    @State private var alertWrapper: AlertWrapper?
-    @State private var isPresentAlert:Bool = false
-    @State private var isPresentError:Bool = false
+    
     
     private let model = Model()
 
@@ -20,32 +17,6 @@ struct ContentView: View {
         VStack {
             LoginView()
         }
-        .environment(\.showError) { error, guidance in
-            errorWrapper = ErrorWrapper(error: error, guidance: guidance ?? "")
-            isPresentError = true
-        }
-        .alert(errorWrapper?.error.localizedDescription ?? "Error",
-               
-               isPresented: $isPresentError, actions: {
-            Button("sure_text") {
-                isPresentError = false
-            }
-        }, message: {
-            Text(errorWrapper?.guidance ?? "")
-        })
-        .environment(\.showAlert) { title, content in
-            alertWrapper = AlertWrapper(title: title, content: content)
-            isPresentAlert = true
-        }
-        .alert(alertWrapper?.title ?? "",
-               
-               isPresented: $isPresentAlert, actions: {
-            Button("sure_text") {
-                isPresentAlert = false
-            }
-        }, message: {
-            Text(alertWrapper?.content ?? "")
-        })
         
         //.syncCoreData() // 同步 booking list 数据
         //.preferredColorScheme(.light)
