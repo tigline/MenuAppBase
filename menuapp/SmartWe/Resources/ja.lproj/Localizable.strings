@@ -6,24 +6,24 @@
 
 "log_out" = "ログアウト";
 "setting_theme" = "テーマ";
-"order_button" = "オーダボタン";
+"order_button" = "呼び出し";
 "select_a_table" = "テーブルを選択してください";
 "table_no.%@" = "テーブル %@";
 "booking_history" = "注文履歴";
-"shopping_car" = "買い物かご";
+"shopping_car" = "カート";
 "input_password_title" = "パスワードを入力してください";
 "password_text" = "パスワード";
 "sure_text" = "確認";
 "cancel_text" = "キャンセル";
-"select_table_title" = "この席を選択するかどうか";
+"select_table_title" = "この席に切り替えてもよろしいですか？";
 "%@seat_count_text" = "%@人席";
 "%@floor_text" = "%@階";
 "%lld table_not_opened" = "No.%lld まだオープンしていません";
 "%lld table_opened" = "No.%lld すでにオープンしています";
-"seat_state_empty" = "空の";
+"seat_state_empty" = "空席";
 "seat_state_standby" = "待って";
-"seat_state_used" = "使用する";
-"seat_state_full" = "満";
+"seat_state_used" = "使用中";
+"seat_state_full" = "満席";
 "logout_caution" = "ログアウトしてもよろしいですか";
 
 "version_info" = "バージョン情報";
@@ -40,12 +40,12 @@
 
 
 "not_shopping_tips" = "ご注文ください";
-"item_count" = "数量";
-"shopping_price" = "小计";
-"all_shopping_price" = "合计";
-"shopping_car_to_order" = "発信";
-"ordering_tips" = "注文しています、お待ちしてください";
-"order_success_tips" = "ご注文あれがとうございました";
+"item_count" = "点数";
+"shopping_price" = "小計";
+"all_shopping_price" = "合計金額";
+"shopping_car_to_order" = "注文確認";
+"ordering_tips" = "注文しています、しばらくお待ちください";
+"order_success_tips" = "ご注文承りました。しばらくお待ちください。";
 
 
 "not_booking_tips" = "注文がなし";
@@ -59,7 +59,7 @@
 "password_error" = "パスワードが正しくありません";
 "password_reinput" = "再入力してください";
 "reset_password" = "パスワードをリセットする";
-"password_is_empty" = "パスワードを空にすることはできません";
+"password_is_empty" = "パスワードを入力してください";
 
 "login_text" = "ログイン";
 "login_failed" = "ログインに失敗しました";
@@ -71,10 +71,10 @@
 "swipeToDelete" = "削除";
 "tag_title" = "お知らせ";
 "show_del_cart_item_tag" = "商品を削除しますか?";
-"call_waiter_success" = "成功しました。しばらくお待ちください";
+"call_waiter_success" = "スタッフをお呼びしましたので、しばらくお待ちください。";
 
 "show_order_cargo_text" = "注文を確認しますか?";
 
-"clear_all" = "ショッピングカートをクリア？";
+"clear_all" = "カート内のすべての商品を削除しますか？";
 
 "clear_button" = "クリア";

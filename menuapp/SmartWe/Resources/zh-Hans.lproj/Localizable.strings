@@ -5,10 +5,10 @@
 
 "log_out" = "登出";
 "setting_theme" = "主题";
-"order_button" = "呼叫按钮";
+"order_button" = "呼叫店员";
 "select_a_table" = "请选桌号";
 "table_no.%@" = "桌号 %@";
-"booking_history" = "历史订单";
+"booking_history" = "订单明细";
 "shopping_car" = "购物车";
 "input_password_title" = "请输入密码";
 "password_text" = "密码";
