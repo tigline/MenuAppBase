@@ -12,7 +12,7 @@ import SwiftUI
 
 struct SelectTableView: View {
     @StateObject private var configuration = AppConfiguration.share
-    @Environment(\.cargoStore) var cargoStore
+    //@Environment(\.cargoStore) var cargoStore
     @State private var tableNo:String = ""
     @Environment(\.dismiss) var dimiss
     @State private var showingPopoverIndex: String? = nil

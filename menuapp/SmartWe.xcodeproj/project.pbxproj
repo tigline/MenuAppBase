@@ -48,7 +48,6 @@
 		76AC25BB29C2E4C2007874DA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76AC25BD29C2E4C2007874DA /* Localizable.strings */; };
 		935DD0202B7274CF00FE5EC3 /* EnvironmentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD01F2B7274CF00FE5EC3 /* EnvironmentConfiguration.swift */; };
 		935DD0222B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */; };
-		93DEC8322B83A08700C8DF8A /* SwiftUIAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DEC8312B83A08700C8DF8A /* SwiftUIAView.swift */; };
 		BE0555852BB3FCEB00CC3897 /* OrderCheckResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0555842BB3FCEB00CC3897 /* OrderCheckResource.swift */; };
 		BE0555872BB401C700CC3897 /* ContenView.Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0555862BB401C700CC3897 /* ContenView.Model.swift */; };
 		BE0C69142B71C8FC00312FE1 /* SystemPackage in Frameworks */ = {isa = PBXBuildFile; productRef = BE0C69132B71C8FC00312FE1 /* SystemPackage */; };
@@ -140,7 +139,6 @@
 		76AC25BE29C2E4C6007874DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		935DD01F2B7274CF00FE5EC3 /* EnvironmentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentConfiguration.swift; sourceTree = "<group>"; };
 		935DD0212B727A0A00FE5EC3 /* SmartWeEnviromentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartWeEnviromentKey.swift; sourceTree = "<group>"; };
-		93DEC8312B83A08700C8DF8A /* SwiftUIAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIAView.swift; sourceTree = "<group>"; };
 		BE0555842BB3FCEB00CC3897 /* OrderCheckResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckResource.swift; sourceTree = "<group>"; };
 		BE0555862BB401C700CC3897 /* ContenView.Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContenView.Model.swift; sourceTree = "<group>"; };
 		BE0C69152B71CA3500312FE1 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
@@ -301,7 +299,6 @@
 			children = (
 				769F247429CEEC2F00C550B8 /* SideBarContainer.swift */,
 				BE573E372B8C4D4C00226D3A /* SideBar.swift */,
-				93DEC8312B83A08700C8DF8A /* SwiftUIAView.swift */,
 				BE27EBE22B75F43D0024DB77 /* ThemePopverMenu.swift */,
 				BEF9C0A32B74B8B2000D259B /* LogoImageView.swift */,
 			);
@@ -656,7 +653,6 @@
 				BE27EBEA2B7B631E0024DB77 /* OptionGroupListView.swift in Sources */,
 				BE2A84442B7F29B0007D11CB /* CargoCellView.swift in Sources */,
 				BE82C8322BABF3F800506EAF /* TabelView.swift in Sources */,
-				93DEC8322B83A08700C8DF8A /* SwiftUIAView.swift in Sources */,
 				BE0C69162B71CA3500312FE1 /* MenuItem.swift in Sources */,
 				BED31E6C2B904DCA00BE74D8 /* ImageView.swift in Sources */,
 				761044E429CC1ACE004EFAA2 /* ButtonStyle.swift in Sources */,

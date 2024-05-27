@@ -13,9 +13,6 @@ struct StackContainer: View {
     var theme:AppTheme {
         configuration.colorScheme
     }
-    
-    @Environment(MenuStore.self) var menuStore
-    @Environment(\.cargoStore) var cargoStore
     @Environment(\.appRouter) var appRouter
     
     @State private var password:String = ""
@@ -26,37 +23,29 @@ struct StackContainer: View {
     //let category:MenuCategory
     var body: some View {
         VStack {
-
             ToolbarView()
-
-            NavigationStack() {
-                    VStack {
-                        switch appRouter.router {
-                            case .menu(_):
-                                MenuGalleryLazyVGrid()
-                            case .cart:
-                                ShoppingCarView().ignoresSafeArea(.keyboard)
-                            case .order:
-                                OrderView().ignoresSafeArea(.keyboard)
-                            case .setting:
-                                SettingAppearance()
-                            case .none:
-                                MenuGalleryLazyVGrid()
-                            
-                        }
-                    }
-                    .toolbar(.hidden, for: .navigationBar)
-                    
+            
+            NavigationStack{
+                switch appRouter.router {
+                    case .menu(_):
+                        MenuGalleryLazyVGrid()
+                    case .cart:
+                        ShoppingCarView().ignoresSafeArea(.keyboard)
+                    case .order:
+                        OrderView().ignoresSafeArea(.keyboard)
+                    case .setting:
+                        SettingAppearance()
+                    case .none:
+                        MenuGalleryLazyVGrid()
+                }
             }
+            
             
         }
+        .toolbar(.hidden, for: .navigationBar)
         .background(theme.themeColor.contentBg)
         .environment(\.showTable) { showTable in
-            
-            DispatchQueue.main.async {
-                self.showPWAlert = showTable
-                //print("showPWAlert set to \(showPWAlert)")
-            }
+            showPWAlert = showTable
         }
         .onAppear{
             if configuration.tableNo == nil {
