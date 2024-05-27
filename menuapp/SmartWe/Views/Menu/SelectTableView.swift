@@ -15,6 +15,7 @@ struct SelectTableView: View {
     @Environment(\.cargoStore) var cargoStore
     @State private var tableNo:String = ""
     @Environment(\.dismiss) var dimiss
+    @State private var showingPopoverIndex: String? = nil
 //    @Binding var isPresented:Bool
 //    @State private var tableNo:Int
     let columns = [
@@ -34,7 +35,7 @@ struct SelectTableView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(model.tableList ?? [], id: \.self) { item in
-                            TabelView(tableInfo: item)
+                            TabelView(currentShowIndex: $showingPopoverIndex, tableInfo: item)
                         }
                     }
                 }

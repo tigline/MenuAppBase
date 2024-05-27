@@ -68,6 +68,18 @@ extension TabelView {
             
         }
         
+        func seatButtonOpened(_ index:Int) -> Bool {
+            
+            if subTablelOrderkeys.count < index {return false}
+            
+            if subTablelOrderkeys[index].isEmpty {
+                return false
+            } else {
+                return true
+            }
+            
+        }
+        
         var subTableInfo1: (String) -> String = { parameter in
             return "SubTableInfo is \(parameter)"
         }
