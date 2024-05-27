@@ -50,7 +50,7 @@ extension ContentView {
             }
             
         }
-        
+        @MainActor
         private func performNetworkRequest(_ shopCode:String,
                                            _ orderKey:String) async throws {
             try await withCheckedThrowingContinuation { continuation in
@@ -63,10 +63,13 @@ extension ContentView {
                                 if result.data {
                                     
                                 } else {
-                                    DispatchQueue.main.async {
-                                        AppConfiguration.share.tableNo = nil
-                                        AppConfiguration.share.orderKey = nil
-                                    }
+                                    
+                                    let table = AppConfiguration.share.tableNo
+                                    AppConfiguration.share.tableNo = nil
+                                    AppConfiguration.share.orderKey = nil
+                                    
+                                    try? await load(shopCode: shopCode, tableNo: table)
+                                    
                                 }
                             }
                             continuation.resume()
@@ -76,6 +79,41 @@ extension ContentView {
                     }
                     
                 }
+        }
+        
+        @MainActor
+        func load(shopCode:String, tableNo:String?) async throws {
+            
+            let resource = SelectTableResource(shopCode: shopCode)
+            let request = APIRequest(resource: resource)
+            
+            do {
+                let result = try await request.execute()
+                if result.code == 200 {
+                    
+                    let tableList = result.data
+                    
+                    guard let tableInfo = tableNo?.split(separator: "ー") else {return}
+                    
+                    guard tableInfo.count > 1 else {return}
+                    
+                    guard let seat = Int(tableInfo[1]) else { return}
+                    
+                    guard let newTableInfo = tableList.first(where: {$0.seatNumber == tableInfo[0]}) else { return }
+                        
+                    guard let orderKey = newTableInfo.orderKeys?[seat], orderKey != "" else {return}
+                    
+                    AppConfiguration.share.tableNo = tableNo
+                    AppConfiguration.share.orderKey = orderKey
+
+                } else {
+                    throw CustomError.createCustomError()
+                }
+                
+            } catch {
+                throw error
+            }
+            
         }
     }
     
