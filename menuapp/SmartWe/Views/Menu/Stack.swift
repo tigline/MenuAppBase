@@ -65,11 +65,11 @@ struct StackContainer: View {
             
             Button(role:.none) {
                 
-                #if DEBUG
-                if password == "" {
-                    password = "123456"
-                }
-                #endif
+//                #if DEBUG
+//                if password == "" {
+//                    password = "123456"
+//                }
+//                #endif
                 
                 if password == configuration.password {
                     showTable = true

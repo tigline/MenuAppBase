@@ -17,7 +17,6 @@ struct ContentView: View {
         VStack {
             LoginView()
         }
-        
         //.syncCoreData() // 同步 booking list 数据
         //.preferredColorScheme(.light)
         .environment(\.locale, appConfiguration.appLanguage.locale)

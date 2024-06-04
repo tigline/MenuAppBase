@@ -84,3 +84,8 @@
 "show_order_cargo_text" = "Confirm order?";
 "clear_all" = "Empty all?";
 "clear_button" = "Clear";
+
+"machine_code_empty" = "Machine code should not be empty";
+"machine_code_error" = "Machine code does not exist";
+
+

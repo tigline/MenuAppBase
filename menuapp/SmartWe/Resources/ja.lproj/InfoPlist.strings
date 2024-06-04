@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  SmartWe
+
+  Created by Aaron Hou on 2024/05/30.
+  
+*/
+"NSCameraUsageDescription" = "このアプリはマシンコードをスキャンするためにカメラへのアクセスを必要とします";

@@ -78,3 +78,8 @@
 "clear_all" = "カート内のすべての商品を削除しますか？";
 
 "clear_button" = "クリア";
+
+"machine_code_empty" = "マシンコードは空であってはなりません";
+"machine_code_error" = "マシンコードが存在しません";
+
+"NSCameraUsageDescription" = "このアプリはマシンコードをスキャンするためにカメラへのアクセスを必要とします";

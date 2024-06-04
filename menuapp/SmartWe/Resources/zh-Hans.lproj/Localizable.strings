@@ -83,3 +83,8 @@
 "show_order_cargo_text" = "确认下单吗？";
 "clear_all" = "清空购物车？";
 "clear_button" = "清空";
+
+"machine_code_empty" = "机器码不能为空";
+"machine_code_error" = "机器码不存在";
+
+

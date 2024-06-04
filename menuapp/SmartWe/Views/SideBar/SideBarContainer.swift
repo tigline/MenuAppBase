@@ -56,20 +56,17 @@ struct SideBarContainer: View {
                 StackContainer()
             }
             .environment(\.isLoading, isLoading)
-            .onReceive(configuration.$appLanguage){ lan in
-                Task {
-                    isLoading = true
-                    guard let shopCode = configuration.shopCode else {
-                        return
-                    }
-                    guard let machineCode = configuration.machineCode else {
-                        return
-                    }
-                    await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan.sourceId)
-                    isLoading = false
-                }
-            }
+            
+//            .onReceive(configuration.$appLanguage){ lan in
+//                
+//            }
             .preferredColorScheme(staturBarTheme)
+            .onChange(of: configuration.appLanguage) { old, new in
+                loadMenu(lan: new.sourceId)
+            }
+            .onAppear {
+                loadMenu(lan: configuration.appLanguage.sourceId)
+            }
             
         }
         .overlay(
@@ -152,6 +149,20 @@ struct SideBarContainer: View {
 //            }
 //        }
 
+    }
+    
+    func loadMenu(lan:String) {
+        Task {
+            isLoading = true
+            guard let shopCode = configuration.shopCode else {
+                return
+            }
+            guard let machineCode = configuration.machineCode else {
+                return
+            }
+            await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan)
+            isLoading = false
+        }
     }
     
     func runAnimation() {

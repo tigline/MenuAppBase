@@ -101,7 +101,7 @@ extension ContentView {
                     
                     guard let newTableInfo = tableList.first(where: {$0.seatNumber == tableInfo[0]}) else { return }
                         
-                    guard let orderKey = newTableInfo.orderKeys?[seat], orderKey != "" else {return}
+                    guard let orderKey = newTableInfo.orderKeys?[seat-1], orderKey != "" else {return}
                     
                     AppConfiguration.share.tableNo = tableNo
                     AppConfiguration.share.orderKey = orderKey

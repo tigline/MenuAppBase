@@ -20,10 +20,10 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
             return "English"
         case .zh:
             return "中文"
-        case .system:
-            return "system"
         case .ko:
             return "한국"
+        case .system:
+            return "system"
         }
     }
 
@@ -73,7 +73,19 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
         case .ko:
             return "language_Korean"
         case .system:
-            return "language_Jpanese"
+            return getFaultFlag(local: .autoupdatingCurrent)
+        }
+    }
+    
+    func getFaultFlag(local:Locale) -> String {
+        if local.identifier.contains("ja") {
+            return "language_Japanese"
+        } else if local.identifier.contains("zh") {
+            return "language_Chinese"
+        } else if local.identifier.contains("ko") {
+            return "language_Korean"
+        } else {
+            return "language_English"
         }
     }
 }

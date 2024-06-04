@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  SmartWe
+
+  Created by Aaron Hou on 2024/05/30.
+  
+*/
+"NSCameraUsageDescription" = "为了扫描机器码请允许使用摄像头";

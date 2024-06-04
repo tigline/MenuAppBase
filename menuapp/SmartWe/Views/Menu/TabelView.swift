@@ -10,6 +10,7 @@ import SwiftUI
 struct TabelView: View {
     
     
+    @State private var showPopover = false
     @State private var showAlert = false
     @State private var subTableNo:Int = 0
     @State private var orderKey:String = ""
@@ -32,6 +33,10 @@ struct TabelView: View {
     }
     
     let tableInfo:TableInfo
+    
+    var isBlur:Bool {
+        currentShowIndex != nil && currentShowIndex != model.tableInfo.seatNumber
+    }
     
     var body: some View {
         ZStack {
@@ -127,15 +132,19 @@ struct TabelView: View {
                     
                     
                 }
+                .blur(radius: isBlur ? 5:0)
                 .cornerRadius(10)
                 .frame(maxWidth: .infinity, minHeight: 150, alignment: .center)
                 
             }
-            if currentShowIndex != nil && currentShowIndex != model.tableInfo.seatNumber {
-                Color.black.opacity(0.6)
-                    .cornerRadius(8)
-                    .allowsHitTesting(false)
-            }
+//            if currentShowIndex != nil && currentShowIndex != model.tableInfo.seatNumber {
+//                Color.black.opacity(0.5)
+//                    
+//                    .blur(radius: 20)
+//                    .cornerRadius(10)
+//                    .allowsHitTesting(false)
+//                    
+//            }
         }
         
 

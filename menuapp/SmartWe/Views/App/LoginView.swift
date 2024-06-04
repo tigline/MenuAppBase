@@ -9,9 +9,9 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var text: String = ""
-//    @State private var showLoginError = false
+    @State private var showLoginError = false
     @State private var openScanView = false
-//    @State private var loginError = "Login failed"
+    @State private var loginError = "Login failed"
     //@StateObject private var configuration = AppConfiguration.share
     @Environment(\.showError) private var showError
     @State var menuStore = MenuStore(appService: AppService.appDefault)
@@ -49,14 +49,14 @@ struct LoginView: View {
                 .buttonStyle(.borderedProminent)
 
         }
-//        .alert("login_failed", isPresented: $showLoginError) {
-//            Button("sure_text") {
-//                showLoginError = false
-//                // Handle the acknowledgement.
-//            }
-//        } message: {
-//            Text(loginError)
-//        }
+        .alert("login_failed", isPresented: $showLoginError) {
+            Button("sure_text") {
+                //showLoginError = false
+                // Handle the acknowledgement.
+            }
+        } message: {
+            Text(LocalizedStringKey(loginError))
+        }
         //弹出ScanView
         .sheet(isPresented: $openScanView, content: {
             ScanView(scannedCode: $text, openScanView: $openScanView)
@@ -76,21 +76,25 @@ struct LoginView: View {
     
     func loginAction() {
         print("loginAction")
-        
-        #if DEBUG
+
         if text == "" {
-//            loginError = "machine code should not be empty"
-//            showLoginError = true
-            text = "hd36G5rUu7bZc5xAMr"
+//#if DEBUG
+//            text = "hd36G5rUu7bZc5xAMr"
+//#else
+            loginError = "machine_code_empty"
+            showLoginError = true
+//#endif
         }
-        #endif
+        
         
         Task {
             do {
                 menuStore.selectBarIndex = 0
                 try await model.login(shopCode: text)
             } catch {
-                showError(error, "Login Failured")
+                loginError = "machine_code_error"
+                showLoginError = true
+                //showError(error, loginError)
             }
         }
     }

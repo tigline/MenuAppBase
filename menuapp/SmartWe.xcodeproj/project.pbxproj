@@ -37,7 +37,6 @@
 		76AC259829C2E2D4007874DA /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 76AC259729C2E2D4007874DA /* Nuke */; };
 		76AC259A29C2E2D4007874DA /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 76AC259929C2E2D4007874DA /* NukeExtensions */; };
 		76AC259C29C2E2D4007874DA /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 76AC259B29C2E2D4007874DA /* NukeUI */; };
-		76AC259E29C2E2D4007874DA /* NukeVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 76AC259D29C2E2D4007874DA /* NukeVideo */; };
 		76AC25A629C2E350007874DA /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC25A529C2E350007874DA /* DeviceStatus.swift */; };
 		76AC25A929C2E35C007874DA /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC25A729C2E35B007874DA /* Shape.swift */; };
 		76AC25AA29C2E35C007874DA /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC25A829C2E35B007874DA /* ViewExtension.swift */; };
@@ -80,6 +79,7 @@
 		BE2A3D912B9EFE29004FF513 /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A3D902B9EFE29004FF513 /* OrderDetail.swift */; };
 		BE2A84422B7EF1C0007D11CB /* ShoppingCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */; };
 		BE2A84442B7F29B0007D11CB /* CargoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2A84432B7F29B0007D11CB /* CargoCellView.swift */; };
+		BE4D91582C07FD8400E53EB6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE4D915A2C07FD8400E53EB6 /* InfoPlist.strings */; };
 		BE573E382B8C4D4C00226D3A /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE573E372B8C4D4C00226D3A /* SideBar.swift */; };
 		BE573E3A2B8C4D8F00226D3A /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE573E392B8C4D8F00226D3A /* AppRouter.swift */; };
 		BE573E3C2B8C4E5600226D3A /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE573E3B2B8C4E5600226D3A /* ToolbarView.swift */; };
@@ -170,6 +170,10 @@
 		BE2A3D902B9EFE29004FF513 /* OrderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetail.swift; sourceTree = "<group>"; };
 		BE2A84412B7EF1C0007D11CB /* ShoppingCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCarView.swift; sourceTree = "<group>"; };
 		BE2A84432B7F29B0007D11CB /* CargoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoCellView.swift; sourceTree = "<group>"; };
+		BE4D91592C07FD8400E53EB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE4D915B2C07FD8700E53EB6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BE4D915C2C07FD8800E53EB6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE4D915D2C07FD8900E53EB6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BE573E372B8C4D4C00226D3A /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		BE573E392B8C4D8F00226D3A /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		BE573E3B2B8C4E5600226D3A /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
@@ -198,7 +202,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76AC259829C2E2D4007874DA /* Nuke in Frameworks */,
-				76AC259E29C2E2D4007874DA /* NukeVideo in Frameworks */,
 				76AC259A29C2E2D4007874DA /* NukeExtensions in Frameworks */,
 				76AC259C29C2E2D4007874DA /* NukeUI in Frameworks */,
 				BE0C69142B71C8FC00312FE1 /* SystemPackage in Frameworks */,
@@ -441,6 +444,7 @@
 			children = (
 				BEFC34C82BCFC51B00CE906E /* 14428.wav */,
 				76AC25BD29C2E4C2007874DA /* Localizable.strings */,
+				BE4D915A2C07FD8400E53EB6 /* InfoPlist.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -546,7 +550,6 @@
 				76AC259729C2E2D4007874DA /* Nuke */,
 				76AC259929C2E2D4007874DA /* NukeExtensions */,
 				76AC259B29C2E2D4007874DA /* NukeUI */,
-				76AC259D29C2E2D4007874DA /* NukeVideo */,
 				769AB0B129D1BCE5008451E6 /* SwiftUIOverlayContainer */,
 				BE0C69132B71C8FC00312FE1 /* SystemPackage */,
 			);
@@ -601,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFC34C92BCFC51B00CE906E /* 14428.wav in Resources */,
+				BE4D91582C07FD8400E53EB6 /* InfoPlist.strings in Resources */,
 				76AC258B29C2E23B007874DA /* Preview Assets.xcassets in Resources */,
 				76AC25BB29C2E4C2007874DA /* Localizable.strings in Resources */,
 				76443C2B29D27A9A00D23BB0 /* README.md in Resources */,
@@ -709,6 +713,17 @@
 				BEEB36472B8EF4BB005DBB10 /* ko */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BE4D915A2C07FD8400E53EB6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE4D91592C07FD8400E53EB6 /* en */,
+				BE4D915B2C07FD8700E53EB6 /* zh-Hans */,
+				BE4D915C2C07FD8800E53EB6 /* ja */,
+				BE4D915D2C07FD8900E53EB6 /* ko */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -837,7 +852,7 @@
 				CODE_SIGN_ENTITLEMENTS = SmartWe/SmartWe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "SmartWe/Preview\\ Content";
 				DEVELOPMENT_TEAM = 3583NXG8VV;
@@ -845,28 +860,31 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartWe/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SmartWe;
+				INFOPLIST_KEY_CFBundleDisplayName = MenuMaster;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
-				INFOPLIST_KEY_NSCameraUsageDescription = "For scan machine code";
+				INFOPLIST_KEY_NSCameraUsageDescription = "このアプリはマシンコードをスキャンするためにカメラへのアクセスを必要とします";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartwe.admin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = auto;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -883,37 +901,43 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SmartWe/SmartWe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "SmartWe/Preview\\ Content";
-				DEVELOPMENT_TEAM = 3583NXG8VV;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = LLMCPWTH2W;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartWe/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SmartWe;
+				INFOPLIST_KEY_CFBundleDisplayName = MenuMaster;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
-				INFOPLIST_KEY_NSCameraUsageDescription = "For scan machine code";
+				INFOPLIST_KEY_NSCameraUsageDescription = "このアプリはマシンコードをスキャンするためにカメラへのアクセスを必要とします";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
-				MARKETING_VERSION = 0.1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartwe.admin;
+				MARKETING_VERSION = 0.1.6;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartwe.orderapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = auto;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = smartweorderappfprofile;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -993,11 +1017,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 76AC259629C2E2D4007874DA /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
-		};
-		76AC259D29C2E2D4007874DA /* NukeVideo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76AC259629C2E2D4007874DA /* XCRemoteSwiftPackageReference "Nuke" */;
-			productName = NukeVideo;
 		};
 		BE0C69132B71C8FC00312FE1 /* SystemPackage */ = {
 			isa = XCSwiftPackageProductDependency;

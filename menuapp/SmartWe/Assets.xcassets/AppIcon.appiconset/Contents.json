@@ -13,7 +13,7 @@
       "size" : "20x20"
     },
     {
-      "filename" : "icon-29.png",
+      "filename" : "icon-29-ipad 1.png",
       "idiom" : "iphone",
       "scale" : "1x",
       "size" : "29x29"
@@ -31,7 +31,7 @@
       "size" : "29x29"
     },
     {
-      "filename" : "icon-40@2x.png",
+      "filename" : "icon-40@2x 1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -55,13 +55,13 @@
       "size" : "60x60"
     },
     {
-      "filename" : "icon-20-ipad.png",
+      "filename" : "20.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "20x20"
     },
     {
-      "filename" : "icon-20@2x-ipad.png",
+      "filename" : "icon-20@2x 1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
@@ -73,7 +73,7 @@
       "size" : "29x29"
     },
     {
-      "filename" : "icon-29@2x-ipad.png",
+      "filename" : "icon-29@2x 1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
