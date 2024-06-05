@@ -15,7 +15,7 @@ public struct MenuItemView: View {
     @Environment(\.goOptions) private var goOptions
     @State var geomeFrame: CGRect = .zero
     
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     
     var theme:AppTheme {
         configuration.colorScheme
@@ -75,7 +75,8 @@ public struct MenuItemView: View {
                 title: item.mainTitle,
                 subtitle: String(Int(item.price)) + " 円",
                 displayType: displayType,
-                theme: theme.themeColor
+                theme: theme.themeColor, 
+                config: configuration
             )
             if displayType == .landscape {
                 Image(systemName: "chevron.forward")
@@ -104,7 +105,8 @@ public struct MenuItemView: View {
                 title: item.mainTitle,
                 subtitle: String(Int(item.currentPrice)) + " 円",
                 displayType: displayType,
-                theme: theme.themeColor
+                theme: theme.themeColor,
+                config: configuration
             )
             if displayType == .landscape {
                 Image(systemName: "chevron.forward")

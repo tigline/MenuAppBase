@@ -13,6 +13,7 @@ struct ItemShortInfo: View {
     let subtitle: String
     let displayType: DisplayType
     let theme:ThemeColors
+    let config:AppConfiguration
 
     var body: some View {
         switch displayType {
@@ -77,7 +78,7 @@ struct ItemShortInfo: View {
     @ViewBuilder
     var titleView: some View {
         Text(title)
-            .font(.custom("PingFangSC-Regular", size: 13))
+            .font(config.appLanguage.regularFont(13))
             .lineLimit(1)
             .foregroundColor(theme.shortInfoText)
     }
@@ -86,7 +87,7 @@ struct ItemShortInfo: View {
     var subTitleView: some View {
         VStack {
             Text(subtitle)
-                .font(.custom("Avenir-Heavy", size: 15))
+                .font(config.appLanguage.semiBoldFont(15))
                 .foregroundColor(theme.shortInfoText)
         }
     }

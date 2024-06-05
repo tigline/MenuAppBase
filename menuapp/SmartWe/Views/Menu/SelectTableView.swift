@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct SelectTableView: View {
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     //@Environment(\.cargoStore) var cargoStore
     @State private var tableNo:String = ""
     @Environment(\.dismiss) var dimiss
@@ -35,7 +35,8 @@ struct SelectTableView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(model.tableList ?? [], id: \.self) { item in
-                            TabelView(currentShowIndex: $showingPopoverIndex, tableInfo: item)
+                            TabelView(currentShowIndex: $showingPopoverIndex, 
+                                      model: TabelView.Model(tableInfo: item, appData:configuration))
                         }
                     }
                 }

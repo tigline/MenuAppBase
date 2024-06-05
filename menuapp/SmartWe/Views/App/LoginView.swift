@@ -12,11 +12,20 @@ struct LoginView: View {
     @State private var showLoginError = false
     @State private var openScanView = false
     @State private var loginError = "Login failed"
-    //@StateObject private var configuration = AppConfiguration.share
+    
     @Environment(\.showError) private var showError
+    @EnvironmentObject var appConfiguration: AppConfiguration
+    
     @State var menuStore = MenuStore(appService: AppService.appDefault)
     
-    private let model = Model(appData: AppConfiguration.share)
+    private var model: Model = Model()
+    
+    var loginSuccess:Binding<Bool> {
+        Binding<Bool>(
+            get: { appConfiguration.loginState == .login },
+            set: { _ in  }
+        )
+    }
 
 
     var body: some View {
@@ -24,7 +33,7 @@ struct LoginView: View {
             HStack{
                 Image("smartwe.logo")
                 Text("SmartWe")
-                    .font(.title)
+                    .font(appConfiguration.appLanguage.regularFont(18))
                     .bold()
                     .foregroundStyle(.blue)
             }
@@ -32,6 +41,7 @@ struct LoginView: View {
             HStack {
                 TextField("input_machine_code", text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .font(appConfiguration.appLanguage.regularFont(16))
                     .frame(width: 300)
                     
                 Button(action: scanAction) {
@@ -46,6 +56,7 @@ struct LoginView: View {
             }
             .padding()
             Button("login_text", action: loginAction)
+                .font(appConfiguration.appLanguage.regularFont(16))
                 .buttonStyle(.borderedProminent)
 
         }
@@ -54,14 +65,16 @@ struct LoginView: View {
                 //showLoginError = false
                 // Handle the acknowledgement.
             }
+            .font(appConfiguration.appLanguage.regularFont(16))
         } message: {
             Text(LocalizedStringKey(loginError))
         }
+        .font(appConfiguration.appLanguage.regularFont(16))
         //弹出ScanView
         .sheet(isPresented: $openScanView, content: {
             ScanView(scannedCode: $text, openScanView: $openScanView)
         })
-        .fullScreenCover(isPresented: model.loginSuccess, content: {
+        .fullScreenCover(isPresented: loginSuccess, content: {
             SideBarContainer().environment(menuStore)
         })
         
@@ -90,11 +103,14 @@ struct LoginView: View {
         Task {
             do {
                 menuStore.selectBarIndex = 0
-                try await model.login(shopCode: text)
+                let machineInfo = try await model.login(shopCode: text)
+                appConfiguration.machineCode = machineInfo.machineCode
+                appConfiguration.shopCode = machineInfo.shopCode
+                appConfiguration.logoImage = machineInfo.logoImage
+                appConfiguration.loginState = .login
             } catch {
                 loginError = "machine_code_error"
                 showLoginError = true
-                //showError(error, loginError)
             }
         }
     }

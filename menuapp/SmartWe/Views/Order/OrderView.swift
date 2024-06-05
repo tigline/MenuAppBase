@@ -12,7 +12,7 @@ import SwiftUI
 struct OrderView: View {
     
     @Environment(\.showError) var showError
-    @StateObject var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     @State private var model = Model()
     
     private var theme:AppTheme {
@@ -45,6 +45,7 @@ struct OrderView: View {
                             .foregroundStyle(theme.themeColor.toolBarTextBgOff)
                     } description: {
                         Text("not_booking_tips")
+                            .font(configuration.appLanguage.mediumFont(16))
                             .foregroundStyle(theme.themeColor.toolBarTextBgOff)
                             .font(.title2)
                     }
@@ -142,12 +143,12 @@ struct OrderView: View {
     var goodsCountView: some View {
         HStack {
             Text("item_count")
-                .font(CustomFonts.orderCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text(model.totalQty)
-                .font(CustomFonts.cargoCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .frame(alignment: .trailing)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
         }
@@ -158,15 +159,15 @@ struct OrderView: View {
         HStack {
             Text("amount_price")
                 .frame(alignment: .leading)
-                .font(CustomFonts.orderCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             
             Text("¥ " + model.totalPrice)
-                .font(CustomFonts.cargoTotalFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .foregroundStyle(theme.themeColor.orderBtBg)
             + Text("tax_flog")
-                .font(CustomFonts.cargoCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .foregroundStyle(theme.themeColor.cargoTextColor)
         }
     }
@@ -175,12 +176,12 @@ struct OrderView: View {
     var totleCountView: some View {
         HStack {
             Text("tax_price")
-                .font(CustomFonts.orderCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .frame(alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text(model.allTax)
-                .font(CustomFonts.cargoCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .frame(alignment: .trailing)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
         }

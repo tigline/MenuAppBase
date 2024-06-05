@@ -55,9 +55,9 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
         case .en:
             return .init(identifier: "en")
         case .jp:
-            return .init(identifier: "ja-JP")
+            return .init(identifier: "ja")
         case .ko:
-            return .init(identifier: "ko-KR")
+            return .init(identifier: "ko")
         }
     }
     
@@ -89,3 +89,68 @@ enum AppLanguage: Int, CaseIterable, Identifiable {
         }
     }
 }
+
+extension AppLanguage {
+    
+    func regularFont(_ size:CGFloat) -> Font {
+        switch self {
+        case .jp:
+            return .custom("HiraginoSans-W3", size: size)
+        case .en:
+            return .system(size: size)
+        case .zh:
+            return .custom("PingFangSC-Regular", size: size)
+        case .ko:
+            return .custom("AppleSDGothicNeo-Regular", size: size)
+        case .system:
+            return .custom("HiraginoMincho-W3", size: size)
+        }
+    }
+    
+    func mediumFont(_ size:CGFloat) -> Font {
+        switch self {
+        case .jp:
+            return .custom("HiraginoSans-W5", size: size)
+        case .en:
+            return .system(size: size, weight: .medium)
+        case .zh:
+            return .custom("PingFangSC-Medium", size: size)
+        case .ko:
+            return .custom("AppleSDGothicNeo-Medium", size: size)
+        case .system:
+            return .custom("HiraginoMincho-W5", size: size)
+        }
+    }
+    
+    func semiBoldFont(_ size:CGFloat) -> Font {
+        switch self {
+        case .jp:
+            return .custom("HiraginoSans-W5", size: size)
+        case .en:
+            return .system(size: size, weight: .semibold)
+        case .zh:
+            return .custom("PingFangSC-SemiBold", size: size)
+        case .ko:
+            return .custom("AppleSDGothicNeo-SemiBold", size: size)
+        case .system:
+            return .custom("HiraginoMincho-W5", size: size)
+        }
+    }
+    
+    func boldFont(_ size:CGFloat) -> Font {
+        switch self {
+        case .jp:
+            return .custom("HiraginoSans-W6", size: size)
+        case .en:
+            return .system(size: size, weight: .bold)
+        case .zh:
+            return .custom("PingFangSC-Bold", size: size)
+        case .ko:
+            return .custom("AppleSDGothicNeo-Bold", size: size)
+        case .system:
+            return .custom("HiraginoMincho-W6", size: size)
+        }
+    }
+    
+}
+

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ToolbarView: View {
 
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     @State var showPopover = false
     @State var showThemePopover = false
     @Environment(MenuStore.self) var menuStore

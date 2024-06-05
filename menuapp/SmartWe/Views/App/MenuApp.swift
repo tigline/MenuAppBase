@@ -7,10 +7,12 @@ import SwiftUI
 @main
 struct MenuApp: App {
     let stack = CoreDataStack.shared
+    @State var appConfiguration = AppConfiguration()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(model: ContentView.Model(configuration: appConfiguration))
                 .environment(\.managedObjectContext, stack.container.viewContext)
+                .environmentObject(appConfiguration)
         }
         #if os(macOS)
         .defaultSize(width: 1024, height: 800)

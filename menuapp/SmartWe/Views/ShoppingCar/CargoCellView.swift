@@ -9,7 +9,7 @@ import SwiftUI
 import NukeUI
 
 struct CargoCellView: View {
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     var themeColor:ThemeColors {
         configuration.colorScheme.themeColor
     }
@@ -39,14 +39,14 @@ struct CargoCellView: View {
 
                 Text(item.title ?? "")
                     .padding(.horizontal)
-                    .font(CustomFonts.carGoMenuFont)
+                    .font(configuration.appLanguage.semiBoldFont(18))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(themeColor.cargoTextColor)
                 Spacer()
                 
                 Text("¥" + "\(Int(item.price))")
                     .padding(.horizontal)
-                    .font(CustomFonts.carGoMenuFont)
+                    .font(configuration.appLanguage.semiBoldFont(18))
                     //.frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(themeColor.cargoTextColor)
                     .padding(.trailing, 50)
@@ -72,7 +72,7 @@ struct CargoCellView: View {
                     .cornerRadius(8)
                     
                     Text("\(item.quantity)")
-                        .font(CustomFonts.carGoMenuFont)
+                        .font(configuration.appLanguage.semiBoldFont(18))
                         .foregroundStyle(themeColor.cargoTextColor)
                         .frame(width: 30)
                     

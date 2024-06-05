@@ -13,7 +13,7 @@ struct ShoppingCarView: View {
     @Environment(\.showError) var showError
     @Environment(\.showTable) var showTable
     
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
 
@@ -90,7 +90,7 @@ struct ShoppingCarView: View {
                 } description: {
                     Text("not_shopping_tips")
                         .foregroundStyle(theme.themeColor.toolBarTextBgOff)
-                        .font(.title2)
+                        .font(configuration.appLanguage.mediumFont(16))
                 }
             }
             .background(theme.themeColor.mainBackground)
@@ -157,6 +157,7 @@ struct ShoppingCarView: View {
                                         .padding(.horizontal)
                                         .frame(height: 50, alignment: .center)
                                         .foregroundStyle(.white)
+                                        .font(configuration.appLanguage.regularFont(16))
                                         .background(.gray)
                                         .clipCornerRadius(10)
                                         
@@ -213,6 +214,7 @@ struct ShoppingCarView: View {
                 } label: {
                     Text("sure_text")
                         .contentShape(Rectangle())
+                        .font(configuration.appLanguage.regularFont(16))
                 }
 
             }
@@ -226,6 +228,7 @@ struct ShoppingCarView: View {
                     HStack {
                         Spacer()
                         Text("sure_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }.foregroundStyle(.red)
@@ -235,11 +238,13 @@ struct ShoppingCarView: View {
                     HStack {
                         Spacer()
                         Text("cancel_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }
             } message: {
                 Text("show_del_cart_item_tag")
+                    .font(configuration.appLanguage.regularFont(16))
             }
             
             .alert("tag_title", isPresented: $showBooking) {
@@ -249,6 +254,7 @@ struct ShoppingCarView: View {
                     HStack {
                         Spacer()
                         Text("sure_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }.foregroundStyle(.red)
@@ -258,11 +264,13 @@ struct ShoppingCarView: View {
                     HStack {
                         Spacer()
                         Text("cancel_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }
             } message: {
                 Text("show_order_cargo_text")
+                    .font(configuration.appLanguage.regularFont(16))
             }
             .alert("tag_title", isPresented: $showClear) {
                 Button {
@@ -273,6 +281,7 @@ struct ShoppingCarView: View {
                     HStack {
                         Spacer()
                         Text("sure_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }.foregroundStyle(.red)
@@ -282,11 +291,13 @@ struct ShoppingCarView: View {
                     HStack {
                         Spacer()
                         Text("cancel_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }
             } message: {
                 Text("clear_all")
+                    .font(configuration.appLanguage.regularFont(16))
             }
         }
             
@@ -328,6 +339,7 @@ struct ShoppingCarView: View {
                 ProgressView()
                 Spacer()
                 Text("ordering_tips")
+                    .font(configuration.appLanguage.regularFont(16))
             }
             .padding()
             .frame(maxWidth: 200, maxHeight: 200)
@@ -349,6 +361,7 @@ struct ShoppingCarView: View {
                     showTable(true)
                 } label: {
                     Text("select_a_table")
+                        .font(configuration.appLanguage.regularFont(16))
                         .frame(maxWidth: .infinity)
 
                 }
@@ -367,6 +380,7 @@ struct ShoppingCarView: View {
                     }
                 } label: {
                     Text("shopping_car_to_order")
+                        .font(configuration.appLanguage.regularFont(16))
                         .frame(maxWidth: .infinity)
 
                 }
@@ -384,12 +398,12 @@ struct ShoppingCarView: View {
     var goodsCountView: some View {
         HStack {
             Text("item_count")
-                .font(CustomFonts.orderCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text(goodsCount)
-                .font(CustomFonts.cargoCountFont)
+                .font(configuration.appLanguage.semiBoldFont(16))
                 .frame(alignment: .trailing)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
         }
@@ -400,13 +414,13 @@ struct ShoppingCarView: View {
         HStack {
             Text("shopping_price")
                 .frame(alignment: .leading)
-                .font(CustomFonts.cargoCountFont)
+                .font(configuration.appLanguage.semiBoldFont(20))
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text("¥ "+allTotal)
                 .frame(alignment: .trailing)
                 .font(CustomFonts.cargoCountFont)
-                .foregroundStyle(theme.themeColor.cargoTextColor)
+                .font(configuration.appLanguage.semiBoldFont(20))
         }
     }
     
@@ -414,12 +428,12 @@ struct ShoppingCarView: View {
     var totleCountView: some View {
         HStack {
             Text("all_shopping_price")
-                .font(CustomFonts.cargoTotalFont)
+                .font(configuration.appLanguage.semiBoldFont(20))
                 .frame(alignment: .leading)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
             Spacer()
             Text("¥ "+allTotal)
-                .font(CustomFonts.cargoTotalPriceFont)
+                .font(configuration.appLanguage.semiBoldFont(20))
                 .frame(alignment: .trailing)
                 .foregroundStyle(theme.themeColor.cargoTextColor)
         }

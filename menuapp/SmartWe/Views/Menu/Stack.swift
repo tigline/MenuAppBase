@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct StackContainer: View {
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     var theme:AppTheme {
         configuration.colorScheme
     }

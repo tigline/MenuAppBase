@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OptionButton: View {
     
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     
     var backgroud:Color { .init(hex: "#F7F7F7")}
     var selectColor:Color  { configuration.colorScheme.themeColor.orderBtBg}

@@ -94,7 +94,7 @@ extension OptionGroupListView {
             return selectOptions.contains(where: {$0.groupCode == group && $0.optionCode == code})
         }
         
-        func addGood(price:Int = 0, options:[String] = []) {
+        func addGood(price:Int = 0, table:String ,options:[String] = []) {
             
             
             let goodItem = GoodItem(id: 0,
@@ -102,7 +102,8 @@ extension OptionGroupListView {
                                     image: menu.homeImage,
                                     title: menu.mainTitle,
                                     price: totlePrice,
-                                    optionCodes: selectOptions.map({$0.optionCode})
+                                    optionCodes: selectOptions.map({$0.optionCode}), 
+                                    table: table
                                    )
             
             coreDataStack.updateCargoItem(menuCode: goodItem.menuCode, item: goodItem)

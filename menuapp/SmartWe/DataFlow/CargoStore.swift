@@ -32,13 +32,14 @@ class CargoStore {
         try? coreDataStack.batchDeleteDataWithTableNumber(tableNumber)
     }
     
-    func addGood(_ menu:Menu, price:Int, options:[String] = []) {
+    func addGood(_ menu:Menu, price:Int, options:[String] = [], tableNo:String) {
         let goodItem = GoodItem(id: 0,
                                 menuCode: menu.menuCode,
                                 image: menu.homeImage,
                                 title: menu.mainTitle,
                                 price: price,
-                                optionCodes: options
+                                optionCodes: options, 
+                                table: tableNo
                                )
         
         coreDataStack.updateCargoItem(menuCode: goodItem.menuCode, item: goodItem)
@@ -129,12 +130,15 @@ class CargoStore {
 }
 
 struct GoodItem: Identifiable {
+    
     let id:Int
     let menuCode:String
     let image:String
     let title:String
     let price:Int
     var optionCodes:[String] = []
+    
+    var table:String
     
     var quantity:Int = 1
     
@@ -145,10 +149,6 @@ struct GoodItem: Identifiable {
 extension GoodItem {
     var moneyType:String {
         "¥"
-    }
-
-    var table:String? {
-        AppConfiguration.share.tableNo
     }
     
     var showPrice:String {

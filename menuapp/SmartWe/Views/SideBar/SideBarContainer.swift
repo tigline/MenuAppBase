@@ -7,7 +7,7 @@ import SwiftUI
 //import CoreData
 
 struct SideBarContainer: View {
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
 
     @Environment(MenuStore.self) var menuStore
     @Environment(\.cargoStore) var cargoStore
@@ -89,7 +89,7 @@ struct SideBarContainer: View {
             } else {
                 //add to shopping car
                 soundPlayer.playSound(soundFileName: "14428")
-                cargoStore.addGood(menu, price: Int(menu.currentPrice))
+                cargoStore.addGood(menu, price: Int(menu.currentPrice), tableNo: configuration.tableNo ?? "")
                 runAnimation()
             }
             
@@ -120,8 +120,10 @@ struct SideBarContainer: View {
             Button("sure_text") {
                 isPresentError = false
             }
+            .font(configuration.appLanguage.regularFont(14))
         }, message: {
             Text(errorWrapper?.guidance ?? "")
+                .font(configuration.appLanguage.regularFont(14))
         })
         .environment(\.showAlert) { title, content in
             alertWrapper = AlertWrapper(title: title, content: content)
@@ -133,8 +135,10 @@ struct SideBarContainer: View {
             Button("sure_text") {
                 isPresentAlert = false
             }
+            .font(configuration.appLanguage.regularFont(14))
         }, message: {
             Text(alertWrapper?.content ?? "")
+                .font(configuration.appLanguage.regularFont(14))
         })
         
 //        .onChange(of: configuration.colorScheme) { oldValue, newValue in

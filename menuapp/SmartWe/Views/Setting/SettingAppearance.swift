@@ -6,7 +6,7 @@ import Foundation
 import SwiftUI
 
 struct SettingAppearance: View {
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     @State private var logoutPresent:Bool = false
     @State private var password:String = ""
     @State private var showResetPw:Bool = false
@@ -30,12 +30,18 @@ struct SettingAppearance: View {
     var body: some View {
             
             Form {
-                Section(header: Text("version_info")) {
+                Section(
+                    header: Text("version_info").font(configuration.appLanguage.regularFont(14))
+                    
+                ) {
                     LabeledContent {
                         Text(appVersion + "(\(appBuild))")
+                            .font(configuration.appLanguage.regularFont(16))
                     } label: {
                         Text(appName)
+                            .font(configuration.appLanguage.regularFont(16))
                     }
+                    
                 }
                 
 //                Section(header: Text("shop_info")) {
@@ -67,6 +73,7 @@ struct SettingAppearance: View {
                             showResetPw.toggle()
                         } label: {
                             Text("password_reset")
+                                .font(configuration.appLanguage.regularFont(16))
                         }
 
                         
@@ -75,11 +82,12 @@ struct SettingAppearance: View {
                     }
                 }
                 
-                Section(header: Text("setting")) {
+                Section(header: Text("setting").font(configuration.appLanguage.regularFont(14))) {
                     // Language
-                    Picker("setting_theme", selection: $configuration.colorScheme) {
+                    Picker("setting_theme", selection: configuration.$colorScheme) {
                         ForEach(AppTheme.allCases) { theme in
                             Text(theme.localizedString)
+                                .font(configuration.appLanguage.regularFont(16))
                                 .tag(theme.rawValue)
                         }
                     }
@@ -87,9 +95,10 @@ struct SettingAppearance: View {
 
 
                     // Theme
-                    Picker("language", selection: $configuration.appLanguage) {
+                    Picker("language", selection: configuration.$appLanguage) {
                         ForEach(AppLanguage.allCases) { language in
                             Text(language.localizedString)
+                                .font(configuration.appLanguage.regularFont(16))
                                 .tag(language)
                         }
                     }
@@ -103,6 +112,7 @@ struct SettingAppearance: View {
                         HStack(alignment: .center){
                             Spacer()
                             Text("log_out")
+                                .font(configuration.appLanguage.regularFont(16))
                                 .foregroundStyle(.red)
                             Spacer()
                         }
@@ -126,7 +136,7 @@ struct SettingAppearance: View {
                     HStack {
                         Spacer()
                         Text("sure_text")
-                            
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }.foregroundStyle(.red)
@@ -137,6 +147,7 @@ struct SettingAppearance: View {
                     HStack {
                         Spacer()
                         Text("cancel_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }
@@ -158,6 +169,7 @@ struct SettingAppearance: View {
                     HStack {
                         Spacer()
                         Text("sure_text")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }
@@ -165,6 +177,7 @@ struct SettingAppearance: View {
                 Button("cancel_text", role: .cancel){
                     password = ""
                 }
+                .font(configuration.appLanguage.regularFont(16))
                 
             }
             .alert("password_is_empty", isPresented: $showPWResult) {
@@ -175,12 +188,14 @@ struct SettingAppearance: View {
                     HStack {
                         Spacer()
                         Text("reset_password")
+                            .font(configuration.appLanguage.regularFont(16))
                         Spacer()
                     }
                 }
                 
                 Button("cancel_text", role: .cancel){
                 }
+                .font(configuration.appLanguage.regularFont(16))
             }
 
         

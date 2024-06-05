@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrderCellView: View {
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     
     var theme:AppTheme {
         configuration.colorScheme
@@ -40,19 +40,19 @@ struct OrderCellView: View {
                 VStack(alignment: .leading) {
                     Text("注文时间: " + orderTime)
                         .padding(.horizontal)
-                        .font(CustomFonts.cargoCountFont)
+                        .font(configuration.appLanguage.regularFont(16))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundStyle(theme.themeColor.cargoTextColor)
                     
                     Text(title)
                         .padding(.horizontal)
-                        .font(CustomFonts.carGoMenuFont)
+                        .font(configuration.appLanguage.semiBoldFont(16))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundStyle(theme.themeColor.cargoTextColor)
                     
                     Text(optionContent)
                         .padding(.horizontal)
-                        .font(CustomFonts.cargoCountFont)
+                        .font(configuration.appLanguage.regularFont(16))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundStyle(theme.themeColor.cargoTextColor)
                     
@@ -61,13 +61,13 @@ struct OrderCellView: View {
                 VStack(alignment: .trailing){
                     Text("x " + "\(quntity)")
                         .padding(.horizontal)
-                        .font(CustomFonts.cargoCountFont)
+                        .font(configuration.appLanguage.regularFont(15))
                     //.frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundStyle(theme.themeColor.cargoTextColor)
                     
                     Text("¥ " + "\(price)")
                         .padding(.horizontal)
-                        .font(CustomFonts.carGoMenuFont)
+                        .font(configuration.appLanguage.semiBoldFont(16))
                     //.frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundStyle(theme.themeColor.cargoTextColor)
                 }

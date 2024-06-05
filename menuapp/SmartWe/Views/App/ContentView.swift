@@ -7,12 +7,11 @@ import SwiftUI
 import SwiftUIOverlayContainer
 
 struct ContentView: View {
-    @StateObject var appConfiguration = AppConfiguration.share
+    
+    @EnvironmentObject var appConfiguration:AppConfiguration
     @Environment(\.scenePhase) private var scenePhase
-    
-    
-    private let model = Model()
 
+    let model:Model
     var body: some View {
         VStack {
             LoginView()
@@ -57,6 +56,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(model: ContentView.Model(configuration: AppConfiguration.share))
     }
 }

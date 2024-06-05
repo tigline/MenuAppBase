@@ -11,9 +11,17 @@ extension ContentView {
     
     @Observable
     class Model {
+        let configuration:AppConfiguration
+        
+        init(configuration: AppConfiguration) {
+            self.configuration = configuration
+        }
+        
+//        init(completion: @escaping (Model) -> Void) {
+//            completion(self)
+//        }
         
         private var isChecking:Bool = false
-        
         
         func startCheck(_ shopCode:String? = nil, 
                         _ orderKey:String? = nil) async {
@@ -64,9 +72,9 @@ extension ContentView {
                                     
                                 } else {
                                     
-                                    let table = AppConfiguration.share.tableNo
-                                    AppConfiguration.share.tableNo = nil
-                                    AppConfiguration.share.orderKey = nil
+                                    let table = configuration.tableNo
+                                    configuration.tableNo = nil
+                                    configuration.orderKey = nil
                                     
                                     try? await load(shopCode: shopCode, tableNo: table)
                                     
@@ -103,8 +111,8 @@ extension ContentView {
                         
                     guard let orderKey = newTableInfo.orderKeys?[seat-1], orderKey != "" else {return}
                     
-                    AppConfiguration.share.tableNo = tableNo
-                    AppConfiguration.share.orderKey = orderKey
+                    configuration.tableNo = tableNo
+                    configuration.orderKey = orderKey
 
                 } else {
                     throw CustomError.createCustomError()

@@ -13,6 +13,7 @@ struct OrderButton: View {
 //    private var appTheme:AppTheme {
 //        configuration.colorScheme
 //    }
+    @EnvironmentObject private var appConfig:AppConfiguration
     
     let icon:String
     let text:LocalizedStringKey
@@ -31,6 +32,7 @@ struct OrderButton: View {
                     .frame(width: 32,height: 32)
                 
                 Text(text)
+                    .font(appConfig.appLanguage.regularFont(16))
                     .foregroundStyle(textColor)
                 
             }
@@ -45,7 +47,7 @@ struct OrderButton: View {
 }
 
 struct ExpandButton: View {
-    
+    @EnvironmentObject private var appConfig:AppConfiguration
     let icon:String
     let text:LocalizedStringKey
     let bgColor:Color
@@ -58,6 +60,7 @@ struct ExpandButton: View {
         }, label: {
             HStack {
                 Label(text, image: icon)
+                    .font(appConfig.appLanguage.regularFont(16))
                     .foregroundColor(textColor)
                 Spacer()
             }
@@ -73,7 +76,8 @@ struct ExpandButton: View {
 
 
 struct CartButton: View {
-    @Environment(\.cargoStore) var cargoStore
+    
+    @EnvironmentObject private var appConfig:AppConfiguration
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
     private var shoppingCart: FetchedResults<CargoItem>
     
@@ -92,6 +96,7 @@ struct CartButton: View {
             }, label: {
                 HStack {
                     Label(text, image: icon)
+                        .font(appConfig.appLanguage.regularFont(16))
                         .foregroundColor(textColor)
                 }
                 .padding(8)

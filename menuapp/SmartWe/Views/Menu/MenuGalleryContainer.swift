@@ -8,7 +8,7 @@ import SwiftUI
 struct MenuGalleryLazyVGrid: View {
     @Environment(\.isLoading) private var isLoading
     @Environment(MenuStore.self) var menuStore
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     var theme:AppTheme {
         configuration.colorScheme
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ThemePopverMenu: View {
-    @StateObject var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     @Binding var showPopover:Bool
     var body: some View {
             VStack(alignment: .leading) {

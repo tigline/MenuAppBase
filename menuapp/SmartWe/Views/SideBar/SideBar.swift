@@ -10,7 +10,7 @@ struct SideBar:View {
     
     @Environment(MenuStore.self) var menuStore
     @Environment(\.isLoading) private var isLoading
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
     @State var showPopover = false
     @Environment(\.appRouter) var appRouter
     @State private var tapCount = 0
@@ -93,6 +93,7 @@ struct SideBar:View {
                 Text(menu)
                     .padding(.leading, 30)
                     .padding(.vertical)
+                    .font(configuration.appLanguage.mediumFont(18))
                     .frame(maxWidth: .infinity, alignment:.leading)
                     .foregroundColor(menuStore.catagory == menu ? theme.themeColor.sideBarTextBg : theme.themeColor.sideBarTextDf)
                     .background(menuStore.catagory == menu ? theme.themeColor.sideBarBtBg : Color.clear)

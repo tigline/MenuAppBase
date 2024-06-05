@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TabelView: View {
     
-    
     @State private var showPopover = false
     @State private var showAlert = false
     @State private var subTableNo:Int = 0
@@ -17,22 +16,20 @@ struct TabelView: View {
     @Binding var currentShowIndex:String?
     
     @Environment(\.showError) private var showError
+    @EnvironmentObject var appConfiguration: AppConfiguration
     
+    let model:Model
 
 
     private var theme:AppTheme {
         model.appData.colorScheme
     }
     
-    private var model:Model {
-        Model(tableInfo: tableInfo, appData: AppConfiguration.share)
-    }
     
     private var shopCode:String {
         model.appData.shopCode ?? ""
     }
     
-    let tableInfo:TableInfo
     
     var isBlur:Bool {
         currentShowIndex != nil && currentShowIndex != model.tableInfo.seatNumber

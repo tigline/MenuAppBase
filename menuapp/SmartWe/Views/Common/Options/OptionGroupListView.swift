@@ -13,7 +13,7 @@ struct OptionGroupListView: View {
     //@Environment(\.goOptions) var addGood
     @Environment(\.imagePipeline) private var imagePipeline
     @Environment(\.soundPlayer) private var soundPlayer
-    @StateObject private var configuration = AppConfiguration.share
+    @EnvironmentObject var configuration: AppConfiguration
 
     @State private var isLandscape:Bool = false
     
@@ -137,7 +137,7 @@ struct OptionGroupListView: View {
                     withAnimation {
                         isShowing = false
                     } completion: {
-                        model.addGood()
+                        model.addGood(table: configuration.tableNo ?? "")
                         isShowAdd()
                     }
                 }) {
