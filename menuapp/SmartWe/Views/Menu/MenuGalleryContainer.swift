@@ -33,6 +33,11 @@ struct MenuGalleryLazyVGrid: View {
                     
                 }
             }
+            .refreshable {
+                await menuStore.load(shopCode: configuration.shopCode ?? "",
+                                     machineCode: configuration.machineCode ?? "",
+                                     language: configuration.appLanguage.sourceId)
+            }
             .background(theme.themeColor.contentBg)
         }
     }
