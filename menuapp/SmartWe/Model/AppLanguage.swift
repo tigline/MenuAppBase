@@ -103,7 +103,7 @@ extension AppLanguage {
         case .ko:
             return .custom("AppleSDGothicNeo-Regular", size: size)
         case .system:
-            return .custom("HiraginoMincho-W3", size: size)
+            return .custom("HiraginoSans-W3", size: size)
         }
     }
     
@@ -118,7 +118,7 @@ extension AppLanguage {
         case .ko:
             return .custom("AppleSDGothicNeo-Medium", size: size)
         case .system:
-            return .custom("HiraginoMincho-W5", size: size)
+            return .custom("HiraginoSans-W5", size: size)
         }
     }
     
@@ -133,7 +133,7 @@ extension AppLanguage {
         case .ko:
             return .custom("AppleSDGothicNeo-SemiBold", size: size)
         case .system:
-            return .custom("HiraginoMincho-W5", size: size)
+            return .custom("HiraginoSans-W5", size: size)
         }
     }
     
@@ -148,7 +148,7 @@ extension AppLanguage {
         case .ko:
             return .custom("AppleSDGothicNeo-Bold", size: size)
         case .system:
-            return .custom("HiraginoMincho-W6", size: size)
+            return .custom("HiraginoSans-W6", size: size)
         }
     }
     
