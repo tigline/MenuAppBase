@@ -8,9 +8,9 @@
 import Foundation
 
 #if DEBUG
-let serverURL = URL(string: "https://waiter-sit.smartwe.co.jp")!
+let serverURL = URL(string: "https://sit-api.smartwe.jp")!
 #else
-let serverURL = URL(string: "https://reji.smartwe.co.jp")!
+let serverURL = URL(string: "https://api.smartwe.jp")!
 #endif
 
 let testMachineCode = "CdAGJxpvT5ypdpnzsv"

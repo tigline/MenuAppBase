@@ -109,7 +109,7 @@ struct LoginView: View {
                 appConfiguration.logoImage = machineInfo.logoImage
                 appConfiguration.loginState = .login
             } catch {
-                loginError = "machine_code_error"
+                loginError = error.localizedDescription//"machine_code_error"
                 showLoginError = true
             }
         }

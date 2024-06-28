@@ -38,7 +38,7 @@ extension OptionGroupListView {
         }
         
         var images:[String] {
-            [menu.homeImage,menu.homeImageHttp]
+            [menu.homeImage,menu.homeImage]
         }
         
         var mainTitle:String {

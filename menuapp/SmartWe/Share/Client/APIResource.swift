@@ -38,9 +38,9 @@ extension APIResource {
     
     var host:String {
         #if DEBUG
-            "https://waiter-sit.smartwe.co.jp"
+            "https://sit-api.smartwe.jp"
         #else
-            "https://waiter.smartwe.co.jp"
+            "https://api.smartwe.jp"
         #endif
     }
     

@@ -33,6 +33,8 @@ struct MenuCategory: Identifiable, Codable, Equatable, Hashable {
     var id:String {self.categoryCode}
     let categoryCode: String
     let categoryName: String
+    let color:String?
+    let image:String?
     let showType: String
     let printReceipt: Int
     let menuVoList: [Menu]
@@ -50,7 +52,7 @@ struct Menu: Identifiable, Codable, Equatable, Hashable {
     let price: Double
     let currentPrice: Double
     let homeImage: String
-    let homeImageHttp: String
+    //let homeImageHttp: String?
     let images: [String]?
     let qtyBounds: Int
     let boundsPrice: Double?
@@ -79,7 +81,7 @@ struct OptionVo: Identifiable, Codable, Equatable, Hashable {
     let group: String
     let groupName: String?
     let homeImage: String
-    let homeImageHttp: String
+    //let homeImageHttp: String?
     let mainTitle: String
     let optionCode: String
     let price: Double?

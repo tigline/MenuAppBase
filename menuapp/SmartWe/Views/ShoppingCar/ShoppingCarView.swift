@@ -10,8 +10,10 @@ import SwiftUI
 struct ShoppingCarView: View {
     
     @Environment(\.cargoStore) var cargoStore
+    @Environment(MenuStore.self) var menuStore
     @Environment(\.showError) var showError
     @Environment(\.showTable) var showTable
+    @Environment(\.appRouter) var appRouter
     
     @EnvironmentObject var configuration: AppConfiguration
     @FetchRequest(fetchRequest: CargoItem.CargoRequest)
@@ -210,6 +212,8 @@ struct ShoppingCarView: View {
                     Task {
                         try await cargoStore.cleanShoppingCar(table: configuration.tableNo ?? "")
                     }
+                    menuStore.updateTab("booking_history")
+                    appRouter.updateRouter(.order)
                     
                 } label: {
                     Text("sure_text")
