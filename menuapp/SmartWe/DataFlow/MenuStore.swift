@@ -80,16 +80,18 @@ class MenuStore {
         self.appService = appService
     }
     
-    @MainActor func load(shopCode: String, machineCode:String, language: String) async {
+    @MainActor func load(shopCode: String, machineCode:String, language: String) async throws {
         
         do {
             let result = try await appService.menuItemList(shopCode: shopCode, machineCode: machineCode, language: language)
             if result.code == 200 {
                 shopMenuInfo = result.data
+            } else {
+                throw NSError(domain: "Loading", code: 0, userInfo: [NSLocalizedDescriptionKey:"Loading Failured"])
             }
         } catch {
-            print("Failed to load menu info: \(error.localizedDescription)")
-            //throw error
+            //print("Failed to load menu info: \(error.localizedDescription)")
+            throw error
         }
     }
     

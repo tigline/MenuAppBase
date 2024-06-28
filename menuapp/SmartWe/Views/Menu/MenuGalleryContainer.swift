@@ -8,6 +8,7 @@ import SwiftUI
 struct MenuGalleryLazyVGrid: View {
     @Environment(\.isLoading) private var isLoading
     @Environment(MenuStore.self) var menuStore
+    @Environment(\.showError) private var showError
     @EnvironmentObject var configuration: AppConfiguration
     var theme:AppTheme {
         configuration.colorScheme
@@ -34,9 +35,16 @@ struct MenuGalleryLazyVGrid: View {
                 }
             }
             .refreshable {
-                await menuStore.load(shopCode: configuration.shopCode ?? "",
-                                     machineCode: configuration.machineCode ?? "",
-                                     language: configuration.appLanguage.sourceId)
+                Task{
+                    do{
+                        try await menuStore.load(shopCode: configuration.shopCode ?? "",
+                                                 machineCode: configuration.machineCode ?? "",
+                                                 language: configuration.appLanguage.sourceId)
+                    } catch {
+                        showError(error,nil)
+                    }
+                }
+                
             }
             .background(theme.themeColor.contentBg)
         }

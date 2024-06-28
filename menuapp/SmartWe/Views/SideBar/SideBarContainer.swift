@@ -12,7 +12,7 @@ struct SideBarContainer: View {
     @Environment(MenuStore.self) var menuStore
     @Environment(\.cargoStore) var cargoStore
     @Environment(\.soundPlayer) private var soundPlayer
-    @Environment(\.showError) private var showError
+
     
     @State var isLoading = false
     @StateObject private var animationManager = AnimationQueueManager()
@@ -165,14 +165,13 @@ struct SideBarContainer: View {
             guard let machineCode = configuration.machineCode else {
                 return
             }
-            await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan)
-//            do {
-//                try await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan)
-//                
-//            }
-//            catch {
-//                showError(error, nil)
-//            }
+            //await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan)
+            do {
+                try await menuStore.load(shopCode:shopCode, machineCode: machineCode, language:lan)
+            } catch {
+                errorWrapper = ErrorWrapper(error: error, guidance: "")
+                isPresentError = true
+            }
             isLoading = false
         }
     }
